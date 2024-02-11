@@ -8,7 +8,7 @@
                 <div class="breadcrumb__content text-center">
                     <ul class="breadcrumb__content--menu d-flex justify-content-center">
                         <li class="breadcrumb__content--menu__items"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb__content--menu__items"><span>Privacy Policy</span></li>
+                        <li class="breadcrumb__content--menu__items"><span>Frequently</span></li>
                     </ul>
                 </div>
             </div>
@@ -17,92 +17,267 @@
 </section>
 <!-- End breadcrumb section -->
 
-<!-- Start privacy policy section -->
-<div class="privacy__policy--section section--padding">
+<!-- faq page section start -->
+<section class="faq__section section--padding">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="privacy__policy--content">
-                    <h2 class="privacy__policy--content__title">Who we are</h2>
-                    <p class="privacy__policy--content__desc">Our website address is: <a href="mailto:info@example.com">info@example.com</a></p>
-                </div>
-                <div class="privacy__policy--content section_2">
-                    <h2 class="privacy__policy--content__title">What personal data we collect and why we collect it</h2>
-                    <h3 class="privacy__policy--content__subtitle">Comments</h3>
-                    <p class="privacy__policy--content__desc">When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor’s IP address and browser user agent string to help spam detection.</p>
-                    <p class="privacy__policy--content__desc">An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p>
-                    <h3 class="privacy__policy--content__subtitle">Media</h3>
-                    <p class="privacy__policy--content__desc">If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p>
-                    <h3 class="privacy__policy--content__subtitle">Cookies</h3>
-                    <p class="privacy__policy--content__desc">If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p>
-                    <p class="privacy__policy--content__desc">If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p>
-                    <p class="privacy__policy--content__desc">When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select “Remember Me”, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p>
-                    <p class="privacy__policy--content__desc">If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p>
-                    <h3 class="privacy__policy--content__subtitle">Embedded content from other websites</h3>
-                    <p class="privacy__policy--content__desc">Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p>
-                    <p class="privacy__policy--content__desc">These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>
-                </div>
-                <div class="privacy__policy--content section_3">
-                    <h2 class="privacy__policy--content__title">How long we retain your data</h2>
-                    <p class="privacy__policy--content__desc">If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>
-                    <p class="privacy__policy--content__desc">For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p>
-                </div>
-                <div class="privacy__policy--content section_3">
-                    <h2 class="privacy__policy--content__title">What rights you have over your data</h2>
-                    <p class="privacy__policy--content__desc">If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p>
-                </div>
-                <div class="privacy__policy--content section_3">
-                    <h2 class="privacy__policy--content__title">Where we send your data</h2>
-                    <p class="privacy__policy--content__desc">Visitor comments may be checked through an automated spam detection service.</p>
+        <div class="faq__section--inner">
+            <div class="face__step one border-bottom" id="accordionExample">
+                <h2 class="face__step--title h3 mb-30">Shipping Information</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="accordion__container">
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">What Shipping Methods Are Available?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">How Long Will it Take To Get My Package??
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">What payment types can I use?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="accordion__container">
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">Do you ship internationally??
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">How will my parcel be delivered?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">How do I know if something is organic?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<!-- End privacy policy section -->
-
-<!-- Start shipping section -->
-<section class="shipping__section">
-    <div class="container">
-        <div class="shipping__inner style2 d-flex">
-            <div class="shipping__items style2 d-flex align-items-center">
-                <div class="shipping__icon">
-                    <img src="assets/img/other/shipping1.webp" alt="icon-img">
-                </div>
-                <div class="shipping__content">
-                    <h2 class="shipping__content--title h3">Free Shipping</h2>
-                    <p class="shipping__content--desc">Free shipping over $100</p>
+            <div class="face__step one border-bottom" id="accordionExample2">
+                <h2 class="face__step--title h3 mb-30">Payment Information</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="accordion__container">
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">What payment types can I use?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">Can I pay by Gift Card?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">can't make a payment
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="accordion__container">
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">Has my payment gone through?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">Tracking my order
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">Haven’t received my order
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="shipping__items style2 d-flex align-items-center">
-                <div class="shipping__icon">
-                    <img src="assets/img/other/shipping2.webp" alt="icon-img">
-                </div>
-                <div class="shipping__content">
-                    <h2 class="shipping__content--title h3">Support 24/7</h2>
-                    <p class="shipping__content--desc">Contact us 24 hours a day</p>
-                </div>
-            </div>
-            <div class="shipping__items style2 d-flex align-items-center">
-                <div class="shipping__icon">
-                    <img src="assets/img/other/shipping3.webp" alt="icon-img">
-                </div>
-                <div class="shipping__content">
-                    <h2 class="shipping__content--title h3">100% Money Back</h2>
-                    <p class="shipping__content--desc">You have 30 days to Return</p>
-                </div>
-            </div>
-            <div class="shipping__items style2 d-flex align-items-center">
-                <div class="shipping__icon">
-                    <img src="assets/img/other/shipping4.webp" alt="icon-img">
-                </div>
-                <div class="shipping__content">
-                    <h2 class="shipping__content--title h3">Payment Secure</h2>
-                    <p class="shipping__content--desc">We ensure secure payment</p>
+            <div class="face__step one" id="accordionExample3">
+                <h2 class="face__step--title h3 mb-30">Orders and Returns</h2>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="accordion__container">
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">How can I return an item?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class=" accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">What Shipping Methods Are Available?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">How can i make refund from your website?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="accordion__container">
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">I am a new user. How should I start?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">What payment methods are accepted?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                            <div class="accordion__items">
+                                <h3 class="accordion__items--title">
+                                    <button class="faq__accordion--btn accordion__items--button">Do you ship internationally?
+                                        <svg class="accordion__items--button__icon" xmlns="http://www.w3.org/2000/svg" width="20.355" height="13.394" viewBox="0 0 512 512">
+                                            <path d="M98 190.06l139.78 163.12a24 24 0 0036.44 0L414 190.06c13.34-15.57 2.28-39.62-18.22-39.62h-279.6c-20.5 0-31.56 24.05-18.18 39.62z" fill="currentColor" />
+                                        </svg>
+                                    </button>
+                                </h3>
+                                <div class="accordion__items--body">
+                                    <p class="accordion__items--body__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim felis.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- End shipping section -->
+<!-- faq page section end -->
 @endsection

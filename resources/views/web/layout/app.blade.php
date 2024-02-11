@@ -33,6 +33,14 @@
 
     <main class="main__content_wrapper">
         @yield('content')
+
+        <!-- Start shipping section -->
+        @include('web.includes.shipping')
+        <!-- End shipping section -->
+
+        <!-- Start shipping section -->
+        @include('web.includes.customer')
+        <!-- End shipping section -->
     </main>
 
     <!-- Start footer section -->

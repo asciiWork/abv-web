@@ -78,7 +78,7 @@
 
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{ route('web.contact') }}">Contact Us</a></li>
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{ route('web.about') }}">About Us</a></li>
-                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="cart.html">Login</a></li>
+                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{ route('web.login') }}">Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -106,8 +106,8 @@
                         </h2>
                         <ul class="footer__widget--menu footer__widget--inner">
                             <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{ route('web.categories') }}">Categories</a></li>
-                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="shop.html">Products</a></li>
-                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="shop.html">Gallery</a></li>
+                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{ route('web.products') }}">Products</a></li>
+                            <li class="footer__widget--menu__list"><a class="footer__widget--menu__text" href="{{ route('web.gallery') }}">Gallery</a></li>
                         </ul>
                     </div>
                 </div>
