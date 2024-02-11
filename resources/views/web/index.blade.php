@@ -3,7 +3,7 @@
 <!-- Start slider section -->
 <section class="hero__slider--section">
     <div class="slider__thumbnail--style5 position-relative">
-        <img class="slider__thumbnail--img__style5" src="{{ asset('webtheme/assets/img/slider/home5-slider-thumb.webp') }}" alt="slider-img">
+        <img class="slider__thumbnail--img__style5" src="{{ asset('web/assets/img/slider/home5-slider-thumb.webp') }}" alt="slider-img">
         <div class="hero__content--style5 text-center">
             <h2 class="hero__content--style5__title h1">Comes Width The <br> <span class="text__secondary">Ultimate Protection</span></h2>
         </div>
@@ -84,7 +84,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product1.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product1.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Starting</h2>
@@ -95,7 +95,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product2.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product2.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Tires Chains</h2>
@@ -106,7 +106,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product3.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product3.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Caliper Covers</h2>
@@ -117,7 +117,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product4.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product4.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Wheel Adapters</h2>
@@ -128,7 +128,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product5.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product5.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">TPMS Sensors</h2>
@@ -139,7 +139,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product6.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product6.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Auto Parts</h2>
@@ -150,7 +150,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product7.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product7.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Parts Box</h2>
@@ -161,7 +161,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product8.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product8.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Porsche</h2>
@@ -172,7 +172,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product1.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product1.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Auto Parts</h2>
@@ -183,7 +183,7 @@
             <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="shop.html">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('webtheme/assets/img/categories/categories-product2.webp') }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/categories-product2.webp') }}" alt="categories-img">
                     </div>
                     <div class="categories__content style3">
                         <h2 class="categories__content--title">Motor Oil </h2>
@@ -233,8 +233,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-14%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -326,8 +326,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -418,8 +418,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -510,8 +510,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -602,8 +602,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-17%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -695,8 +695,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-19%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -787,8 +787,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-14%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -880,8 +880,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -978,8 +978,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1070,8 +1070,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-17%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1163,8 +1163,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-19%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1255,8 +1255,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-14%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1348,8 +1348,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1440,8 +1440,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1532,8 +1532,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1624,8 +1624,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-17%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1723,8 +1723,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1815,8 +1815,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -1907,8 +1907,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-14%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2000,8 +2000,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2092,8 +2092,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-17%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2185,8 +2185,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-19%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2277,8 +2277,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2369,8 +2369,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2467,8 +2467,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2559,8 +2559,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2651,8 +2651,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-17%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2744,8 +2744,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-19%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2836,8 +2836,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-14%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -2929,8 +2929,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3021,8 +3021,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3113,8 +3113,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3211,8 +3211,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3303,8 +3303,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3395,8 +3395,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-14%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3488,8 +3488,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-17%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3581,8 +3581,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product6.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-19%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3673,8 +3673,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-20%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3765,8 +3765,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-11%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3857,8 +3857,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-18%</span>
                                         <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -3960,7 +3960,7 @@
         <div class="row  mb--n30">
             <div class="col-lg-6 col-md-6 mb-30">
                 <div class="banner__items position__relative">
-                    <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('webtheme/assets/img/banner/banner1.webp') }}" alt="banner-img">
+                    <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('web/assets/img/banner/banner1.webp') }}" alt="banner-img">
                         <div class="banner__content">
                             <span class="banner__content--subtitle text__secondary">Toyota Combo</span>
                             <h2 class="banner__content--title"><span class="banner__content--title__inner">CAR PARTS</span> COLLECTION</h2>
@@ -3977,7 +3977,7 @@
             </div>
             <div class="col-lg-6 col-md-6 mb-30">
                 <div class="banner__items position__relative">
-                    <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('webtheme/assets/img/banner/banner2.webp') }}" alt="banner-img">
+                    <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('web/assets/img/banner/banner2.webp') }}" alt="banner-img">
                         <div class="banner__content right">
                             <span class="banner__badge--style2">20% Off</span>
                             <h2 class="banner__content--title">BODY PARTS <br> FOR ANY <span class="banner__content--title__inner"> VEHICLE </span></h2>
@@ -4007,8 +4007,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product1.webp') }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product4.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product1.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product4.webp') }}" alt="product-img">
                             </a>
                             <span class="product__badge">-14%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -4100,8 +4100,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product2.webp') }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product3.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product2.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product3.webp') }}" alt="product-img">
                             </a>
                             <span class="product__badge">-11%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -4192,8 +4192,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product3.webp') }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product1.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product3.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product1.webp') }}" alt="product-img">
                             </a>
                             <span class="product__badge">-18%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -4284,8 +4284,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product4.webp') }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product2.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product4.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product2.webp') }}" alt="product-img">
                             </a>
                             <span class="product__badge">-20%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -4376,8 +4376,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('webtheme/assets/img/product/main-product/product1.webp') }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('webtheme/assets/img/product/main-product/product3.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product1.webp') }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product3.webp') }}" alt="product-img">
                             </a>
                             <span class="product__badge">-17%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -4497,7 +4497,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="product-details.html">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('webtheme/assets/img/product/big-product/product1.webp') }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/big-product/product1.webp') }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-14%</span>
                                             <span class="product__badge--new">New</span>
@@ -4506,7 +4506,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="product-details.html">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('webtheme/assets/img/product/big-product/product2.webp') }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/big-product/product2.webp') }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-14%</span>
                                             <span class="product__badge--new">New</span>
@@ -4515,7 +4515,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="product-details.html">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('webtheme/assets/img/product/big-product/product3.webp') }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/big-product/product3.webp') }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-14%</span>
                                             <span class="product__badge--new">New</span>
@@ -4524,7 +4524,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="product-details.html">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('webtheme/assets/img/product/big-product/product4.webp') }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/big-product/product4.webp') }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-14%</span>
                                             <span class="product__badge--new">New</span>
@@ -4533,7 +4533,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="product-details.html">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('webtheme/assets/img/product/big-product/product5.webp') }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/big-product/product5.webp') }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-14%</span>
                                             <span class="product__badge--new">New</span>
@@ -4542,7 +4542,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="product-details.html">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('webtheme/assets/img/product/big-product/product6.webp') }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/big-product/product6.webp') }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-14%</span>
                                             <span class="product__badge--new">New</span>
@@ -4631,32 +4631,32 @@
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('webtheme/assets/img/product/small-product/product1.webp') }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/small-product/product1.webp') }}" alt="product-nav-img">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('webtheme/assets/img/product/small-product/product2.webp') }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="product-nav-img">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('webtheme/assets/img/product/small-product/product3.webp') }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/small-product/product3.webp') }}" alt="product-nav-img">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('webtheme/assets/img/product/small-product/product4.webp') }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/small-product/product4.webp') }}" alt="product-nav-img">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('webtheme/assets/img/product/small-product/product5.webp') }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/small-product/product5.webp') }}" alt="product-nav-img">
                                     </div>
                                 </div>
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('webtheme/assets/img/product/small-product/product1.webp') }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/small-product/product1.webp') }}" alt="product-nav-img">
                                     </div>
                                 </div>
                             </div>
@@ -4676,7 +4676,7 @@
                 <div class="col-lg-3">
                     <div class="banner__sidebar style5">
                         <div class="banner__items position__relative mb-30">
-                            <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img" src="{{ asset('webtheme/assets/img/banner/banner18.webp') }}" alt="banner-img">
+                            <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/banner/banner18.webp') }}" alt="banner-img">
                                 <div class="banner__content--style5">
                                     <span class="banner__content--style5__subtitle text-white">From $540</span>
                                     <h2 class="banner__content--style5__title text-white">MEGA SALE</h2>
@@ -4685,7 +4685,7 @@
                             </a>
                         </div>
                         <div class="banner__items position__relative">
-                            <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img" src="{{ asset('webtheme/assets/img/banner/banner19.webp') }}" alt="banner-img">
+                            <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/banner/banner19.webp') }}" alt="banner-img">
                                 <div class="banner__content--style5 right">
                                     <span class="banner__content--style5__subtitle text__secondary">From $540</span>
                                     <h2 class="banner__content--style5__title text-white">MEGA SALE</h2>
@@ -4713,7 +4713,7 @@
                 <div class="swiper-slide">
                     <div class="blog__card">
                         <div class="blog__card--thumbnail">
-                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('webtheme/assets/img/blog/blog1.webp') }}" alt="blog-img"></a>
+                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('web/assets/img/blog/blog1.webp') }}" alt="blog-img"></a>
                             <span class="blog__card--meta__date">20 <br> Oct</span>
                         </div>
                         <div class="blog__card--content">
@@ -4769,7 +4769,7 @@
                 <div class="swiper-slide">
                     <div class="blog__card">
                         <div class="blog__card--thumbnail">
-                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('webtheme/assets/img/blog/blog2.webp') }}" alt="blog-img"></a>
+                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('web/assets/img/blog/blog2.webp') }}" alt="blog-img"></a>
                             <span class="blog__card--meta__date">24 <br> Oct</span>
                         </div>
                         <div class="blog__card--content">
@@ -4824,7 +4824,7 @@
                 <div class="swiper-slide">
                     <div class="blog__card">
                         <div class="blog__card--thumbnail">
-                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('webtheme/assets/img/blog/blog3.webp') }}" alt="blog-img"></a>
+                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('web/assets/img/blog/blog3.webp') }}" alt="blog-img"></a>
                             <span class="blog__card--meta__date">22 <br> Oct</span>
                         </div>
                         <div class="blog__card--content">
@@ -4879,7 +4879,7 @@
                 <div class="swiper-slide">
                     <div class="blog__card">
                         <div class="blog__card--thumbnail">
-                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('webtheme/assets/img/blog/blog1.webp') }}" alt="blog-img"></a>
+                            <a class="blog__card--thumbnail__link" href="blog-details.html"><img class="blog__card--thumbnail__img" src="{{ asset('web/assets/img/blog/blog1.webp') }}" alt="blog-img"></a>
                             <span class="blog__card--meta__date">18 <br> Oct</span>
                         </div>
                         <div class="blog__card--content">
@@ -4953,7 +4953,7 @@
         <div class="shipping__inner style2 d-flex">
             <div class="shipping__items style2 d-flex align-items-center">
                 <div class="shipping__icon">
-                    <img src="{{ asset('webtheme/assets/img/other/shipping1.webp') }}" alt="icon-img">
+                    <img src="{{ asset('web/assets/img/other/shipping1.webp') }}" alt="icon-img">
                 </div>
                 <div class="shipping__content">
                     <h2 class="shipping__content--title h3">Free Shipping</h2>
@@ -4962,7 +4962,7 @@
             </div>
             <div class="shipping__items style2 d-flex align-items-center">
                 <div class="shipping__icon">
-                    <img src="{{ asset('webtheme/assets/img/other/shipping2.webp') }}" alt="icon-img">
+                    <img src="{{ asset('web/assets/img/other/shipping2.webp') }}" alt="icon-img">
                 </div>
                 <div class="shipping__content">
                     <h2 class="shipping__content--title h3">Support 24/7</h2>
@@ -4971,7 +4971,7 @@
             </div>
             <div class="shipping__items style2 d-flex align-items-center">
                 <div class="shipping__icon">
-                    <img src="{{ asset('webtheme/assets/img/other/shipping3.webp') }}" alt="icon-img">
+                    <img src="{{ asset('web/assets/img/other/shipping3.webp') }}" alt="icon-img">
                 </div>
                 <div class="shipping__content">
                     <h2 class="shipping__content--title h3">100% Money Back</h2>
@@ -4980,7 +4980,7 @@
             </div>
             <div class="shipping__items style2 d-flex align-items-center">
                 <div class="shipping__icon">
-                    <img src="{{ asset('webtheme/assets/img/other/shipping4.webp') }}" alt="icon-img">
+                    <img src="{{ asset('web/assets/img/other/shipping4.webp') }}" alt="icon-img">
                 </div>
                 <div class="shipping__content">
                     <h2 class="shipping__content--title h3">Payment Secure</h2>
