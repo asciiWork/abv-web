@@ -98,18 +98,16 @@
                     <nav class="header__menu--navigation">
                         <ul class="header__menu--wrapper d-flex">
                             <li class="header__menu--items">
-                                <a class="header__menu--link active" href="index.html">Home
-                                    <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12" height="7.41" viewBox="0 0 12 7.41">
-                                        <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                                    </svg>
-                                </a>
-                                <ul class="header__sub--menu">
-                                    <li class="header__sub--menu__items"><a href="index.html" class="header__sub--menu__link">Home One</a></li>
-                                    <li class="header__sub--menu__items"><a href="index-2.html" class="header__sub--menu__link">Home Two</a></li>
-                                    <li class="header__sub--menu__items"><a href="index-3.html" class="header__sub--menu__link">Home Three</a></li>
-                                    <li class="header__sub--menu__items"><a href="index-4.html" class="header__sub--menu__link">Home Four</a></li>
-                                    <li class="header__sub--menu__items"><a href="index-5.html" class="header__sub--menu__link">Home Five</a></li>
-                                </ul>
+                                <a class="header__menu--link" href="{{ route('web.index') }}">Home</a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{ route('web.products') }}">Products</a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{ route('web.about') }}">About</a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{ route('web.contact') }}">Contact</a>
                             </li>
                             <li class="header__menu--items mega__menu--items">
                                 <a class="header__menu--link" href="shop.html">Shop
