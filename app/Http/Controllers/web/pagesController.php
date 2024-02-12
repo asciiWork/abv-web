@@ -67,23 +67,11 @@ class pagesController extends Controller
         $data['page_title'] = 'Product Details';
         return view('web.productDetails', $data);
     }
-    public function login()
-    {
-        $data = array();
-        $data['page_title'] = 'Login';
-        return view('web.login', $data);
-    }
     public function productCategory()
     {
         $data = array();
         $data['page_title'] = 'Product Category';
         return view('web.productCategory', $data);
-    }
-    public function register()
-    {
-        $data = array();
-        $data['page_title'] = 'Register';
-        return view('web.register', $data);
     }
     public function cart()
     {

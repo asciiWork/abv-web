@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\web\PagesController;
+use  App\Http\Controllers\web\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,13 @@ Route::get('/delivery-and-shipping-policy', [PagesController::class, 'deliveryAn
 Route::get('/product-category', [PagesController::class, 'productCategory'])->name('web.product-category');
 Route::get('/categories', [PagesController::class, 'categories'])->name('web.categories');
 Route::get('/product-details/{slug}', [PagesController::class, 'productDetails'])->name('web.product-details');
-Route::get('/login', [PagesController::class, 'login'])->name('web.login');
-Route::get('/register', [PagesController::class, 'register'])->name('web.register');
 Route::get('/cart', [PagesController::class, 'cart'])->name('web.cart');
 Route::get('/checkout', [PagesController::class, 'checkout'])->name('web.checkout');
 Route::get('/gallery', [PagesController::class, 'gallery'])->name('web.gallery');
 Route::get('/my-account', [PagesController::class, 'myAccount'])->name('web.my-account');
 Route::get('/my-address', [PagesController::class, 'myAddress'])->name('web.my-address');
+
+Route::get('/login', [LoginController::class, 'login'])->name('web.login');
+Route::post('/check-login', [LoginController::class, 'checkLogin'])->name('web.check-login');
+Route::get('/register', [LoginController::class, 'register'])->name('web.register');
+Route::post('/check-register', [LoginController::class, 'checkRegister'])->name('web.check-register');

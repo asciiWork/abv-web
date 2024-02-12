@@ -32,6 +32,9 @@
     <!-- End header area -->
 
     <main class="main__content_wrapper">
+        <!-- Start breadcrumb section -->
+        @include('web.includes.breadcrumb')
+        <!-- End breadcrumb section -->
         @yield('content')
 
         <!-- Start shipping section -->
@@ -338,6 +341,8 @@
         </svg></button>
 
     <!-- All Script JS Plugins here  -->
+    <script src="{{ asset('web/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('web/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('web/assets/js/vendor/popper.js') }}" defer="defer"></script>
     <script src="{{ asset('web/assets/js/vendor/bootstrap.min.js') }}" defer="defer"></script>
     <script src="{{ asset('web/assets/js/plugins/swiper-bundle.min.js') }}"></script>
@@ -345,6 +350,11 @@
 
     <!-- Customscript js -->
     <script src="{{ asset('web/assets/js/script.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('web/js/jquery.bootstrap-growl.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('web/js/parsley.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('web/js/comman.js')}}"></script>
+    @yield('scripts')
 
 </body>
 
