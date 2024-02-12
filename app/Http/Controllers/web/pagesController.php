@@ -4,6 +4,10 @@ namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Categories;
+use App\Models\Product;
+use App\Models\ProductReview;
+use App\Models\ProductImages;
 
 class pagesController extends Controller
 {
@@ -11,6 +15,16 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Home';
+        $catData = new Categories; 
+        $cat =  $catData->get_category();
+        $data['Catdata']=$cat;
+        $proData = new Product; 
+        $product =  $proData->get_Allproduct();
+        $data['productData']=$product;
+        $latestProduct =  $proData->get_latest_product(5);
+        $data['letProductData']=$latestProduct;
+        $dealProduct =  $proData->get_latest_product(4);
+        $data['dealProduct']=$dealProduct;
         return view('web.index', $data);
     }
     public function about()
@@ -23,6 +37,9 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Products';
+        $proData = new Product; 
+        $product =  $proData->get_Allproduct();
+        $data['productData']=$product;
         return view('web.products', $data);
     }
     public function contact()
@@ -61,16 +78,31 @@ class pagesController extends Controller
         $data['page_title'] = 'Categories';
         return view('web.categories', $data);
     }
-    public function productDetails()
+    public function productDetails($slug)
     {
         $data = array();
         $data['page_title'] = 'Product Details';
+        $proData = new Product; 
+        $product =  $proData->get_ProductDetail($slug);
+        $data['proData']=$product;
+        $proreview = new ProductImages; 
+        $proimges =  $proreview->get_ProductImages($product->id);
+        $data['proimges']=$proimges;
+        $proreview = new ProductReview; 
+        $prore =  $proreview->get_ProductReview($product->id);
+        $data['proReview']=$prore;
         return view('web.productDetails', $data);
     }
     public function productCategory()
     {
         $data = array();
         $data['page_title'] = 'Product Category';
+        $catData = new Categories; 
+        $cat =  $catData->get_category();
+        $data['Catdata']=$cat;
+        $proData = new Product; 
+        $product =  $proData->get_Allproduct();
+        $data['productData']=$product;
         return view('web.productCategory', $data);
     }
     public function cart()
