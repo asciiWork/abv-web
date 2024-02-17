@@ -7,37 +7,47 @@
         <div class="row">
             <div class="col-12">
                 <div class="privacy__policy--content">
-                    <h2 class="privacy__policy--content__title">Who we are</h2>
-                    <p class="privacy__policy--content__desc">Our website address is: <a href="mailto:info@example.com">info@example.com</a></p>
+                    <p class="privacy__policy--content__desc">This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our website. By accessing and using our services, you agree to the terms of this Privacy Policy.</p>
                 </div>
                 <div class="privacy__policy--content section_2">
-                    <h2 class="privacy__policy--content__title">What personal data we collect and why we collect it</h2>
-                    <h3 class="privacy__policy--content__subtitle">Comments</h3>
-                    <p class="privacy__policy--content__desc">When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor’s IP address and browser user agent string to help spam detection.</p>
-                    <p class="privacy__policy--content__desc">An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p>
-                    <h3 class="privacy__policy--content__subtitle">Media</h3>
-                    <p class="privacy__policy--content__desc">If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p>
-                    <h3 class="privacy__policy--content__subtitle">Cookies</h3>
-                    <p class="privacy__policy--content__desc">If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p>
-                    <p class="privacy__policy--content__desc">If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p>
-                    <p class="privacy__policy--content__desc">When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select “Remember Me”, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p>
-                    <p class="privacy__policy--content__desc">If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p>
-                    <h3 class="privacy__policy--content__subtitle">Embedded content from other websites</h3>
-                    <p class="privacy__policy--content__desc">Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p>
-                    <p class="privacy__policy--content__desc">These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p>
+                    <h2 class="privacy__policy--content__title">1. Types of Information Collected</h2>
+                    <p class="privacy__policy--content__desc">a. Personal Information: We may collect personal information such as your name, email address, phone number, and shipping address when you create an account or make a purchase on our website.</p>
+                    <p class="privacy__policy--content__desc"> b. Non-Personal Information: We may also collect non-personal information, such as your IP address, browser type, device information, and website usage data. This information is collected through cookies and similar technologies (see “Use of Cookies and Tracking Technologies” below).</p>
                 </div>
                 <div class="privacy__policy--content section_3">
-                    <h2 class="privacy__policy--content__title">How long we retain your data</h2>
-                    <p class="privacy__policy--content__desc">If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p>
-                    <p class="privacy__policy--content__desc">For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p>
+                    <h2 class="privacy__policy--content__title">2. How Collected Information is Used and Stored</h2>
+                    <p class="privacy__policy--content__desc">a. Personal Information: We use your personal information to process your orders, communicate with you regarding your purchases and account, and provide customer support. We may also use your email address to send you promotional offers and newsletters.</p>
+                    <p class="privacy__policy--content__desc">b. Non-Personal Information: Non-personal information is used to analyze website usage trends, improve our website’s functionality, and enhance user experience.</p>
+                    <p class="privacy__policy--content__desc">c. Data Storage: Your information is stored on secure servers and is retained for as long as necessary to fulfill the purposes outlined in this Privacy Policy, or as required by law.</p>
                 </div>
                 <div class="privacy__policy--content section_3">
-                    <h2 class="privacy__policy--content__title">What rights you have over your data</h2>
-                    <p class="privacy__policy--content__desc">If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p>
+                    <h2 class="privacy__policy--content__title">3. Data Sharing and Disclosure Practices</h2>
+                    <p class="privacy__policy--content__desc">a. We do not sell, trade, or rent your personal information to third parties for their marketing purposes.</p>
+                    <p class="privacy__policy--content__desc">b. We may share your personal information with third-party service providers who assist us in processing payments, fulfilling orders, or providing customer support.</p>
+                    <p class="privacy__policy--content__desc">c. We may disclose your information to comply with legal obligations, enforce our Terms and Conditions, or protect the rights, property, or safety of ABV TOOL our customers, or others.</p>
                 </div>
                 <div class="privacy__policy--content section_3">
-                    <h2 class="privacy__policy--content__title">Where we send your data</h2>
-                    <p class="privacy__policy--content__desc">Visitor comments may be checked through an automated spam detection service.</p>
+                    <h2 class="privacy__policy--content__title">4. Use of Cookies and Tracking Technologies</h2>
+                    <p class="privacy__policy--content__desc">a. Cookies are small data files stored on your device when you visit our website. They enable us to track your interactions with the website and provide a personalized experience.</p>
+                    <p class="privacy__policy--content__desc">b. We use cookies to remember your preferences, analyze website traffic, and display relevant advertisements.</p>
+                    <p class="privacy__policy--content__desc">c. You can control cookies through your browser settings or opt-out of targeted advertising by visiting the Digital Advertising Alliance’s opt-out page.</p>
+                </div>
+                <div class="privacy__policy--content section_3">
+                    <h2 class="privacy__policy--content__title">5. User Rights Regarding Their Personal Data</h2>
+                    <p class="privacy__policy--content__desc">a. You have the right to access, correct, update, and delete your personal information stored on our website. You can do this by accessing your account settings or contacting our customer support team.</p>
+                    <p class="privacy__policy--content__desc">b. If you wish to delete your account, please contact us, and we will assist you in the process.</p>
+                </div>
+                <div class="privacy__policy--content section_3">
+                    <h2 class="privacy__policy--content__title">6. Security Measures to Protect User Information</h2>
+                    <p class="privacy__policy--content__desc">a. We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, or destruction.</p>
+                    <p class="privacy__policy--content__desc">b. However, no data transmission over the internet or electronic storage method is 100% secure. While we strive to protect your information, we cannot guarantee its absolute security.</p>
+                </div>
+                <div class="privacy__policy--content section_3">
+                    <h2 class="privacy__policy--content__title">7. Contact Information for Privacy-Related Queries</h2>
+                    <p class="privacy__policy--content__desc">For any questions, concerns, or requests related to this Privacy Policy, please contact us at: ABV Tools</p>
+                    <p class="privacy__policy--content__desc">Address:Ahmedabad, Gujarat ,India </p>
+                    <p class="privacy__policy--content__desc">Email: info@abvtool.in</p>
+                    <p class="privacy__policy--content__desc">Phone:  78744 27439</p>
                 </div>
             </div>
         </div>

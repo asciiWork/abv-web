@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\DB;
 class Categories extends Model
 {
     protected $table = 'product_category';
-	public function get_category()
+	public function get_category($id='')
 	{
-		$cat = DB::table('product_category')->get();
+		$cat = DB::table('product_category');
+		if($id){
+			$cat =$cat->where('id',$id);
+		}
+		$cat =$cat->get();
     	return $cat;
 	}
 }

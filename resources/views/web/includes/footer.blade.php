@@ -26,10 +26,7 @@
                             </svg>
                         </h2>
                         <div class="footer__widget--inner">
-                            <p class="footer__widget--desc">Corporate clients and leisure travelers has
-                                been relying on Groundlink for dependable
-                                safe, and professional chauffeured car end
-                                service in major cities across World.</p>
+                            <p class="footer__widget--desc">Welcome to ABV TOOLS! We are your ultimate destination for all things related to CNC machine auto part tools. Whether you’re a seasoned professional or just starting out in the world of CNC machining, our website offers a comprehensive range of high-quality tools and accessories to meet your specific needs.</p>
                             <ul class="social__share footer__social d-flex">
                                 <li class="social__share--list">
                                     <a class="social__share--icon__style2" target="_blank" href="https://www.facebook.com">

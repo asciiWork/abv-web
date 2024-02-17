@@ -6814,7 +6814,7 @@ input[type=number]::-webkit-outer-spin-button {
   color: var(--secondary-color);
 }
 .variant__size--value {
-  width: 4.7rem;
+  width: 9.7rem;
   height: 3.2rem;
   line-height: 2.8rem;
   display: inline-block;

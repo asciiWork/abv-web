@@ -8,6 +8,9 @@ use App\Models\Categories;
 use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\ProductImages;
+use App\Models\Contact;
+use App\Models\Carts;
+use Validator;
 
 class pagesController extends Controller
 {
@@ -31,6 +34,9 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'About';
+        $proreview = new ProductReview; 
+        $prore =  $proreview->get_ProductWithReview();
+        $data['proReview']=$prore;
         return view('web.about', $data);
     }
     public function products()
@@ -47,6 +53,46 @@ class pagesController extends Controller
         $data = array();
         $data['page_title'] = 'Contact';
         return view('web.contact', $data);
+    }
+    public function checkContactForm(Request $request)
+    {
+        $status = 0;
+        $msg = "";
+
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone_number' => 'required',
+            'email' => 'required|email',
+        ]);
+        // check validations
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) {
+                $msg .= $message . "<br />";
+            }
+        } else {
+            $contactFrm = new Contact();
+            $contactFrm->firstname = $request->get('firstname');
+            $contactFrm->lastname = $request->get('lastname');
+            $contactFrm->phone_number = $request->get('phone_number');
+            $contactFrm->email = $request->get('email');
+            $contactFrm->message = $request->get('message');
+            $contactFrm->save();
+            $status = 1;
+            $msg = "We will contact you as soon as possible.";
+
+        }
+        if ($request->isXmlHttpRequest()) {
+            return ['status' => $status, 'msg' => $msg];
+        } else {
+            if ($status == 0) {
+                session()->flash('error_message', $msg);
+            }
+            return redirect('contact');
+        }
     }
     public function privacyPolicy()
     {
@@ -76,6 +122,9 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Categories';
+        $catData = new Categories; 
+        $cat =  $catData->get_category();
+        $data['Catdata']=$cat;
         return view('web.categories', $data);
     }
     public function productDetails($slug)
@@ -85,12 +134,23 @@ class pagesController extends Controller
         $proData = new Product; 
         $product =  $proData->get_ProductDetail($slug);
         $data['proData']=$product;
+        $productWithSize = $proData->productWithSize($product->id);
+        $data['productWithSize']=$productWithSize;
+        $catquery = new Categories;
+        $productCategory = $catquery->get_category($product->category_id);
+        $data['catData']=$productCategory;
         $proreview = new ProductImages; 
         $proimges =  $proreview->get_ProductImages($product->id);
         $data['proimges']=$proimges;
         $proreview = new ProductReview; 
         $prore =  $proreview->get_ProductReview($product->id);
         $data['proReview']=$prore;
+        $pwr =  $proreview->get_ProductWithReview($product->id);
+        $data['pwr']=$pwr;
+        $avgRate =  $proreview->getAvgRating($product->id);
+        $data['avgRate']=$avgRate;
+        $ranProduct =  $proData->get_random_product();
+        $data['ranProduct']=$ranProduct;
         return view('web.productDetails', $data);
     }
     public function productCategory()
@@ -109,14 +169,13 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Cart';
+        $cartData = Carts::getCartData();
+        $data['cartData'] = $cartData;
+        $proData = new Product;
+        $ranProduct =  $proData->get_random_product();
+        $data['ranProduct']=$ranProduct;
         return view('web.cart', $data);
-    }
-    public function checkout()
-    {
-        $data = array();
-        $data['page_title'] = 'Checkout';
-        return view('web.checkout', $data);
-    }
+    }    
     public function gallery()
     {
         $data = array();

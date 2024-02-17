@@ -6,12 +6,12 @@
     <div class="container">
         <div class="contact__section--heading text-center mb-40">
             <h2 class="contact__section--heading__maintitle">Get In Touch</h2>
-            <p class="contact__section--heading__desc">Beyond more stoic this along goodness this sed wow manatee mongos flusterd impressive man farcrud opened.</p>
+            <p class="contact__section--heading__desc"></p>
         </div>
         <div class="main__contact--area position__relative">
             <div class="contact__form">
                 <h3 class="contact__form--title mb-30">Contact Me</h3>
-                <form class="contact__form--inner" action="#">
+                {!! Form::open(['route' => 'web.check-contact', 'id' => 'submit-form']) !!}
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="contact__form--list mb-20">
@@ -28,7 +28,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="contact__form--list mb-20">
                                 <label class="contact__form--label" for="input3">Phone Number <span class="contact__form--label__star">*</span></label>
-                                <input class="contact__form--input" name="number" id="input3" placeholder="Phone number" type="text">
+                                <input class="contact__form--input" name="phone_number" id="input3" placeholder="Phone number" type="text">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">
@@ -39,13 +39,13 @@
                         </div>
                         <div class="col-12">
                             <div class="contact__form--list mb-15">
-                                <label class="contact__form--label" for="input5">Write Your Message <span class="contact__form--label__star">*</span></label>
+                                <label class="contact__form--label" for="input5">Write Your Message </label>
                                 <textarea class="contact__form--textarea" name="message" id="input5" placeholder="Write Your Message"></textarea>
                             </div>
                         </div>
                     </div>
                     <button class="contact__form--btn primary__btn" type="submit"> <span>Submit Now</span></button>
-                </form>
+                {!! Form::close() !!}
             </div>
             <div class="contact__info border-radius-5">
                 <div class="contact__info--items">
@@ -57,12 +57,13 @@
                             </svg>
                         </div>
                         <div class="contact__info--content">
-                            <p class="contact__info--content__desc text-white">Change the design through a range <br> <a href="tel:+01234-567890">+01234-567890</a> <a href="tel:++01234-5688765">+01234-5688765</a> </p>
+                            <p class="contact__info--content__desc text-white">Phone Number<br> <a href="tel:+91 78744 27439">+91 78744 27439</a> 
+                                <a href="tel:+84695 55348">+91 84695 55348</a> </p>
                         </div>
                     </div>
                 </div>
                 <div class="contact__info--items">
-                    <h3 class="contact__info--content__title text-white mb-15">Email Address</h3>
+                    <h3 class="contact__info--content__title text-white mb-15">E-mail Address</h3>
                     <div class="contact__info--items__inner d-flex">
                         <div class="contact__info--icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="31.57" height="31.13" viewBox="0 0 31.57 31.13">
@@ -70,7 +71,7 @@
                             </svg>
                         </div>
                         <div class="contact__info--content">
-                            <p class="contact__info--content__desc text-white"> <a href="mailto:info@example.com">info@example.com</a> <br> <a href="mailto:info@example.com">info@example.com</a></p>
+                            <p class="contact__info--content__desc text-white"> <a href="mailto:info@abvtool.in">info@abvtool.in</a> </p>
                         </div>
                     </div>
                 </div>
@@ -83,9 +84,7 @@
                             </svg>
                         </div>
                         <div class="contact__info--content">
-                            <p class="contact__info--content__desc text-white"> 123 Stree New York City ,
-                                United States Of America
-                                NY 750065.</p>
+                            <p class="contact__info--content__desc text-white"> A-205, Krish Elite Commercial Complex, Nr Vishala Land Mark,B/H Sankalp International School, Ahmedabad-382350, Gujarat, India</p>
                         </div>
                     </div>
                 </div>
@@ -134,7 +133,7 @@
 
 <!-- Start contact map area -->
 <div class="contact__map--area section--padding pt-0">
-    <iframe class="contact__map--iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7887.465355142307!2d-0.13384360843222626!3d51.4876034467734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48760532743b90e1%3A0x790260718555a20c!2sU.S.%20Embassy%2C%20London!5e0!3m2!1sen!2sbd!4v1632035375945!5m2!1sen!2sbd" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe class="contact__map--iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d58750.82058640327!2d72.6195728!3d23.0264786!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e870f39d38289%3A0x6debef70be6a8a9e!2sKrish%20Elite!5e0!3m2!1sen!2sin!4v1689408117127!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
 <!-- End contact map area -->
 
@@ -143,19 +142,19 @@
     <div class="container">
         <div class="brand__section--inner d-flex justify-content-between align-items-center">
             <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/brand-logo1.webp') }}" alt="brand-logo">
+                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/sumip.png') }}" alt="brand-logo">
             </div>
             <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/brand-logo2.webp') }}" alt="brand-logo">
+                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/anovi.png') }}" alt="brand-logo">
             </div>
             <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/brand-logo3.webp') }}" alt="brand-logo">
+                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/woodsden.png') }}" alt="brand-logo">
             </div>
             <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/brand-logo4.webp') }}" alt="brand-logo">
+                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/kgs.png') }}" alt="brand-logo">
             </div>
             <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/brand-logo5.webp') }}" alt="brand-logo">
+                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/tilara.png') }}" alt="brand-logo">
             </div>
         </div>
     </div>
