@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
  
 class TempOrderDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     protected $table = 'temp_order_details';
     public $timestamps = false;	
 }

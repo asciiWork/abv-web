@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('discount')->nullable();
             $table->string('amount')->nullable();
             $table->string('total_amount')->nullable();
-            $table->string('quality')->nullable();
+            $table->string('quantity')->nullable();
             $table->string('unit_price')->nullable();
             $table->timestamps();
 

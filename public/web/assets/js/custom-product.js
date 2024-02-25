@@ -300,4 +300,5 @@ function populateCountries(countryElementId, stateElementId) {
 
 
 populateCountries("country", "state");
+populateCountries("ship_country", "ship_state");
 })();

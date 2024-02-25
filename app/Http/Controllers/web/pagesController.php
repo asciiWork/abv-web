@@ -28,6 +28,8 @@ class pagesController extends Controller
         $data['letProductData']=$latestProduct;
         $dealProduct =  $proData->get_latest_product(4);
         $data['dealProduct']=$dealProduct;
+        $newPro =  $proData->get_NewArrivals();
+        $data['newProData']=$newPro;
         return view('web.index', $data);
     }
     public function about()
@@ -46,6 +48,8 @@ class pagesController extends Controller
         $proData = new Product; 
         $product =  $proData->get_Allproduct();
         $data['productData']=$product;
+        $newPro =  $proData->get_NewArrivals();
+        $data['newProData']=$newPro;
         return view('web.products', $data);
     }
     public function contact()
@@ -139,8 +143,8 @@ class pagesController extends Controller
         $catquery = new Categories;
         $productCategory = $catquery->get_category($product->category_id);
         $data['catData']=$productCategory;
-        $proreview = new ProductImages; 
-        $proimges =  $proreview->get_ProductImages($product->id);
+        $proimgs = new ProductImages; 
+        $proimges =  $proimgs->get_ProductImages($product->id);
         $data['proimges']=$proimges;
         $proreview = new ProductReview; 
         $prore =  $proreview->get_ProductReview($product->id);

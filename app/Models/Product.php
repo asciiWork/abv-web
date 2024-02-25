@@ -22,6 +22,16 @@ class Product extends Model
             ->get();
     	return $product;
 	}
+    public function get_NewArrivals()
+    {
+        $product = DB::table('product')
+            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->where('product_img.pro_main', '1')
+            ->orderBy('product.id', 'desc')
+            ->get();
+        return $product;
+    }
 	public function productWithSize($id='')
 	{
 		$productWithSize = Product::with('product_size')

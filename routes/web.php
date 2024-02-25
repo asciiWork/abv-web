@@ -38,4 +38,6 @@ Route::post('/add-to-cart', [ProductsController::class,'addToCart'])->name('web.
 Route::get('/remove-cart', [ProductsController::class,'removeCart'])->name('remove-cart');
 Route::post('/inc-dec-cart', [ProductsController::class,'incDecCart'])->name('inc-dec-cart');
 Route::get('/checkout', [ProductsController::class, 'checkout'])->name('web.checkout');
+Route::post('/shipping-post', [ProductsController::class,'shoppingPost'])->name('web.shipping-post');
+Route::get('/open-quick-view', [ProductsController::class,'openQuickView'])->name('open-quick-view');
 

@@ -102,4 +102,30 @@ $(document).ready(function() {
             }
         });
     });
+    /*$(document).on('click','.quick-view-modal',function () {
+        var pid = $(this).attr('data-id');
+        //openQuickViewModal(pid);
+    });*/
 });
+function openQuickModal(pid)
+{
+    var url = http_host_js + '/open-quick-view';
+    $.ajax({
+        headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+        type: "GET",
+        url: url,
+        data: { id : pid},        
+        success: function (result)
+        {
+            //$('#AjaxLoaderDiv').fadeOut('slow');
+            jQuery('#examplemodal').html(result);
+            $('#examplemodal').modal('show');
+        },
+        error: function (error)
+        {
+            $('#AjaxLoaderDiv').fadeOut('slow');
+            $.bootstrapGrowl("Internal Server Error", {type: 'danger', delay: 4000});
+        }
+    });
+}
