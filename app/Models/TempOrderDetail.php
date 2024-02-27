@@ -10,5 +10,9 @@ class TempOrderDetail extends Model
 {
     use HasFactory;
     protected $table = 'temp_order_details';
-    public $timestamps = false;	
+    public $timestamps = false;
+
+    public static function getOrders($id){
+    	return $tObj = TempOrderDetail::where('temp_order_id',$id)->get();
+    }
 }

@@ -264,7 +264,6 @@ var s_a = new Array();
 function populateStates(countryElementId, stateElementId) {
 
     var selectedCountryIndex = document.getElementById(countryElementId).selectedIndex;
-
     var stateElement = document.getElementById(stateElementId);
 
     stateElement.length = 0; // Fixed by Julian Woods
@@ -296,9 +295,24 @@ function populateCountries(countryElementId, stateElementId) {
         };
     }
 }
+function getstate(selectedCountryIndex) {
+	var stateElementId='state';
+    var stateElement = document.getElementById(stateElementId);
+    stateElement.length = 0; // Fixed by Julian Woods
+    stateElement.options[0] = new Option('Select State', '');
+    stateElement.selectedIndex = 1;
 
+    var state_arr = s_a[selectedCountryIndex].split("|");
 
-
+    for (var i = 0; i < state_arr.length; i++) {
+        stateElement.options[stateElement.length] = new Option(state_arr[i], state_arr[i]);
+    }
+}
+var dbcountry = document.getElementById('dbcountry');
+if (dbcountry !== null) {
+	var index=country_arr.findIndex(num=> { return num > dbcountry.value; });
+	getstate(index);
+}
 populateCountries("country", "state");
 populateCountries("ship_country", "ship_state");
 })();

@@ -10,6 +10,8 @@ use App\Models\ProductReview;
 use App\Models\ProductImages;
 use App\Models\Contact;
 use App\Models\Carts;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Validator;
 
 class pagesController extends Controller
@@ -186,16 +188,15 @@ class pagesController extends Controller
         $data['page_title'] = 'Gallery';
         return view('web.gallery', $data);
     }
-    public function myAccount()
-    {
-        $data = array();
-        $data['page_title'] = 'My Account';
-        return view('web.account', $data);
-    }
-    public function myAddress()
-    {
-        $data = array();
-        $data['page_title'] = 'My Address';
-        return view('web.address ', $data);
+    public function viewReceivedOrder($id,$key){
+        if($id){
+            $tObj = Order::where('id',$id)->where('ordkey',$key)->first();
+            if($tObj){
+                $data['order'] = $tObj;
+                $data['orderDet'] = OrderDetail::getOrders($id);
+                return view('web.orderComplete', $data);
+            }
+        }
+        return abort(404);
     }
 }

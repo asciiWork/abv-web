@@ -83,8 +83,8 @@ class LoginController extends Controller
             }
         } else {
             $user = new User();
-            $user->name = bcrypt($request->get("name"));
-            $user->email = bcrypt($request->get("email"));
+            $user->name = $request->get("name");
+            $user->email = $request->get("email");
             $user->password = bcrypt($request->get("password"));
             $user->save();
 
@@ -99,5 +99,14 @@ class LoginController extends Controller
             }
             return redirect('login');
         }
+    }
+    public function getLogout()
+    {
+        $url = '/';
+        session()->forget('note');
+        session()->forget('temp_order_id');
+        session()->forget('cart');
+        Auth::logout();
+        return redirect($url);
     }
 }

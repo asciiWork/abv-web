@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\web\PagesController;
 use  App\Http\Controllers\web\LoginController;
 use  App\Http\Controllers\web\ProductsController;
+use  App\Http\Controllers\web\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,19 @@ Route::get('/categories', [PagesController::class, 'categories'])->name('web.cat
 Route::get('/product-details/{slug}', [PagesController::class, 'productDetails'])->name('web.product-details');
 Route::get('/cart', [PagesController::class, 'cart'])->name('web.cart');
 Route::get('/gallery', [PagesController::class, 'gallery'])->name('web.gallery');
-Route::get('/my-account', [PagesController::class, 'myAccount'])->name('web.my-account');
-Route::get('/my-address', [PagesController::class, 'myAddress'])->name('web.my-address');
+
+Route::group(['middleware' => ['auth']], function(){
+	Route::get('/logout', [LoginController::class, 'getLogout'])->name("logout");
+	Route::get('/my-account', [DashboardController::class, 'myAccount'])->name('web.my-account');
+	Route::get('/my-orders', [DashboardController::class, 'myOrders'])->name('web.my-orders');
+	Route::get('/view-order/{id}', [DashboardController::class, 'viewOrder'])->name("view-order");
+	Route::get('/my-address', [DashboardController::class, 'myAddress'])->name('web.my-address');
+	Route::post('update-address', [DashboardController::class, 'UpdateAddress'])->name("update-address");
+	Route::get('/edit-account', [DashboardController::class, 'editAccount'])->name('web.edit-account');
+	Route::post('update-account', [DashboardController::class, 'UpdateAccount'])->name("update-account");
+	Route::get('/downloads', [DashboardController::class, 'downloads'])->name('web.downloads');
+});
+Route::get('/order-received/{id}/{key}', [pagesController::class, 'viewReceivedOrder'])->name("order-received");
 
 Route::get('/login', [LoginController::class, 'login'])->name('web.login');
 Route::post('/check-login', [LoginController::class, 'checkLogin'])->name('web.check-login');

@@ -9,10 +9,13 @@ use App\Models\Product;
 use App\Models\ProductReview;
 use App\Models\ProductImages;
 use App\Models\Contact;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\TempOrder;
 use App\Models\TempOrderDetail;
 use App\Models\ProductSize;
 use App\Models\Carts;
+use App\Models\UserAddresses;
 use Validator;
 
 class ProductsController extends Controller
@@ -30,10 +33,10 @@ class ProductsController extends Controller
             if($prd){
                 if(\Auth::check())
                 {
-                    $temp_order_id = session()->get('temp_order_id');
-                    $obj = TempOrder::where('id',$temp_order_id)->where('user_id',\Auth::user()->id)->first();
-                    if($obj && $temp_order_id > 0){
-                        $tmpOrd = TempOrderDetail::where('temp_order_id',$temp_order_id)->where('product_id',$id)
+                    $order_id = session()->get('order_id');
+                    $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
+                    if($obj && $order_id > 0){
+                        $tmpOrd = OrderDetail::where('order_id',$order_id)->where('product_id',$id)->where('prosize',$prosize)
                         ->first();
                         if($tmpOrd){
                             $tmpOrd->quantity = $tmpOrd->quantity + $qnt;
@@ -43,15 +46,20 @@ class ProductsController extends Controller
                         }
                     }else{
                         $authUser = \Auth::user();
-                        $cart = Carts::where('product_id',$id)->where('user_id',$authUser->id)->first();
+                        $cart = Carts::where('product_id',$id)->where('user_id',$authUser->id)->where('prosize',$prosize)->first();
                         if($cart){
                             $cart->quantity = $cart->quantity + $qnt;
                             $cart->save();
                         }else{
+                            $proSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
                             $cart = new Carts();
                             $cart->user_id = $authUser->id;
                             $cart->product_id = $id;
                             $cart->quantity = $qnt;
+                            $cart->prosize = $proSize->product_size;
+                            $cart->price = $proSize->product_current_price;
+                            $cart->created_at = \Carbon\Carbon::now();
+                            $cart->updated_at = \Carbon\Carbon::now();
                             $cart->save();
                         }
                     }
@@ -59,10 +67,10 @@ class ProductsController extends Controller
                     $status = 1;
                     $msg = 'Product has been added!';
                 }else{
-                    $temp_order_id = session()->get('temp_order_id');
-                    $obj = TempOrder::where('id',$temp_order_id)->first();
-                    if($obj && $temp_order_id > 0){
-                        $tmpOrd = TempOrderDetail::where('temp_order_id',$temp_order_id)->where('product_id',$id)
+                    $order_id = session()->get('order_id');
+                    $obj = Order::where('id',$order_id)->first();
+                    if($obj && $order_id > 0){
+                        $tmpOrd = OrderDetail::where('order_id',$order_id)->where('product_id',$id)->where('prosize',$prosize)
                         ->first();
                         if($tmpOrd){
                             $tmpOrd->quantity = $tmpOrd->quantity + $qnt;
@@ -126,30 +134,28 @@ class ProductsController extends Controller
         $msg = 'Please try again later!';
         $data = array();
         $id = $request->get('id');
-        $prd = Product::find($id);
-        if($prd){
-            if(\Auth::check())
-            {
-                $authUser = \Auth::user();
-                $temp_order_id = session()->get('temp_order_id');
-                $obj = TempOrder::where('id',$temp_order_id)->where('user_id',$authUser->id)->first();
-                if($obj && $temp_order_id > 0){
-                    TempOrderDetail::where('temp_order_id',$temp_order_id)->delete();
-                    TempOrder::where('id',$temp_order_id)->where('user_id',$authUser->id)->delete();
-                }else{
-                    Carts::where('product_id',$id)->where('user_id',$authUser->id)->delete();
-                }
-                $status = 1;
-                $msg = 'Product has been removed!';
+        // $prd = Product::find($id);
+        if(\Auth::check())
+        {
+            $authUser = \Auth::user();
+            $order_id = session()->get('order_id');
+            $obj = Order::where('id',$order_id)->where('user_id',$authUser->id)->first();
+            if($obj && $order_id > 0){
+                OrderDetail::where('order_id',$order_id)->delete();
+                Order::where('id',$order_id)->where('user_id',$authUser->id)->delete();
             }else{
-                $cart = session()->get('cart');
-                if(isset($cart[$id])){
-                    unset($cart[$id]);
-                    session()->put('cart', $cart);
-                }
-                $status = 1;
-                $msg = 'Product has been removed!';
+                Carts::where('id',$id)->where('user_id',$authUser->id)->delete();
             }
+            $status = 1;
+            $msg = 'Product has been removed!';
+        }else{
+            $cart = session()->get('cart');
+            if(isset($cart[$id])){
+                unset($cart[$id]);
+                session()->put('cart', $cart);
+            }
+            $status = 1;
+            $msg = 'Product has been removed!';
         }
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }
@@ -165,25 +171,39 @@ class ProductsController extends Controller
             if(\Auth::check())
             {
                 $authUser = \Auth::user();
-                $temp_order_id = session()->get('temp_order_id');
-                $obj = TempOrder::where('id',$temp_order_id)->where('user_id',$authUser->id)->first();
-                if($obj && $temp_order_id > 0){
-                    $tmobj = TempOrderDetail::where('temp_order_id',$temp_order_id)->where('product_id',$id)->first();
+                $order_id = session()->get('order_id');
+                $obj = Order::where('id',$order_id)->where('user_id',$authUser->id)->first();
+                if($obj && $order_id > 0){
+                    $tmobj = OrderDetail::where('order_id',$order_id)->where('id',$id)->first();
                     if($tmobj){
                         if($type == 'plus'){
+                            $qnt=$tmobj->quantity + 1;
                             $tmobj->quantity = $tmobj->quantity + 1;
+                            $tmobj->total_amount = $qnt *$tmobj->amount;
                             $tmobj->save();
+
+                            $totOrdamt = OrderDetail::where('order_id', $order_id)->sum('total_amount');
+                            $obj->order_tax_amount_total =$totOrdamt;
+                            $obj->total_amount=$totOrdamt+$obj->shipping_charge;
+                            $obj->save();
                         }else{
                             if($tmobj->quantity > 1){
+                                $qnt=$tmobj->quantity - 1;
                                 $tmobj->quantity = $tmobj->quantity - 1;
+                                $tmobj->total_amount = $qnt *$tmobj->amount;
                                 $tmobj->save();
+
+                                $totOrdamt = OrderDetail::where('order_id', $order_id)->sum('total_amount');
+                                $obj->order_tax_amount_total =$totOrdamt;
+                                $obj->total_amount=$totOrdamt+$obj->shipping_charge;
+                                $obj->save();
                             }else{
                                 $tmobj->delete();
                             }
                         }
                     }
                 }else{
-                    $cart = Carts::where('product_id',$id)->where('user_id',$authUser->id)->first();
+                    $cart = Carts::where('id',$id)->where('user_id',$authUser->id)->first();
                     if($cart){
                         if($type == 'plus'){
                             $cart->quantity = $cart->quantity + 1;
@@ -245,7 +265,6 @@ class ProductsController extends Controller
             'bil_state' => 'required',
             'bil_city' => 'required',
             'bil_street' => 'required',
-            'bil_area' => 'required',
             'bil_zipcode' => 'required',
             'bil_phone' => 'required',
             'contact_email' => 'required|email'
@@ -292,11 +311,11 @@ class ProductsController extends Controller
             $products = Carts::getCartData();
             if(is_array($products) && !empty($products))
             {
-                $temp_order_id = session()->get('temp_order_id');
-                $obj = TempOrder::find($temp_order_id);
-                if($temp_order_id > 0 && $obj){
+                $order_id = session()->get('order_id');
+                $obj = Order::find($order_id);
+                if($order_id > 0 && $obj){
                     if(\Auth::check()){
-                        $obj = TempOrder::where('id',$temp_order_id)->where('user_id',\Auth::user()->id)->first();
+                        $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
                     }else{
                        if($request->get('create_acc')=='on'){
                             $user = new User();
@@ -317,7 +336,7 @@ class ProductsController extends Controller
                         //mail to user for password
                     }
                     $is_new = 1;
-                    $obj = new TempOrder();
+                    $obj = new Order();
                 }
                 if($obj){
                     $obj->user_id = $userId;
@@ -344,34 +363,38 @@ class ProductsController extends Controller
 
                     $obj->note = $request->get('note');
                     $obj->contact_email = $request->get('contact_email');
-                    $obj->order_status = Carts::$PENDING;
+                    $obj->order_status = Carts::$PLACED;
                     $obj->order_date = date('Y-m-d H:s:i');
                     $obj->created_at = date('Y-m-d H:s:i');
                     $obj->updated_at = date('Y-m-d H:s:i');
+                    $obj->ordkey='wc_order_'.md5(date('Y-m-d H:s:i'));
                     $obj->save();
 
-                    $tempOrderId = $obj->id;
+                    $orderId = $obj->id;
                     $total_price = 0;
 
                     foreach($products as $p)
                     {
                         $qnt = $p['qnt'];
                         $slug = $p['slug'];
-                        $product_id = $p['id'];
+                        $product_id = $p['product_id'];
                         $amount = $p['price'];
+                        $prosize = $p['prosize'];
                         $prdcutObj = Product::where('product_slug',$slug)->first();
 
                         if($prdcutObj && $qnt > 0){
-                            $tObj = TempOrderDetail::where('product_id',$p['id'])->where('temp_order_id',$tempOrderId)->first();
+                            $tObj = OrderDetail::where('product_id',$p['product_id'])->where('order_id',$orderId)->where('prosize',$prosize)->first();
                             if(!$tObj){
-                                $tObj = new TempOrderDetail;
+                                $tObj = new OrderDetail;
                             }
-                            $tObj->temp_order_id = $tempOrderId;
+                            $tObj->order_id = $orderId;
                             $tObj->product_id = $product_id;
                             $tObj->discount = 0;
                             $tObj->amount = $amount;
                             $tObj->quantity = $qnt;
                             $tObj->total_amount = $qnt * $amount;
+                            $tObj->unit_price = $amount;
+                            $tObj->prosize = $prosize;
                             $tObj->created_at = date('Y-m-d H:s:i');
                             $tObj->updated_at = date('Y-m-d H:s:i');
                             $tObj->save();
@@ -388,14 +411,17 @@ class ProductsController extends Controller
                     $obj->save();
 
                     if($total_price > 0){
-                        session()->put('temp_order_id',$tempOrderId);
+                        //session()->put('order_id',$orderId);
                     }
                     if(\Auth::check()){
                         Carts::where('user_id',$authUser->id)->delete();
+                        UserAddresses::addOrderAddress($orderId,$authUser->id);
                     }
                     $status = 1;
                     $msg = 'Order has been placed!';
                     session()->forget('cart');
+                    $key='wc_order_'.md5(date('Y-m-d H:s:i'));
+                    return redirect()->route('order-received',['id' => $orderId,'key'=>$key]);
                 }
             }
         }

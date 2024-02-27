@@ -16,6 +16,7 @@
 
     <!-- Plugin css -->
     <link rel="stylesheet" href="{{ asset('web/assets/css/vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
 
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{{ asset('web/assets/css/style.css') }}">

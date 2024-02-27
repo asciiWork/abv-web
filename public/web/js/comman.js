@@ -102,10 +102,6 @@ $(document).ready(function() {
             }
         });
     });
-    /*$(document).on('click','.quick-view-modal',function () {
-        var pid = $(this).attr('data-id');
-        //openQuickViewModal(pid);
-    });*/
 });
 function openQuickModal(pid)
 {

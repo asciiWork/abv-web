@@ -20,22 +20,27 @@ class Carts extends Model
     public static $SHIPPED = 'shipped';
     public static $OUTFORDEL = 'outForDelivery';
     public static $DELEVERED = 'delivered';
+
     public static function cartCounter()
     {
         $count = 0;
         if(\Auth::check()){
-            $temp_order_id = session()->get('temp_order_id');
-            $tObj = TempOrder::find($temp_order_id);
-            if($temp_order_id > 0 && $tObj){
-                $count = TempOrderDetail::where('temp_order_id',$temp_order_id)->count();
+            $order_id = session()->get('order_id');
+            if($order_id){
+              $tObj = Order::find($order_id)->where('order_status',Carts::$PENDING);
+              if($order_id > 0 && $tObj){
+                  $count = OrderDetail::where('order_id',$order_id)->count();
+              }else{
+                  $count = Carts::where('user_id',\Auth::user()->id)->count();
+              }
             }else{
-                $count = Cart::where('user_id',\Auth::user()->id)->count();
-            }            
+              $count = Carts::where('user_id',\Auth::user()->id)->count();
+            }
         }else{
-            $temp_order_id = session()->get('temp_order_id');
-            $tObj = TempOrder::find($temp_order_id);
-            if($temp_order_id > 0 && $tObj){
-                $count = TempOrderDetail::where('temp_order_id',$temp_order_id)->count();
+            $order_id = session()->get('order_id');
+            $tObj = Order::find($order_id);
+            if($order_id > 0 && $tObj){
+                $count = OrderDetail::where('order_id',$order_id)->count();
             }else{
                 $prds = session()->get('cart');
                 $count = (is_array($prds))?count($prds):0;
@@ -47,18 +52,19 @@ class Carts extends Model
     {
     	$data = array();
     	if(\Auth::check()){
-            $temp_order_id = session()->get('temp_order_id');
-            $tObj = TempOrder::where('id',$temp_order_id)->where('user_id',\Auth::user()->id)->first();
-            if($temp_order_id > 0 && $tObj){
-                $tempPrds = TempOrderDetail::select('temp_order_details.*','product.product_name','product.product_slug')
-                                ->join('product','product.id','temp_order_details.product_id')
-                                ->where('temp_order_details.temp_order_id',$temp_order_id)
+            $order_id = session()->get('order_id');
+            $tObj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
+            if($order_id > 0 && $tObj){
+                $ordPrds = OrderDetail::select('order_details.*','product.product_name','product.product_slug')
+                                ->join('product','product.id','order_details.product_id')
+                                ->where('order_details.order_id',$order_id)
                                 ->get();
-                if($tempPrds){
+                if($ordPrds){
                     $i = 0;
-                    foreach($tempPrds as $tp){
+                    foreach($ordPrds as $tp){
                         $pObj = ProductImages::select('product_img_url')->where('pro_main','1')->where('product_id',$tp->id)->get();
                         $data[$i]['id'] = $tp->id; 
+                        $data[$i]['product_id'] = $tp->product_id; 
                         $data[$i]['product_img'] =$pObj[0]->product_img_url; 
                         $data[$i]['product_name'] = $tp->product_name; 
                         $data[$i]['prosize'] = $tp->prosize; 
@@ -80,29 +86,30 @@ class Carts extends Model
                     foreach($raw as $r)
                     {
                         $pObj = ProductImages::select('product_img_url')->where('pro_main','1')->where('product_id',$r->product_id)->get();
-                       $data[$i]['id'] = $r->product_id; 
+                       $data[$i]['id'] = $r->id; 
+                       $data[$i]['product_id'] = $r->product_id; 
                        $data[$i]['product_img'] = $pObj[0]->product_img_url; 
                        $data[$i]['product_name'] = $r->product_name; 
-                       $data[$i]['prosize'] = $tp->prosize;
-                       $data[$i]['price'] = $r->amount;
+                       $data[$i]['prosize'] = $r->prosize;
+                       $data[$i]['price'] = $r->price;
                        $data[$i]['qnt'] = $r->quantity;
                        $data[$i]['slug'] = $r->product_slug;
-                       $data[$i]['total'] = $r->amount * $r->quantity;
+                       $data[$i]['total'] = $r->price * $r->quantity;
                        $i++;
                     }
                 }
             }
         }else{
-        	$temp_order_id = session()->get('temp_order_id');
-            $tObj = TempOrder::find($temp_order_id);
-            if($temp_order_id > 0 && $tObj){
-                $tempPrds = TempOrderDetail::select('temp_order_details.*','product.product_name','product.product_slug')
-                                ->join('product','product.id','temp_order_details.product_id')
-                                ->where('temp_order_details.temp_order_id',$temp_order_id)
+        	$order_id = session()->get('order_id');
+            $tObj = Order::find($order_id);
+            if($order_id > 0 && $tObj){
+                $ordPrds = OrderDetail::select('order_details.*','product.product_name','product.product_slug')
+                                ->join('product','product.id','order_details.product_id')
+                                ->where('order_details.order_id',$order_id)
                                 ->get();
-                if($tempPrds){
+                if($ordPrds){
                     $i = 0;
-                    foreach($tempPrds as $tp){
+                    foreach($ordPrds as $tp){
                             $pObj = ProductImages::select('product_img_url')->where('pro_main','1')->where('product_id',$tp->id)->get();
                            $data[$i]['id'] = $tp->id; 
                            $data[$i]['product_img'] =$pObj[0]->product_img_url; 
@@ -123,6 +130,7 @@ class Carts extends Model
                     foreach($prds as $p)
                     {
                        $data[$i]['id'] = $p['id']; 
+                       $data[$i]['product_id'] = $p['id']; 
                        $data[$i]['product_img'] = $p['product_img']; 
                        $data[$i]['product_name'] = $p['product_name']; 
                        $data[$i]['prosize'] = $p['prosize']; 
@@ -134,7 +142,7 @@ class Carts extends Model
                     }
                 }
             }
-            return $data;
         }
+        return $data;
     }
 }

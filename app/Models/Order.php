@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
  
-class TempOrder extends Model
+class Order extends Model
 {
-    protected $table = 'temp_orders';
+    protected $table = 'orders';
     public $timestamps = false;
 
-    public static function getOrderData(){
-      return $tObj = TempOrder::where('user_id',\Auth::user()->id)->get();
+    public static function getOrderData($id){
+      return $tObj = Order::where('user_id',$id)->get();
     }
 }
