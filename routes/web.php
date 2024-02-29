@@ -24,6 +24,7 @@ Route::get('/refund-and-cancellation-policy', [PagesController::class, 'refundAn
 Route::get('/delivery-and-shipping-policy', [PagesController::class, 'deliveryAndShippingPolicy'])->name('web.delivery-and-shipping-policy');
 Route::get('/product-category', [PagesController::class, 'productCategory'])->name('web.product-category');
 Route::get('/categories', [PagesController::class, 'categories'])->name('web.categories');
+Route::get('/product-category/{slug}', [PagesController::class, 'categoryDetails'])->name('web.categories-detail');
 Route::get('/product-details/{slug}', [PagesController::class, 'productDetails'])->name('web.product-details');
 Route::get('/cart', [PagesController::class, 'cart'])->name('web.cart');
 Route::get('/gallery', [PagesController::class, 'gallery'])->name('web.gallery');

@@ -6,37 +6,7 @@
         <div class="row">
             <div class="col-xl-3 col-lg-4 shop-col-width-lg-4">
                 <div class="shop__sidebar--widget widget__area d-none d-lg-block">
-                    <div class="single__widget widget__bg">
-                        <h2 class="widget__title h3">Categories</h2>
-                        <ul class="widget__categories--menu">
-                            @foreach($Catdata as $cat)
-                            <li class="widget__categories--menu__list">
-                                <label class="widget__categories--menu__label d-flex align-items-center">
-                                    <img class="widget__categories--menu__img" src="{{ asset('web/assets/img/product/small-product/product1.webp') }}" alt="categories-img">
-                                    <span class="widget__categories--menu__text">{{ substr($cat->category_name,0,18) }}...</span>
-                                    <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                        <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                    </svg>
-                                </label>
-                                <ul class="widget__categories--sub__menu">
-                                    <?php $pro_id=''; ?>
-                                    @foreach($productData as $pro)
-                                        @if ($cat->id==$pro->category_id && $pro_id!=$pro->id)
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
-                                                <img class="widget__categories--sub__menu--img" src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">{{ substr($pro->product_name,0,18) }}...</span>
-                                            </a>
-                                        </li>
-                                        @else
-                                        @endif
-                                        <?php $pro_id=$pro->id; ?>
-                                    @endforeach
-                                </ul>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    @include('web.includes.categoryMenu')
                     <div class="single__widget price__filter widget__bg">
                         <h2 class="widget__title h3">Filter By Price</h2>
                         <form class="price__filter--form" action="#">
@@ -64,6 +34,50 @@
                     </div>
                 </div>
             </div>
+            @if(isset($catPro))
+                <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
+                <div class="shop__right--sidebar">
+                    <div class="shop__product--wrapper">
+                        <div class="tab_content">
+                            <div id="product_grid" class="tab_pane active show">
+                                <div class="product__section--inner">
+                                    <div class="row mb--n30">
+                                        @foreach($catPro as $pro)
+                                        <div class="col-lg-4 col-md-4 col-sm-6 col-6 custom-col mb-30">
+                                            <article class="product__card">
+                                                <div class="product__card--thumbnail">
+                                                    <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                    </a>
+                                                    <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
+                                                </div>
+                                                <div class="product__card--content">
+                                                    <h3 class="product__card--title"><a href="{{$pro->product_slug}}">{{ $pro->product_name }}</a></h3>
+                                                    <div class="product__card--price">
+                                                        <span class="current__price">₹{{ $pro->product_min_price }}</span> - 
+                                                        <span class="current__price">₹{{ $pro->product_max_price }}</span>
+                                                    </div>
+                                                    <div class="product__card--footer">
+                                                <a class="product__card--btn primary__btn" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
+                                                    <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M13.2371 4H11.5261L8.5027 0.460938C8.29176 0.226562 7.9402 0.203125 7.70582 0.390625C7.47145 0.601562 7.44801 0.953125 7.63551 1.1875L10.0496 4H3.46364L5.8777 1.1875C6.0652 0.953125 6.04176 0.601562 5.80739 0.390625C5.57301 0.203125 5.22145 0.226562 5.01051 0.460938L1.98707 4H0.299574C0.135511 4 0.0183239 4.14062 0.0183239 4.28125V4.84375C0.0183239 5.00781 0.135511 5.125 0.299574 5.125H0.721449L1.3777 9.78906C1.44801 10.3516 1.91676 10.75 2.47926 10.75H11.0339C11.5964 10.75 12.0652 10.3516 12.1355 9.78906L12.7918 5.125H13.2371C13.3777 5.125 13.5183 5.00781 13.5183 4.84375V4.28125C13.5183 4.14062 13.3777 4 13.2371 4ZM11.0339 9.625H2.47926L1.86989 5.125H11.6433L11.0339 9.625ZM7.33082 6.4375C7.33082 6.13281 7.07301 5.875 6.76832 5.875C6.4402 5.875 6.20582 6.13281 6.20582 6.4375V8.3125C6.20582 8.64062 6.4402 8.875 6.76832 8.875C7.07301 8.875 7.33082 8.64062 7.33082 8.3125V6.4375ZM9.95582 6.4375C9.95582 6.13281 9.69801 5.875 9.39332 5.875C9.0652 5.875 8.83082 6.13281 8.83082 6.4375V8.3125C8.83082 8.64062 9.0652 8.875 9.39332 8.875C9.69801 8.875 9.95582 8.64062 9.95582 8.3125V6.4375ZM4.70582 6.4375C4.70582 6.13281 4.44801 5.875 4.14332 5.875C3.8152 5.875 3.58082 6.13281 3.58082 6.4375V8.3125C3.58082 8.64062 3.8152 8.875 4.14332 8.875C4.44801 8.875 4.70582 8.64062 4.70582 8.3125V6.4375Z" fill="currentColor" />
+                                                    </svg>
+                                                    Select Option
+                                                </a>
+                                            </div>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @else
             <div class="col-xl-9 col-lg-8 shop-col-width-lg-8">
                 <div class="shop__right--sidebar">
                     <div class="shop__product--wrapper">
@@ -640,6 +654,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>

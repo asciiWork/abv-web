@@ -88,9 +88,14 @@ class Product extends Model
 		->where("product.product_slug", $slug)->first();
     	return $product;
 	}
-	/*public function get_ProductReview($id)
+	public function get_catProduct($id)
 	{
-		$productReview = DB::table('product_review')->where("product_id", $id)->get();
-    	return $productReview;
-	}*/
+        $product = DB::table('product')
+            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->where('product_img.pro_main', '1')
+            ->where("product.category_id", $id)
+            ->get();
+    	return $product;
+	}
 }

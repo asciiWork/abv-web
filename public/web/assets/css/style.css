@@ -3635,7 +3635,7 @@ input[type=number]::-webkit-outer-spin-button {
     home 4 slider css here
 */
 .slider4__items--bg1 {
-  background: url(../img/slider/home4-slider1-bg.webp);
+  /*background: url(../img/slider/bg_slider.jpg);*/
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -7263,7 +7263,7 @@ input.quickview__value--number {
     home three brand logo css
 */
 .brand__section--style3 {
-  background: url(../img/other/brand-section-bg3.webp);
+  /*background: url(../img/other/brand-section-bg3.webp);*/
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;

@@ -13,6 +13,7 @@ use App\Models\Carts;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Validator;
+use Rap2hpoutre\FastExcel\FastExcel;
 
 class pagesController extends Controller
 {
@@ -164,11 +165,27 @@ class pagesController extends Controller
         $data = array();
         $data['page_title'] = 'Product Category';
         $catData = new Categories; 
-        $cat =  $catData->get_category();
+        $cat =  $catData->get_Menucategory();
         $data['Catdata']=$cat;
         $proData = new Product; 
         $product =  $proData->get_Allproduct();
         $data['productData']=$product;
+        return view('web.productCategory', $data);
+    }
+    public function categoryDetails($slug){
+        $data = array();
+        $data['page_title'] = 'Product Category';
+        $catData = new Categories; 
+        $cat =  $catData->get_Menucategory();
+        $data['Catdata']=$cat;
+        $proData = new Product; 
+        $product =  $proData->get_Allproduct();
+        $data['productData']=$product;
+        if($slug){
+            $cat=$catData->get_categoryBy_slug($slug);
+            $data['Catsl'] = $cat; 
+            $data['catPro'] =  $proData->get_catProduct($cat[0]->id);
+        }
         return view('web.productCategory', $data);
     }
     public function cart()
