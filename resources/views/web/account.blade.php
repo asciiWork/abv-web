@@ -10,76 +10,29 @@
                 @include('web.includes.profileList')
             </div>
             <div class="account__wrapper">
-                <div class="align-left">
-                    <div class="box-content">
-                        <p class="mb-4"> Hello <strong class="account-text-user">{{ $userData->name}}</strong> (not <strong class="account-text-user">{{$userData->name}}</strong>?<a href="{{route ('logout') }}">Log out</a>)</p>
-                        <p class="m-b-xl">From your account dashboard you can view your <a href="{{route ('web.my-orders') }}" class="link-primary">recent orders</a>, manage your <a href="{{route ('web.my-address') }}"  class="link-primary">shipping and billing addresses</a>, and <a href="{{ route('web.edit-account') }}"  class="link-primary">edit your password and account details</a>.</p>
-                    </div>
-                </div>
                 <div class="account__content">
-                    <div class="row py-4">
-                        <div class="col-md-4 col-sm-6 col-12 m-b-md">
-                            <div class="border text-center">
-                            <a href="{{route ('web.my-orders') }}" class="text-decoration-none">
-                            <div class="box-content align-items-center py-4">
-                                <h1><i class="bi bi-dropbox text-secondary"></i></h1>
-                                <h4>ORDERS</h4>
-                            </div>
-                            </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-12 m-b-md">
-                            <div class="border text-center">
-                            <a href="{{ route('web.downloads') }}" class="text-decoration-none">
-                            <div class="box-content align-items-center py-4">
-                                <h1><i class="bi bi-cloud-download text-secondary"></i></h1>
-                                <h4>DOWNLOADS</h4>
-                            </div>
-                            </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-12 m-b-md">
-                            <div class="border text-center">
-                            <a href="{{ route('web.my-address') }}" class="text-decoration-none">
-                            <div class="box-content align-items-center py-4">
-                                <h1><i class="bi bi-geo-alt-fill text-secondary"></i></h1>
-                                <h4>ADDRESS</h4>
-                            </div>
-                            </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row py-4">
-                        <div class="col-md-4 col-sm-6 col-12 m-b-md">
-                            <div class="border text-center">
-                            <a href="{{ route('web.edit-account') }}" class="text-decoration-none">
-                            <div class="box-content align-items-center py-4">
-                                <h1><i class="bi bi-person text-secondary"></i></h1>
-                                <h4>ACCOUNT DETAILS</h4>
-                            </div>
-                            </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-12 m-b-md">
-                            <div class="border text-center">
-                            <a href="{{ route('web.my-address') }}" class="text-decoration-none">
-                            <div class="box-content align-items-center py-4">
-                                <h1><i class="bi bi-heart text-secondary"></i></h1>
-                                <h4>WISHLIST</h4>
-                            </div>
-                            </a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-6 col-12 m-b-md">
-                            <div class="border text-center">
-                            <a href="{{ route('logout') }}" class="text-decoration-none">
-                            <div class="box-content align-items-center py-4">
-                                <h1><i class="bi bi-box-arrow-left text-secondary"></i></h1>
-                                <h4>LOGOUT</h4>
-                            </div>
-                            </a>
-                            </div>
-                        </div>
+                    <h2 class="account__content--title h3 mb-20">Orders History</h2>
+                    <div class="account__table--area">
+                        <table class="account__table">
+                            <thead class="account__table--header">
+                                <tr class="account__table--header__child">
+                                    <th class="account__table--header__child--items">Order</th>
+                                    <th class="account__table--header__child--items">Date</th>
+                                    <th class="account__table--header__child--items">Status</th>
+                                    <th class="account__table--header__child--items">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="account__table--body mobile__none">
+                                @foreach($ordData as $ord)
+                                <tr class="account__table--body__child">
+                                    <td class="account__table--body__child--items">#00000{{ $ord->id}}</td>
+                                    <td class="account__table--body__child--items">{{date_format(date_create($ord->order_date),"F d, Y")}}</td>
+                                    <td class="account__table--body__child--items">{{$ord->order_status}}</td>
+                                    <td class="account__table--body__child--items">₹{{$ord->total_amount}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

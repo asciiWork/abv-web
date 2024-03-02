@@ -245,6 +245,7 @@ class ProductsController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Checkout';
+        $data['breadcrumb'] = 'Checkout';
         $data['products'] = Carts::getCartData();
         if(!empty($data['products'])){
             return view('web.checkout', $data);
@@ -269,9 +270,7 @@ class ProductsController extends Controller
             'bil_phone' => 'required',
             'contact_email' => 'required|email'
         ];
-        if($request->get('create_acc')=='on'){
-            $vslidateArr = $vslidateArr + ['contact_email' => 'required|email|unique:users,email'];
-        }
+        
         if($request->get('ship_me')=='on'){
             $vslidateArr = $vslidateArr + [
                 'ship_name' => 'required|min:2',
@@ -317,17 +316,19 @@ class ProductsController extends Controller
                     if(\Auth::check()){
                         $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
                     }else{
-                       if($request->get('create_acc')=='on'){
+                        $nusr = User::where('contact_email',$email)->first();
+                        if(!empty($nusr)){
                             $user = new User();
                             $user->name = bcrypt($request->get("ship_name"));
                             $user->email = bcrypt($request->get("contact_email"));
                             $user->password = bcrypt($request->get("ship_name"));
                             $user->save();
                             //mail to user for password
-                        } 
+                        }
                     }
                 }else{
-                    if($request->get('create_acc')=='on'){
+                    $nusr = User::where('contact_email',$email)->first();
+                    if(!empty($nusr)){
                         $user = new User();
                         $user->name = bcrypt($request->get("ship_name"));
                         $user->email = bcrypt($request->get("contact_email"));

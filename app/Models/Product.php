@@ -32,6 +32,21 @@ class Product extends Model
             ->get();
         return $product;
     }
+    public function get_BestSellerOrRecent($var)
+    {
+        $product = DB::table('product')
+            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->where('product_img.pro_main', '1');
+        if($var=='best_seller'){
+            $product=$product->where('best_seller','1');
+        }
+        if($var=='recent'){
+            $product=$product->where('recent_product','1');
+        }
+        $product=$product->orderBy('product.id', 'desc')->get();
+        return $product;
+    }
 	public function productWithSize($id='')
 	{
 		$productWithSize = Product::with('product_size')
@@ -40,6 +55,10 @@ class Product extends Model
         ->find($id);
         return $productWithSize;
 	}
+    public function productSize($id=''){
+        $productWithSize = Product::with('product_size')->find($id);
+        return $productWithSize;
+    }
 	public function get_latest_product($proNum)
 	{
 		/*$product = DB::table('product')

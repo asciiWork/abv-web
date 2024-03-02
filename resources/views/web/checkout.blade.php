@@ -105,14 +105,6 @@
                                 </div>
                             </div>
                         </div>
-                        @if(!\Auth::check())
-                        <div class="checkout__checkbox">
-                            <input class="checkout__checkbox--input" id="checkbox2" type="checkbox" name="create_acc">
-                            <span class="checkout__checkbox--checkmark"></span>
-                            <label class="checkout__checkbox--label" for="checkbox2">
-                                Create an account?</label>
-                        </div>
-                        @endif
                         <details>
                             <summary class="checkout__checkbox mb-20">
                                 <input name="ship_me" class="checkout__checkbox--input" type="checkbox">

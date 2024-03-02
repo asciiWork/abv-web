@@ -21,8 +21,10 @@ class DashboardController extends Controller
     {
         $data = array();
         $data['page_title'] = 'My Account';
+        $data['breadcrumb'] = 'My Account';
         $userData=Auth::user();
         $data['userData'] = $userData;
+        $data['ordData'] = Order::getOrderData(\Auth::user()->id);
         return view('web.account', $data);
     }
     public function myAddress(Request $request)
@@ -30,6 +32,7 @@ class DashboardController extends Controller
         $id = $request->get('id');
         $data = array();
         $data['page_title'] = 'My Address';
+        $data['breadcrumb'] = 'My Address';
         $data['user'] = \Auth::user();
         $formObj= '';
         if($id){
@@ -46,6 +49,7 @@ class DashboardController extends Controller
     {
         $data = array();
         $data['page_title'] = 'My Orders';
+        $data['breadcrumb'] = 'My Orders';
         $userData=Auth::user();
         $data['userData'] = $userData;
         $data['ordData'] = Order::getOrderData(\Auth::user()->id);
@@ -58,6 +62,7 @@ class DashboardController extends Controller
         $data = array();
         $data['user'] = \Auth::user();
         $data['page_title'] = 'Orders';
+        $data['breadcrumb'] = 'Orders';
         // $obj = Order::where('id',$id)->where('user_id',\Auth::user()->id)->where('is_confirm',1)->first();
         $obj = Order::where('id',$id)->where('user_id',\Auth::user()->id)->first();
         if(!$obj){
@@ -72,6 +77,7 @@ class DashboardController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Update Account';
+        $data['breadcrumb'] = 'Update Account';
         $user = \Auth::user();
         $data['userData'] = $user;
         return view('web.editAccount ', $data);
@@ -80,6 +86,7 @@ class DashboardController extends Controller
     {
         $data = array();
         $data['page_title'] = 'downloads';
+        $data['breadcrumb'] = 'downloads';
         return view('web.downloads ', $data);
     }
     public function UpdateAddress(Request $request)
@@ -152,7 +159,6 @@ class DashboardController extends Controller
         $vslidateArr = [
             'name' => 'required|min:2',
             'email' => 'required|unique:users,email,'.$id,
-            'display_name' => 'required',
         ];
         if($request->get('current_password') ){
             $vslidateArr = $vslidateArr + [
@@ -189,7 +195,6 @@ class DashboardController extends Controller
                 }
                 $user->name = $request->get('name');
                 $user->email = trim($request->get('email'));
-                $user->display_name = $request->get('display_name');
                 $user->save();
             }
         }

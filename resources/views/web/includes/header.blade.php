@@ -1,5 +1,6 @@
 <?php
 $cartCounter = \App\Models\Carts::cartCounter();
+$crrRoute = \Route::currentRouteName();
 ?>
 <header class="header__section">
     <div class="header__topbar bg__primary">
@@ -7,13 +8,7 @@ $cartCounter = \App\Models\Carts::cartCounter();
             <div class="header__topbar--inner d-flex align-items-center justify-content-between">
                 <ul class="header__topbar--info d-none d-lg-flex">
                     <li class="header__info--list">
-                        <a class="header__info--link text-white" href="shop.html">STORES</a>
-                    </li>
-                    <li class="header__info--list">
-                        <a class="header__info--link text-white" href="shop.html">DELIVERY</a>
-                    </li>
-                    <li class="header__info--list">
-                        <a class="header__info--link text-white" href="shop.html">GUARANTEE</a>
+                        <a class="header__info--link text-white" href="{{route('web.contact')}}">Mon - Sat 9.00 - 19.00</a>
                     </li>
                     <li class="header__info--list">
                         <a class="header__info--link text-white" href="mailto:info@abvtool.in">
@@ -101,16 +96,16 @@ $cartCounter = \App\Models\Carts::cartCounter();
                     <nav class="header__menu--navigation">
                         <ul class="header__menu--wrapper d-flex">
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.index') }}">Home</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.index' || $crrRoute == 'web.terms-and-conditions' || $crrRoute == 'web.privacy-policy' || $crrRoute == 'web.refund-and-cancellation-policy' || $crrRoute == 'web.delivery-and-shipping-policy')?'active':'' }}" href="{{ route('web.index') }}">Home</a>
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.products') }}">Products</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.products' || $crrRoute =='web.categories' || $crrRoute == 'web.gallery' || $crrRoute == 'web.product-category' || $crrRoute == 'web.product-details')?'active':'' }}" href="{{ route('web.products') }}">Products</a>
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.about') }}">About</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.about')?'active':'' }}" href="{{ route('web.about') }}">About</a>
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.contact') }}">Contact</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.contact')?'active':'' }}" href="{{ route('web.contact') }}">Contact</a>
                             </li>
                         </ul>
                     </nav>
@@ -158,80 +153,6 @@ $cartCounter = \App\Models\Carts::cartCounter();
             </div>
         </div>
     </div>
-    <!-- Start Offcanvas header menu -->
-    <div class="offcanvas__header">
-        <div class="offcanvas__inner">
-            <div class="offcanvas__logo">
-                <a class="offcanvas__logo_link" href="index.html">
-                    <img src="{{ asset('web/assets/img/logo/nav-log.webp') }}" alt="Grocee Logo" width="158" height="36">
-                </a>
-                <button class="offcanvas__close--btn" data-offcanvas>close</button>
-            </div>
-            <nav class="offcanvas__menu">
-                <ul class="offcanvas__menu_ul">
-                    <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="index.html">Home</a>
-                        <ul class="offcanvas__sub_menu">
-                            <li class="offcanvas__sub_menu_li"><a href="index.html" class="offcanvas__sub_menu_item">Home One</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-2.html" class="offcanvas__sub_menu_item">Home Two</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-3.html" class="offcanvas__sub_menu_item">Home Three</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-4.html" class="offcanvas__sub_menu_item">Home Four</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-5.html" class="offcanvas__sub_menu_item">Home Five</a></li>
-                        </ul>
-                    </li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="about.html">About</a></li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a></li>
-                </ul>
-                <div class="offcanvas__account--items">
-                    <a class="offcanvas__account--items__btn d-flex align-items-center" href="login.html">
-                        <span class="offcanvas__account--items__icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20.51" height="19.443" viewBox="0 0 512 512">
-                                <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
-                                <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
-                            </svg>
-                        </span>
-                        <span class="offcanvas__account--items__label">Login / Register</span>
-                    </a>
-                </div>
-                <div class="offcanvas__account--wrapper d-flex">
-                    <div class="offcanvas__account--currency">
-                        <a class="offcanvas__account--currency__menu d-flex align-items-center text-black" href="javascript:void(0)">
-                            <img src="{{ asset('web/assets/img/icon/usd-icon.webp') }}" alt="currency">
-                            <span>USD</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9.797" height="6.05" viewBox="0 0 9.797 6.05">
-                                <path d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                            </svg>
-                        </a>
-                        <div class="offcanvas__account--currency__submenu">
-                            <ul>
-                                <li class="currency__items"><a class="currency__text" href="#">CAD</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">CNY</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">EUR</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">GBP</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="language__currency--list">
-                        <a class="offcanvas__language--switcher" href="javascript:void(0)">
-                            <span>English</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9.797" height="6.05" viewBox="0 0 9.797 6.05">
-                                <path d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                            </svg>
-                        </a>
-                        <div class="offcanvas__dropdown--language">
-                            <ul>
-                                <li class="language__items"><a class="language__text" href="#">France</a></li>
-                                <li class="language__items"><a class="language__text" href="#">Russia</a></li>
-                                <li class="language__items"><a class="language__text" href="#">Spanish</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- End Offcanvas header menu -->
-
     <!-- Start Offcanvas stikcy toolbar -->
     <div class="offcanvas__stikcy--toolbar">
         <ul class="d-flex justify-content-between">

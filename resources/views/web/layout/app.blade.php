@@ -16,7 +16,6 @@
 
     <!-- Plugin css -->
     <link rel="stylesheet" href="{{ asset('web/assets/css/vendor/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
 
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{{ asset('web/assets/css/style.css') }}">
@@ -66,6 +65,13 @@
     <!-- All Script JS Plugins here  -->
     <script type="text/javascript">
         var http_host_js = '{{ url("/") }}';
+        var readMoreBtns = document.querySelectorAll('.read-more-btn');
+          readMoreBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+              var moreContent = this.previousElementSibling.querySelector('.more-content');
+              moreContent.classList.toggle('hidden');
+            });
+          });
     </script>
     <script src="{{ asset('web/js/jquery.min.js')}}" type="text/javascript"></script>
     <script src="{{ asset('web/js/bootstrap.min.js')}}" type="text/javascript"></script>

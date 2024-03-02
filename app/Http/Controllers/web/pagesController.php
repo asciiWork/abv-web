@@ -21,6 +21,7 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Home';
+        $data['breadcrumb'] = 'Home';
         $catData = new Categories; 
         $cat =  $catData->get_category();
         $data['Catdata']=$cat;
@@ -33,12 +34,15 @@ class pagesController extends Controller
         $data['dealProduct']=$dealProduct;
         $newPro =  $proData->get_NewArrivals();
         $data['newProData']=$newPro;
+        $data['recentPro'] =  $proData->get_BestSellerOrRecent('recent');
+        $data['bestSeller'] =  $proData->get_BestSellerOrRecent('best_seller');
         return view('web.index', $data);
     }
     public function about()
     {
         $data = array();
         $data['page_title'] = 'About';
+        $data['breadcrumb'] = 'About';
         $proreview = new ProductReview; 
         $prore =  $proreview->get_ProductWithReview();
         $data['proReview']=$prore;
@@ -48,17 +52,21 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Products';
+        $data['breadcrumb'] = 'Products';
         $proData = new Product; 
         $product =  $proData->get_Allproduct();
         $data['productData']=$product;
         $newPro =  $proData->get_NewArrivals();
         $data['newProData']=$newPro;
+        $data['recentPro'] =  $proData->get_BestSellerOrRecent('recent');
+        $data['bestSeller'] =  $proData->get_BestSellerOrRecent('best_seller');
         return view('web.products', $data);
     }
     public function contact()
     {
         $data = array();
         $data['page_title'] = 'Contact';
+        $data['breadcrumb'] = 'Contact';
         return view('web.contact', $data);
     }
     public function checkContactForm(Request $request)
@@ -105,30 +113,35 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Privacy Policy';
+        $data['breadcrumb'] = 'Privacy Policy';
         return view('web.privacyPolicy', $data);
     }
     public function termsAndConditions()
     {
         $data = array();
         $data['page_title'] = 'Terms And Conditions';
+        $data['breadcrumb'] = 'Terms And Conditions';
         return view('web.termsAndConditions', $data);
     }
     public function refundAndCancellationPolicy()
     {
         $data = array();
         $data['page_title'] = 'Refund And Cancellation Policy';
+        $data['breadcrumb'] = 'Refund And Cancellation Policy';
         return view('web.refundAndCancellationPolicy', $data);
     }
     public function deliveryAndShippingPolicy()
     {
         $data = array();
         $data['page_title'] = 'Delivery And Shipping Policy';
+        $data['breadcrumb'] = 'Delivery And Shipping Policy';
         return view('web.deliveryAndShippingPolicy', $data);
     }
     public function categories()
     {
         $data = array();
         $data['page_title'] = 'Categories';
+        $data['breadcrumb'] = 'Categories';
         $catData = new Categories; 
         $cat =  $catData->get_category();
         $data['Catdata']=$cat;
@@ -138,9 +151,11 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Product Details';
+        $data['breadcrumb'] = 'Product Details';
         $proData = new Product; 
         $product =  $proData->get_ProductDetail($slug);
         $data['proData']=$product;
+        $data['productSize'] = $proData->productSize($product->id);
         $productWithSize = $proData->productWithSize($product->id);
         $data['productWithSize']=$productWithSize;
         $catquery = new Categories;
@@ -164,6 +179,7 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Product Category';
+        $data['breadcrumb'] = 'Product Category';
         $catData = new Categories; 
         $cat =  $catData->get_Menucategory();
         $data['Catdata']=$cat;
@@ -175,6 +191,7 @@ class pagesController extends Controller
     public function categoryDetails($slug){
         $data = array();
         $data['page_title'] = 'Product Category';
+        $data['breadcrumb'] = 'Product Category';
         $catData = new Categories; 
         $cat =  $catData->get_Menucategory();
         $data['Catdata']=$cat;
@@ -192,6 +209,7 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Cart';
+        $data['breadcrumb'] = 'Cart';
         $cartData = Carts::getCartData();
         $data['cartData'] = $cartData;
         $proData = new Product;
@@ -203,6 +221,7 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Gallery';
+        $data['breadcrumb'] = 'Gallery';
         return view('web.gallery', $data);
     }
     public function viewReceivedOrder($id,$key){

@@ -13,7 +13,7 @@ class UserAddresses extends Model
     public $timestamps = false;
 
     public static function getAddData($id){
-      return $tObj = UserAddresses::where('user_id',$id)->get();
+      return $tObj = UserAddresses::where('user_id',$id)->orderBy('id', 'desc')->take(2)->get();
     }
     public static function addOrderAddress($ordr_id,$id)
     {

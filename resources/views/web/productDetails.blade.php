@@ -46,8 +46,7 @@
                                     <img class="product__media--nav__items--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $proimg->product_img_url }}" alt="product-nav-img">
                                 </div>
                             </div>
-                            @endforeach
-                            
+                            @endforeach                            
                         </div>
                         <div class="swiper__nav--btn swiper-button-next">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-right">
@@ -64,8 +63,8 @@
             </div>
             <div class="col">
                 <div class="product__details--info">
-                    {!! Form::open(['route' => 'web.add-to-cart', 'id' => 'submit-form']) !!}
-                        <input type="hidden" name="id" value="{{$productWithSize->id}}">
+                    {!! Form::open(['route' => 'web.add-to-cart', 'id' => 'submit-form','redirect'=>url('/product-details/'.$productWithSize->product_slug)]) !!}
+                        <input type="hidden" name="id" value="{{$productWithSize->product_id}}">
                         <input type="hidden" id="inputValue" name="prosize" placeholder="Selected tab value">
                         <h2 class="product__details--info__title mb-15">{{$productWithSize->product_name}}</h2>
                         <div class="product__details--info__price mb-12">
@@ -112,48 +111,30 @@
                                     <p class="product__details--info__meta--list"><strong>CATEGORIES:</strong> <span>{{$catData[0]->category_name}}</span> </p>
                                 </div>
                             </div>
-                            <!-- <div class="product__variant--list mb-10">
-                                <fieldset class="variant__input--fieldset">
-                                    <legend class="product__variant--title mb-8">SIZE: </legend>
-                                    <div class="variant__color d-flex">
-                                        <div class="variant__color--list">
-                                            <input id="color-red5" name="color" type="radio" checked>
-                                            <label class="variant__color--value red" for="color-red5" title="Red"><img class="variant__color--value__img" src="{{ asset('web/assets/img/product/small-product/product1.webp') }}" alt="variant-color-img"></label>
-                                        </div>
-                                        <div class="variant__color--list">
-                                            <input id="color-red6" name="color" type="radio">
-                                            <label class="variant__color--value red" for="color-red6" title="Black"><img class="variant__color--value__img" src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="variant-color-img"></label>
-                                        </div>
-                                        <div class="variant__color--list">
-                                            <input id="color-red7" name="color" type="radio">
-                                            <label class="variant__color--value red" for="color-red7" title="Pink"><img class="variant__color--value__img" src="{{ asset('web/assets/img/product/small-product/product3.webp') }}" alt="variant-color-img"></label>
-                                        </div>
-                                        <div class="variant__color--list">
-                                            <input id="color-red8" name="color" type="radio">
-                                            <label class="variant__color--value red" for="color-red8" title="Orange"><img class="variant__color--value__img" src="{{ asset('web/assets/img/product/small-product/product4.webp') }}" alt="variant-color-img"></label>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div> -->
                             <div class="product__variant--list mb-20">
                                 <fieldset class="variant__input--fieldset">
                                     <legend class="product__variant--title mb-8">Size :</legend>
-                                    <ul class="variant__size d-flex" id="labelList">
-                                        <?php $tracking_size = ''; ?>
-                                        @foreach ($productWithSize->product_size as $r)
-                                        <li class="variant__size--list" >
-                                            <!-- <input id="weight{{$r->id}}" name="weight" type="radio" checked> -->
+                                    <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
+                                        @foreach ($productSize->product_size as $r)
+                                        <li class="variant__size--list mb-2">
                                             <label data-tab="{{$r->product_size}}" class="variant__size--value psize" for="weight{{$r->id}}" >{{$r->product_size}}</label>
                                         </li>
-                                        <?php $tracking_size .= $r->product_size . ', '; ?>
                                         @endforeach                                        
                                     </ul>
-                                    @foreach ($productWithSize->product_size as $r)
+                                    @foreach ($productSize->product_size as $r)
                                         <div id="{{$r->product_size}}" class="tab-price">
                                             <p></p>
                                             <p class="product__details--info__meta--list">
-                                                <strong><s>₹{{$r->product_old_price}}</s></strong>&nbsp;
-                                                <strong>₹{{$r->product_current_price}}</strong>
+                                                @if($r->product_old_price>0)
+                                                    @if($r->product_old_price>0 && $r->product_current_price<=0)
+                                                        <strong>₹{{$r->product_old_price}}</strong>&nbsp;
+                                                    @elseif($r->product_current_price!=$r->product_old_price)
+                                                        <strong><s>₹{{$r->product_old_price}}</s></strong>&nbsp;
+                                                    @endif
+                                                @endif
+                                                @if($r->product_current_price>0)
+                                                    <strong>₹{{$r->product_current_price}}</strong>
+                                                @endif
                                             </p>
                                         </div>
                                     @endforeach
@@ -168,16 +149,7 @@
                                     <button type="button" class="quantity__value quickview__value--quantity increase" aria-label="quantity value" value="Increase Value">+</button>
                                 </div>
                                 <button class="primary__btn quickview__cart--btn" type="submit">Add To Cart</button>
-                            </div>
-                            <!-- <div class="product__variant--list mb-15">
-                                <a class="variant__wishlist--icon mb-15" href="wishlist.html" title="Add to wishlist">
-                                    <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                        <path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
-                                    </svg>
-                                    Add to Wishlist
-                                </a>
-                                <button class="variant__buy--now__btn primary__btn" type="submit">Buy it now</button>
-                            </div> -->                            
+                            </div>                          
                         </div>
                         <div class="quickview__social d-flex align-items-center mb-15">
                             <label class="quickview__social--title">Social Share:</label>
@@ -387,7 +359,15 @@
                                     <ul class="additional__info_list">
                                         <li class="additional__info_list--item">
                                             <span class="info__list--item-head"><strong>Size</strong></span>
-                                            <span class="info__list--item-content">{{rtrim($tracking_size, ', ');}}</span>
+                                            <span class="info__list--item-content">
+                                                <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
+                                                    @foreach ($productSize->product_size as $r)
+                                                    <li class="variant__size--list mb-2">
+                                                        <label data-tab="{{$r->product_size}}" class="variant__size--value psize" for="weight{{$r->id}}" >{{$r->product_size}}</label>
+                                                    </li>
+                                                    @endforeach                                        
+                                                </ul>
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
