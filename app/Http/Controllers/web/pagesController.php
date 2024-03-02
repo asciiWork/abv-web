@@ -21,7 +21,6 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Home';
-        $data['breadcrumb'] = 'Home';
         $catData = new Categories; 
         $cat =  $catData->get_category();
         $data['Catdata']=$cat;
