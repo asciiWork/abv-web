@@ -53,4 +53,5 @@ Route::post('/inc-dec-cart', [ProductsController::class,'incDecCart'])->name('in
 Route::get('/checkout', [ProductsController::class, 'checkout'])->name('web.checkout');
 Route::post('/shipping-post', [ProductsController::class,'shoppingPost'])->name('web.shipping-post');
 Route::get('/open-quick-view', [ProductsController::class,'openQuickView'])->name('open-quick-view');
+Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
 

@@ -90,7 +90,7 @@ $crrRoute = \Route::currentRouteName();
                     </a>
                 </div>
                 <div class="main__logo">
-                    <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img class="main__logo--img" src="{{ asset('web/assets/img/logo/nav-log.webp') }}" alt="logo-img"></a></h1>
+                    <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img class="main__logo--img" src="{{ asset('web/assets/img/abv-logo-s.png') }}" alt="logo-img"></a></h1>
                 </div>
                 <div class="header__menu style3 d-none d-lg-block">
                     <nav class="header__menu--navigation">
@@ -122,7 +122,7 @@ $crrRoute = \Route::currentRouteName();
                             </a>
                         </li>
                         <li class="header__account--items d-none d-lg-block">
-                            <?php $rt = (Auth::check())?route('web.my-account'):route('web.login'); ?>
+                            <?php $rt = (Auth::check()) ? route('web.my-account') : route('web.login'); ?>
                             <a class="header__account--btn" href="{{ $rt }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -144,7 +144,7 @@ $crrRoute = \Route::currentRouteName();
                                     </g>
                                 </svg>
                                 @if($cartCounter)
-                                    <span class="items__count">{{$cartCounter}}</span>
+                                <span class="items__count">{{$cartCounter}}</span>
                                 @endif
                             </a>
                         </li>

@@ -136,11 +136,18 @@ class pagesController extends Controller
         $data['breadcrumb'] = 'Delivery And Shipping Policy';
         return view('web.deliveryAndShippingPolicy', $data);
     }
+    public function catalog()
+    {
+        $data = array();
+        $data['page_title'] = 'Delivery And Shipping Policy';
+        $data['breadcrumb'] = 'Delivery And Shipping Policy';
+        return view('web.catalog', $data);
+    }
     public function categories()
     {
         $data = array();
         $data['page_title'] = 'Categories';
-        $data['breadcrumb'] = 'Categories';
+        // $data['breadcrumb'] = 'Categories';
         $catData = new Categories; 
         $cat =  $catData->get_category();
         $data['Catdata']=$cat;
