@@ -24,7 +24,7 @@
                                         {!! Form::text('name',null,['class'=>'checkout__input--field border-radius-5','placeholder'=>'Enter Name','required'=>'required']) !!}
                                     </div>
                                     <div class="col-md-12">
-                                        <span>Name </span><span class="contact__form--label__star">*</span>
+                                        <span>Email </span><span class="contact__form--label__star">*</span>
                                         {!! Form::text('email',null,['class'=>'checkout__input--field border-radius-5','placeholder'=>'Enter Name','required'=>'required']) !!}
                                     </div>
                                   </div>

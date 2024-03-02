@@ -102,7 +102,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="contact_email">Email address <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="Email address " id="contact_email" type="text" name="contact_email">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="Email address " id="contact_email" type="email" name="contact_email">
                                     </div>
                                 </div>
                             </div>
