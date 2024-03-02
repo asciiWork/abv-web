@@ -106,39 +106,43 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <label class="contact__form--label"><strong> Shipping Detail</strong></label>
+                                    <label class="contact__form--label"><strong> Shipping</strong></label>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <select id="country" name="country" class="contact__form--input" value="India">
+                                        <select id="country" name="country" required class="contact__form--input" value="India">
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <select name="state" id="state" class="contact__form--input" placeholder="State"></select>
+                                        <select name="state" id="state" required class="contact__form--input" placeholder="State"></select>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <input class="contact__form--input" name="city" placeholder="City" type="text">
+                                        <input class="contact__form--input" required name="city" placeholder="City" type="text">
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <input class="contact__form--input" name="zipcode" placeholder="Postcode/ Zip" type="text">
+                                        <input class="contact__form--input" required name="zipcode" placeholder="Postcode/ Zip" type="text">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div>
                                 <table class="cart__summary--total__table">
                                     <tbody>
                                         <tr class="cart__summary--total__list">
-                                            <td class="cart__summary--total__title text-left"><strong> SUBTOTAL</strong></td>
-                                            <td class="cart__summary--amount text-right">₹{{number_format($total_amount,2)}}</td>
+                                            <td class="cart__summary--total__title text-left"><strong> Shipping</strong></td>
+                                            <td class="cart__summary--amount text-right">₹100</td>
+                                        </tr>
+                                        <tr class="cart__summary--total__list">
+                                            <td class="cart__summary--total__title text-left"><strong>GST</strong></td>
+                                            <td class="cart__summary--amount text-right">18%</td>
                                         </tr>
                                         <tr>
                                             <td colspan="2">
@@ -149,6 +153,7 @@
                                 </table>
                             </div>
                             <div class="cart__summary--footer">
+                                <p class="cart__summary--footer__desc">Shipping & taxes calculated at checkout</p>
                                 <ul class="d-flex justify-content-between">
                                     <!-- <li><button class="cart__summary--footer__btn primary__btn cart" type="submit">Update Cart</button></li> -->
                                     <li><a class="cart__summary--footer__btn primary__btn checkout" href="{{ URL::to('checkout/') }}">Check Out</a></li>
@@ -214,7 +219,7 @@
                             </ul>
                         </div>
                         <div class="product__card--content">
-                            <ul class="rating product__card--rating d-flex">
+                            <!-- <ul class="rating product__card--rating d-flex">
                                 <li class="rating__list">
                                     <span class="rating__icon">
                                         <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -253,7 +258,7 @@
                                 <li>
                                     <span class="rating__review--text">(126) Review</span>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <h3 class="product__card--title"><a href="{{ URL::to('product-details/') }}/{{$proRan->product_slug}}">{{ $proRan->product_name }}</a></h3>
                             <div class="product__card--price">
                                 <span class="current__price">₹{{ $proRan->product_min_price }}</span> -

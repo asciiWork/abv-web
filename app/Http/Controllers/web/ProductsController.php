@@ -15,6 +15,7 @@ use App\Models\TempOrder;
 use App\Models\TempOrderDetail;
 use App\Models\ProductSize;
 use App\Models\Carts;
+use App\Models\User;
 use App\Models\UserAddresses;
 use Validator;
 
@@ -270,8 +271,8 @@ class ProductsController extends Controller
             'bil_phone' => 'required',
             'contact_email' => 'required|email'
         ];
-        
-        if($request->get('ship_me')=='on'){
+        $selState = $request->get('bil_state');
+        if($request->get('ship_me')){
             $vslidateArr = $vslidateArr + [
                 'ship_name' => 'required|min:2',
                 'ship_country'=>'required',
@@ -282,6 +283,7 @@ class ProductsController extends Controller
                 'ship_zipcode' => 'required',
                 'ship_phone' => 'required',
             ];
+            $selState = $request->get('ship_state');
         }
         if(\Auth::check()){
             $authUser = \Auth::user();
@@ -306,6 +308,7 @@ class ProductsController extends Controller
         }
         else
         {
+            $email = $request->get('news_email');
             $is_new = 0;
             $products = Carts::getCartData();
             if(is_array($products) && !empty($products))
@@ -316,22 +319,22 @@ class ProductsController extends Controller
                     if(\Auth::check()){
                         $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
                     }else{
-                        $nusr = User::where('contact_email',$email)->first();
+                        $nusr = User::where('email',$email)->first();
                         if(!empty($nusr)){
                             $user = new User();
-                            $user->name = bcrypt($request->get("ship_name"));
-                            $user->email = bcrypt($request->get("contact_email"));
+                            $user->name = $request->get("ship_name");
+                            $user->email = $email;
                             $user->password = bcrypt($request->get("ship_name"));
                             $user->save();
                             //mail to user for password
                         }
                     }
                 }else{
-                    $nusr = User::where('contact_email',$email)->first();
+                    $nusr = User::where('email',$email)->first();
                     if(!empty($nusr)){
                         $user = new User();
-                        $user->name = bcrypt($request->get("ship_name"));
-                        $user->email = bcrypt($request->get("contact_email"));
+                        $user->name = $request->get("ship_name");
+                        $user->email = $email;
                         $user->password = bcrypt($request->get("ship_name"));
                         $user->save();
                         //mail to user for password
@@ -361,22 +364,24 @@ class ProductsController extends Controller
                     $obj->bil_zipcode = $request->get('bil_zipcode');
 
                     $obj->country = $request->get('country');
-
                     $obj->note = $request->get('note');
                     $obj->contact_email = $request->get('contact_email');
                     $obj->order_status = Carts::$PLACED;
                     $obj->order_date = date('Y-m-d H:s:i');
                     $obj->created_at = date('Y-m-d H:s:i');
                     $obj->updated_at = date('Y-m-d H:s:i');
+                    $obj->updated_at = date('Y-m-d H:s:i');
                     $obj->ordkey='wc_order_'.md5(date('Y-m-d H:s:i'));
                     $obj->save();
 
                     $orderId = $obj->id;
                     $total_price = 0;
+                    $total_qnt = 0;
 
                     foreach($products as $p)
                     {
                         $qnt = $p['qnt'];
+                        $total_qnt += $p['qnt'];
                         $slug = $p['slug'];
                         $product_id = $p['product_id'];
                         $amount = $p['price'];
@@ -403,12 +408,25 @@ class ProductsController extends Controller
                             $total_price = $total_price + $tObj->total_amount; 
                         }
                     }
+
+                    $shipping_flat_charge = 0;
+                    if ($selState != 'Gujarat') {
+                        $shipping_flat_charge = ($total_qnt < 50)? 130:260;
+                    } else {
+                        $shipping_flat_charge = ($total_qnt < 50)? 100:200;
+                    }
+                    $gst_charge = ($total_price + $shipping_flat_charge) * 0.18;
+                    $cod_charge = ($gst_charge + $total_price + $shipping_flat_charge) * 0.02;
+                    $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
                     $orderTexes = 0;//Product::$orderTexes;
                     $obj->discount = 0;
-                    $obj->tax = $orderTexes;
-                    $obj->shipping_charge = 100;
-                    $obj->total_amount = $total_price+100;
-                    $obj->order_tax_amount_total = $orderTexes + $total_price;
+                    $obj->tax = $gst_charge;
+                    $obj->shipping_flat_charge = $shipping_flat_charge;
+                    $obj->gst_charge = $gst_charge;
+                    $obj->cod_charge = $cod_charge;
+                    $obj->shipping_charge = $shipping_flat_charge;
+                    $obj->total_amount = $total_price;
+                    $obj->order_tax_amount_total = $order_tax_amount_total;
                     $obj->save();
 
                     if($total_price > 0){
@@ -426,7 +444,7 @@ class ProductsController extends Controller
                 }
             }
         }
-        return ['status' => $status, 'msg' => $msg, 'data' => $data];        
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }
     public function openQuickView(Request $request)
     {
