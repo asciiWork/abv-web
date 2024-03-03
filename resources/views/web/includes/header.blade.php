@@ -107,6 +107,9 @@ $crrRoute = \Route::currentRouteName();
                             <li class="header__menu--items">
                                 <a class="header__menu--link {{ ($crrRoute == 'web.contact')?'active':'' }}" href="{{ route('web.contact') }}">Contact</a>
                             </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link {{ ($crrRoute == 'web.catalog')?'active':'' }}" href="{{ route('web.catalog') }}">Our Catalog</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>

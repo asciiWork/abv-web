@@ -1,0 +1,4 @@
+[30-Dec-2023 15:16:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function iberezansky\fb3d\plugin_dir_path() in /home/abvtooli/public_html/wp-content/plugins/interactive-3d-flipbook-powered-physics-engine/index.php:86
+Stack trace:
+#0 {main}
+  thrown in /home/abvtooli/public_html/wp-content/plugins/interactive-3d-flipbook-powered-physics-engine/index.php on line 86

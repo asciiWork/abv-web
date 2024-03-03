@@ -1,0 +1,8 @@
+[29-Feb-2024 14:09:32 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function iberezansky\fb3d\get_header() in /home/abvtooli/public_html/wp-content/plugins/interactive-3d-flipbook-powered-physics-engine/assets/templates/single-3d-flip-book.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/abvtooli/public_html/wp-content/plugins/interactive-3d-flipbook-powered-physics-engine/assets/templates/single-3d-flip-book.php on line 4
+[01-Mar-2024 13:34:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function iberezansky\fb3d\get_header() in /home/abvtooli/public_html/wp-content/plugins/interactive-3d-flipbook-powered-physics-engine/assets/templates/single-3d-flip-book.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/abvtooli/public_html/wp-content/plugins/interactive-3d-flipbook-powered-physics-engine/assets/templates/single-3d-flip-book.php on line 4

@@ -141,7 +141,7 @@ class pagesController extends Controller
     {
         $data = array();
         $data['page_title'] = 'Delivery And Shipping Policy';
-        $data['breadcrumb'] = 'Delivery And Shipping Policy';
+        $data['breadcrumb'] = 'Catalog';
         return view('web.catalog', $data);
     }
     public function categories()
