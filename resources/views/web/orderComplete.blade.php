@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Partsix - Auto Parts & Car Accessories Shop HTML Template</title>
@@ -17,6 +18,7 @@
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{{ asset('web/assets/css/style.css') }}">
 </head>
+
 <body>
     <!-- Start preloader -->
     @include('web.includes.loader')
@@ -44,7 +46,7 @@
                     <div class="row py-4">
                         <div class="col-md-2 col-sm-6 col-12 m-b-md">
                             <div class="text-center">
-                                <p>Order Number<br><b>{{$order->id}}</b></p>
+                                <p>Order Number<br><b>{{$order->order_number}}</b></p>
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-6 col-12 m-b-md">
@@ -71,46 +73,52 @@
                     <div class="row">
                         <p>Pay with cash upon delivery.</p>
                         <aside class="checkout__sidebar sidebar border-radius-10">
-                                <h3 class="checkout__order--summary__title">Your Order</h3>
-                                <p><h4 class="">Product</h4></p>
-                                <div class="checkout__total">
-                                    <table class="checkout__total--table">
-                                        <tbody class="cart__table--body">
-                                            <?php $total = 0; ?>
-                                            @foreach($orderDet as $ord)
-                                            <tr class="cart__table--body__items">
-                                                <td class="">{{$ord->product_name}} - {{$ord->prosize}} <b>× {{$ord->quantity}}</b><br><p>size : {{$ord->prosize}}</p></td>
-                                                <td class=" text-right" >₹{{ number_format($ord->total_amount,2) }}</td>
-                                            </tr>
-                                            <?php $total = $total + $ord->total_amount;  ?>
-                                            @endforeach
-                                            <tr class="cart__table--body__items">
-                                                <td class=""><b>Subtotal : </b></td>
-                                                <td class=" text-right">₹{{ number_format($total,2) }}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="checkout__total">
-                                    <table class="checkout__total--table">
-                                        <tbody class="checkout__total--body">
-                                            <tr class="checkout__total--items">
-                                                <td class="text-left"><b>Shipping</b></td>
-                                                <td class="text-right">₹{{ number_format($order->shipping_charge,2) }} via Flat rate</td>
-                                            </tr>
-                                        
-                                            <tr class="checkout__total--footer__items">
-                                                <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Payment method: </b></td>
-                                                <td class="checkout__total--footer__title checkout__total--footer__list text-right">Cash on delivery</td>
-                                            </tr>
-                                            <tr class="checkout__total--footer__items">
-                                                <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Total: </b></td>
-                                                <td class=" checkout__total--footer__title checkout__total--footer__list text-right"><h2>₹{{ number_format($order->total_amount,2) }}</h2></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>                        
-                            </aside>
+                            <h3 class="checkout__order--summary__title">Your Order</h3>
+                            <p>
+                            <h4 class="">Product</h4>
+                            </p>
+                            <div class="checkout__total">
+                                <table class="checkout__total--table">
+                                    <tbody class="cart__table--body">
+                                        <?php $total = 0; ?>
+                                        @foreach($orderDet as $ord)
+                                        <tr class="cart__table--body__items">
+                                            <td class="">{{$ord->product_name}} - {{$ord->prosize}} <b>× {{$ord->quantity}}</b><br>
+                                                <p>size : {{$ord->prosize}}</p>
+                                            </td>
+                                            <td class=" text-right">₹{{ number_format($ord->total_amount,2) }}</td>
+                                        </tr>
+                                        <?php $total = $total + $ord->total_amount;  ?>
+                                        @endforeach
+                                        <tr class="cart__table--body__items">
+                                            <td class=""><b>Subtotal : </b></td>
+                                            <td class=" text-right">₹{{ number_format($total,2) }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="checkout__total">
+                                <table class="checkout__total--table">
+                                    <tbody class="checkout__total--body">
+                                        <tr class="checkout__total--items">
+                                            <td class="text-left"><b>Shipping</b></td>
+                                            <td class="text-right">₹{{ number_format($order->shipping_charge,2) }} via Flat rate</td>
+                                        </tr>
+
+                                        <tr class="checkout__total--footer__items">
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Payment method: </b></td>
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-right">Cash on delivery</td>
+                                        </tr>
+                                        <tr class="checkout__total--footer__items">
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Total: </b></td>
+                                            <td class=" checkout__total--footer__title checkout__total--footer__list text-right">
+                                                <h2>₹{{ number_format($order->total_amount,2) }}</h2>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </div>
@@ -121,7 +129,7 @@
     <button id="scroll__top"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512">
             <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M112 244l144-144 144 144M256 120v292" />
         </svg></button>
-        <!-- All Script JS Plugins here  -->
+    <!-- All Script JS Plugins here  -->
     <script type="text/javascript">
         var http_host_js = '{{ url("/") }}';
     </script>
@@ -140,4 +148,5 @@
     <script type="text/javascript" src="{{ asset('web/js/parsley.js')}}"></script>
     <script type="text/javascript" src="{{ asset('web/js/comman.js')}}"></script>
 </body>
+
 </html>

@@ -6,9 +6,6 @@
     <li class="{{ ($rName == 'web.my-orders')?'active':'' }} account__menu--list">
     	<a href="{{ route('web.my-orders') }}">Orders</a>
     </li>
-    <li class="{{ ($rName == 'web.downloads')?'active':'' }} account__menu--list">
-    	<a href="{{ route('web.downloads') }}">Downloads</a>
-    </li>
     <li class="{{ ($rName == 'web.my-address')?'active':'' }} account__menu--list">
     	<a href="{{ route('web.my-address') }}">Addresses</a>
     </li>

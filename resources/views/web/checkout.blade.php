@@ -118,8 +118,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                     <div class="col-12 mb-20">
                                         <div class="checkout__input--list ">
                                             <label class="checkout__input--label" for="ship_name">Name <span class="checkout__input--label__star">*</span></label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="Name" id="ship_name" type="text" name="ship_name"
-                                            value="{{ (isset($uAddress[1]->name))?$uAddress[1]->name:'' }}">
+                                            <input class="checkout__input--field border-radius-5" placeholder="Name" id="ship_name" type="text" name="ship_name" value="{{ (isset($uAddress[1]->name))?$uAddress[1]->name:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-12 mb-20">
@@ -324,6 +323,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
         $("#gst_rate_txt").html('₹' + parseFloat(gstAmount).toFixed(2));
         var final_total_txt = totl + gstAmount;
         var codAmount = parseFloat(final_total_txt) * 0.02;
+        $("#cod_rate_txt").html('₹' + parseFloat(codAmount).toFixed(2));
         final_total_txt = codAmount + final_total_txt;
         $("#final_total_txt").html('₹' + (parseFloat(final_total_txt).toFixed(2)));
     }

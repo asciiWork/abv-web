@@ -18,9 +18,6 @@
                                     <th class="account__table--header__child--items">ORDER</th>
                                     <th class="account__table--header__child--items">DATE</th>
                                     <th class="account__table--header__child--items">STATUS</th>
-                                    <th class="account__table--header__child--items">SHIPPING CHARGE</th>
-                                    <th class="account__table--header__child--items">GST</th>
-                                    <th class="account__table--header__child--items">COD</th>
                                     <th class="account__table--header__child--items">TOTAL</th>
                                     <th class="account__table--header__child--items">ACTIONS</th>
                                 </tr>
@@ -29,12 +26,9 @@
                                 @foreach($ordData as $ord)
                                 <tr class="account__table--body__child">
                                     <td class="account__table--body__child--items">#{{ $ord->order_number}}</td>
-                                    <td class="account__table--body__child--items">{{date_format(date_create($ord->order_date),"F d Y")}}</td>
+                                    <td class="account__table--body__child--items">{{date_format(date_create($ord->order_date),"d-M-Y")}}</td>
                                     <td class="account__table--body__child--items">{{$ord->order_status}}</td>
-                                    <td class="account__table--body__child--items">{{$ord->shipping_flat_charge}}</td>
-                                    <td class="account__table--body__child--items">{{$ord->gst_charge}}</td>
-                                    <td class="account__table--body__child--items">{{$ord->cod_charge}}</td>
-                                    <td class="account__table--body__child--items">₹{{$ord->order_tax_amount_total}}</td>
+                                    <td class="account__table--body__child--items">₹{{number_format($ord->order_tax_amount_total,2)}}</td>
                                     <td class="account__table--body__child--items"><a href="{{ route('view-order',['id' => $ord->id]) }}" class="primary__btn">View</a></td>
                                 </tr>
                                 @endforeach

@@ -46,7 +46,7 @@
                                             </div>
                                         </td>
                                         <td class="cart__table--body__list">
-                                            <span class="cart__price">₹{{$c['price']}}</span>
+                                            <span class="cart__price">₹{{number_format($c['price'],2)}}</span>
                                         </td>
                                         <td class="cart__table--body__list">
                                             <div class="quantity__box">
@@ -58,7 +58,7 @@
                                             </div>
                                         </td>
                                         <td class="cart__table--body__list">
-                                            <span class="cart__price end">₹{{$c['total']}}</span>
+                                            <span class="cart__price end">₹{{number_format($c['total'],2)}}</span>
                                         </td>
                                     </tr>
                                     <?php $total_amount = $total_amount + $c['total']; ?>
