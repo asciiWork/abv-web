@@ -7,7 +7,7 @@
   <meta name="description" content="Morden Bootstrap HTML5 Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('web/assets/img/favicon.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('web/assets/img/fav.ico') }}">
 
   <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{ asset('web/assets/css/plugins/swiper-bundle.min.css') }}">
