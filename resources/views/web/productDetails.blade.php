@@ -12,47 +12,57 @@
     .tab-price.active {
         display: block;
     }
+
     .rate_c {
         float: left;
         height: 46px;
     }
-    .rate_c:not(:checked) > input {
-        position:fixed;
-        top:-9999px;
+
+    .rate_c:not(:checked)>input {
+        position: fixed;
+        top: -9999px;
     }
-    .rate_c:not(:checked) > label {
-        float:right;
-        width:1em;
-        overflow:hidden;
-        white-space:nowrap;
-        cursor:pointer;
-        font-size:30px;
-        color:#ccc;
+
+    .rate_c:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
     }
-    .rate_c:not(:checked) > label:before {
+
+    .rate_c:not(:checked)>label:before {
         content: '★ ';
     }
-    .rate_c > input:checked ~ label {
-        color: #ed1d24;    
+
+    .rate_c>input:checked~label {
+        color: #ed1d24;
     }
-    .rate_c:not(:checked) > label:hover,
-    .rate_c:not(:checked) > label:hover ~ label {
-        color: #ed1d24;  
+
+    .rate_c:not(:checked)>label:hover,
+    .rate_c:not(:checked)>label:hover~label {
+        color: #ed1d24;
     }
-    .rate_c > input:checked + label:hover,
-    .rate_c > input:checked + label:hover ~ label,
-    .rate_c > input:checked ~ label:hover,
-    .rate_c > input:checked ~ label:hover ~ label,
-    .rate_c > label:hover ~ input:checked ~ label {
+
+    .rate_c>input:checked+label:hover,
+    .rate_c>input:checked+label:hover~label,
+    .rate_c>input:checked~label:hover,
+    .rate_c>input:checked~label:hover~label,
+    .rate_c>label:hover~input:checked~label {
         color: #c59b08;
     }
+
     .rate_c::-webkit-scrollbar {
-      display: none;
+        display: none;
     }
 
     .rate_c {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
     }
 </style>
 @endsection
@@ -110,31 +120,15 @@
                         <!-- <span class="old__price">$68.00</span> -->
                     </div>
                     <ul class="rating product__card--rating mb-15 d-flex">
-                    @if($avgRate['avgRate'])
-                        @for ($i=1; $i <= 5; $i++) 
-                            @if($i<=$avgRate['avgRate']) 
-                                <li class="rating__list">
-                                <span class="rating__icon">
-                                    <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor" />
-                                    </svg>
-                                </span>
-                                </li>
+                        @if($avgRate['avgRate'])
+                        @for ($i=1; $i <= 5; $i++) @if($i<=$avgRate['avgRate']) <li class="rating__list">
+                            <span class="rating__icon">
+                                <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.08398 0.921875L4.56055 4.03906L1.11523 4.53125C0.505859 4.625 0.271484 5.375 0.716797 5.82031L3.17773 8.23438L2.5918 11.6328C2.49805 12.2422 3.1543 12.7109 3.69336 12.4297L6.76367 10.8125L9.81055 12.4297C10.3496 12.7109 11.0059 12.2422 10.9121 11.6328L10.3262 8.23438L12.7871 5.82031C13.2324 5.375 12.998 4.625 12.3887 4.53125L8.9668 4.03906L7.41992 0.921875C7.16211 0.382812 6.36523 0.359375 6.08398 0.921875Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            </li>
                             @else
-                                <li class="rating__list">
-                                    <span class="rating__icon">
-                                        <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor" />
-                                        </svg>
-                                    </span>
-                                </li>
-                            @endif
-                        @endfor
-                        <li>
-                            <span class="rating__review--text">({{$avgRate['totalRate']}}) Review</span>
-                        </li>
-                    @else
-                        @for ($i=1; $i <= 5; $i++)
                             <li class="rating__list">
                                 <span class="rating__icon">
                                     <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,11 +136,24 @@
                                     </svg>
                                 </span>
                             </li>
-                        @endfor
-                        <li>
-                            <span class="rating__review--text">(0) Review</span>
-                        </li>
-                    @endif
+                            @endif
+                            @endfor
+                            <li>
+                                <span class="rating__review--text">({{$avgRate['totalRate']}}) Review</span>
+                            </li>
+                            @else
+                            @for ($i=1; $i <= 5; $i++) <li class="rating__list">
+                                <span class="rating__icon">
+                                    <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor" />
+                                    </svg>
+                                </span>
+                                </li>
+                                @endfor
+                                <li>
+                                    <span class="rating__review--text">(0) Review</span>
+                                </li>
+                                @endif
                     </ul>
                     <p class="product__details--info__desc mb-15">{{substr($productWithSize->product_detail,0,150)}} ...</p>
                     <div class="product__variant">
@@ -300,15 +307,15 @@
                                 <div class="reviews__comment--area">
                                     @foreach($pwr as $proRev)
                                     <div class="reviews__comment--list d-flex">
-                                        <div class="reviews__comment--thumb">
+                                        <!-- <div class="reviews__comment--thumb">
                                             <img src="{{ asset('web/assets/img/other/comment-thumb1.webp') }}" alt="comment-thumb">
-                                        </div>
+                                        </div> -->
                                         <div class="reviews__comment--content">
                                             <div class="reviews__comment--top d-flex justify-content-between">
                                                 <div class="reviews__comment--top__left">
                                                     <h3 class="reviews__comment--content__title h4">{{$proRev->name}}</h3>
                                                     <ul class="rating d-flex">
-                                                    @if($proRev->review_rate)
+                                                        @if($proRev->review_rate)
                                                         @for ($i=1; $i <= 5; $i++) @if($i<=$proRev->review_rate)
                                                             <li class="rating__list">
                                                                 <span class="rating__icon">
@@ -317,7 +324,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </li>
-                                                        @else
+                                                            @else
                                                             <li class="rating__list">
                                                                 <span class="rating__icon">
                                                                     <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -325,19 +332,18 @@
                                                                     </svg>
                                                                 </span>
                                                             </li>
-                                                        @endif
-                                                        @endfor
-                                                    @else
-                                                        @for ($i=1; $i <= 5; $i++)
-                                                        <li class="rating__list">
-                                                            <span class="rating__icon">
-                                                                <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                    <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor" />
-                                                                </svg>
-                                                            </span>
-                                                        </li>
-                                                        @endfor
-                                                    @endif
+                                                            @endif
+                                                            @endfor
+                                                            @else
+                                                            @for ($i=1; $i <= 5; $i++) <li class="rating__list">
+                                                                <span class="rating__icon">
+                                                                    <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor" />
+                                                                    </svg>
+                                                                </span>
+                                                                </li>
+                                                                @endfor
+                                                                @endif
                                                     </ul>
                                                 </div>
                                                 <span class="reviews__comment--content__date">{{date_format(date_create($proRev->created_date),"F d Y")}}</span>
@@ -349,41 +355,41 @@
                                 </div>
                                 <div id="writereview" class="reviews__comment--reply__area">
                                     {!! Form::open(['route' => 'web.add-review', 'id' => 'submit-form','redirect'=>url('/product-details/$productWithSize->product_slug')]) !!}
-                                        <h3 class="reviews__comment--reply__title mb-15">Add a review </h3>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="rate_c">
-                                                    <input type="radio" id="star_5" name="rate_c" value="5" />
-                                                    <label for="star_5" title="text">5 stars</label>
-                                                    <input type="radio" id="star_4" name="rate_c" value="4" />
-                                                    <label for="star_4" title="text">4 stars</label>
-                                                    <input type="radio" id="star_3" name="rate_c" value="3" />
-                                                    <label for="star_3" title="text">3 stars</label>
-                                                    <input type="radio" id="star_2" name="rate_c" value="2" />
-                                                    <label for="star_2" title="text">2 stars</label>
-                                                    <input type="radio" id="star_1" name="rate_c" value="1" />
-                                                    <label for="star_1" title="text">1 star</label>
-                                                </div>
+                                    <h3 class="reviews__comment--reply__title mb-15">Add a review </h3>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="rate_c">
+                                                <input type="radio" id="star_5" name="rate_c" value="5" />
+                                                <label for="star_5" title="text">5 stars</label>
+                                                <input type="radio" id="star_4" name="rate_c" value="4" />
+                                                <label for="star_4" title="text">4 stars</label>
+                                                <input type="radio" id="star_3" name="rate_c" value="3" />
+                                                <label for="star_3" title="text">3 stars</label>
+                                                <input type="radio" id="star_2" name="rate_c" value="2" />
+                                                <label for="star_2" title="text">2 stars</label>
+                                                <input type="radio" id="star_1" name="rate_c" value="1" />
+                                                <label for="star_1" title="text">1 star</label>
                                             </div>
-                                        </div>                                        
-                                        <div class="row">
-                                            <div class="col-12 mb-10">
-                                                <textarea class="reviews__comment--reply__textarea" placeholder="Your Comments...." name="review_text"></textarea>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 mb-15">
-                                                <label>
-                                                    <input class="reviews__comment--reply__input" placeholder="Your Name...." name="review_name" type="text">
-                                                </label>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 mb-15">
-                                                <label>
-                                                    <input class="reviews__comment--reply__input" placeholder="Your Email...." name="review_email" type="email">
-                                                </label>
-                                            </div>
-                                            <input type="hidden" name="product_id" value="{{$productWithSize->product_id}}">
-                                            <input type="hidden" name="category_id" value="{{$productWithSize->category_id}}">
                                         </div>
-                                        <button class="primary__btn text-white" data-hover="Submit" type="submit">SUBMIT</button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mb-10">
+                                            <textarea class="reviews__comment--reply__textarea" placeholder="Your Comments...." name="review_text" required></textarea>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 mb-15">
+                                            <label>
+                                                <input class="reviews__comment--reply__input" placeholder="Your Name...." name="review_name" type="text" value="{{ (\Auth::check())?\Auth::user()->name:'' }}" required>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 mb-15">
+                                            <label>
+                                                <input class="reviews__comment--reply__input" placeholder="Your Email...." name="review_email" type="email" value="{{ (\Auth::check())?\Auth::user()->email:'' }}" required>
+                                            </label>
+                                        </div>
+                                        <input type="hidden" name="product_id" value="{{$productWithSize->product_id}}">
+                                        <input type="hidden" name="category_id" value="{{$productWithSize->category_id}}">
+                                    </div>
+                                    <button class="primary__btn text-white" data-hover="Submit" type="submit">SUBMIT</button>
                                     {!! Form::close() !!}
                                 </div>
                             </div>

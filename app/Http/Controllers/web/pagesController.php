@@ -253,13 +253,30 @@ class pagesController extends Controller
         $uadd->review=$request->get('review_text');
         $uadd->review_name=$request->get('review_name');
         $uadd->review_email=$request->get('review_email');
-        if(\Auth::check()){
-            $authUser = \Auth::user();
-            $uadd->user_id=$authUser->id;
+        $validator = Validator::make($request->all(), [
+            'product_id' => 'required',
+            'review_text' => 'required|min:5',
+            'review_name' => 'required',
+            'review_email' => 'required|email',
+        ]);
+        $status = 0;
+        $msg = "Add Valid Data";
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) {
+                $msg .= $message . "<br />";
+            }
+        }else{
+            if(\Auth::check()){
+                $authUser = \Auth::user();
+                $uadd->user_id=$authUser->id;
+            }
+            $uadd->save();
+            $status = 1;
+            $msg = 'Review has been added!';
         }
-        $uadd->save();
-        $status = 1;
-        $msg = 'Review has been added!';
         return ['status' => $status, 'msg' => $msg];
     }
 }
