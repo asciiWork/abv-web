@@ -43,10 +43,12 @@ Route::group(['middleware' => ['auth']], function(){
 });
 Route::get('/order-received/{id}/{key}', [pagesController::class, 'viewReceivedOrder'])->name("order-received");
 
-Route::get('/login', [LoginController::class, 'login'])->name('web.login');
-Route::post('/check-login', [LoginController::class, 'checkLogin'])->name('web.check-login');
-Route::get('/register', [LoginController::class, 'register'])->name('web.register');
-Route::post('/check-register', [LoginController::class, 'checkRegister'])->name('web.check-register');
+Route::group(['middleware' => ['guest']], function(){
+	Route::get('/login', [LoginController::class, 'login'])->name('web.login');
+	Route::post('/check-login', [LoginController::class, 'checkLogin'])->name('web.check-login');
+	Route::get('/register', [LoginController::class, 'register'])->name('web.register');
+	Route::post('/check-register', [LoginController::class, 'checkRegister'])->name('web.check-register');
+});
 /*cart*/
 Route::post('/add-to-cart', [ProductsController::class,'addToCart'])->name('web.add-to-cart');
 Route::get('/remove-cart', [ProductsController::class,'removeCart'])->name('remove-cart');

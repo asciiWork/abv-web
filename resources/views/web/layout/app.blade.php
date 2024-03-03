@@ -38,6 +38,7 @@
     <!-- End breadcrumb section -->
     @yield('content')
 
+    @if(!in_array(\Route::currentRouteName(), ['web.login','web.register']))
     <!-- Start shipping section -->
     @include('web.includes.shipping')
     <!-- End shipping section -->
@@ -45,6 +46,7 @@
     <!-- Start shipping section -->
     @include('web.includes.customer')
     <!-- End shipping section -->
+    @endif
   </main>
 
   <!-- Start footer section -->
