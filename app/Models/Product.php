@@ -61,12 +61,6 @@ class Product extends Model
     }
 	public function get_latest_product($proNum)
 	{
-		/*$product = DB::table('product')
-            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
-            ->join('product_img', "product.id", "=", "product_img.product_id")
-            ->leftjoin('product_review', "product.id", "=", "product_review.product_id")
-            ->where('product_img.pro_main', '1')
-            ->orderBy('id', 'desc')->take($proNum)->get();*/
         $product = Product::select('product.id','product.product_name',
         	'product.product_min_price',
         	'product.product_max_price',
@@ -80,8 +74,12 @@ class Product extends Model
 		->leftjoin('product_review', "product.id", "=", "product_review.product_id")
 		->leftjoin('product_img', "product.id", "=", "product_img.product_id")
 		->where('product_img.pro_main', '1')
-		->groupBy('product.id','product.product_name','product.product_min_price','product.product_max_price','product.product_offer_per','product.product_slug','product.product_detail','product_img.product_img_url')
-		->orderBy('product.id', 'desc');
+		->groupBy('product.id','product.product_name','product.product_min_price','product.product_max_price','product.product_offer_per','product.product_slug','product.product_detail','product_img.product_img_url');
+        if($proNum==1){
+            $product =$product->inRandomOrder()->take(1);
+        }else{
+		  $product =$product->orderBy('product.id', 'desc');
+        }
 		if($proNum){
 			$product =$product->take($proNum);
 		}

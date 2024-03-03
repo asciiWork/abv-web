@@ -248,6 +248,11 @@ class ProductsController extends Controller
         $data['page_title'] = 'Checkout';
         $data['breadcrumb'] = 'Checkout';
         $data['products'] = Carts::getCartData();
+        if(\Auth::check()){
+            $authUser = \Auth::user();
+            $uAddress=UserAddresses::getAddData($authUser->id);
+            $data['uAddress'] = $uAddress;
+        }
         if(!empty($data['products'])){
             return view('web.checkout', $data);
         }else{
@@ -285,11 +290,9 @@ class ProductsController extends Controller
             ];
             $selState = $request->get('ship_state');
         }
-        if(\Auth::check()){
-            $authUser = \Auth::user();
-            $userId = $authUser->id; 
+        if(!\Auth::user()){
             $vslidateArr = $vslidateArr + [
-                'contact_email' => 'required|email|unique:users,email,'.$userId,
+                'contact_email' => 'required|email|unique:users,email,'
             ];
         }
 
@@ -313,30 +316,37 @@ class ProductsController extends Controller
             $products = Carts::getCartData();
             if(is_array($products) && !empty($products))
             {
-                $order_id = session()->get('order_id');
+                $order_id = session()->get('order_id');                
                 $obj = Order::find($order_id);
+                if($request->get("ship_name")!=''){
+                    $name=$request->get("ship_name");
+                }else{
+                    $name=$request->get("bil_name");
+                }
                 if($order_id > 0 && $obj){
                     if(\Auth::check()){
                         $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
                     }else{
                         $nusr = User::where('email',$email)->first();
-                        if(!empty($nusr)){
+                        if(empty($nusr)){
                             $user = new User();
-                            $user->name = $request->get("ship_name");
+                            $user->name = $name;
                             $user->email = $email;
                             $user->password = bcrypt($request->get("ship_name"));
                             $user->save();
+                            $userId = $user->id;
                             //mail to user for password
                         }
                     }
                 }else{
                     $nusr = User::where('email',$email)->first();
-                    if(!empty($nusr)){
+                    if(empty($nusr)){
                         $user = new User();
-                        $user->name = $request->get("ship_name");
+                        $user->name = $name;
                         $user->email = $email;
                         $user->password = bcrypt($request->get("ship_name"));
                         $user->save();
+                        $userId = $user->id;
                         //mail to user for password
                     }
                     $is_new = 1;
@@ -433,14 +443,17 @@ class ProductsController extends Controller
                         //session()->put('order_id',$orderId);
                     }
                     if(\Auth::check()){
+                        $authUser = \Auth::user();
                         Carts::where('user_id',$authUser->id)->delete();
-                        UserAddresses::addOrderAddress($orderId,$authUser->id);
+                        $userId=$authUser->id;
                     }
+                        UserAddresses::addOrderAddress($orderId,$userId);
                     $status = 1;
                     $msg = 'Order has been placed!';
                     session()->forget('cart');
                     $key='wc_order_'.md5(date('Y-m-d H:s:i'));
-                    return redirect()->route('order-received',['id' => $orderId,'key'=>$key]);
+                    //mail for order
+                    //return redirect()->route('order-received',['id' => $orderId,'key'=>$key]);
                 }
             }
         }

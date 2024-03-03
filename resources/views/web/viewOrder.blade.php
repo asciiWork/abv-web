@@ -19,12 +19,12 @@
             </div>
             <div class="account__wrapper">
                 <div class="account__content">
-                    <h2 class="account__content--title h2 mb-20"><i class="bi bi-dropbox text-secondary"></i> Order#{{$order->id}}</h2>
+                    <h2 class="account__content--title h2 mb-20"><i class="bi bi-dropbox text-secondary"></i> Order #{{sprintf('%06d',$order->id)}}</h2>
                 </div>    
                 <div class="row py-4">
                     <div class="col-md-2 col-sm-6 col-12 m-b-md">
                         <div class="text-center">
-                            <p>Order Number</p><p>{{$order->id}}</p>
+                            <p>Order Number</p><p>#{{sprintf('%06d',$order->id)}}</p>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-6 col-12 m-b-md">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-md-2 col-sm-6 col-12 m-b-md">
                         <div class="text-center">
-                            <p>Total</p><p>₹{{$order->total_amount}}</p>
+                            <p>Total</p><p>₹{{$order->order_tax_amount_total}}</p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-12 m-b-md">
@@ -75,16 +75,23 @@
                                 <tbody class="checkout__total--body">
                                     <tr class="checkout__total--items">
                                         <td class="text-left"><b>Shipping</b></td>
-                                        <td class="text-right">₹{{ number_format($order->shipping_charge,2) }} via Flat rate</td>
+                                        <td class="text-right">₹{{ number_format($order->shipping_flat_charge,2) }}</td>
                                     </tr>
-                                
+                                    <tr class="checkout__total--items">
+                                        <td class="text-left"><b>GST</b></td>
+                                        <td class="text-right">₹{{ number_format($order->gst_charge,2) }}</td>
+                                    </tr>
+                                    <tr class="checkout__total--items">
+                                        <td class="text-left"><b>COD</b></td>
+                                        <td class="text-right">₹{{ number_format($order->cod_charge,2) }}</td>
+                                    </tr>
                                     <tr class="checkout__total--footer__items">
                                         <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Payment method: </b></td>
                                         <td class="checkout__total--footer__title checkout__total--footer__list text-right">Cash on delivery</td>
                                     </tr>
                                     <tr class="checkout__total--footer__items">
                                         <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Total: </b></td>
-                                        <td class=" checkout__total--footer__title checkout__total--footer__list text-right"><h2>₹{{ number_format($order->total_amount,2) }}</h2></td>
+                                        <td class=" checkout__total--footer__title checkout__total--footer__list text-right"><h2>₹{{ number_format($order->order_tax_amount_total,2) }}</h2></td>
                                     </tr>
                                 </tbody>
                             </table>

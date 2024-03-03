@@ -6,7 +6,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 <!-- Start checkout page area -->
 <div class="checkout__page--area section--padding">
     <div class="container">
-        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form']) !!}
+        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form','redirect'=>url('checkout')]) !!}
         <div class="row">
             <div class="col-lg-7 col-md-6">
                 <div class="main checkout__mian">
@@ -42,13 +42,13 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                 <div class="col-12 mb-20">
                                     <div class="checkout__input--list ">
                                         <label class="checkout__input--label" for="bil_name">Name <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="Name" id="bil_name" type="text" name="bil_name">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="Name" id="bil_name" type="text" name="bil_name" value="{{ (isset($uAddress[0]->name))?$uAddress[0]->name:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="bil_company">Company name (optional)</label>
-                                        <input class="checkout__input--field border-radius-5" placeholder="Company (optional)" id="bil_company" type="text" name="bil_company">
+                                        <input class="checkout__input--field border-radius-5" placeholder="Company (optional)" id="bil_company" type="text" name="bil_company" value="{{ (isset($uAddress[0]->company))?$uAddress[0]->company:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-20">
@@ -66,50 +66,50 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                 <div class="col-12 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="bil_city">Town/City <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="City" id="bil_city" type="text" name="bil_city">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="City" value="{{ (isset($uAddress[0]->city))?$uAddress[0]->city:'' }}" id="bil_city" type="text" name="bil_city">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="gst_number">GST Number (optional)</label>
-                                        <input class="checkout__input--field border-radius-5" placeholder="GST Number (optional)" id="gst_number" type="text" name="gst_number">
+                                        <input class="checkout__input--field border-radius-5" placeholder="GST Number (optional)" id="gst_number" type="text" name="gst_number" value="{{ (isset($uAddress[0]->gst_number))?$uAddress[0]->gst_number:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="bil_street">Street address <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="Street address" id="bil_street" type="text" name="bil_street">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="Street address" id="bil_street" type="text" name="bil_street" value="{{ (isset($uAddress[0]->street))?$uAddress[0]->street:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="bil_area">Area </label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="Street address" id="bil_area" type="text" name="bil_area">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="Street address" id="bil_area" type="text" name="bil_area" value="{{ (isset($uAddress[0]->area))?$uAddress[0]->area:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="bil_zipcode">Postcode / ZIP <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="Postal code" id="bil_zipcode" type="text" name="bil_zipcode">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="Postal code" id="bil_zipcode" type="text" name="bil_zipcode" value="{{ (isset($uAddress[0]->zipcode))?$uAddress[0]->zipcode:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="bil_phone">Phone <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="phone" id="bil_phone" type="text" name="bil_phone">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="phone" id="bil_phone" type="text" name="bil_phone" value="{{ (isset($uAddress[0]->phone))?$uAddress[0]->phone:'' }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
                                         <label class="checkout__input--label" for="contact_email">Email address <span class="checkout__input--label__star">*</span></label>
-                                        <input class="checkout__input--field border-radius-5" required placeholder="Email address " id="contact_email" type="email" name="contact_email">
+                                        <input class="checkout__input--field border-radius-5" required placeholder="Email address " id="contact_email" type="email" name="contact_email" value="{{ (isset($uAddress[0]->contact_email))?$uAddress[0]->contact_email:'' }}">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <details>
+                        <details {{ (isset($uAddress[1]->name))?'open':'' }}>
                             <summary class="checkout__checkbox mb-20">
-                                <input name="ship_me" class="checkout__checkbox--input" type="checkbox" value="1">
+                                <input name="ship_me" class="checkout__checkbox--input" type="checkbox" value="1" {{ (isset($uAddress[1]->name))?'checked':'' }}>
                                 <span class="checkout__checkbox--checkmark"></span>
                                 <span class="checkout__checkbox--label">Ship to a different address?</span>
                             </summary>
@@ -118,13 +118,14 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                     <div class="col-12 mb-20">
                                         <div class="checkout__input--list ">
                                             <label class="checkout__input--label" for="ship_name">Name <span class="checkout__input--label__star">*</span></label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="Name" id="ship_name" type="text" name="ship_name">
+                                            <input class="checkout__input--field border-radius-5" placeholder="Name" id="ship_name" type="text" name="ship_name"
+                                            value="{{ (isset($uAddress[1]->name))?$uAddress[1]->name:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-12 mb-20">
                                         <div class="checkout__input--list">
                                             <label class="checkout__input--label" for="ship_company">Company name (optional)</label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="Company (optional)" id="ship_company" type="text" name="ship_company">
+                                            <input class="checkout__input--field border-radius-5" placeholder="Company (optional)" id="ship_company" type="text" name="ship_company" value="{{ (isset($uAddress[1]->company))?$uAddress[1]->company:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-12 mb-20">
@@ -142,31 +143,31 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                     <div class="col-12 mb-20">
                                         <div class="checkout__input--list">
                                             <label class="checkout__input--label" for="ship_city">Town/City <span class="checkout__input--label__star">*</span></label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="City" id="ship_city" type="text" name="ship_city">
+                                            <input class="checkout__input--field border-radius-5" placeholder="City" id="ship_city" type="text" name="ship_city" value="{{ (isset($uAddress[1]->city))?$uAddress[1]->city:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                         <div class="checkout__input--list">
                                             <label class="checkout__input--label" for="ship_street">Street address <span class="checkout__input--label__star">*</span></label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="Street address" id="ship_street" type="text" name="ship_street">
+                                            <input class="checkout__input--field border-radius-5" placeholder="Street address" id="ship_street" type="text" name="ship_street" value="{{ (isset($uAddress[1]->street))?$uAddress[1]->street:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                         <div class="checkout__input--list">
                                             <label class="checkout__input--label" for="ship_area">Area </label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="Street address" id="ship_area" type="text" name="ship_area">
+                                            <input class="checkout__input--field border-radius-5" placeholder="Street address" id="ship_area" type="text" name="ship_area" value="{{ (isset($uAddress[1]->area))?$uAddress[1]->area:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                         <div class="checkout__input--list">
                                             <label class="checkout__input--label" for="ship_zipcode">Postcode / ZIP <span class="checkout__input--label__star">*</span></label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="Postal code" id="ship_zipcode" type="text" name="ship_zipcode">
+                                            <input class="checkout__input--field border-radius-5" placeholder="Postal code" id="ship_zipcode" type="text" name="ship_zipcode" value="{{ (isset($uAddress[1]->zipcode))?$uAddress[1]->zipcode:'' }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                         <div class="checkout__input--list">
                                             <label class="checkout__input--label" for="ship_phone">Phone <span class="checkout__input--label__star">*</span></label>
-                                            <input class="checkout__input--field border-radius-5" placeholder="phone" id="ship_phone" type="text" name="ship_phone">
+                                            <input class="checkout__input--field border-radius-5" placeholder="phone" id="ship_phone" type="text" name="ship_phone" value="{{ (isset($uAddress[1]->phone))?$uAddress[1]->phone:'' }}">
                                         </div>
                                     </div>
                                 </div>

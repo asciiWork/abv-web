@@ -15,7 +15,7 @@
                     <h2 class="account__content--title h2 mb-20"> <i class="bi bi-geo-alt-fill text-secondary"></i> {{ ($formObj->is_ship==0)?'Billing':'Shipping' }} Address</h2>
                     <p>The following addresses will be used on the checkout page by default.</p>                    
                     <div class="row">
-                        {!! Form::model($formObj,['method' => 'POST', 'route' => 'update-address', 'id' => 'submit-form','redirect-url'=>route('web.my-address')]) !!}
+                        {!! Form::model($formObj,['method' => 'POST', 'route' => 'update-address', 'id' => 'submit-form','redirect'=>url('my-address')]) !!}
 
                             {!! Form::hidden('id',null) !!}
                             <div class="row" id="address-form">

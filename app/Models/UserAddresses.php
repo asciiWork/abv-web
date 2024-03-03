@@ -13,14 +13,16 @@ class UserAddresses extends Model
     public $timestamps = false;
 
     public static function getAddData($id){
-      return $tObj = UserAddresses::where('user_id',$id)->orderBy('id', 'desc')->take(2)->get();
+      return $tObj = UserAddresses::where('user_id',$id)->get();
     }
     public static function addOrderAddress($ordr_id,$id)
     {
         $order = Order::find($ordr_id);
         if($order){
-
-            $obj = new UserAddresses;
+            $obj = UserAddresses::where('user_id',$id)->where('is_ship',0)->first();
+            if(!$obj){
+                $obj = new UserAddresses;
+            }
             $obj->user_id = $id;
             $obj->name = $order->bil_name;
             $obj->phone = $order->bil_phone;
@@ -36,7 +38,10 @@ class UserAddresses extends Model
             $obj->save();
 
             if($order->ship_name!=''){
-                $obj = new UserAddresses;
+                $obj = UserAddresses::where('user_id',$id)->where('is_ship',1)->first();
+                if(!$obj){
+                    $obj = new UserAddresses;
+                }
                 $obj->user_id = $id;
                 $obj->name = $order->ship_name;
                 $obj->phone = $order->ship_phone;

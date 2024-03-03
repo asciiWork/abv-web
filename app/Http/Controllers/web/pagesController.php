@@ -12,6 +12,7 @@ use App\Models\Contact;
 use App\Models\Carts;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\UserAddresses;
 use Validator;
 use Rap2hpoutre\FastExcel\FastExcel;
 
@@ -29,7 +30,7 @@ class pagesController extends Controller
         $data['productData']=$product;
         $latestProduct =  $proData->get_latest_product(5);
         $data['letProductData']=$latestProduct;
-        $dealProduct =  $proData->get_latest_product(4);
+        $dealProduct =  $proData->get_latest_product(1);
         $data['dealProduct']=$dealProduct;
         $newPro =  $proData->get_NewArrivals();
         $data['newProData']=$newPro;
@@ -240,5 +241,22 @@ class pagesController extends Controller
             }
         }
         return abort(404);
+    }
+    public function addReviewForm(Request $request){
+        $uadd = new ProductReview();
+        $uadd->category_id=$request->get('category_id');
+        $uadd->product_id=$request->get('product_id');
+        $uadd->review_rate=$request->get('rate_c');
+        $uadd->review=$request->get('review_text');
+        $uadd->review_name=$request->get('review_name');
+        $uadd->review_email=$request->get('review_email');
+        if(\Auth::check()){
+            $authUser = \Auth::user();
+            $uadd->user_id=$authUser->id;
+        }
+        $uadd->save();
+        $status = 1;
+        $msg = 'Review has been added!';
+        return ['status' => $status, 'msg' => $msg];
     }
 }

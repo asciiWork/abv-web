@@ -172,7 +172,6 @@
                                 </div>
                                 <div class="product__sold">
                                     <span class="product__sold--text">Available: <span class="product__sold--text__number"></span></span>
-                                    <span class="product__sold--text">Units Sold: <span class="product__sold--text__number"></span></span>
                                 </div>
                                 <div class="single__product--countdown d-flex" data-countdown="{{date('M d, Y H:s:i', strtotime('+1 week', strtotime(date('M d, Y H:s:i'))));}}"></div>
                                 <ul class="single__product--action d-flex align-items-center">

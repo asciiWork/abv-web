@@ -28,6 +28,7 @@ Route::get('/product-category/{slug}', [PagesController::class, 'categoryDetails
 Route::get('/product-details/{slug}', [PagesController::class, 'productDetails'])->name('web.product-details');
 Route::get('/cart', [PagesController::class, 'cart'])->name('web.cart');
 Route::get('/gallery', [PagesController::class, 'gallery'])->name('web.gallery');
+Route::post('/add-review', [PagesController::class, 'addReviewForm'])->name('web.add-review');
 
 Route::group(['middleware' => ['auth']], function(){
 	Route::get('/logout', [LoginController::class, 'getLogout'])->name("logout");

@@ -19,7 +19,7 @@
 
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{{ asset('web/assets/css/style.css') }}">
-
+    @yield('stylecss')
 </head>
 
 <body>

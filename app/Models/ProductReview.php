@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ProductReview extends Model
 {
     protected $table = 'product_review';
+    public $timestamps = false;
 	
 	public function get_ProductReview($id='')
 	{

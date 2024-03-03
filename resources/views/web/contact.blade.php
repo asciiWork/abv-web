@@ -11,7 +11,7 @@
         <div class="main__contact--area position__relative">
             <div class="contact__form">
                 <h3 class="contact__form--title mb-30">Contact Me</h3>
-                {!! Form::open(['route' => 'web.check-contact', 'id' => 'submit-form']) !!}
+                {!! Form::open(['route' => 'web.check-contact', 'id' => 'submit-form','redirect'=>url('/contact')]) !!}
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="contact__form--list mb-20">
@@ -34,7 +34,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="contact__form--list mb-20">
                                 <label class="contact__form--label" for="input4">Email <span class="contact__form--label__star">*</span></label>
-                                <input class="contact__form--input" name="email" id="input4" placeholder="Email" type="text">
+                                <input class="contact__form--input" name="email" id="input4" placeholder="Email" type="email">
                             </div>
                         </div>
                         <div class="col-12">
