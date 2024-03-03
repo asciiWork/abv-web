@@ -86,11 +86,11 @@ $crrRoute = \Route::currentRouteName();
                         <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg" viewBox="0 0 512 512">
                             <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352" />
                         </svg>
-                        <span class="visually-hidden">Offcanvas Menu Open</span>
+                        <span class="visually-hidden">Menu</span>
                     </a>
                 </div>
                 <div class="main__logo">
-                    <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img class="main__logo--img" src="{{ asset('web/assets/img/abv-logo-s.png') }}" alt="logo-img"></a></h1>
+                    <h1 class="main__logo--title"><a class="main__logo--link" href="{{ url('/') }}"><img class="main__logo--img" src="{{ asset('web/assets/img/abv.png') }}" alt="logo-img"></a></h1>
                 </div>
                 <div class="header__menu style3 d-none d-lg-block">
                     <nav class="header__menu--navigation">
@@ -156,6 +156,39 @@ $crrRoute = \Route::currentRouteName();
             </div>
         </div>
     </div>
+    <!-- Start Offcanvas header menu -->
+    <div class="offcanvas__header">
+        <div class="offcanvas__inner">
+            <div class="offcanvas__logo">
+                <a class="offcanvas__logo_link" href="index.html">
+                    <img src="{{ asset('web/assets/img/abv.png')}}" alt="Abv Logo" width="158" height="36">
+                </a>
+                <button class="offcanvas__close--btn" data-offcanvas>close</button>
+            </div>
+            <nav class="offcanvas__menu">
+                <ul class="offcanvas__menu_ul">
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.index') }}">Home</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.products') }}">Products</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.about') }}">About</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.contact') }}">Contact</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.catalog') }}">Our Catalog</a></li>
+                </ul>
+                <div class="offcanvas__account--items">
+                    <a class="offcanvas__account--items__btn d-flex align-items-center" href="{{route('web.login')}}">
+                        <span class="offcanvas__account--items__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20.51" height="19.443" viewBox="0 0 512 512">
+                                <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
+                                <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
+                            </svg>
+                        </span>
+                        <span class="offcanvas__account--items__label">Login / Register</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- End Offcanvas header menu -->
+
     <!-- Start Offcanvas stikcy toolbar -->
     <div class="offcanvas__stikcy--toolbar">
         <ul class="d-flex justify-content-between">
@@ -238,7 +271,7 @@ $crrRoute = \Route::currentRouteName();
         <div class="minicart__product">
             <div class="minicart__product--items d-flex">
                 <div class="minicart__thumb">
-                    <a href="product-details.html"><img src="{{ asset('web/assets/img/product/small-product/product1.webp') }}" alt="prduct-img"></a>
+                    <a href="product-details.html"><img src="assets/img/product/small-product/product1.webp" alt="prduct-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h4 class="minicart__subtitle"><a href="product-details.html">Car & Motorbike Care.</a></h4>
@@ -261,7 +294,7 @@ $crrRoute = \Route::currentRouteName();
             </div>
             <div class="minicart__product--items d-flex">
                 <div class="minicart__thumb">
-                    <a href="product-details.html"><img src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="prduct-img"></a>
+                    <a href="product-details.html"><img src="assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h4 class="minicart__subtitle"><a href="product-details.html">Engine And Drivetrain.</a></h4>
@@ -327,3 +360,10 @@ $crrRoute = \Route::currentRouteName();
     <!-- End serch box area -->
 
 </header>
+<div id="AjaxLoaderDiv" style="display: none;z-index:99999 !important;">
+    <div style="width:100%; height:100%; left:0px; top:0px; position:fixed; opacity:0; filter:alpha(opacity=40); background:#000000;z-index:999999999;">
+    </div>
+    <div style="float:left;width:100%; left:0px; top:50%; text-align:center; position:fixed; padding:0px; z-index:999999999;">
+        <img src="{{ asset('web/assets/img/ajax-loader.gif') }}" />
+    </div>
+</div>

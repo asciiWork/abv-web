@@ -28,7 +28,7 @@
                             <tbody class="account__table--body mobile__none">
                                 @foreach($ordData as $ord)
                                 <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#{{ sprintf('%06d',$ord->id)}}</td>
+                                    <td class="account__table--body__child--items">#{{ $ord->order_number}}</td>
                                     <td class="account__table--body__child--items">{{date_format(date_create($ord->order_date),"F d Y")}}</td>
                                     <td class="account__table--body__child--items">{{$ord->order_status}}</td>
                                     <td class="account__table--body__child--items">{{$ord->shipping_flat_charge}}</td>

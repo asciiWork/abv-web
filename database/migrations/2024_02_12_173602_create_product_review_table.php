@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('product_review', function (Blueprint $table) {
             $table->integer('id', true);
-            $table->integer('user_id');
-            $table->integer('category_id');
-            $table->integer('product_id');
-            $table->double('review_rate', 10, 2);
-            $table->text('review');
-            $table->dateTime('created_date')->useCurrent();
+            $table->integer('user_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('product_id')->nullable();
+            $table->double('review_rate', 10, 2)->nullable();
+            $table->text('review')->nullable();
+            $table->dateTime('created_date')->useCurrent()->nullable();
         });
     }
 

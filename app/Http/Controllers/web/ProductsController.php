@@ -317,10 +317,11 @@ class ProductsController extends Controller
         {
             $email = $request->get('news_email');
             $is_new = 0;
+            $is_new_pass = date('Ymdhis').rand(8,2);
             $products = Carts::getCartData();
             if(is_array($products) && !empty($products))
             {
-                $order_id = session()->get('order_id');                
+                $order_id = session()->get('order_id');
                 $obj = Order::find($order_id);
                 if($request->get("ship_name")!=''){
                     $name=$request->get("ship_name");
@@ -333,10 +334,11 @@ class ProductsController extends Controller
                     }else{
                         $nusr = User::where('email',$email)->first();
                         if(empty($nusr)){
+                            $is_new = 1;
                             $user = new User();
                             $user->name = $name;
                             $user->email = $email;
-                            $user->password = bcrypt($request->get("ship_name"));
+                            $user->password = bcrypt($is_new_pass);
                             $user->save();
                             $userId = $user->id;
                             //mail to user for password
@@ -348,7 +350,7 @@ class ProductsController extends Controller
                         $user = new User();
                         $user->name = $name;
                         $user->email = $email;
-                        $user->password = bcrypt($request->get("ship_name"));
+                        $user->password = bcrypt($is_new_pass);
                         $user->save();
                         $userId = $user->id;
                         //mail to user for password
@@ -384,7 +386,6 @@ class ProductsController extends Controller
                     $obj->order_date = date('Y-m-d H:s:i');
                     $obj->created_at = date('Y-m-d H:s:i');
                     $obj->updated_at = date('Y-m-d H:s:i');
-                    $obj->updated_at = date('Y-m-d H:s:i');
                     $obj->ordkey='wc_order_'.md5(date('Y-m-d H:s:i'));
                     $obj->save();
 
@@ -419,7 +420,7 @@ class ProductsController extends Controller
                             $tObj->updated_at = date('Y-m-d H:s:i');
                             $tObj->save();
 
-                            $total_price = $total_price + $tObj->total_amount; 
+                            $total_price = $total_price + $tObj->total_amount;
                         }
                     }
 
@@ -434,6 +435,7 @@ class ProductsController extends Controller
                     $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
                     $orderTexes = 0;//Product::$orderTexes;
                     $obj->discount = 0;
+                    $obj->order_number = Order::getOrderNo();
                     $obj->tax = $gst_charge;
                     $obj->shipping_flat_charge = $shipping_flat_charge;
                     $obj->gst_charge = $gst_charge;
@@ -457,7 +459,18 @@ class ProductsController extends Controller
                     session()->forget('cart');
                     $key='wc_order_'.md5(date('Y-m-d H:s:i'));
                     //mail for order
-                    //return redirect()->route('order-received',['id' => $orderId,'key'=>$key]);
+                    $orderData = array();
+                    $orderData['id'] = $obj->id;
+                    $orderData['email'] = $email;
+                    $orderData['password'] = $is_new_pass;
+                    $orderData['is_new'] = $is_new;
+                    $orderData['is_customer'] = 1;
+                    \Mail::send(new \App\Mail\OrderEmail($orderData));
+
+                    $orderData['is_customer'] = 0;
+                    $orderData['email'] = env("APP_EMAIL");
+                    \Mail::send(new \App\Mail\OrderEmail($orderData));
+
                 }
             }
         }

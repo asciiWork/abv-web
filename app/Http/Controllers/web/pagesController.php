@@ -99,6 +99,9 @@ class pagesController extends Controller
             $status = 1;
             $msg = "We will contact you as soon as possible.";
 
+            \Mail::send(new \App\Mail\ContactEmail($contactFrm->id));
+
+
         }
         if ($request->isXmlHttpRequest()) {
             return ['status' => $status, 'msg' => $msg];

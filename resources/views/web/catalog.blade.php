@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="sample-container-box">
-    <div class="sample-container flip-book-container" src="{{ asset('a.pdf') }}" style="height: 500px !important;">
+    <div class="sample-container flip-book-container" src="{{ asset('ABV TOOL-1.pdf') }}" style="height: 500px !important;">
     </div>
 </div>
 <br /><br /><br />
