@@ -307,8 +307,8 @@
                                             <div class="reviews__comment--top d-flex justify-content-between">
                                                 <div class="reviews__comment--top__left">
                                                     <h3 class="reviews__comment--content__title h4">{{$proRev->name}}</h3>
-                                                    @if($proRev->review_rate)
                                                     <ul class="rating d-flex">
+                                                    @if($proRev->review_rate)
                                                         @for ($i=1; $i <= 5; $i++) @if($i<=$proRev->review_rate)
                                                             <li class="rating__list">
                                                                 <span class="rating__icon">
@@ -317,7 +317,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </li>
-                                                            @else
+                                                        @else
                                                             <li class="rating__list">
                                                                 <span class="rating__icon">
                                                                     <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -325,10 +325,20 @@
                                                                     </svg>
                                                                 </span>
                                                             </li>
-                                                            @endif
-                                                            @endfor
-                                                    </ul>
+                                                        @endif
+                                                        @endfor
+                                                    @else
+                                                        @for ($i=1; $i <= 5; $i++)
+                                                        <li class="rating__list">
+                                                            <span class="rating__icon">
+                                                                <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M12.4141 4.53125L8.99219 4.03906L7.44531 0.921875C7.1875 0.382812 6.39062 0.359375 6.10938 0.921875L4.58594 4.03906L1.14062 4.53125C0.53125 4.625 0.296875 5.375 0.742188 5.82031L3.20312 8.23438L2.61719 11.6328C2.52344 12.2422 3.17969 12.7109 3.71875 12.4297L6.78906 10.8125L9.83594 12.4297C10.375 12.7109 11.0312 12.2422 10.9375 11.6328L10.3516 8.23438L12.8125 5.82031C13.2578 5.375 13.0234 4.625 12.4141 4.53125ZM9.53125 7.95312L10.1875 11.75L6.78906 9.96875L3.36719 11.75L4.02344 7.95312L1.25781 5.28125L5.07812 4.71875L6.78906 1.25L8.47656 4.71875L12.2969 5.28125L9.53125 7.95312Z" fill="currentColor" />
+                                                                </svg>
+                                                            </span>
+                                                        </li>
+                                                        @endfor
                                                     @endif
+                                                    </ul>
                                                 </div>
                                                 <span class="reviews__comment--content__date">{{date_format(date_create($proRev->created_date),"F d Y")}}</span>
                                             </div>
