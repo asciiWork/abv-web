@@ -265,6 +265,10 @@ class ProductsController extends Controller
         $msg = 'Please try again later.';
         $data = array();
         $userId = null;
+        if(\Auth::check()){
+            $authUser = \Auth::user();
+            $userId=$authUser->id;
+        }
 
         $vslidateArr = [
             'bil_name' => 'required|min:2',
