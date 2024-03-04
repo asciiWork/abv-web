@@ -14,10 +14,10 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <img class="product__card--thumbnail__img" src="https://lh3.googleusercontent.com/a/AAcHTtfAz0vP9_8f-UypUWhk_qWaSQeaPpug0oZ78x3PrkdC=s120-c-rp-mo-br100">
+                                <div class="col-sm-1 col-sm-4">
+                                    <img class="" src="https://lh3.googleusercontent.com/a/AAcHTtfAz0vP9_8f-UypUWhk_qWaSQeaPpug0oZ78x3PrkdC=s120-c-rp-mo-br100">
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-3 col-sm-8">
                                     <span>Sugath Prasad</span>
                                     <span>2024-01-28</span>
                                 </div>
@@ -69,10 +69,10 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <img class="product__card--thumbnail__img" src="https://lh3.googleusercontent.com/a-/AD_cMMQVbRp6u5nhL7pkgLm6v_pcCWVr5yS3Q1p31Zg-NZ29hw=s120-c-rp-mo-br100">
+                                <div class="col-sm-1 col-sm-4">
+                                    <img class="" src="https://lh3.googleusercontent.com/a-/AD_cMMQVbRp6u5nhL7pkgLm6v_pcCWVr5yS3Q1p31Zg-NZ29hw=s120-c-rp-mo-br100">
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-3 col-sm-8">
                                     <span>Ghanshyam Suthar</span>
                                     <span>2022-09-26</span>
                                 </div>
@@ -125,10 +125,10 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <img class="product__card--thumbnail__img" src="https://lh3.googleusercontent.com/a/ACg8ocK3UzMpgwCbaFyidUUDiveg08RPBXy405LIMNoJ15Nj=w60-h60-p-rp-mo-br100">
+                                <div class="col-sm-1 col-sm-4">
+                                    <img class="" src="https://lh3.googleusercontent.com/a/ACg8ocK3UzMpgwCbaFyidUUDiveg08RPBXy405LIMNoJ15Nj=w60-h60-p-rp-mo-br100">
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-3 col-sm-8">
                                     <span>vekariya divyesh</span>
                                     <span>2022-09-26</span>
                                 </div>
@@ -180,10 +180,10 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <img class="product__card--thumbnail__img" src="https://lh3.googleusercontent.com/a-/AD_cMMRG7v0Npo2bULbANxic4aplr-9BNQxeWOj0O6v1tqXq41w=s120-c-rp-mo-br100">
+                                <div class="col-sm-1 col-sm-4">
+                                    <img class="" src="https://lh3.googleusercontent.com/a-/AD_cMMRG7v0Npo2bULbANxic4aplr-9BNQxeWOj0O6v1tqXq41w=s120-c-rp-mo-br100">
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-3 col-sm-8">
                                     <span>Ashish Patel</span>
                                     <span>2022-09-26</span>
                                 </div>
@@ -236,10 +236,10 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <img class="product__card--thumbnail__img" src="https://lh3.googleusercontent.com/a-/ALV-UjXFo4t1PweKc1Ozrql3fn2aHT9WUmh-MLs7JNGQWEzCzMTP=w60-h60-p-rp-mo-br100">
+                                <div class="col-sm-1 col-sm-4">
+                                    <img class="" src="https://lh3.googleusercontent.com/a-/ALV-UjXFo4t1PweKc1Ozrql3fn2aHT9WUmh-MLs7JNGQWEzCzMTP=w60-h60-p-rp-mo-br100">
                                 </div>
-                                <div class="col-sm-8">
+                                <div class="col-sm-3 col-sm-8">
                                     <span>Mayur Mori</span>
                                     <span>2023-03-02</span>
                                 </div>

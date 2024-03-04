@@ -32,6 +32,28 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            <tbody class="account__table--body mobile__block">
+                                @foreach($ordData as $ord)
+                                <tr class="account__table--body__child">
+                                    <td class="account__table--body__child--items">
+                                        <strong>Order</strong>
+                                        <span>#{{ $ord->order_number}}</span>
+                                    </td>
+                                    <td class="account__table--body__child--items">
+                                        <strong>Date</strong>
+                                        <span>{{date_format(date_create($ord->order_date),"d-M-Y")}}</span>
+                                    </td>
+                                    <td class="account__table--body__child--items">
+                                        <strong>Status</strong>
+                                        <span>{{$ord->order_status}}</span>
+                                    </td>
+                                    <td class="account__table--body__child--items">
+                                        <strong>Total</strong>
+                                        <span>₹{{number_format($ord->order_tax_amount_total,2)}}</span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>

@@ -1,7 +1,82 @@
 <?php
 $cartCounter = \App\Models\Carts::cartCounter();
 $crrRoute = \Route::currentRouteName();
+$current_params = Route::current()->parameters();
+$crrSlug='';
+if($current_params){
+    $crrSlug =  (is_array($current_params))?$current_params['slug']:'';
+}
+$Catdata = \App\Models\Categories::get_Menucategory();
 ?>
+<!-- Start offcanvas filter sidebar -->
+<div class="offcanvas__filter--sidebar widget__area">
+    <button type="button" class="offcanvas__filter--close" data-offcanvas>
+        <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path></svg> <span class="offcanvas__filter--close__text">Close</span>
+    </button>
+    <div class="offcanvas__filter--sidebar__inner">
+        <div class="single__widget widget__bg">
+            <h2 class="widget__title h3">Categories</h2>
+            <ul class="widget__categories--menu">
+                @if(isset($Catdata))
+                @foreach($Catdata as $cat)
+                <li class="widget__categories--menu__list {{ ($crrSlug == $cat->cat_slug)?'active':'' }}">
+                    <label class="widget__categories--menu__label d-flex align-items-center">
+                        <img class="widget__categories--menu__img" src="{{ asset('web/assets/img/categories/') }}/{{$cat->cat_img}}" alt="categories-img">
+                        <a href="{{ URL::to('product-category/') }}/{{$cat->id}}">
+                            <span class="widget__categories--menu__text">{{ substr($cat->category_name,0,15) }}...({{$cat->pro_count}})</span>
+                        </a>
+                        <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
+                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
+                        </svg>
+                    </label>
+                    <ul class="widget__categories--sub__menu" style="{{ ($crrSlug == $cat->cat_slug) ? 'display: block' : 'display: none' }}">
+                        <?php $pro_id=''; $i=0;?>
+                        @foreach($productData as $pro)
+                            @if ($cat->id==$pro->category_id && $pro_id!=$pro->id)
+                            <li class="widget__categories--sub__menu--list">
+                                <a class="widget__categories--sub__menu--link d-flex align-items-center" href="{{ URL::to('product-category') }}/{{$cat->cat_slug}}">
+                                    <!-- <img class="widget__categories--sub__menu--img" src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="categories-img"> -->
+                                    <span class="widget__categories--sub__menu--text">{{ substr($pro->product_name,0,22) }}...</span>
+                                </a>
+                            </li>
+                            @else
+                            @endif
+                            <?php $pro_id=$pro->id; ?>
+                        @endforeach
+                    </ul>
+                </li>
+                @endforeach
+                @endif
+            </ul>
+        </div>
+        <!-- <div class="single__widget price__filter widget__bg">
+            <h2 class="widget__title h3">Filter By Price</h2>
+            <form class="price__filter--form" action="#"> 
+                <div class="price__filter--form__inner mb-15 d-flex align-items-center">
+                    <div class="price__filter--group">
+                        <label class="price__filter--label" for="Filter-Price-GTE">From</label>
+                        <div class="price__filter--input">
+                            <span class="price__filter--currency">$</span>
+                            <input class="price__filter--input__field border-0" name="filter.v.price.gte" id="Filter-Price-GTE" type="number" placeholder="0" min="0" max="250.00">
+                        </div>
+                    </div>
+                    <div class="price__divider">
+                        <span>-</span>
+                    </div>
+                    <div class="price__filter--group">
+                        <label class="price__filter--label" for="Filter-Price-LTE">To</label>
+                        <div class="price__filter--input">
+                            <span class="price__filter--currency">$</span>
+                            <input class="price__filter--input__field border-0" name="filter.v.price.lte" id="Filter-Price-LTE" type="number" min="0" placeholder="250.00" max="250.00"> 
+                        </div>  
+                    </div>
+                </div>
+                <button class="primary__btn price__filter--btn" type="submit">Filter</button>
+            </form>
+        </div> -->
+    </div>
+</div>
+<!-- End offcanvas filter sidebar -->
 <header class="header__section">
     <div class="header__topbar bg__primary">
         <div class="container-fluid">

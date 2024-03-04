@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Categories extends Model
 {
     protected $table = 'product_category';
-	public function get_Menucategory(){
+	public static function get_Menucategory(){
 		$cat = DB::table('product_category')
 		->select('product_category.id','product_category.category_name', 'product_category.cat_slug', 'product_category.cat_img', DB::raw('COUNT(product.category_id) AS pro_count'))
 	    ->join('product', 'product_category.id', '=', 'product.category_id')
