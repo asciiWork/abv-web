@@ -49,6 +49,10 @@ Route::group(['middleware' => ['guest']], function(){
 	Route::get('/register', [LoginController::class, 'register'])->name('web.register');
 	Route::post('/check-register', [LoginController::class, 'checkRegister'])->name('web.check-register');
 });
+Route::get('/forgot-password', [PagesController::class,'forgotPassword'])->name('web.forgot-password');
+Route::post('/forgot-password/post', [PagesController::class,'forgotPasswordPost'])->name('web.forgot-password.post');
+Route::get('/reset-password/verify/{email}/{activation_key}', [PagesController::class,'resetPasswordLink'])->name('reset-password-link');
+Route::post('/reset-password', [PagesController::class,'resetPassword'])->name('web.reset-password');
 /*cart*/
 Route::post('/add-to-cart', [ProductsController::class,'addToCart'])->name('web.add-to-cart');
 Route::get('/remove-cart', [ProductsController::class,'removeCart'])->name('remove-cart');

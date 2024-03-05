@@ -13,7 +13,7 @@ class Product extends Model
     {
         return $this->hasMany(ProductSize::class);
     }
-	public function get_Allproduct()
+	public static function get_Allproduct()
 	{
 		$product = DB::table('product')
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])

@@ -19,7 +19,7 @@
                                 <input class="account__login--input" placeholder="Password" name="password" type="password">
                             </label>
                             <div class="account__login--remember__forgot mb-15 d-flex justify-content-between align-items-center">
-                                <button class="account__login--forgot" type="button">Forgot Your Password?</button>
+                                <a href="{{route('web.forgot-password')}}" class="account__login--forgot" type="button">Forgot Your Password?</a>
                             </div>
                             <button class="account__login--btn primary__btn" id="submit-form-button" type="submit">Login</button>
                             <div class="account__login--divide">

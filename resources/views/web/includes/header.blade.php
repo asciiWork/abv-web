@@ -4,9 +4,12 @@ $crrRoute = \Route::currentRouteName();
 $current_params = Route::current()->parameters();
 $crrSlug='';
 if($current_params){
-    $crrSlug =  (is_array($current_params))?$current_params['slug']:'';
+    if(isset($current_params['slug'])){
+        $crrSlug =  (is_array($current_params))?$current_params['slug']:'';
+    }
 }
 $Catdata = \App\Models\Categories::get_Menucategory();
+$productData = \App\Models\Product::get_Allproduct();
 ?>
 <!-- Start offcanvas filter sidebar -->
 <div class="offcanvas__filter--sidebar widget__area">

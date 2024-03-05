@@ -13,6 +13,7 @@ use App\Models\Carts;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\UserAddresses;
+use App\Models\User;
 use Validator;
 use Rap2hpoutre\FastExcel\FastExcel;
 
@@ -277,6 +278,102 @@ class pagesController extends Controller
             $status = 1;
             $msg = 'Review has been added!';
         }
+        return ['status' => $status, 'msg' => $msg];
+    }
+    public function forgotPassword()
+    {
+        $data = array();
+        $data['page_title'] = 'Forgot Password';
+        $data['breadcrumb'] = 'Forgot Password';
+        return view('web.forgotPassword',$data);
+    }
+    public function forgotPasswordPost(Request $request)
+    {
+        $data = array();
+        $status = 0;
+        $msg = 'Please try again later!';
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email', 
+        ]);        
+        // check validations
+        if ($validator->fails())
+        {
+            $messages = $validator->messages();            
+            $status = 0;
+            $msg = "";            
+            foreach ($messages->all() as $message){
+                $msg .= $message . "<br />";
+            }
+        }         
+        else
+        {
+            $email = $request->get('email');
+            $user = User::where('email',$email)->first();
+            if($user){
+                $keyPass = Contact::generatePassword(20);
+                $user->activation_key = $keyPass;
+                $user->save();
+
+                $mData = array();
+                $mData['user'] = $user;
+                $mData['email'] = $user->email;
+                $mData['link'] = route('reset-password-link',['email' => $user->email,'activation_key'=>$keyPass]);
+                \Mail::send(new \App\Mail\ForgotPassword($mData));
+
+                $status = 1;
+                $msg = 'We have sent you an email so that you can restore your password.';
+            }
+        }
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];
+    }
+    public function resetPasswordLink($email,$activation_key)
+    {
+        $user = User::where('email',$email)->where('activation_key',$activation_key)->first();
+        if(!$user)
+            return redirect('/');
+ 
+        return view('web.resetPassword',['activation_key' => $activation_key]);
+    }
+    public function resetPassword(Request $request)
+    {
+        $status = 1;
+        $msg = 'Password has been updated!';
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|exists:users,email',
+            'password' => 'required|min:4|confirmed',
+            'password_confirmation' => 'required',
+        ]);
+
+        if ($validator->fails()) 
+        {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) 
+            {
+                $msg .= $message . "<br />";
+            }            
+        }
+        else
+        {
+            $newPassword = $request->get('password');
+            $user = User::where('email',$request->get('email'))
+                        ->where('activation_key',$request->get('activation_key'))
+                        ->first();
+            if($user)
+            {
+                $user->password = bcrypt($request->get('password'));
+                $user->activation_key = '';
+                $user->save();
+            }
+            else
+            {
+                $status = 0;
+                $msg = 'User not found!';
+            }
+        }        
         return ['status' => $status, 'msg' => $msg];
     }
 }
