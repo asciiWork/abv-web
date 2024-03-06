@@ -155,7 +155,11 @@
                                 </li>
                                 @endif
                     </ul>
-                    <p class="product__details--info__desc mb-15">{{substr($productWithSize->product_detail,0,150)}} ...</p>
+                    <p class="product__details--info__desc mb-15">
+                        @if($productWithSize->product_detail!='')
+                            {{substr($productWithSize->product_detail,0,150)}} ...
+                        @endif
+                    </p>
                     <div class="product__variant">
                         <div class="product__variant--list mb-15">
                             <div class="product__details--info__meta">
