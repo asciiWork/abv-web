@@ -268,6 +268,11 @@ class ProductsController extends Controller
         if(\Auth::check()){
             $authUser = \Auth::user();
             $userId=$authUser->id;
+        }else{
+            $confUser = User::where('email',$email)->first();
+            if($confUser){
+                return ['status' => 0, 'msg' => "Email alredy exists, please login first.", 'data' => $data];
+            }
         }
 
         $vslidateArr = [

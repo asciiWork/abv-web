@@ -22,11 +22,15 @@ class Categories extends Model
 	}
 	public function get_category($id='')
 	{
-		$cat = DB::table('product_category');
+		$cat = DB::table('product_category')
+		->select('product_category.*', DB::raw('COUNT(product.id) AS p_count'))
+		->leftJoin('product', 'product.category_id', 'product_category.id')
+		->where('product_category.status',1);
 		if($id){
-			$cat =$cat->where('id',$id);
+			$cat =$cat->where('product_category.id',$id);
 		}
-		$cat =$cat->get();
+		$cat =$cat->groupBy('product_category.id')
+			->get();
     	return $cat;
 	}
 	public function get_categoryBy_slug($slug){

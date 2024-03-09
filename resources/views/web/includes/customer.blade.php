@@ -50,8 +50,8 @@ $gogdata = \App\Models\GoogleReview::getReviewData();
                                     @endif
                                 @endfor
                                 </ul>
-                                <h3 class="product__card--title">{{substr($gog->review,0,104)}}<span class="more-content hidden"> {{substr($gog->review,104)}}</span></h3>
-                                @if(strlen($gog->review)>104)
+                                <h3 class="product__card--title">{{substr($gog->review,0,105)}}<span class="more-content hidden"> {{substr($gog->review,105)}}</span></h3>
+                                @if(strlen($gog->review)>105)
                                     <a href="javascript:void(0);" class="read-more-btn">Read More</a>
                                 @endif
                             </div>

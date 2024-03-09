@@ -44,7 +44,7 @@ class Product extends Model
         if($var=='recent'){
             $product=$product->where('recent_product','1');
         }
-        $product=$product->orderBy('product.id', 'desc')->get();
+        $product=$product->orderBy('product.id', 'ASC')->get();
         return $product;
     }
 	public function productWithSize($id='')
@@ -76,7 +76,7 @@ class Product extends Model
 		->where('product_img.pro_main', '1')
 		->groupBy('product.id','product.product_name','product.product_min_price','product.product_max_price','product.product_offer_per','product.product_slug','product.product_detail','product_img.product_img_url');
         if($proNum==1){
-            $product =$product->inRandomOrder()->take(1);
+            $product =$product->where('product.id',1);
         }else{
 		  $product =$product->orderBy('product.id', 'desc');
         }

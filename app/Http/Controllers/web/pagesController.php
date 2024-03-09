@@ -65,7 +65,7 @@ class pagesController extends Controller
     }
     public function contact()
     {
-        $data = array();
+        $data = array();    
         $data['page_title'] = 'Contact';
         $data['breadcrumb'] = 'Contact';
         return view('web.contact', $data);
