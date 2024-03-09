@@ -8,6 +8,10 @@
 @include('web.includes.category')
 <!-- End categories section -->
 
+<!-- Start banner section -->
+@include('web.includes.bannerSection')
+<!-- End banner section -->
+
 <!-- Start product section -->
 @include('web.includes.product')
 <!-- End product section -->
@@ -206,28 +210,28 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-lg-3">
+                <div class="col-lg-3">
                     <div class="banner__sidebar style5">
                         <div class="banner__items position__relative mb-30">
-                            <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/slider/bg_slider-2.jpg') }}" alt="banner-img">
+                            <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/banner/01_296x247.jpg') }}" alt="banner-img">
                                 <div class="banner__content--style5">
-                                    <span class="banner__content--style5__subtitle text-white">From $540</span>
+                                    <span class="banner__content--style5__subtitle text-white"></span>
                                     <h2 class="banner__content--style5__title text-white">MEGA SALE</h2>
                                     <span class="banner__content--style5__btn">Shop now </span>
                                 </div>
                             </a>
                         </div>
                         <div class="banner__items position__relative">
-                            <a class="banner__thumbnail display-block" href="shop.html"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/slider/bg_slider-1.jpg') }}" alt="banner-img">
+                            <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/banner/01_296x247.jpg') }}" alt="banner-img">
                                 <div class="banner__content--style5 right">
-                                    <span class="banner__content--style5__subtitle text__secondary">From $540</span>
+                                    <span class="banner__content--style5__subtitle text__secondary"></span>
                                     <h2 class="banner__content--style5__title text-white">MEGA SALE</h2>
                                     <span class="banner__content--style5__btn">Shop now </span>
                                 </div>
                             </a>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
