@@ -5,6 +5,11 @@ use  App\Http\Controllers\web\PagesController;
 use  App\Http\Controllers\web\LoginController;
 use  App\Http\Controllers\web\ProductsController;
 use  App\Http\Controllers\web\DashboardController;
+use  App\Http\Controllers\admin\AdminController;
+use  App\Http\Controllers\admin\UsersController;
+use  App\Http\Controllers\admin\OrdersController;
+use  App\Http\Controllers\admin\CategoriesController;
+use  App\Http\Controllers\admin\AdminProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +17,16 @@ use  App\Http\Controllers\web\DashboardController;
 |--------------------------------------------------------------------------
 |
 */
-
+/* ADMIN ROUTE */
+Route::group(['prefix'=>'abv-admin','middleware' => ['auth','admin']], function(){
+	Route::get('/', [AdminController::class,'index'])->name('admin-dashboard');
+	Route::resource('admin-users', UsersController::class);
+	Route::resource('admin-orders', OrdersController::class);
+	Route::get('admin-orders/invoice/{id}', [OrdersController::class,'orderInvoice'])->name('admin-orders.invoice');
+	Route::resource('admin-category', CategoriesController::class);
+	Route::resource('admin-products', AdminProductsController::class);
+	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
+});
 Route::get('/', [PagesController::class, 'index'])->name('web.index');
 Route::get('/about', [PagesController::class, 'about'])->name('web.about');
 Route::get('/products', [PagesController::class, 'products'])->name('web.products');
