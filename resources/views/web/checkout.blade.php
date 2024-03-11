@@ -236,7 +236,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                     <td class="checkout__total--calculated__text text-right" id="gst_rate_txt">₹100.00</td>
                                 </tr>
                                 <tr class="checkout__total--items">
-                                    <td class="checkout__total--title text-left">COD(2%)</td>
+                                    <td class="checkout__total--title text-left">COD</td>
                                     <input type="hidden" id="cod_rate_amount" value="0">
                                     <td class="checkout__total--calculated__text text-right" id="cod_rate_txt">2%</td>
                                 </tr>

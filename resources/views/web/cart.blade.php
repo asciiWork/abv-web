@@ -133,7 +133,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <div>
+                           <!--  <div>
                                 <table class="cart__summary--total__table">
                                     <tbody>
                                         <tr class="cart__summary--total__list">
@@ -151,7 +151,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> -->
                             <div class="cart__summary--footer">
                                 <p class="cart__summary--footer__desc">Shipping & taxes calculated at checkout</p>
                                 <ul class="d-flex justify-content-between">

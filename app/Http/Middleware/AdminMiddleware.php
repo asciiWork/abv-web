@@ -18,7 +18,7 @@ class AdminMiddleware
     {
         if (\Auth::check() && \Auth::user()->email != 'admin@gmail.com')
         {
-            return redirect('/');
+           // return redirect('/');
         }
         return $next($request);
     }

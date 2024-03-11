@@ -10,6 +10,7 @@ use  App\Http\Controllers\admin\UsersController;
 use  App\Http\Controllers\admin\OrdersController;
 use  App\Http\Controllers\admin\CategoriesController;
 use  App\Http\Controllers\admin\AdminProductsController;
+use  App\Http\Controllers\admin\QuatationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +19,14 @@ use  App\Http\Controllers\admin\AdminProductsController;
 |
 */
 /* ADMIN ROUTE */
-Route::group(['prefix'=>'abv-admin','middleware' => ['auth','admin']], function(){
+Route::group(['prefix'=>'admin','middleware' => ['auth','admin']], function(){
 	Route::get('/', [AdminController::class,'index'])->name('admin-dashboard');
 	Route::resource('admin-users', UsersController::class);
 	Route::resource('admin-orders', OrdersController::class);
 	Route::get('admin-orders/invoice/{id}', [OrdersController::class,'orderInvoice'])->name('admin-orders.invoice');
 	Route::resource('admin-category', CategoriesController::class);
 	Route::resource('admin-products', AdminProductsController::class);
+	Route::resource('quatations', QuatationsController::class);
 	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
 });
 Route::get('/', [PagesController::class, 'index'])->name('web.index');

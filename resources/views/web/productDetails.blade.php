@@ -178,7 +178,7 @@
                                 <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
                                     @foreach ($productSize->product_size as $r)
                                     <li class="variant__size--list mb-2">
-                                        <label data-tab="{{$r->product_size}}" class="variant__size--value psize" for="weight{{$r->id}}">{{$r->product_size}}</label>
+                                        <label data-tab="{{$r->product_size}}" class="variant__size--value psize" for="weight{{$r->id}}">{{$r->product_size}} - {{ $r->product_current_price }} - {{$r->product_code}}</label>
                                     </li>
                                     @endforeach
                                 </ul>
