@@ -21,13 +21,18 @@ use  App\Http\Controllers\admin\QuatationsController;
 /* ADMIN ROUTE */
 Route::group(['prefix'=>'admin','middleware' => ['auth','admin']], function(){
 	Route::get('/', [AdminController::class,'index'])->name('admin-dashboard');
+	Route::get('admin-users/data', [UsersController::class,'data'])->name('admin-users.data');
 	Route::resource('admin-users', UsersController::class);
+	Route::get('admin-orders/data', [OrdersController::class,'data'])->name('admin-orders.data');
 	Route::resource('admin-orders', OrdersController::class);
 	Route::get('admin-orders/invoice/{id}', [OrdersController::class,'orderInvoice'])->name('admin-orders.invoice');
+	Route::get('admin-category/data', [CategoriesController::class,'data'])->name('admin-category.data');
 	Route::resource('admin-category', CategoriesController::class);
+	Route::get('admin-products/data', [AdminProductsController::class,'data'])->name('admin-products.data');
 	Route::resource('admin-products', AdminProductsController::class);
 	Route::resource('quatations', QuatationsController::class);
 	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
+	Route::get('/contact-quick-view', [AdminProductsController::class,'contactQuickView'])->name('contact-quick-view');
 });
 Route::get('/', [PagesController::class, 'index'])->name('web.index');
 Route::get('/about', [PagesController::class, 'about'])->name('web.about');

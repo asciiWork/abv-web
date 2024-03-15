@@ -1,12 +1,12 @@
 @extends('adminPanel.layouts.app')
 @section('adminContent')
-<div x-data="basic">    
+<div>    
     <div class="panel mt-6">
-        <h5 class="text-lg font-semibold dark:text-white-light">Users</h5>
+        <h5 class="text-lg font-semibold dark:text-white-light">{{$page_title}}</h5>
         <table id="myTable1" class="table-hover whitespace-nowrap">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>Order No.</th>
                     <th>Customer</th>
                     <th>Price</th>
                     <th>Order Date</th>
@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if($records)
+                <!-- @if($records)
                   @foreach($records as $raw)
                     <tr>
                       	<td>{{ $raw->id }}</td>
@@ -44,9 +44,47 @@
                   <tr>
                     <td colspan="7" >Data Not Found</td>
                   </tr>
-                @endif
+                @endif -->
             </tbody>
         </table>
     </div>
 </div>
+@endsection
+@section('adminscript')
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<!-- <script src="{{ asset('admin-theme/assets/js/simple-datatables.js')}}"></script> -->
+<script>
+    var MODULE_URL="{{ route('admin-orders.data') }}";
+    $(document).ready(function(){
+        var oTableCustom = $('#myTable1').DataTable({
+            processing: false,
+            serverSide: true,
+            searching: false,
+            pageLength: 25,
+            displayStart: 0,
+            ajax: {
+                "url": MODULE_URL,
+                "data": function ( data ) 
+                {
+                    
+                }
+            },
+            lengthMenu:
+              [
+                [25,50,100,200],
+                [25,50,100,200]
+              ],
+            columns: [
+                { data: 'order_number', name: 'order_number', orderable:false},
+                { data: 'name', name: 'name' },
+                { data: 'order_tax_amount_total', name: 'order_tax_amount_total', orderable:false},
+                { data: 'order_date', name: 'order_date', orderable:false},
+                { data: 'ship_date', name: 'ship_date', orderable:false},
+                { data: 'order_status', name: 'order_status', orderable:false},
+                { data: 'action', name: 'action', orderable:false},
+            ]
+        });
+    });
+</script>
 @endsection

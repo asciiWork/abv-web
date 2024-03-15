@@ -62,60 +62,60 @@ if($current_params){
                     </a>
                 </li>
                 <li class="menu nav-item">
-                                        <button
-                                            type="button"
-                                            class="nav-link active group"
-                                            :class="{'active' : activeDropdown === 'invoice'}"
-                                            @click="activeDropdown === 'invoice' ? activeDropdown = null : activeDropdown = 'invoice'"
-                                        >
-                                            <div class="flex items-center">
-                                                <svg
-                                                    class="shrink-0 group-hover:!text-primary"
-                                                    width="20"
-                                                    height="20"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        opacity="0.5"
-                                                        fill-rule="evenodd"
-                                                        clip-rule="evenodd"
-                                                        d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                                                        fill="currentColor"
-                                                    />
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        clip-rule="evenodd"
-                                                        d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V6.31673C14.3804 6.60867 15.75 7.83361 15.75 9.5C15.75 9.91421 15.4142 10.25 15 10.25C14.5858 10.25 14.25 9.91421 14.25 9.5C14.25 8.82154 13.6859 8.10339 12.75 7.84748V11.3167C14.3804 11.6087 15.75 12.8336 15.75 14.5C15.75 16.1664 14.3804 17.3913 12.75 17.6833V18C12.75 18.4142 12.4142 18.75 12 18.75C11.5858 18.75 11.25 18.4142 11.25 18V17.6833C9.61957 17.3913 8.25 16.1664 8.25 14.5C8.25 14.0858 8.58579 13.75 9 13.75C9.41421 13.75 9.75 14.0858 9.75 14.5C9.75 15.1785 10.3141 15.8966 11.25 16.1525V12.6833C9.61957 12.3913 8.25 11.1664 8.25 9.5C8.25 7.83361 9.61957 6.60867 11.25 6.31673V6C11.25 5.58579 11.5858 5.25 12 5.25ZM11.25 7.84748C10.3141 8.10339 9.75 8.82154 9.75 9.5C9.75 10.1785 10.3141 10.8966 11.25 11.1525V7.84748ZM14.25 14.5C14.25 13.8215 13.6859 13.1034 12.75 12.8475V16.1525C13.6859 15.8966 14.25 15.1785 14.25 14.5Z"
-                                                        fill="currentColor"
-                                                    />
-                                                </svg>
-                                                <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Quatations</span>
-                                            </div>
-                                            <div class="rtl:rotate-180" :class="{'!rotate-90' : activeDropdown === 'invoice'}">
-                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9 5L15 12L9 19"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </div>
-                                        </button>
-                                        <ul x-cloak x-show="activeDropdown === 'invoice'" x-collapse class="sub-menu text-gray-500">
-                                            <li>
-                                                <a href="{{ route('quatations.index') }}" class="active">List</a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('quatations.create') }}">Add</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                    <button
+                        type="button"
+                        class="nav-link active group {{ (request()->routeIs('admin-products.*'))?'active':'' }}"
+                        :class="{'active' : activeDropdown === 'invoice'}"
+                        @click="activeDropdown === 'invoice' ? activeDropdown = null : activeDropdown = 'invoice'"
+                    >
+                        <div class="flex items-center">
+                            <svg
+                                class="shrink-0 group-hover:!text-primary"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    opacity="0.5"
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
+                                    fill="currentColor"
+                                />
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M12 5.25C12.4142 5.25 12.75 5.58579 12.75 6V6.31673C14.3804 6.60867 15.75 7.83361 15.75 9.5C15.75 9.91421 15.4142 10.25 15 10.25C14.5858 10.25 14.25 9.91421 14.25 9.5C14.25 8.82154 13.6859 8.10339 12.75 7.84748V11.3167C14.3804 11.6087 15.75 12.8336 15.75 14.5C15.75 16.1664 14.3804 17.3913 12.75 17.6833V18C12.75 18.4142 12.4142 18.75 12 18.75C11.5858 18.75 11.25 18.4142 11.25 18V17.6833C9.61957 17.3913 8.25 16.1664 8.25 14.5C8.25 14.0858 8.58579 13.75 9 13.75C9.41421 13.75 9.75 14.0858 9.75 14.5C9.75 15.1785 10.3141 15.8966 11.25 16.1525V12.6833C9.61957 12.3913 8.25 11.1664 8.25 9.5C8.25 7.83361 9.61957 6.60867 11.25 6.31673V6C11.25 5.58579 11.5858 5.25 12 5.25ZM11.25 7.84748C10.3141 8.10339 9.75 8.82154 9.75 9.5C9.75 10.1785 10.3141 10.8966 11.25 11.1525V7.84748ZM14.25 14.5C14.25 13.8215 13.6859 13.1034 12.75 12.8475V16.1525C13.6859 15.8966 14.25 15.1785 14.25 14.5Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                            <span class="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">Quatations</span>
+                        </div>
+                        <div class="rtl:rotate-180" :class="{'!rotate-90' : activeDropdown === 'invoice'}">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9 5L15 12L9 19"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </div>
+                    </button>
+                    <ul x-cloak x-show="activeDropdown === 'invoice'" x-collapse class="sub-menu text-gray-500">
+                        <li>
+                            <a href="{{ route('quatations.index') }}" class="active">List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('quatations.create') }}">Add</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin-orders.index') }}" class="group {{ ($crrRoute == 'admin-orders.index')?'active':'' }}">
+                    <a href="{{ route('admin-orders.index') }}" class="group {{ (request()->routeIs('admin-orders.*'))?'active':'' }}">
                         <div class="flex items-center">
                             <svg
                                 class="shrink-0 group-hover:!text-primary"
@@ -139,7 +139,7 @@ if($current_params){
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin-category.index') }}" class="group {{ ($crrRoute == 'admin-category.index')?'active':'' }}">
+                    <a href="{{ route('admin-category.index') }}" class="group {{ (request()->routeIs('admin-category.*'))?'active':'' }}">
                         <div class="flex items-center">
                             <svg class="shrink-0 group-hover:!text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.5" d="M12 22C7.28595 22 4.92893 22 3.46447 20.5355C2 19.0711 2 16.714 2 12C2 7.28595 2 4.92893 3.46447 3.46447C4.92893 2 7.28595 2 12 2C16.714 2 19.0711 2 20.5355 3.46447C22 4.92893 22 7.28595 22 12C22 16.714 22 19.0711 20.5355 20.5355C19.0711 22 16.714 22 12 22Z" fill="currentColor"></path>
@@ -152,7 +152,7 @@ if($current_params){
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin-products.index') }}" class="group {{ ($crrRoute == 'admin-products.index')?'active':'' }}">
+                    <a href="{{ route('admin-products.index') }}" class="group {{ (request()->routeIs('admin-products.*'))?'active':'' }}">
                         <div class="flex items-center">
                             <svg class="shrink-0 group-hover:!text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4.97883 9.68508C2.99294 8.89073 2 8.49355 2 8C2 7.50645 2.99294 7.10927 4.97883 6.31492L7.7873 5.19153C9.77318 4.39718 10.7661 4 12 4C13.2339 4 14.2268 4.39718 16.2127 5.19153L19.0212 6.31492C21.0071 7.10927 22 7.50645 22 8C22 8.49355 21.0071 8.89073 19.0212 9.68508L16.2127 10.8085C14.2268 11.6028 13.2339 12 12 12C10.7661 12 9.77318 11.6028 7.7873 10.8085L4.97883 9.68508Z" fill="currentColor"></path>

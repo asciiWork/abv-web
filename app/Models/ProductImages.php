@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ProductImages extends Model
 {
     protected $table = 'product_img';
+    public $timestamps = false;
 	
 	public function get_ProductImages($id)
 	{

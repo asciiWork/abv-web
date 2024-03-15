@@ -13,10 +13,13 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/perfect-scrollbar.min.css') }}" />        
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/style.css')}}" />
         <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/animate.css')}}" />
+        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/simple-datatables.css')}}" />
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
         <script src="{{ asset('admin-theme/assets/js/perfect-scrollbar.min.js')}}"></script>
         <script defer src="{{ asset('admin-theme/assets/js/popper.min.js')}}"></script>
         <script defer src="{{ asset('admin-theme/assets/js/tippy-bundle.umd.min.js')}}"></script>
         <script defer src="{{ asset('admin-theme/assets/js/sweetalert.min.js')}}"></script>
+        @yield('adminStyle')
     </head>
 
     <body
@@ -62,6 +65,7 @@
         <script src="{{ asset('admin-theme/assets/js/simple-datatables.js')}}"></script>
         @yield('adminscript')
         <script>
+            var http_host_js = '{{ url("/abv-admin") }}';
             document.addEventListener('alpine:init', () => {
                 // main section
                 Alpine.data('scrollToTop', () => ({

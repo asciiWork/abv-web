@@ -64,6 +64,10 @@
         scrollbar-width: none;
         /* Firefox */
     }
+    .psize:hover {
+        color: #ffffff;
+        background: #0a58ca;
+    }
 </style>
 @endsection
 @section('content')

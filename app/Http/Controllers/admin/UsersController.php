@@ -22,15 +22,8 @@ class UsersController extends Controller
         $data['records'] = User::select('*')->get();
         return view('adminPanel.users.index',$data);
     }
-    /*public function show($id)
-    {
-        $data = array();
-        $data['page_title'] = 'User';
-        $obj = User::find($id);
-        if(!$obj){
-            return abort(404); 
-        }
-        $data['address'] = UserAddresses::getAddress($id);
-        return view('adminPanel.users.address',$data);
-    }*/
+    public function data(Request $request){
+        $user = User::query();
+        return Datatables::eloquent($user)->make(true);
+    }
 }
