@@ -6814,7 +6814,7 @@ input[type=number]::-webkit-outer-spin-button {
   color: var(--secondary-color);
 }
 .variant__size--value {
-  width: 18rem;
+  /*width: 18rem;*/
   height: 3.2rem;
   line-height: 2.8rem;
   display: inline-block;
@@ -6822,6 +6822,8 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
   font-size: 1.5rem;
   cursor: pointer;
+  border: solid black 0.1vw;
+  padding: 0px 10px;
 }
 
 .quickview__variant--wishlist__svg {

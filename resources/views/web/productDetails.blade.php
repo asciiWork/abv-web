@@ -6,7 +6,7 @@
     }
 
     .psize {
-        border: 1px solid;
+        /*border: 1px solid;*/
     }
 
     .tab-price.active {
