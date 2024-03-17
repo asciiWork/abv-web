@@ -265,6 +265,7 @@ class ProductsController extends Controller
         $msg = 'Please try again later.';
         $data = array();
         $userId = null;
+        $email=$request->get('contact_email');
         if(\Auth::check()){
             $authUser = \Auth::user();
             $userId=$authUser->id;
