@@ -33,7 +33,7 @@ class ContactEmail extends Mailable
         if ($obj) {
             $this->contact = $obj;
             return $this->subject("abvtool - Inquiry")
-            ->to('alka.phpdots@gmail.com')
+            ->to(env("APP_EMAIL"))
             ->markdown('emails.contactEmail');
         }
     }

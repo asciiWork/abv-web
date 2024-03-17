@@ -31,7 +31,7 @@
                                                 <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                                 <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                             </a>
-                                            <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
+                                            <span class="product__badge">-{{ intval($pro->product_offer_per) }}%</span>
                                         </div>
                                         <div class="product__card--content">
                                             <h3 class="product__card--title"><a href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">{{ $pro->product_name }}</a></h3>
@@ -66,7 +66,7 @@
                                                 <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                                 <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                             </a>
-                                            <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
+                                            <span class="product__badge">-{{ intval($pro->product_offer_per) }}%</span>
                                         </div>
                                         <div class="product__card--content">
                                             <h3 class="product__card--title"><a href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">{{ $pro->product_name }}</a></h3>
@@ -101,7 +101,7 @@
                                             <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $npro->product_img_url }}" alt="product-img">
                                             <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $npro->product_img_url }}" alt="product-img">
                                         </a>
-                                        <span class="product__badge">-{{ $npro->product_offer_per }}%</span>
+                                        <span class="product__badge">-{{ intval($npro->product_offer_per) }}%</span>
                                         <!-- <ul class="product__card--action d-flex align-items-center justify-content-center">
                                             <li class="product__card--action__list">
                                                 <a class="product__card--action__btn" title="Quick View" data-bs-toggle="modal" data-bs-target="#examplemodal" href="javascript:void(0)">
