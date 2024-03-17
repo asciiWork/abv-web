@@ -7,6 +7,9 @@
 
     .psize {
         /*border: 1px solid;*/
+        font-weight: 400;
+        font-size: 12px;
+        letter-spacing: 0;
     }
 
     .tab-price.active {
@@ -276,7 +279,7 @@
                             <div class="product__tab--content">
                                 <div class="product__tab--content__step mb-30">
                                     <h2 class="product__tab--content__title h4 mb-10">{{$productWithSize->product_name}}</h2>
-                                    <p class="product__tab--content__desc">{{$productWithSize->product_detail}}</p>
+                                    <p class="product__tab--content__desc"><?php echo $productWithSize->product_desc; ?></p>
                                 </div>
                             </div>
                         </div>
