@@ -196,7 +196,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                     <td class="cart__table--body__list">
                                         <div class="product__image two  d-flex align-items-center">
                                             <div class="product__thumbnail border-radius-5">
-                                                <img class="display-block border-radius-5" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $c['product_img'] }}" alt="cart-product">
+                                                <img class="display-block border-radius-5" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $c['product_img'] }}" alt="cart-product">
                                                 <span class="product__thumbnail--quantity">{{ $c['qnt'] }}</span>
                                                 <?php $totalQnt += $c['qnt']; ?>
                                             </div>

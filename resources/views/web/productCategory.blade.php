@@ -92,8 +92,8 @@
                                             <article class="product__card">
                                                 <div class="product__card--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
                                                 </div>
@@ -187,8 +187,8 @@
                                             <article class="product__card">
                                                 <div class="product__card--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="{{$urllink}}">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/categories/') }}/{{ $cat->cat_img }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/categories/') }}/{{ $cat->cat_img }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/categories/') }}/{{ $cat->cat_img }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/categories/') }}/{{ $cat->cat_img }}" alt="product-img">
                                                     </a>
                                                     <!-- <span class="product__badge">-14%</span> 
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -224,8 +224,8 @@
                                             <div class="product__card product__list d-flex align-items-center">
                                                 <div class="product__card--thumbnail product__list--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-20%</span>
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -310,8 +310,8 @@
                                             <div class="product__card product__list d-flex align-items-center">
                                                 <div class="product__card--thumbnail product__list--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product1.webp') }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product2.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/product1.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/product2.webp') }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-17%</span>
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -397,8 +397,8 @@
                                             <div class="product__card product__list d-flex align-items-center">
                                                 <div class="product__card--thumbnail product__list--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product3.webp') }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product4.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/product3.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/product4.webp') }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-16%</span>
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -483,8 +483,8 @@
                                             <div class="product__card product__list d-flex align-items-center">
                                                 <div class="product__card--thumbnail product__list--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/product5.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/product6.webp') }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-22%</span>
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -569,8 +569,8 @@
                                             <div class="product__card product__list d-flex align-items-center">
                                                 <div class="product__card--thumbnail product__list--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/product7.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/product8.webp') }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-16%</span>
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -655,8 +655,8 @@
                                             <div class="product__card product__list d-flex align-items-center">
                                                 <div class="product__card--thumbnail product__list--thumbnail">
                                                     <a class="product__card--thumbnail__link display-block" href="product-details.html">
-                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
-                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/product9.webp') }}" alt="product-img">
+                                                        <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/product10.webp') }}" alt="product-img">
                                                     </a>
                                                     <span class="product__badge">-24%</span>
                                                     <ul class="product__card--action d-flex align-items-center justify-content-center">

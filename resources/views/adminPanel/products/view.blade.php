@@ -26,7 +26,7 @@
                 <div class="swiper-wrapper">
                     @foreach($prImg as $pimg)
                     <div class="swiper-slide">
-                        <img src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pimg->product_img_url }}" class="w-full" alt="image" />
+                        <img src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pimg->product_img_url }}" class="w-full" alt="image" />
                         <div class="absolute bottom-8 left-1/2 z-[999] w-full -translate-x-1/2 px-11 text-center text-white sm:px-0">
                             
                         </div>
@@ -115,7 +115,7 @@
 </div>
 @endsection
 @section('adminscript')
-<script src="{{ asset('admin-theme/assets/js/swiper-bundle.min.js')}}"></script>
+<script src="{{ asset('public/admin-theme/assets/js/swiper-bundle.min.js')}}"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     var labelList = document.getElementById("labelList");

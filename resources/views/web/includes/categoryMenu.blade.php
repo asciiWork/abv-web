@@ -9,7 +9,7 @@ if($current_params){
         @foreach($Catdata as $cat)
         <li class="widget__categories--menu__list {{ ($crrSlug == $cat->cat_slug)?'active':'' }}">
             <label class="widget__categories--menu__label d-flex align-items-center">
-                <img class="widget__categories--menu__img" src="{{ asset('web/assets/img/categories/') }}/{{$cat->cat_img}}" alt="categories-img">
+                <img class="widget__categories--menu__img" src="{{ asset('public/web/assets/img/categories/') }}/{{$cat->cat_img}}" alt="categories-img">
                 <a href="{{ URL::to('product-category/') }}/{{$cat->id}}">
                     <span class="widget__categories--menu__text">{{ substr($cat->category_name,0,15) }}...({{$cat->pro_count}})</span>
                 </a>
@@ -23,7 +23,7 @@ if($current_params){
                     @if ($cat->id==$pro->category_id && $pro_id!=$pro->id)
                     <li class="widget__categories--sub__menu--list">
                         <a class="widget__categories--sub__menu--link d-flex align-items-center" href="{{ URL::to('product-category') }}/{{$cat->cat_slug}}">
-                            <!-- <img class="widget__categories--sub__menu--img" src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="categories-img"> -->
+                            <!-- <img class="widget__categories--sub__menu--img" src="{{ asset('public/web/assets/img/product/small-product/product2.webp') }}" alt="categories-img"> -->
                             <span class="widget__categories--sub__menu--text">{{ substr($pro->product_name,0,22) }}...</span>
                         </a>
                     </li>

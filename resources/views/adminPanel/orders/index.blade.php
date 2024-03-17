@@ -53,7 +53,7 @@
 @section('adminscript')
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<!-- <script src="{{ asset('admin-theme/assets/js/simple-datatables.js')}}"></script> -->
+<!-- <script src="{{ asset('public/admin-theme/assets/js/simple-datatables.js')}}"></script> -->
 <script>
     var MODULE_URL="{{ route('admin-orders.data') }}";
     $(document).ready(function(){

@@ -7,18 +7,18 @@
   <meta name="description" content="Morden Bootstrap HTML5 Template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('web/assets/img/fav.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}">
 
   <!-- ======= All CSS Plugins here ======== -->
-  <link rel="stylesheet" href="{{ asset('web/assets/css/plugins/swiper-bundle.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('web/assets/css/plugins/glightbox.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/swiper-bundle.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/glightbox.min.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap" rel="stylesheet">
 
   <!-- Plugin css -->
-  <link rel="stylesheet" href="{{ asset('web/assets/css/vendor/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/web/assets/css/vendor/bootstrap.min.css') }}">
 
   <!-- Custom Style CSS -->
-  <link rel="stylesheet" href="{{ asset('web/assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('public/web/assets/css/style.css') }}">
   @yield('stylecss')
 </head>
 
@@ -75,20 +75,20 @@
       });
     });
   </script>
-  <script src="{{ asset('web/js/jquery.min.js')}}" type="text/javascript"></script>
-  <script src="{{ asset('web/js/bootstrap.min.js')}}" type="text/javascript"></script>
-  <script src="{{ asset('web/assets/js/vendor/popper.js') }}" defer="defer"></script>
-  <script src="{{ asset('web/assets/js/vendor/bootstrap.min.js') }}" defer="defer"></script>
-  <script src="{{ asset('web/assets/js/plugins/swiper-bundle.min.js') }}"></script>
-  <script src="{{ asset('web/assets/js/plugins/glightbox.min.js') }}"></script>
+  <script src="{{ asset('public/web/js/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('public/web/js/bootstrap.min.js')}}" type="text/javascript"></script>
+  <script src="{{ asset('public/web/assets/js/vendor/popper.js') }}" defer="defer"></script>
+  <script src="{{ asset('public/web/assets/js/vendor/bootstrap.min.js') }}" defer="defer"></script>
+  <script src="{{ asset('public/web/assets/js/plugins/swiper-bundle.min.js') }}"></script>
+  <script src="{{ asset('public/web/assets/js/plugins/glightbox.min.js') }}"></script>
 
   <!-- Customscript js -->
-  <script src="{{ asset('web/assets/js/script.js') }}"></script>
-  <script src="{{ asset('web/assets/js/custom-product.js') }}"></script>
+  <script src="{{ asset('public/web/assets/js/script.js') }}"></script>
+  <script src="{{ asset('public/web/assets/js/custom-product.js') }}"></script>
 
-  <script type="text/javascript" src="{{ asset('web/js/jquery.bootstrap-growl.min.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('web/js/parsley.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('web/js/comman.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('public/web/js/jquery.bootstrap-growl.min.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('public/web/js/parsley.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('public/web/js/comman.js')}}"></script>
   @yield('scripts')
 
 </body>

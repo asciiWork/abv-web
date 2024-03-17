@@ -3,7 +3,7 @@
         <div class="row  mb--n30">
             <div class="col-lg-6 col-md-6 mb-30">
                 <div class="banner__items position__relative">
-                    <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('web/assets/img/banner/01_587x206.jpg') }}" alt="banner-img">
+                    <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('public/web/assets/img/banner/01_587x206.jpg') }}" alt="banner-img">
                         <div class="banner__content">
                             <span class="banner__content--subtitle text__secondary">ABV TOOL</span>
                             <h2 class="banner__content--title"><span class="banner__content--title__inner">CNC ROUTER TOOL</span> COLLECTION</h2>
@@ -20,7 +20,7 @@
             </div>
             <div class="col-lg-6 col-md-6 mb-30">
                 <div class="banner__items position__relative">
-                    <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('web/assets/img/banner/02_587x206.jpg') }}" alt="banner-img">
+                    <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img banner__max--height" src="{{ asset('public/web/assets/img/banner/02_587x206.jpg') }}" alt="banner-img">
                         <div class="banner__content right">
                             <span class="banner__badge--style2">20% Off</span>
                             <h2 class="banner__content--title">CNC ROUTER SPARE <br><span class="banner__content--title__inner"> PARTS </span></h2>

@@ -28,8 +28,8 @@
                                     <article class="product__card">
                                         <div class="product__card--thumbnail">
                                             <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
-                                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
-                                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                             </a>
                                             <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
                                         </div>
@@ -63,8 +63,8 @@
                                     <article class="product__card">
                                         <div class="product__card--thumbnail">
                                             <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
-                                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
-                                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                             </a>
                                             <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
                                         </div>
@@ -98,8 +98,8 @@
                                 <article class="product__card">
                                     <div class="product__card--thumbnail">
                                         <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$npro->product_slug}}">
-                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $npro->product_img_url }}" alt="product-img">
-                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $npro->product_img_url }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $npro->product_img_url }}" alt="product-img">
+                                            <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $npro->product_img_url }}" alt="product-img">
                                         </a>
                                         <span class="product__badge">-{{ $npro->product_offer_per }}%</span>
                                         <!-- <ul class="product__card--action d-flex align-items-center justify-content-center">

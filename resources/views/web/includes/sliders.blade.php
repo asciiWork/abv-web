@@ -3,7 +3,7 @@
     <div class="hero__slider--inner hero__slider--activation swiper">
         <div class="hero__slider--wrapper swiper-wrapper">
             <div class="swiper-slide ">
-                <div class="hero__slider--items style4 slider4__items--bg1" style="background-image: url('{{ asset('web/assets/img/slider/01_1920X730.jpg') }}');">
+                <div class="hero__slider--items style4 slider4__items--bg1" style="background-image: url('{{ asset('public/web/assets/img/slider/01_1920X730.jpg') }}');">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 text-center">
@@ -16,12 +16,12 @@
                         </div>
                     </div>
                     <!-- <div class="hero__slider--layer__style4">
-                        <img class="slider__layer--img " src="{{ asset('web/assets/img/logo/ABV-logo.png') }}" alt="slider-img" align="right" width="50%">
+                        <img class="slider__layer--img " src="{{ asset('public/web/assets/img/logo/ABV-logo.png') }}" alt="slider-img" align="right" width="50%">
                     </div> --> 
                 </div>
             </div>
             <div class="swiper-slide ">
-                <div class="hero__slider--items style4 slider4__items--bg1" style="background-image: url('{{ asset('web/assets/img/slider/02_1920X730.jpg') }}');">
+                <div class="hero__slider--items style4 slider4__items--bg1" style="background-image: url('{{ asset('public/web/assets/img/slider/02_1920X730.jpg') }}');">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 text-center">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="swiper-slide ">
-                <div class="hero__slider--items style4 slider4__items--bg1" style="background-image: url('{{ asset('web/assets/img/slider/03_1920X730.jpg') }}');">
+                <div class="hero__slider--items style4 slider4__items--bg1" style="background-image: url('{{ asset('public/web/assets/img/slider/03_1920X730.jpg') }}');">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12 col-md-12 text-center">

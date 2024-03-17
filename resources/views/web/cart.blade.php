@@ -37,7 +37,7 @@
                                                     </svg>
                                                 </button>
                                                 <div class="cart__thumbnail">
-                                                    <a href="{{ URL::to('product-details/') }}/{{$c['slug']}}"><img class="border-radius-5" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $c['product_img'] }}" alt="cart-product"></a>
+                                                    <a href="{{ URL::to('product-details/') }}/{{$c['slug']}}"><img class="border-radius-5" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $c['product_img'] }}" alt="cart-product"></a>
                                                 </div>
                                                 <div class="cart__content">
                                                     <h3 class="cart__content--title h4"><a href="{{ URL::to('product-details/') }}/{{$c['slug']}}">{{$c['product_name']}}</a></h3>
@@ -187,8 +187,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$proRan->product_slug}}">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
                             </a>
                             <span class="product__badge">-{{ $proRan->product_offer_per }}%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">

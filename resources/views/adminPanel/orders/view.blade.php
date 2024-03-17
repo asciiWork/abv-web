@@ -32,7 +32,7 @@
         <div class="flex flex-wrap justify-between gap-4 px-4">
             <div class="text-2xl font-semibold uppercase">Invoice</div>
             <div class="shrink-0">
-                <img src="{{ asset('web/assets/img/abv.png') }}" alt="image" class="w-14 ltr:ml-auto rtl:mr-auto" />
+                <img src="{{ asset('public/web/assets/img/abv.png') }}" alt="image" class="w-14 ltr:ml-auto rtl:mr-auto" />
             </div>
         </div>
         <div class="px-4 ltr:text-right rtl:text-left">

@@ -16,7 +16,7 @@ if($current_params){
         <div class="h-full bg-white dark:bg-[#0e1726]">
             <div class="flex items-center justify-between px-4 py-3">
                 <a href="javascript:void(0);" class="main-logo flex shrink-0 items-center">
-                    <img class="ml-[5px] w-8 flex-none" src="{{ asset('web/assets/img/abv.png')}}" alt="image" />
+                    <img class="ml-[5px] w-8 flex-none" src="{{ asset('public/web/assets/img/abv.png')}}" alt="image" />
                     <span class="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">ABV Tools</span>
                 </a>
                 <a href="javascript:;"

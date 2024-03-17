@@ -8,7 +8,7 @@
                 <div class="categories__card--style3 text-center">
                 <a class="categories__card--link" href="{{ URL::to('product-category/') }}/{{$cat->cat_slug}}">
                     <div class="categories__thumbnail">
-                        <img class="categories__thumbnail--img" src="{{ asset('web/assets/img/categories/') }}/{{ $cat->cat_img }}" alt="categories-img">
+                        <img class="categories__thumbnail--img" src="{{ asset('public/web/assets/img/categories/') }}/{{ $cat->cat_img }}" alt="categories-img">
                     </div>
                     <div class="categories__content style1">
                         <br/>

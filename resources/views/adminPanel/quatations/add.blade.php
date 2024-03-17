@@ -6,7 +6,7 @@
             <div class="flex flex-wrap justify-between px-4">
                 <div class="mb-6 w-full lg:w-1/2">
                     <div class="flex shrink-0 items-center text-black dark:text-white">
-                        <img src="{{ asset('web/assets/img/abv.png') }}" alt="image" class="w-14" />
+                        <img src="{{ asset('public/web/assets/img/abv.png') }}" alt="image" class="w-14" />
                     </div>
                     <div class="mt-6 space-y-1 text-gray-500 dark:text-gray-400">
                         <div>ABV TOOL</div>

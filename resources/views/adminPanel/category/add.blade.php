@@ -1,6 +1,6 @@
 @extends('adminPanel.layouts.app')
 @section('adminStyle')
-<link rel="stylesheet" type="text/css" href="{{ asset('admin-theme/assets/css/file-upload-with-preview.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('public/admin-theme/assets/css/file-upload-with-preview.min.css')}}" />
 @endsection
 @section('adminContent')
 <div>
@@ -22,7 +22,7 @@
 </div>
 @endsection
 @section('adminscript')
-<script src="{{ asset('admin-theme/assets/js/file-upload-with-preview.iife.js')}}"></script>
+<script src="{{ asset('public/admin-theme/assets/js/file-upload-with-preview.iife.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	var img='Choose file...';

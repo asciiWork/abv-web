@@ -16,7 +16,7 @@
         <div class="max-w-[19rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-[#e0e6ed] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
             <div class="py-7 px-6">
                 <div class="-mt-7 mb-7 -mx-6 rounded-tl rounded-tr overflow-hidden">
-                    <img src="{{ asset('web/assets/img/categories/') }}/{{ $catData->cat_img }}" alt="image" class="w-full h-full object-cover" />
+                    <img src="{{ asset('public/web/assets/img/categories/') }}/{{ $catData->cat_img }}" alt="image" class="w-full h-full object-cover" />
                 </div>
                 <h5 class="text-[#3b3f5c] text-xl font-semibold mb-4 dark:text-white-light">{{$catData->category_name}}</h5>
             </div>
@@ -25,7 +25,7 @@
 </div>
 @endsection
 @section('adminscript')
-<script src="{{ asset('admin-theme/assets/js/swiper-bundle.min.js')}}"></script>
+<script src="{{ asset('public/admin-theme/assets/js/swiper-bundle.min.js')}}"></script>
 <script>
 document.addEventListener('alpine:init', () => {
 Alpine.data('carousel', () => ({

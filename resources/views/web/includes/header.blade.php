@@ -25,7 +25,7 @@ $productData = \App\Models\Product::get_Allproduct();
                         @if($cat->cat_img)
                             <li class="widget__categories--menu__list {{ ($crrSlug == $cat->cat_slug)?'active':'' }}">
                                 <label class="widget__categories--menu__label d-flex align-items-center">
-                                    <img class="widget__categories--menu__img" src="{{ asset('web/assets/img/categories/') }}/{{$cat->cat_img}}" alt="categories-img">
+                                    <img class="widget__categories--menu__img" src="{{ asset('public/web/assets/img/categories/') }}/{{$cat->cat_img}}" alt="categories-img">
                                     <a href="{{ URL::to('product-category/') }}/{{$cat->id}}">
                                         <span class="widget__categories--menu__text">{{ substr($cat->category_name,0,15) }}...({{$cat->pro_count}})</span>
                                     </a>
@@ -39,7 +39,7 @@ $productData = \App\Models\Product::get_Allproduct();
                                         @if ($cat->id==$pro->category_id && $pro_id!=$pro->id)
                                         <li class="widget__categories--sub__menu--list">
                                             <a class="widget__categories--sub__menu--link d-flex align-items-center" href="{{ URL::to('product-category') }}/{{$cat->cat_slug}}">
-                                                <!-- <img class="widget__categories--sub__menu--img" src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="categories-img"> -->
+                                                <!-- <img class="widget__categories--sub__menu--img" src="{{ asset('public/web/assets/img/product/small-product/product2.webp') }}" alt="categories-img"> -->
                                                 <span class="widget__categories--sub__menu--text">{{ substr($pro->product_name,0,22) }}...</span>
                                             </a>
                                         </li>
@@ -170,7 +170,7 @@ $productData = \App\Models\Product::get_Allproduct();
                     </a>
                 </div>
                 <div class="main__logo">
-                    <h1 class="main__logo--title"><a class="main__logo--link" href="{{ url('/') }}"><img class="main__logo--img" src="{{ asset('web/assets/img/abv.png') }}" alt="logo-img"></a></h1>
+                    <h1 class="main__logo--title"><a class="main__logo--link" href="{{ url('/') }}"><img class="main__logo--img" src="{{ asset('public/web/assets/img/abv.png') }}" alt="logo-img"></a></h1>
                 </div>
                 <div class="header__menu style3 d-none d-lg-block">
                     <nav class="header__menu--navigation">
@@ -249,7 +249,7 @@ $productData = \App\Models\Product::get_Allproduct();
         <div class="offcanvas__inner">
             <div class="offcanvas__logo">
                 <a class="offcanvas__logo_link" href="javascript:void(0);">
-                    <img src="{{ asset('web/assets/img/abv.png')}}" alt="Abv Logo" width="158" height="36">
+                    <img src="{{ asset('public/web/assets/img/abv.png')}}" alt="Abv Logo" width="158" height="36">
                 </a>
                 <button class="offcanvas__close--btn" data-offcanvas>close</button>
             </div>
@@ -452,6 +452,6 @@ $productData = \App\Models\Product::get_Allproduct();
     <div style="width:100%; height:100%; left:0px; top:0px; position:fixed; opacity:0; filter:alpha(opacity=40); background:#000000;z-index:999999999;">
     </div>
     <div style="float:left;width:100%; left:0px; top:50%; text-align:center; position:fixed; padding:0px; z-index:999999999;">
-        <img src="{{ asset('web/assets/img/ajax-loader.gif') }}" />
+        <img src="{{ asset('public/web/assets/img/ajax-loader.gif') }}" />
     </div>
 </div> -->

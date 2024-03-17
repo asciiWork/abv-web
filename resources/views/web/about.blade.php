@@ -8,7 +8,7 @@
             <div class="col-lg-6">
                 <div class="about__thumb d-flex">
                     <div class="about__thumb--items">
-                        <img class="about__thumb--img border-radius-5" src="{{ asset('web/assets/img/other/abv-500x500.png') }}" alt="about-thumb">
+                        <img class="about__thumb--img border-radius-5" src="{{ asset('public/web/assets/img/other/abv-500x500.png') }}" alt="about-thumb">
                     </div>
                 </div>
             </div>
@@ -62,27 +62,27 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="testimonial__items--thumbnail">
-                            <img class="testimonial__items--thumbnail__img" src="{{ asset('web/assets/img/logo/anovi.png') }}" alt="testimonial-img">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/anovi.png') }}" alt="testimonial-img">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="testimonial__items--thumbnail">
-                            <img class="testimonial__items--thumbnail__img" src="{{ asset('web/assets/img/logo/kgs.png') }}" alt="testimonial-img">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/kgs.png') }}" alt="testimonial-img">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="testimonial__items--thumbnail">
-                            <img class="testimonial__items--thumbnail__img" src="{{ asset('web/assets/img/logo/sumip.png') }}" alt="testimonial-img">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/sumip.png') }}" alt="testimonial-img">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="testimonial__items--thumbnail">
-                            <img class="testimonial__items--thumbnail__img" src="{{ asset('web/assets/img/logo/tilara.png') }}" alt="testimonial-img">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/tilara.png') }}" alt="testimonial-img">
                         </div>
                     </div>
                     <div class="swiper-slide">
                         <div class="testimonial__items--thumbnail">
-                            <img class="testimonial__items--thumbnail__img" src="{{ asset('web/assets/img/logo/woodsden.png') }}" alt="testimonial-img">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/woodsden.png') }}" alt="testimonial-img">
                         </div>
                     </div>
                 </div>

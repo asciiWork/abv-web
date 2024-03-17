@@ -116,7 +116,7 @@
             <div class="footer__bottom--inenr d-flex justify-content-between align-items-center">
                 <p class="copyright__content"><span class="text__secondary">© {{date('Y')}}</span> Powered by <a class="copyright__content--link" target="_blank" href="{{url('/')}}">abvtool</a> . All Rights Reserved.</p>
                 <div class="footer__payment">
-                    <!-- <img src="{{ asset('web/assets/img/icon/payment-img.webp') }}" alt="payment-img"> -->
+                    <!-- <img src="{{ asset('public/web/assets/img/icon/payment-img.webp') }}" alt="payment-img"> -->
                 </div>
             </div>
         </div>

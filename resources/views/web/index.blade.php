@@ -29,8 +29,8 @@
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                             </a>
                             <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -135,7 +135,7 @@
                                     <div class="swiper-slide">
                                         <div class="single__product--thumbnail">
                                             <a class="single__product--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">
-                                                <img class="single__product--thumbnail__img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
+                                                <img class="single__product--thumbnail__img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $pro->product_img_url }}" alt="product-img">
                                             </a>
                                             <span class="product__badge style__left">-{{ $pro->product_offer_per }}%</span>
                                             <span class="product__badge--new">New</span>
@@ -192,7 +192,7 @@
                                 @foreach($dealProduct as $pro)
                                 <div class="swiper-slide">
                                     <div class="single__product--nav__items">
-                                        <img class="single__product--nav__thumbnail" src="{{ asset('web/assets/img/product/main-product/')}}/{{ $pro->product_img_url }}" alt="product-nav-img">
+                                        <img class="single__product--nav__thumbnail" src="{{ asset('public/web/assets/img/product/main-product/')}}/{{ $pro->product_img_url }}" alt="product-nav-img">
                                     </div>
                                 </div>
                                 @endforeach
@@ -213,7 +213,7 @@
                 <div class="col-lg-3">
                     <div class="banner__sidebar style5">
                         <div class="banner__items position__relative mb-30">
-                            <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/banner/01_296x247.jpg') }}" alt="banner-img">
+                            <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img" src="{{ asset('public/web/assets/img/banner/01_296x247.jpg') }}" alt="banner-img">
                                 <div class="banner__content--style5">
                                     <span class="banner__content--style5__subtitle text-white"></span>
                                     <h2 class="banner__content--style5__title text-white">MEGA SALE</h2>
@@ -222,7 +222,7 @@
                             </a>
                         </div>
                         <div class="banner__items position__relative">
-                            <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img" src="{{ asset('web/assets/img/banner/01_296x247.jpg') }}" alt="banner-img">
+                            <a class="banner__thumbnail display-block" href="{{ URL::to('products/') }}"><img class="banner__thumbnail--img" src="{{ asset('public/web/assets/img/banner/01_296x247.jpg') }}" alt="banner-img">
                                 <div class="banner__content--style5 right">
                                     <span class="banner__content--style5__subtitle text__secondary"></span>
                                     <h2 class="banner__content--style5__title text-white">MEGA SALE</h2>

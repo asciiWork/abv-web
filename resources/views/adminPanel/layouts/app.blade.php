@@ -6,19 +6,19 @@
         <title>Leading CNC machine tool Supplier in India | Abv Tools</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="icon" type="image/x-icon" href="{{ asset('web/assets/img/fav.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/perfect-scrollbar.min.css') }}" />        
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/style.css')}}" />
-        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/animate.css')}}" />
-        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('admin-theme/assets/css/simple-datatables.css')}}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('public/admin-theme/assets/css/perfect-scrollbar.min.css') }}" />        
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('public/admin-theme/assets/css/style.css')}}" />
+        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('public/admin-theme/assets/css/animate.css')}}" />
+        <link defer rel="stylesheet" type="text/css" media="screen" href="{{ asset('public/admin-theme/assets/css/simple-datatables.css')}}" />
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-        <script src="{{ asset('admin-theme/assets/js/perfect-scrollbar.min.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/popper.min.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/tippy-bundle.umd.min.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/sweetalert.min.js')}}"></script>
+        <script src="{{ asset('public/admin-theme/assets/js/perfect-scrollbar.min.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/popper.min.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/tippy-bundle.umd.min.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/sweetalert.min.js')}}"></script>
         @yield('adminStyle')
     </head>
 
@@ -55,14 +55,14 @@
                 <!-- end footer section -->
             </div>
         </div>
-        <script src="{{ asset('admin-theme/assets/js/alpine-collaspe.min.js')}}"></script>
-        <script src="{{ asset('admin-theme/assets/js/alpine-persist.min.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/alpine-ui.min.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/alpine-focus.min.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/alpine.min.js')}}"></script>
-        <script src="{{ asset('admin-theme/assets/js/custom.js')}}"></script>
-        <script defer src="{{ asset('admin-theme/assets/js/apexcharts.js')}}"></script>
-        <script src="{{ asset('admin-theme/assets/js/simple-datatables.js')}}"></script>
+        <script src="{{ asset('public/admin-theme/assets/js/alpine-collaspe.min.js')}}"></script>
+        <script src="{{ asset('public/admin-theme/assets/js/alpine-persist.min.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/alpine-ui.min.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/alpine-focus.min.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/alpine.min.js')}}"></script>
+        <script src="{{ asset('public/admin-theme/assets/js/custom.js')}}"></script>
+        <script defer src="{{ asset('public/admin-theme/assets/js/apexcharts.js')}}"></script>
+        <script src="{{ asset('public/admin-theme/assets/js/simple-datatables.js')}}"></script>
         @yield('adminscript')
         <script>
             var http_host_js = '{{ url("/abv-admin") }}';
