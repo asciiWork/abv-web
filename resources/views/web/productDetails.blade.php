@@ -66,7 +66,7 @@
     }
     .psize:hover {
         color: #ffffff;
-        background: #0a58ca;
+        background: #212121;
     }
 </style>
 @endsection
