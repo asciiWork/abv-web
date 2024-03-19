@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-lg-7 col-md-7">
                                         <div class="slider__content style4">
-                                            <h2 class="slider__maintitle style4 h1">Precision Beyond Measure <span class="text__secondary"> Your Trusted CNC Tools Supplier<br><br></span></h2>
+                                            <h2 class="slider__maintitle style4 h1">Precision Beyond Measure <span class="text__secondary"> Your Trusted CNC Tools Supplier<br><br><br></span></h2>
                                         </div>
                                     </div>
                                 </div>
