@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="hero__slider--layer__style4 style__right">
-                                <img class="slider__layer--img " src="{{asset('public/web/assets/img/slider/slider-blog-3.png')}}" alt="slider-img">
+                                <img class="slider__layer--img " src="{{asset('public/web/assets/img/slider/slider-blog-4.png')}}" alt="slider-img">
                             </div> 
                         </div>
                     </div>
