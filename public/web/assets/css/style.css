@@ -3635,7 +3635,7 @@ input[type=number]::-webkit-outer-spin-button {
     home 4 slider css here
 */
 .slider4__items--bg1 {
-  /*background: url(../img/slider/bg_slider.jpg);*/
+  background: url(../img/slider/bg_slider.png);
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
