@@ -5,6 +5,7 @@ use  App\Http\Controllers\web\PageController;
 use  App\Http\Controllers\web\LoginController;
 use  App\Http\Controllers\web\ProductsController;
 use  App\Http\Controllers\web\DashboardController;
+use  App\Http\Controllers\web\RazorpayPaymentController;
 use  App\Http\Controllers\admin\AdminController;
 use  App\Http\Controllers\admin\UsersController;
 use  App\Http\Controllers\admin\OrdersController;
@@ -62,6 +63,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('update-account', [DashboardController::class, 'UpdateAccount'])->name("update-account");
 	Route::get('/downloads', [DashboardController::class, 'downloads'])->name('web.downloads');
 });
+Route::get('/order-pay/{id}/{key}', [PageController::class, 'viewOrderPay'])->name("order-pay");
 Route::get('/order-received/{id}/{key}', [PageController::class, 'viewReceivedOrder'])->name("order-received");
 
 Route::group(['middleware' => ['guest']], function(){
@@ -83,3 +85,4 @@ Route::post('/shipping-post', [ProductsController::class,'shoppingPost'])->name(
 Route::get('/open-quick-view', [ProductsController::class,'openQuickView'])->name('open-quick-view');
 Route::get('/catalog', [PageController::class, 'catalog'])->name('web.catalog');
 
+Route::post('/razorpay-payment', [RazorpayPaymentController::class, 'store'])->name('razorpay.payment.store');

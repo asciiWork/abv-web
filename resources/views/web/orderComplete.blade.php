@@ -61,12 +61,12 @@
                         </div>
                         <div class="col-md-2 col-sm-6 col-12 m-b-md">
                             <div class="text-center">
-                                <p>Total<br><b>₹{{$order->total_amount}}</b></p>
+                                <p>Total<br><b>₹{{$order->order_tax_amount_total}}</b></p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-12 m-b-md">
                             <div class="text-center">
-                                <p>Payment method<br><b>Cash on delivery</b></p>
+                                <p>Payment method<br><b>{{$order->payment_method}}</b></p>
                             </div>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                                         @endforeach
                                         <tr class="cart__table--body__items">
                                             <td class=""><b>Subtotal : </b></td>
-                                            <td class=" text-right">₹{{ number_format($total,2) }}</td>
+                                            <td class=" text-right">₹{{ number_format($order->total_amount,2) }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -102,17 +102,24 @@
                                     <tbody class="checkout__total--body">
                                         <tr class="checkout__total--items">
                                             <td class="text-left"><b>Shipping</b></td>
-                                            <td class="text-right">₹{{ number_format($order->shipping_charge,2) }} via Flat rate</td>
+                                            <td class="text-right">₹{{ number_format($order->shipping_flat_charge,2) }}</td>
                                         </tr>
-
+                                        <tr class="checkout__total--items">
+                                            <td class="text-left"><b>GST</b></td>
+                                            <td class="text-right">₹{{ number_format($order->gst_charge,2) }}</td>
+                                        </tr>
+                                        <tr class="checkout__total--items">
+                                            <td class="text-left"><b>COD</b></td>
+                                            <td class="text-right">₹{{ number_format($order->cod_charge,2) }}</td>
+                                        </tr>
                                         <tr class="checkout__total--footer__items">
                                             <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Payment method: </b></td>
-                                            <td class="checkout__total--footer__title checkout__total--footer__list text-right">Cash on delivery</td>
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-right">{{$order->payment_method}}</td>
                                         </tr>
                                         <tr class="checkout__total--footer__items">
-                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Total: </b></td>
+                                            <td class="checkout__total--footer__title checkout__total--footer__list text-left"><b>Grand Total: </b></td>
                                             <td class=" checkout__total--footer__title checkout__total--footer__list text-right">
-                                                <h2>₹{{ number_format($order->total_amount,2) }}</h2>
+                                                <h2>₹{{ number_format($order->order_tax_amount_total,2) }}</h2>
                                             </td>
                                         </tr>
                                     </tbody>

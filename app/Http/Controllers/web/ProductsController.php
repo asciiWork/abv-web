@@ -262,6 +262,7 @@ class ProductsController extends Controller
     public function shoppingPost(Request $request)
     {
         $status = 0;
+        $redirect = '';
         $msg = 'Please try again later.';
         $data = array();
         $userId = null;
@@ -393,6 +394,7 @@ class ProductsController extends Controller
                     $obj->created_at = date('Y-m-d H:s:i');
                     $obj->updated_at = date('Y-m-d H:s:i');
                     $obj->ordkey='wc_order_'.md5(date('Y-m-d H:s:i'));
+                    $obj->payment_method = $request->get('payment_method');
                     $obj->save();
 
                     $orderId = $obj->id;
@@ -476,11 +478,13 @@ class ProductsController extends Controller
                     $orderData['is_customer'] = 0;
                     $orderData['email'] = env("APP_EMAIL");
                     \Mail::send(new \App\Mail\OrderEmail($orderData));
-
+                    if($request->get('payment_method')=='razorpay'){
+                        $redirect='order-pay/'.$orderId.'/'.$key;
+                    }
                 }
             }
         }
-        return ['status' => $status, 'msg' => $msg, 'data' => $data];
+        return ['status' => $status, 'msg' => $msg, 'data' => $data, 'redirect' => $redirect];
     }
     public function openQuickView(Request $request)
     {

@@ -237,11 +237,23 @@ class PageController extends Controller
     }
     public function viewReceivedOrder($id,$key){
         if($id){
-            $tObj = Order::where('id',$id)->where('ordkey',$key)->first();
+            $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$CONFIRM)->first();
             if($tObj){
                 $data['order'] = $tObj;
                 $data['orderDet'] = OrderDetail::getOrders($id);
                 return view('web.orderComplete', $data);
+            }
+        }
+        return abort(404);
+    }
+    public function viewOrderPay($id,$key){
+        if($id){
+            $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->first();
+            if($tObj){
+                session()->put('orderId',$id);
+                $data['order'] = $tObj;
+                $data['orderDet'] = OrderDetail::getOrders($id);
+                return view('web.orderPay', $data);
             }
         }
         return abort(404);

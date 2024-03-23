@@ -17,6 +17,11 @@ $(document).ready(function() {
                             type: 'success',
                             delay: 4000
                         });
+                        if (typeof result.redirect !== 'undefined') {
+                            if(result.redirect!=''){
+                                window.location = result.redirect;
+                            }
+                        }
                         window.location = $('#submit-form').attr('redirect');
                     } else {
                         $.bootstrapGrowl(result.msg, {

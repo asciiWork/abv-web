@@ -6,7 +6,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 <!-- Start checkout page area -->
 <div class="checkout__page--area section--padding">
     <div class="container">
-        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form','redirect'=>url('checkout')]) !!}
+        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form','redirect'=>url('/checkout')]) !!}
         <div class="row">
             <div class="col-lg-7 col-md-6">
                 <div class="main checkout__mian">
@@ -83,7 +83,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 mb-20">
                                     <div class="checkout__input--list">
-                                        <label class="checkout__input--label" for="bil_area">Area </label>
+                                        <label class="checkout__input--label" for="bil_area">Area <span class="checkout__input--label__star">*</span></label>
                                         <input class="checkout__input--field border-radius-5" required placeholder="Street address" id="bil_area" type="text" name="bil_area" value="{{ (isset($uAddress[0]->area))?$uAddress[0]->area:'' }}">
                                     </div>
                                 </div>
@@ -218,7 +218,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                             </tbody>
                         </table>
                     </div>
-                    <div class="checkout__total">
+                    <div class="">
                         <table class="checkout__total--table">
                             <tbody class="checkout__total--body">
                                 <tr class="checkout__total--items">
@@ -251,10 +251,14 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                         </table>
                     </div>
                     <div class="payment__history mb-30">
-                        <h3 class="payment__history--title mb-20">Payment</h3>
+                        <h3 class="payment__history--title mb-20">Payment Method</h3>
                         <ul class="payment__history--inner d-flex">
-                            <!-- <li class="payment__history--list"><button class="payment__history--link primary__btn" type="submit">Credit Card</button></li> -->
-                            <li class="payment__history--list"><button class="payment__history--link primary__btn">Cash on delivery</button></li>
+                            <li class="payment__history--list">
+                                <input id="payment_method_razorpay" type="radio" class="variant__color--list" name="payment_method" value="razorpay"> Razorpay
+                            </li>
+                            <li class="payment__history--list">
+                                <input id="payment_method_cod" type="radio" class="variant__color--list" name="payment_method" value="cod" checked="checked"> Cash on delivery
+                            </li>
                             <!-- <li class="payment__history--list"><button class="payment__history--link primary__btn" type="submit">Paypal</button></li> -->
                         </ul>
                     </div>
