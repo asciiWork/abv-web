@@ -1,6 +1,10 @@
 @extends('web.layout.app')
 @section('content')
-<style type="text/css">.container.demo {margin-top:4em}</style>
+<style type="text/css">
+    .container.demo {
+        margin-top: 4em
+    }
+</style>
 <!-- cart section start -->
 <section class="cart__section section--padding">
     <div class="container-fluid">
@@ -23,40 +27,40 @@
                                 <tbody class="cart__table--body">
                                     <?php $total_amount = 0 ?>
                                     @foreach($cartData as $c)
-                                        <tr class="cart__table--body__items">
-                                            <td class="cart__table--body__list">
-                                                <div class="cart__product d-flex align-items-center">
-                                                    <button class="cart__remove--btn remove-cart-btn" aria-label="search button" type="button" data-id="{{ $c['id'] }}" action="{{ route('remove-cart') }}" isRefresh="1">
-                                                        
-                                                        <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
-                                                            <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z" />
-                                                        </svg>
-                                                    </button>
-                                                    <div class="cart__thumbnail">
-                                                        <a href="{{ URL::to('product-details/') }}/{{$c['slug']}}"><img class="border-radius-5" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $c['product_img'] }}" alt="cart-product"></a>
-                                                    </div>
-                                                    <div class="cart__content">
-                                                        <h3 class="cart__content--title h4"><a href="{{ URL::to('product-details/') }}/{{$c['slug']}}">{{$c['product_name']}}</a></h3>
-                                                        <span class="cart__content--variant">SIZE: {{$c['prosize']}}</span>
-                                                    </div>
+                                    <tr class="cart__table--body__items">
+                                        <td class="cart__table--body__list">
+                                            <div class="cart__product d-flex align-items-center">
+                                                <button class="cart__remove--btn remove-cart-btn" aria-label="search button" type="button" data-id="{{ $c['id'] }}" action="{{ route('remove-cart') }}" isRefresh="1">
+
+                                                    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
+                                                        <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z" />
+                                                    </svg>
+                                                </button>
+                                                <div class="cart__thumbnail">
+                                                    <a href="{{ URL::to('product-details/') }}/{{$c['slug']}}"><img class="border-radius-5" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $c['product_img'] }}" alt="cart-product"></a>
                                                 </div>
-                                            </td>
-                                            <td class="cart__table--body__list">
-                                                <span class="cart__price">₹{{$c['price']}}</span>
-                                            </td>
-                                            <td class="cart__table--body__list">
-                                                <div class="quantity__box">
-                                                    <a type="minus" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity decrease" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Decrease Value">-</a>
-                                                    <label>
-                                                        <input type="number" name="qnt" class="quantity__number quickview__value--number" value="{{$c['qnt']}}" data-counter />
-                                                    </label>
-                                                    <a type="plus" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity increase" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Increase Value">+</a>
+                                                <div class="cart__content">
+                                                    <h3 class="cart__content--title h4"><a href="{{ URL::to('product-details/') }}/{{$c['slug']}}">{{$c['product_name']}}</a></h3>
+                                                    <span class="cart__content--variant">SIZE: {{$c['prosize']}}</span>
                                                 </div>
-                                            </td>
-                                            <td class="cart__table--body__list">
-                                                <span class="cart__price end">₹{{$c['total']}}</span>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table--body__list">
+                                            <span class="cart__price">₹{{number_format($c['price'],2)}}</span>
+                                        </td>
+                                        <td class="cart__table--body__list">
+                                            <div class="quantity__box">
+                                                <a type="minus" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity decrease" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Decrease Value">-</a>
+                                                <label>
+                                                    <input type="number" name="qnt" class="quantity__number quickview__value--number" value="{{$c['qnt']}}" data-counter />
+                                                </label>
+                                                <a type="plus" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity increase" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Increase Value">+</a>
+                                            </div>
+                                        </td>
+                                        <td class="cart__table--body__list">
+                                            <span class="cart__price end">₹{{number_format($c['total'],2)}}</span>
+                                        </td>
+                                    </tr>
                                     <?php $total_amount = $total_amount + $c['total']; ?>
                                     @endforeach
                                 </tbody>
@@ -85,7 +89,7 @@
                                 <textarea class="cart__note--textarea border-radius-5"></textarea>
                             </div>-->
                             <div class="coupon__code mb-30">
-                                 <h3 class="coupon__code--title">CART TOTALS</h3>
+                                <h3 class="coupon__code--title">CART TOTALS</h3>
                             </div>
                             <div class="cart__summary--total mb-20">
                                 <table class="cart__summary--total__table">
@@ -93,49 +97,63 @@
                                         <tr class="cart__summary--total__list">
                                             <td class="cart__summary--total__title text-left"><strong> SUBTOTAL</strong></td>
                                             <td class="cart__summary--amount text-right">₹{{number_format($total_amount,2)}}</td>
-                                        </tr>                                        
-                                        <tr><td colspan="2"><hr></td></tr>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-lg-12 col-md-12">
-                                    <label class="contact__form--label"><strong> Shipping Detail</strong></label>
+                                    <label class="contact__form--label"><strong> Shipping</strong></label>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <select id="country" name="country" class="contact__form--input"></select>
+                                        <select id="country" name="country" required class="contact__form--input" value="India">
+                                        </select>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <select name="state" id="state" class="contact__form--input" placeholder="State"></select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 col-md-12">
-                                    <div class="contact__form--list mb-20">
-                                        <input class="contact__form--input" name="city"  placeholder="City" type="text">
+                                        <select name="state" id="state" required class="contact__form--input" placeholder="State"></select>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="contact__form--list mb-20">
-                                        <input class="contact__form--input" name="zipcode"  placeholder="Postcode/ Zip" type="text">
+                                        <input class="contact__form--input" required name="city" placeholder="City" type="text">
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="contact__form--list mb-20">
+                                        <input class="contact__form--input" required name="zipcode" placeholder="Postcode/ Zip" type="text">
+                                    </div>
+                                </div>
+                            </div> -->
+                           <!--  <div>
                                 <table class="cart__summary--total__table">
                                     <tbody>
                                         <tr class="cart__summary--total__list">
-                                            <td class="cart__summary--total__title text-left"><strong> SUBTOTAL</strong></td>
-                                            <td class="cart__summary--amount text-right">₹{{number_format($total_amount,2)}}</td>
-                                        </tr>                                        
-                                        <tr><td colspan="2"><hr></td></tr>
+                                            <td class="cart__summary--total__title text-left"><strong> Shipping</strong></td>
+                                            <td class="cart__summary--amount text-right">₹100</td>
+                                        </tr>
+                                        <tr class="cart__summary--total__list">
+                                            <td class="cart__summary--total__title text-left"><strong>GST</strong></td>
+                                            <td class="cart__summary--amount text-right">18%</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <hr>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> -->
                             <div class="cart__summary--footer">
+                                <p class="cart__summary--footer__desc">Shipping & taxes calculated at checkout</p>
                                 <ul class="d-flex justify-content-between">
                                     <!-- <li><button class="cart__summary--footer__btn primary__btn cart" type="submit">Update Cart</button></li> -->
                                     <li><a class="cart__summary--footer__btn primary__btn checkout" href="{{ URL::to('checkout/') }}">Check Out</a></li>
@@ -146,10 +164,10 @@
                 </div>
             </form>
             @else
-                <p align="center">Your cart is currently empty.</p>
-                <p align="center"><a class="cart__summary--footer__btn primary__btn" href="{{ url('/') }}">Continue shopping</a></p>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
+            <p align="center">Your cart is currently empty.</p>
+            <p align="center"><a class="cart__summary--footer__btn primary__btn" href="{{ url('/') }}">Continue shopping</a></p>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
             @endif
         </div>
     </div>
@@ -164,13 +182,13 @@
         </div>
         <div class="product__section--inner pb-15 product__swiper--activation swiper">
             <div class="swiper-wrapper">
-            @foreach($ranProduct as $proRan)
+                @foreach($ranProduct as $proRan)
                 <div class="swiper-slide">
                     <article class="product__card">
                         <div class="product__card--thumbnail">
                             <a class="product__card--thumbnail__link display-block" href="{{ URL::to('product-details/') }}/{{$proRan->product_slug}}">
-                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
-                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
+                                <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $proRan->product_img_url }}" alt="product-img">
                             </a>
                             <span class="product__badge">-{{ $proRan->product_offer_per }}%</span>
                             <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -201,7 +219,7 @@
                             </ul>
                         </div>
                         <div class="product__card--content">
-                            <ul class="rating product__card--rating d-flex">
+                            <!-- <ul class="rating product__card--rating d-flex">
                                 <li class="rating__list">
                                     <span class="rating__icon">
                                         <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,7 +258,7 @@
                                 <li>
                                     <span class="rating__review--text">(126) Review</span>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <h3 class="product__card--title"><a href="{{ URL::to('product-details/') }}/{{$proRan->product_slug}}">{{ $proRan->product_name }}</a></h3>
                             <div class="product__card--price">
                                 <span class="current__price">₹{{ $proRan->product_min_price }}</span> -
@@ -257,7 +275,7 @@
                         </div>
                     </article>
                 </div>
-            @endforeach
+                @endforeach
             </div>
             <div class="swiper__nav--btn swiper-button-next">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-right">
@@ -273,30 +291,6 @@
     </div>
 </section>
 <!-- End product section -->
-
-<!-- Start brand section -->
-<div class="brand__section section--padding pt-0">
-    <div class="container">
-        <div class="brand__section--inner d-flex justify-content-between align-items-center">
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="assets/img/logo/brand-logo1.webp" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="assets/img/logo/brand-logo2.webp" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="assets/img/logo/brand-logo3.webp" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="assets/img/logo/brand-logo4.webp" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="assets/img/logo/brand-logo5.webp" alt="brand-logo">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End brand section -->
 @endsection
 @section('scripts')
 <script type="text/javascript">

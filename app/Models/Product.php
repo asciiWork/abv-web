@@ -13,15 +13,42 @@ class Product extends Model
     {
         return $this->hasMany(ProductSize::class);
     }
-	public function get_Allproduct()
+	public static function get_Allproduct()
 	{
 		$product = DB::table('product')
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
             ->where('product_img.pro_main', '1')
+            ->where('product_category.status', '1')
             ->get();
     	return $product;
 	}
+    public function get_NewArrivals()
+    {
+        $product = DB::table('product')
+            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->where('product_img.pro_main', '1')
+            ->orderBy('product.id', 'desc')
+            ->get();
+        return $product;
+    }
+    public function get_BestSellerOrRecent($var)
+    {
+        $product = DB::table('product')
+            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->where('product_img.pro_main', '1');
+        if($var=='best_seller'){
+            $product=$product->where('best_seller','1');
+        }
+        if($var=='recent'){
+            $product=$product->where('recent_product','1');
+        }
+        $product=$product->orderBy('product.id', 'ASC')->get();
+        return $product;
+    }
 	public function productWithSize($id='')
 	{
 		$productWithSize = Product::with('product_size')
@@ -30,14 +57,12 @@ class Product extends Model
         ->find($id);
         return $productWithSize;
 	}
+    public function productSize($id=''){
+        $productWithSize = Product::with('product_size')->find($id);
+        return $productWithSize;
+    }
 	public function get_latest_product($proNum)
 	{
-		/*$product = DB::table('product')
-            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
-            ->join('product_img', "product.id", "=", "product_img.product_id")
-            ->leftjoin('product_review', "product.id", "=", "product_review.product_id")
-            ->where('product_img.pro_main', '1')
-            ->orderBy('id', 'desc')->take($proNum)->get();*/
         $product = Product::select('product.id','product.product_name',
         	'product.product_min_price',
         	'product.product_max_price',
@@ -51,8 +76,12 @@ class Product extends Model
 		->leftjoin('product_review', "product.id", "=", "product_review.product_id")
 		->leftjoin('product_img', "product.id", "=", "product_img.product_id")
 		->where('product_img.pro_main', '1')
-		->groupBy('product.id','product.product_name','product.product_min_price','product.product_max_price','product.product_offer_per','product.product_slug','product.product_detail','product_img.product_img_url')
-		->orderBy('product.id', 'desc');
+		->groupBy('product.id','product.product_name','product.product_min_price','product.product_max_price','product.product_offer_per','product.product_slug','product.product_detail','product_img.product_img_url');
+        if($proNum==1){
+            $product =$product->where('product.id',1);
+        }else{
+		  $product =$product->orderBy('product.id', 'desc');
+        }
 		if($proNum){
 			$product =$product->take($proNum);
 		}
@@ -78,9 +107,14 @@ class Product extends Model
 		->where("product.product_slug", $slug)->first();
     	return $product;
 	}
-	/*public function get_ProductReview($id)
+	public function get_catProduct($id)
 	{
-		$productReview = DB::table('product_review')->where("product_id", $id)->get();
-    	return $productReview;
-	}*/
+        $product = DB::table('product')
+            ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->where('product_img.pro_main', '1')
+            ->where("product.category_id", $id)
+            ->get();
+    	return $product;
+	}
 }

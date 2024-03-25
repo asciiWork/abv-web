@@ -1,27 +1,105 @@
+<?php
+$cartCounter = \App\Models\Carts::cartCounter();
+$crrRoute = \Route::currentRouteName();
+$current_params = Route::current()->parameters();
+$crrSlug='';
+if($current_params){
+    if(isset($current_params['slug'])){
+        $crrSlug =  (is_array($current_params))?$current_params['slug']:'';
+    }
+}
+$Catdata = \App\Models\Categories::get_Menucategory();
+$productData = \App\Models\Product::get_Allproduct();
+?>
+<!-- Start offcanvas filter sidebar -->
+<div class="offcanvas__filter--sidebar widget__area">
+    <button type="button" class="offcanvas__filter--close" data-offcanvas>
+        <svg class="minicart__close--icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"></path></svg> <span class="offcanvas__filter--close__text">Close</span>
+    </button>
+    <div class="offcanvas__filter--sidebar__inner">
+        <div class="single__widget widget__bg">
+            <h2 class="widget__title h3">Categories</h2>
+            <ul class="widget__categories--menu">
+                @if(isset($Catdata))
+                    @foreach($Catdata as $cat)
+                        @if($cat->cat_img)
+                            <li class="widget__categories--menu__list {{ ($crrSlug == $cat->cat_slug)?'active':'' }}">
+                                <label class="widget__categories--menu__label d-flex align-items-center">
+                                    <img class="widget__categories--menu__img" src="{{ asset('public/web/assets/img/categories/') }}/{{$cat->cat_img}}" alt="categories-img">
+                                    <a href="{{ URL::to('product-category/') }}/{{$cat->id}}">
+                                        <span class="widget__categories--menu__text">{{ substr($cat->category_name,0,15) }}...({{$cat->pro_count}})</span>
+                                    </a>
+                                    <svg class="widget__categories--menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
+                                        <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"></path>
+                                    </svg>
+                                </label>
+                                <ul class="widget__categories--sub__menu" style="{{ ($crrSlug == $cat->cat_slug) ? 'display: block' : 'display: none' }}">
+                                    <?php $pro_id=''; $i=0;?>
+                                    @foreach($productData as $pro)
+                                        @if ($cat->id==$pro->category_id && $pro_id!=$pro->id)
+                                        <li class="widget__categories--sub__menu--list">
+                                            <a class="widget__categories--sub__menu--link d-flex align-items-center" href="{{ URL::to('product-category') }}/{{$cat->cat_slug}}">
+                                                <!-- <img class="widget__categories--sub__menu--img" src="{{ asset('public/web/assets/img/product/small-product/product2.webp') }}" alt="categories-img"> -->
+                                                <span class="widget__categories--sub__menu--text">{{ substr($pro->product_name,0,22) }}...</span>
+                                            </a>
+                                        </li>
+                                        @else
+                                        @endif
+                                        <?php $pro_id=$pro->id; ?>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
+                    @endforeach
+                @endif
+            </ul>
+        </div>
+        <!-- <div class="single__widget price__filter widget__bg">
+            <h2 class="widget__title h3">Filter By Price</h2>
+            <form class="price__filter--form" action="#"> 
+                <div class="price__filter--form__inner mb-15 d-flex align-items-center">
+                    <div class="price__filter--group">
+                        <label class="price__filter--label" for="Filter-Price-GTE">From</label>
+                        <div class="price__filter--input">
+                            <span class="price__filter--currency">$</span>
+                            <input class="price__filter--input__field border-0" name="filter.v.price.gte" id="Filter-Price-GTE" type="number" placeholder="0" min="0" max="250.00">
+                        </div>
+                    </div>
+                    <div class="price__divider">
+                        <span>-</span>
+                    </div>
+                    <div class="price__filter--group">
+                        <label class="price__filter--label" for="Filter-Price-LTE">To</label>
+                        <div class="price__filter--input">
+                            <span class="price__filter--currency">$</span>
+                            <input class="price__filter--input__field border-0" name="filter.v.price.lte" id="Filter-Price-LTE" type="number" min="0" placeholder="250.00" max="250.00"> 
+                        </div>  
+                    </div>
+                </div>
+                <button class="primary__btn price__filter--btn" type="submit">Filter</button>
+            </form>
+        </div> -->
+    </div>
+</div>
+<!-- End offcanvas filter sidebar -->
 <header class="header__section">
     <div class="header__topbar bg__primary">
         <div class="container-fluid">
             <div class="header__topbar--inner d-flex align-items-center justify-content-between">
                 <ul class="header__topbar--info d-none d-lg-flex">
                     <li class="header__info--list">
-                        <a class="header__info--link text-white" href="shop.html">STORES</a>
+                        <a class="header__info--link text-white" href="{{route('web.contact')}}">Mon - Sat 9.00 - 19.00</a>
                     </li>
                     <li class="header__info--list">
-                        <a class="header__info--link text-white" href="shop.html">DELIVERY</a>
-                    </li>
-                    <li class="header__info--list">
-                        <a class="header__info--link text-white" href="shop.html">GUARANTEE</a>
-                    </li>
-                    <li class="header__info--list">
-                        <a class="header__info--link text-white" href="mailto:info@example.com">
+                        <a class="header__info--link text-white" href="mailto:info@abvtool.in">
                             <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.368 9.104C7.26133 9.17867 7.13867 9.216 7 9.216C6.86133 9.216 6.744 9.17867 6.648 9.104L0.36 4.624C0.264 4.56 0.178667 4.54933 0.104 4.592C0.04 4.624 0.00800002 4.69867 0.00800002 4.816V11.984C0.00800002 12.112 0.0506667 12.2187 0.136 12.304C0.221333 12.3893 0.322667 12.432 0.44 12.432H13.56C13.6773 12.432 13.7787 12.3893 13.864 12.304C13.96 12.2187 14.008 12.112 14.008 11.984V4.816C14.008 4.69867 13.9707 4.624 13.896 4.592C13.8213 4.54933 13.736 4.56 13.64 4.624L7.368 9.104ZM6.76 8.32C6.84533 8.37333 6.92533 8.4 7 8.4C7.08533 8.4 7.16533 8.37333 7.24 8.32L12.52 4.56C12.6373 4.464 12.696 4.352 12.696 4.224V0.783999C12.696 0.666666 12.6533 0.570666 12.568 0.495999C12.4933 0.410666 12.3973 0.367999 12.28 0.367999H1.72C1.60267 0.367999 1.50667 0.410666 1.432 0.495999C1.35733 0.570666 1.32 0.666666 1.32 0.783999V4.224C1.32 4.37333 1.37333 4.48533 1.48 4.56L6.76 8.32ZM3.784 2.064H9.96C10.088 2.064 10.1947 2.112 10.28 2.208C10.3653 2.29333 10.408 2.4 10.408 2.528C10.408 2.64533 10.3653 2.74667 10.28 2.832C10.1947 2.91733 10.088 2.96 9.96 2.96H3.784C3.656 2.96 3.54933 2.91733 3.464 2.832C3.37867 2.74667 3.336 2.64533 3.336 2.528C3.336 2.4 3.37867 2.29333 3.464 2.208C3.54933 2.112 3.656 2.064 3.784 2.064ZM3.784 3.632H9.96C10.088 3.632 10.1947 3.68 10.28 3.776C10.3653 3.86133 10.408 3.96267 10.408 4.08C10.408 4.19733 10.3653 4.304 10.28 4.4C10.1947 4.48533 10.088 4.528 9.96 4.528H3.784C3.656 4.528 3.54933 4.48533 3.464 4.4C3.37867 4.31467 3.336 4.21333 3.336 4.096C3.336 3.968 3.37867 3.86133 3.464 3.776C3.54933 3.68 3.656 3.632 3.784 3.632Z" fill="#FF2D37" />
                             </svg>
-                            info@example.com</a>
+                            info@abvtool.in</a>
                     </li>
                 </ul>
                 <div class="header__top--right d-flex align-items-center">
-                    <ul class="header__top--link d-flex align-items-center">
+                    <!-- <ul class="header__top--link d-flex align-items-center">
                         <li class="header__link--menu"><a class="header__link--menu__text text-white" href="wishlist.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -heart">
                                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -33,7 +111,7 @@
                                     <path d="M64 160h85.19a80 80 0 0166.56 35.62l80.5 120.76A80 80 0 00362.81 352H416M416 160h-53.19a80 80 0 00-66.56 35.62L288 208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
                                 </svg>Compare</a>
                         </li>
-                    </ul>
+                    </ul> -->
                     <ul class="social__share style5 d-flex">
                         <li class="social__share--list">
                             <a class="social__share--icon text-white" target="_blank" href="https://www.facebook.com">
@@ -88,26 +166,29 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="ionicon offcanvas__header--menu__open--svg" viewBox="0 0 512 512">
                             <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352" />
                         </svg>
-                        <span class="visually-hidden">Offcanvas Menu Open</span>
+                        <span class="visually-hidden">Menu</span>
                     </a>
                 </div>
                 <div class="main__logo">
-                    <h1 class="main__logo--title"><a class="main__logo--link" href="index.html"><img class="main__logo--img" src="{{ asset('web/assets/img/logo/nav-log.webp') }}" alt="logo-img"></a></h1>
+                    <h1 class="main__logo--title"><a class="main__logo--link" href="{{ url('/') }}"><img class="main__logo--img" src="{{ asset('public/web/assets/img/abv.png') }}" alt="logo-img"></a></h1>
                 </div>
                 <div class="header__menu style3 d-none d-lg-block">
                     <nav class="header__menu--navigation">
                         <ul class="header__menu--wrapper d-flex">
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.index') }}">Home</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.index' || $crrRoute == 'web.terms-and-conditions' || $crrRoute == 'web.privacy-policy' || $crrRoute == 'web.refund-and-cancellation-policy' || $crrRoute == 'web.delivery-and-shipping-policy')?'active':'' }}" href="{{ route('web.index') }}">Home</a>
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.products') }}">Products</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.products' || $crrRoute =='web.categories' || $crrRoute == 'web.gallery' || $crrRoute == 'web.product-category' || $crrRoute == 'web.product-details')?'active':'' }}" href="{{ route('web.products') }}">Products</a>
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.about') }}">About</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.about')?'active':'' }}" href="{{ route('web.about') }}">About</a>
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('web.contact') }}">Contact</a>
+                                <a class="header__menu--link {{ ($crrRoute == 'web.contact')?'active':'' }}" href="{{ route('web.contact') }}">Contact</a>
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link {{ ($crrRoute == 'web.catalog')?'active':'' }}" href="{{ route('web.catalog') }}">Our Catalog</a>
                             </li>
                         </ul>
                     </nav>
@@ -124,7 +205,16 @@
                             </a>
                         </li>
                         <li class="header__account--items d-none d-lg-block">
-                            <a class="header__account--btn" href="{{ route('web.login') }}">
+                            @if(Auth::check())
+                                @if(\Auth::user()->is_admin==1)
+                                    <?php $rt=route('admin-dashboard'); ?>
+                                @else
+                                    <?php $rt=route('web.my-account'); ?>
+                                @endif
+                            @else
+                                <?php $rt=route('web.login'); ?>
+                            @endif
+                            <a class="header__account--btn" href="{{ $rt }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                     <circle cx="12" cy="7" r="4"></circle>
@@ -133,7 +223,8 @@
                             </a>
                         </li>
                         <li class="header__account--items header__minicart--items">
-                            <a class="header__account--btn minicart__open--btn" href="javascript:void(0)" data-offcanvas>
+                            <!-- <a class="header__account--btn minicart__open--btn" href="javascript:void(0)" data-offcanvas> -->
+                            <a class="header__account--btn minicart__open--btn" href="{{URL::to('cart/')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22.706" height="22.534" viewBox="0 0 14.706 13.534">
                                     <g transform="translate(0 0)">
                                         <g>
@@ -143,7 +234,9 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="items__count">2</span>
+                                @if($cartCounter)
+                                <span class="items__count">{{$cartCounter}}</span>
+                                @endif
                             </a>
                         </li>
                     </ul>
@@ -155,70 +248,29 @@
     <div class="offcanvas__header">
         <div class="offcanvas__inner">
             <div class="offcanvas__logo">
-                <a class="offcanvas__logo_link" href="index.html">
-                    <img src="{{ asset('web/assets/img/logo/nav-log.webp') }}" alt="Grocee Logo" width="158" height="36">
+                <a class="offcanvas__logo_link" href="javascript:void(0);">
+                    <img src="{{ asset('public/web/assets/img/abv.png')}}" alt="Abv Logo" width="158" height="36">
                 </a>
                 <button class="offcanvas__close--btn" data-offcanvas>close</button>
             </div>
             <nav class="offcanvas__menu">
                 <ul class="offcanvas__menu_ul">
-                    <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="index.html">Home</a>
-                        <ul class="offcanvas__sub_menu">
-                            <li class="offcanvas__sub_menu_li"><a href="index.html" class="offcanvas__sub_menu_item">Home One</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-2.html" class="offcanvas__sub_menu_item">Home Two</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-3.html" class="offcanvas__sub_menu_item">Home Three</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-4.html" class="offcanvas__sub_menu_item">Home Four</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="index-5.html" class="offcanvas__sub_menu_item">Home Five</a></li>
-                        </ul>
-                    </li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="about.html">About</a></li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="contact.html">Contact</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.index') }}">Home</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.products') }}">Products</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.about') }}">About</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.contact') }}">Contact</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('web.catalog') }}">Our Catalog</a></li>
                 </ul>
                 <div class="offcanvas__account--items">
-                    <a class="offcanvas__account--items__btn d-flex align-items-center" href="login.html">
+                    <a class="offcanvas__account--items__btn d-flex align-items-center" href="{{(Auth::check())?route('web.my-account'):route('web.login')}}">
                         <span class="offcanvas__account--items__icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20.51" height="19.443" viewBox="0 0 512 512">
                                 <path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" />
                                 <path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
                             </svg>
                         </span>
-                        <span class="offcanvas__account--items__label">Login / Register</span>
+                        <span class="offcanvas__account--items__label">{{ (Auth::check())?"My Account":"Login" }}</span>
                     </a>
-                </div>
-                <div class="offcanvas__account--wrapper d-flex">
-                    <div class="offcanvas__account--currency">
-                        <a class="offcanvas__account--currency__menu d-flex align-items-center text-black" href="javascript:void(0)">
-                            <img src="{{ asset('web/assets/img/icon/usd-icon.webp') }}" alt="currency">
-                            <span>USD</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9.797" height="6.05" viewBox="0 0 9.797 6.05">
-                                <path d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                            </svg>
-                        </a>
-                        <div class="offcanvas__account--currency__submenu">
-                            <ul>
-                                <li class="currency__items"><a class="currency__text" href="#">CAD</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">CNY</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">EUR</a></li>
-                                <li class="currency__items"><a class="currency__text" href="#">GBP</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="language__currency--list">
-                        <a class="offcanvas__language--switcher" href="javascript:void(0)">
-                            <span>English</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9.797" height="6.05" viewBox="0 0 9.797 6.05">
-                                <path d="M14.646,8.59,10.9,12.329,7.151,8.59,6,9.741l4.9,4.9,4.9-4.9Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7" />
-                            </svg>
-                        </a>
-                        <div class="offcanvas__dropdown--language">
-                            <ul>
-                                <li class="language__items"><a class="language__text" href="#">France</a></li>
-                                <li class="language__items"><a class="language__text" href="#">Russia</a></li>
-                                <li class="language__items"><a class="language__text" href="#">Spanish</a></li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </nav>
         </div>
@@ -229,7 +281,7 @@
     <div class="offcanvas__stikcy--toolbar">
         <ul class="d-flex justify-content-between">
             <li class="offcanvas__stikcy--toolbar__list">
-                <a class="offcanvas__stikcy--toolbar__btn" href="index.html">
+                <a class="offcanvas__stikcy--toolbar__btn" href="{{ route('web.index')}}">
                     <span class="offcanvas__stikcy--toolbar__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="21.51" height="21.443" viewBox="0 0 22 17">
                             <path fill="currentColor" d="M20.9141 7.93359c.1406.11719.2109.26953.2109.45703 0 .14063-.0469.25782-.1406.35157l-.3516.42187c-.1172.14063-.2578.21094-.4219.21094-.1406 0-.2578-.04688-.3515-.14062l-.9844-.77344V15c0 .3047-.1172.5625-.3516.7734-.2109.2344-.4687.3516-.7734.3516h-4.5c-.3047 0-.5742-.1172-.8086-.3516-.2109-.2109-.3164-.4687-.3164-.7734v-3.6562h-2.25V15c0 .3047-.11719.5625-.35156.7734-.21094.2344-.46875.3516-.77344.3516h-4.5c-.30469 0-.57422-.1172-.80859-.3516-.21094-.2109-.31641-.4687-.31641-.7734V8.46094l-.94922.77344c-.11719.09374-.24609.14062-.38672.14062-.16406 0-.30468-.07031-.42187-.21094l-.35157-.42187C.921875 8.625.875 8.50781.875 8.39062c0-.1875.070312-.33984.21094-.45703L9.73438.832031C10.1094.527344 10.5312.375 11 .375s.8906.152344 1.2656.457031l8.6485 7.101559zm-3.7266 6.50391V7.05469L11 1.99219l-6.1875 5.0625v7.38281h3.375v-3.6563c0-.3046.10547-.5624.31641-.7734.23437-.23436.5039-.35155.80859-.35155h3.375c.3047 0 .5625.11719.7734.35155.2344.211.3516.4688.3516.7734v3.6563h3.375z"></path>
@@ -239,7 +291,7 @@
                 </a>
             </li>
             <li class="offcanvas__stikcy--toolbar__list">
-                <a class="offcanvas__stikcy--toolbar__btn" href="shop.html">
+                <a class="offcanvas__stikcy--toolbar__btn" href="{{ route('web.products') }}">
                     <span class="offcanvas__stikcy--toolbar__icon">
                         <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="18.51" height="17.443" viewBox="0 0 448 512">
                             <path d="M416 32H32A32 32 0 0 0 0 64v384a32 32 0 0 0 32 32h384a32 32 0 0 0 32-32V64a32 32 0 0 0-32-32zm-16 48v152H248V80zm-200 0v152H48V80zM48 432V280h152v152zm200 0V280h152v152z"></path>
@@ -260,7 +312,7 @@
                 </a>
             </li>
             <li class="offcanvas__stikcy--toolbar__list">
-                <a class="offcanvas__stikcy--toolbar__btn minicart__open--btn" href="javascript:void(0)" data-offcanvas>
+                <a class="offcanvas__stikcy--toolbar__btn minicart__open--btn" href="{{ route('web.cart') }}">
                     <span class="offcanvas__stikcy--toolbar__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22.706" height="22.534" viewBox="0 0 14.706 13.534">
                             <g transform="translate(0 0)">
@@ -273,10 +325,12 @@
                         </svg>
                     </span>
                     <span class="offcanvas__stikcy--toolbar__label">Cart</span>
-                    <span class="items__count">3</span>
+                    @if($cartCounter)
+                        <span class="items__count">{{$cartCounter}}</span>
+                    @endif
                 </a>
             </li>
-            <li class="offcanvas__stikcy--toolbar__list">
+            <!-- <li class="offcanvas__stikcy--toolbar__list">
                 <a class="offcanvas__stikcy--toolbar__btn" href="wishlist.html">
                     <span class="offcanvas__stikcy--toolbar__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -heart">
@@ -286,7 +340,7 @@
                     <span class="offcanvas__stikcy--toolbar__label">Wishlist</span>
                     <span class="items__count">3</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </div>
     <!-- End Offcanvas stikcy toolbar -->
@@ -304,10 +358,10 @@
             </div>
             <p class="minicart__header--desc">The organic foods products are limited</p>
         </div>
-        <div class="minicart__product">
+        <!-- <div class="minicart__product">
             <div class="minicart__product--items d-flex">
                 <div class="minicart__thumb">
-                    <a href="product-details.html"><img src="{{ asset('web/assets/img/product/small-product/product1.webp') }}" alt="prduct-img"></a>
+                    <a href="product-details.html"><img src="assets/img/product/small-product/product1.webp" alt="prduct-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h4 class="minicart__subtitle"><a href="product-details.html">Car & Motorbike Care.</a></h4>
@@ -330,7 +384,7 @@
             </div>
             <div class="minicart__product--items d-flex">
                 <div class="minicart__thumb">
-                    <a href="product-details.html"><img src="{{ asset('web/assets/img/product/small-product/product2.webp') }}" alt="prduct-img"></a>
+                    <a href="product-details.html"><img src="assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h4 class="minicart__subtitle"><a href="product-details.html">Engine And Drivetrain.</a></h4>
@@ -351,8 +405,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="minicart__amount">
+        </div> -->
+        <!-- <div class="minicart__amount">
             <div class="minicart__amount_list d-flex justify-content-between">
                 <span>Sub Total:</span>
                 <span><b>$240.00</b></span>
@@ -369,7 +423,7 @@
         <div class="minicart__button d-flex justify-content-center">
             <a class="primary__btn minicart__button--link" href="cart.html">View cart</a>
             <a class="primary__btn minicart__button--link" href="checkout.html">Checkout</a>
-        </div>
+        </div> -->
     </div>
     <!-- End offCanvas minicart -->
 
@@ -396,3 +450,10 @@
     <!-- End serch box area -->
 
 </header>
+<!-- <div id="AjaxLoaderDiv" style="display: none;z-index:99999 !important;text-align:center;">
+    <div style="width:100%; height:100%; left:0px; top:0px; position:fixed; opacity:0; filter:alpha(opacity=40); background:#000000;z-index:999999999;">
+    </div>
+    <div style="float:left;width:100%; left:0px; top:50%; text-align:center; position:fixed; padding:0px; z-index:999999999;">
+        <img src="{{ asset('public/web/assets/img/ajax-loader.gif') }}" />
+    </div>
+</div> -->

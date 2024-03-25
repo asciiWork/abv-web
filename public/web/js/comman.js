@@ -17,7 +17,12 @@ $(document).ready(function() {
                             type: 'success',
                             delay: 4000
                         });
-                        window.location = '/';
+                        if (typeof result.redirect !== 'undefined') {
+                            if(result.redirect!=''){
+                                window.location = result.redirect;
+                            }
+                        }
+                        window.location = $('#submit-form').attr('redirect');
                     } else {
                         $.bootstrapGrowl(result.msg, {
                             type: 'danger',
@@ -103,3 +108,25 @@ $(document).ready(function() {
         });
     });
 });
+function openQuickModal(pid)
+{
+    var url = http_host_js + '/open-quick-view';
+    $.ajax({
+        headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
+        type: "GET",
+        url: url,
+        data: { id : pid},        
+        success: function (result)
+        {
+            //$('#AjaxLoaderDiv').fadeOut('slow');
+            jQuery('#examplemodal').html(result);
+            $('#examplemodal').modal('show');
+        },
+        error: function (error)
+        {
+            $('#AjaxLoaderDiv').fadeOut('slow');
+            $.bootstrapGrowl("Internal Server Error", {type: 'danger', delay: 4000});
+        }
+    });
+}

@@ -11,7 +11,7 @@
         <div class="main__contact--area position__relative">
             <div class="contact__form">
                 <h3 class="contact__form--title mb-30">Contact Me</h3>
-                {!! Form::open(['route' => 'web.check-contact', 'id' => 'submit-form']) !!}
+                {!! Form::open(['route' => 'web.check-contact', 'id' => 'submit-form','redirect'=>url('/contact')]) !!}
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="contact__form--list mb-20">
@@ -34,7 +34,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="contact__form--list mb-20">
                                 <label class="contact__form--label" for="input4">Email <span class="contact__form--label__star">*</span></label>
-                                <input class="contact__form--input" name="email" id="input4" placeholder="Email" type="text">
+                                <input class="contact__form--input" name="email" id="input4" placeholder="Email" type="email">
                             </div>
                         </div>
                         <div class="col-12">
@@ -136,28 +136,4 @@
     <iframe class="contact__map--iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d58750.82058640327!2d72.6195728!3d23.0264786!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e870f39d38289%3A0x6debef70be6a8a9e!2sKrish%20Elite!5e0!3m2!1sen!2sin!4v1689408117127!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
 <!-- End contact map area -->
-
-<!-- Start brand section -->
-<div class="brand__section section--padding pt-0">
-    <div class="container">
-        <div class="brand__section--inner d-flex justify-content-between align-items-center">
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/sumip.png') }}" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/anovi.png') }}" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/woodsden.png') }}" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/kgs.png') }}" alt="brand-logo">
-            </div>
-            <div class="brang__logo--items">
-                <img class="brang__logo--img" src="{{ asset('web/assets/img/logo/tilara.png') }}" alt="brand-logo">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End brand section -->
 @endsection
