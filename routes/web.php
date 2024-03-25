@@ -11,7 +11,9 @@ use  App\Http\Controllers\admin\UsersController;
 use  App\Http\Controllers\admin\OrdersController;
 use  App\Http\Controllers\admin\CategoriesController;
 use  App\Http\Controllers\admin\AdminProductsController;
-use  App\Http\Controllers\admin\QuatationsController;
+use  App\Http\Controllers\admin\QuotationsController;
+use  App\Http\Controllers\admin\AdminLoginController;
+use  App\Http\Controllers\admin\ClientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,10 +22,24 @@ use  App\Http\Controllers\admin\QuatationsController;
 |
 */
 /* ADMIN ROUTE */
-Route::group(['prefix'=>'admin','middleware' => ['auth','admin']], function(){
-	Route::get('/', [AdminController::class,'index'])->name('admin-dashboard');
+Route::prefix('/admin')->controller(AdminLoginController::class)->group(function () {
+        Route::get('/', 'getLogin')->name("admin_login");
+        Route::get('/login', 'getLogin')->name("admin_login");
+        Route::post('/login', 'loginPost')->name("admin_login_post");
+        Route::get('/logout', 'getLogout')->name("admin_logout");
+    });
+Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
+	Route::get('/dashboard', [AdminController::class,'index'])->name('admin-dashboard');
 	Route::get('admin-users/data', [UsersController::class,'data'])->name('admin-users.data');
 	Route::resource('admin-users', UsersController::class);
+
+	Route::get('admin-clients/data', [ClientsController::class,'data'])->name('admin-clients.data');
+	Route::resource('admin-clients', ClientsController::class);
+
+	Route::get('admin-quotations/data', [QuotationsController::class,'data'])->name('admin-quotations.data');
+	Route::resource('admin-quotations', QuotationsController::class);
+
+
 	Route::get('admin-orders/data', [OrdersController::class,'data'])->name('admin-orders.data');
 	Route::resource('admin-orders', OrdersController::class);
 	Route::get('admin-orders/invoice/{id}', [OrdersController::class,'orderInvoice'])->name('admin-orders.invoice');

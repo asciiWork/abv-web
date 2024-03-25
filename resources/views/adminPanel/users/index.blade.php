@@ -1,95 +1,74 @@
-@extends('adminPanel.layouts.app')
-@section('adminContent')
-<div>    
-    <div class="panel mt-6">
-        <h5 class="text-lg font-semibold dark:text-white-light">{{$page_title}}</h5>
-        <table id="myTable1" class="table-hover whitespace-nowrap">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div>
-@endsection
-@section('adminscript')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="{{ asset('public/admin-theme/assets/js/simple-datatables.js')}}"></script>
-<script>
-    var MODULE_URL="{{ route('admin-users.data') }}";
-    $(document).ready(function(){
-        var oTableCustom = $('#myTable1').DataTable({
-            processing: false,
-            serverSide: true,
-            searching: false,
-            pageLength: 10,
-            displayStart: 0,
-            ajax: {
-                "url": MODULE_URL,
-                "data": function ( data ) 
-                {
-                    
-                }
-            },
-            lengthMenu:
-              [
-                [25,50,100,200],
-                [25,50,100,200]
-              ],
-            columns: [
-                { data: 'id', name: 'id',orderable:false },
-                { data: 'name', name: 'name' },
-                { data: 'email', name: 'email', orderable:false},
-            ]
-        });
-    });
-    /*document.addEventListener('alpine:init', () => {
-        Alpine.data('basic', () => ({
-            datatable: null,
-            init() {
-                this.datatable = new simpleDatatables.DataTable('#myTable1', {
-                    data: {
-                        headings: ['ID', 'First Name','Last Name', 'Email', 'Phone'],
-                        data: [
-                            console.log(addNewColumn()),
-                        ],
-                    },
-                    sortable: false,
-                    searchable: false,
-                    perPage: 10,
-                    perPageSelect: [10, 20, 30, 50, 100],
-                    firstLast: true,
-                    firstText:
-                        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
-                    lastText:
-                        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
-                    prevText:
-                        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
-                    nextText:
-                        '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>',
-                    labels: {
-                        perPage: '{select}',
-                    },
-                    layout: {
-                        top: '{search}',
-                        bottom: '{info}{select}{pager}',
-                    },
-                });
-            },
-        }));
-        let addNewColumn = function() {
-        let columnData = MODULE_URL
+@extends('adminPanel.layout.appNew')
+@section('content')
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <a href="{{$add_url}}" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add New
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="server-side-datatables" class="table table-striped dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Phone</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody> </tbody>
+                    </table>
 
-        fetch(columnData)
-        .then(response => response.json())
-        .then(data => datatable.columns.add(data))
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        </div><!-- end col-->
+    </div> <!-- end row-->
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    var MODULE_URL = "{!! route($moduleRouteText.'.data') !!}";
+    var dataColumns = [{
+            data: 'id',
+            name: 'id'
+        },
+        {
+            data: 'image',
+            name: 'image'
+        },
+        {
+            data: 'name',
+            name: 'name'
+        },
+        {
+            data: 'email',
+            name: 'email'
+        },
+        {
+            data: 'phone',
+            name: 'phone'
+        },
+        {
+            data: 'status',
+            name: 'status'
+        },
+        {
+            data: 'action',
+            orderable: false,
+            searchable: false
         }
-    });*/
+    ];
 </script>
+<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?123') }}"></script>
 @endsection

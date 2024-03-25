@@ -16,9 +16,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (\Auth::check() && \Auth::user()->email != 'admin@gmail.com')
+        if (!\Auth::guard('admins')->check())
         {
-           // return redirect('/');
+           return redirect('/login');
         }
         return $next($request);
     }

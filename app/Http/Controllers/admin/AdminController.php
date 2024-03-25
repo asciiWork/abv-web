@@ -20,7 +20,7 @@ class AdminController extends Controller
         $data['page_title'] = 'Dashboard';
         $userData=Auth::user();
         $data['userData'] = $userData;
-        $data['ordData'] = Order::getOrderData(\Auth::user()->id);
+        $data['ordData'] = [];//Order::getOrderData(\Auth::user()->id);
         return view('adminPanel.dashboard',$data);
     }
     public function contact()

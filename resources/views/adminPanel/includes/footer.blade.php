@@ -1,3 +1,13 @@
-<div class="mt-auto p-6 pt-0 text-center dark:text-white-dark ltr:sm:text-left rtl:sm:text-right">
-    © <span id="footer-year">2022</span>. Vristo All rights reserved.
-</div>
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> © <b>{{env("APP_NAME")}}</b> All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- end Footer -->
