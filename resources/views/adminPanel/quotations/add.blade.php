@@ -107,22 +107,22 @@
                                         </td>
                                         <td>
                                             <div class="col-sm-8">
-                                                <input type="number" min="0" value="" name="quantity[]" class="form-control">
+                                                <input type="number" min="0" value="1" data-row="1" name="quantity[]" class="form-control item-qnt">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-10">
-                                                <input type="text" value="" name="taxable_value[]" class="form-control">
+                                                <input type="text" value="" name="taxable_value[]" id="taxable-value-1" class="form-control taxable-value">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-10">
-                                                <input type="text" value="" name="tax_amount[]" class="form-control">
+                                                <input type="text" value="" name="tax_amount[]" id="tax-amount-1" class="form-control">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-10">
-                                                <input type="text" value="" name="total_amount[]" class="form-control">
+                                                <input type="text" value="" name="total_amount[]" id="total-amount-1" class="total-amount form-control">
                                             </div>
                                         </td>
                                         <td class="float-end">
@@ -131,7 +131,7 @@
                                 </tbody>
                             </table>
                         </div> <!-- end table-responsive-->
-                    </div> <!-- end col -->
+                    </div>
                 </div>
                 <!-- end row -->
                 <hr />
@@ -139,18 +139,16 @@
                     <div class="col-sm-6">
                         <div class="clearfix pt-3">
                         </div>
-                    </div> <!-- end col -->
+                    </div>
                     <div class="col-sm-6">
                         <div class="float-end mt-3 mt-sm-0">
-                            <p><b>Sub-total:</b> <span class="float-end">$4120.00</span></p>
-                            <p><b>VAT (12.5):</b> <span class="float-end">$515.00</span></p>
-                            <h3>$4635.00 USD</h3>
+                            <p><b>Taxable Amount:</b> <span class="float-end final-taxable-total">000.00</span></p>
+                            <p><b>IGST (18.0%):</b> <span class="float-end final-gst-total">000.00</span></p>
+                            <p><b>Total:</b> <span class="float-end final-total">000.00</span></p>
                         </div>
                         <div class="clearfix"></div>
-                    </div> <!-- end col -->
+                    </div>
                 </div>
-                <!-- end row-->
-
                 <div class="mt-4">
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary" id="submit_btn">{{ $buttonText}}</button>
@@ -171,30 +169,77 @@
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
             html += '<td><div class = "col-sm-12" ><select name="product_id[]" data-toggle="select2" class="select2 form-control product-items" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select> </div> </td>';
             html += '<td> <span id="product-amount-text-' + num + '">000.00</span> <input type = "hidden" value = "0" id="product-amount-' + num + '" ></td>';
-            html += '<td><div class="col-sm-8"><input type = "number" min = "0" value = "" name = "quantity[]" class = "form-control" ></div ></td>';
-            html += '<td ><div class = "col-sm-10" ><input type = "text" value = "" name = "taxable_value[]" class = "form-control" ></div ></td>';
-            html += '<td ><div class = "col-sm-10" ><input type = "text" value = "" name = "tax_amount[]" class = "form-control" ></div > < /td><td ><div class = "col-sm-10" ><input type = "text" value = "" name = "total_amount[]"class="form-control"></div > < /td> <td class = "float-end" ><a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i ></a></td ></tr>';
+            html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
+            html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
+            html += '<td ><div class="col-sm-10"><input type="text" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control" ></div ></td>';
+            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i ></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
                 $('#product-option-' + num).append($(this).clone());
             });
-            $('#product-option-' + num).trigger('change');
+            $(".select2").select2({
+                placeholder: "Search Client",
+                allowClear: true,
+                width: null
+            });
         });
         $(document).on("click", ".delete-item-tr", function() {
             $(this).closest('tr').remove();
+            allTotalPrices();
             return false;
         });
         $(document).on("change", ".product-items", function() {
-            if ($(this).val()>0){
+            if ($(this).val() > 0) {
                 var rowNo = $(this).attr('data-row');
                 var selectedOption = $(this).find('option:selected');
                 var price = selectedOption.data('price');
                 $('#product-amount-text-' + rowNo).html(price);
-                $('#product-amount' + rowNo).html(price);
+                $('#product-amount' + rowNo).val(price);
+                $('#taxable-value-' + rowNo).val(price);
+                var result = parseFloat(price) * 0.18;
+                $('#tax-amount-' + rowNo).val(result);
+                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
             }
+            allTotalPrices();
+        });
+        $(document).on("change", ".item-qnt", function() {
+            if ($(this).val() > 0) {
+                var rowNo = $(this).attr('data-row');
+                var totl = parseFloat($('#product-amount' + rowNo).val()) * parseFloat($(this).val());
+                $('#taxable-value-' + rowNo).val(totl);
+                var result = parseFloat(totl) * 0.18;
+                $('#tax-amount-' + rowNo).val(result);
+                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+            }
+            allTotalPrices();
         });
     });
+
+    function allTotalPrices() {
+        var texts = document.getElementsByClassName("total-amount");
+        var amounts = 0;
+        for (var i = 0; i < texts.length; i++) {
+            var aa = parseFloat(texts[i].value);
+            if (aa == "NaN" || aa == null || aa == "") {
+                aa = parseFloat("0");
+            }
+            amounts = parseFloat(amounts) + parseFloat(aa);
+        }
+        $('.final-total').html(parseFloat(amounts));
+
+        var tamounts = 0;
+        var texts = document.getElementsByClassName("taxable-value");
+        for (var i = 0; i < texts.length; i++) {
+            var aa = parseFloat(texts[i].value);
+            if (aa == "NaN" || aa == null || aa == "") {
+                aa = parseFloat("0");
+            }
+            tamounts = parseFloat(tamounts) + parseFloat(aa);
+        }
+        $('.final-taxable-total').html(parseFloat(tamounts));
+
+    }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
 <script src=" {{ asset('public/admin-theme/assetsNew/vendor/select2/js/select2.min.js') }}"></script>

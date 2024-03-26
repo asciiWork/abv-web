@@ -31,12 +31,6 @@
                     <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> <span class="text__secondary">Your Trusted CNC Tools Supplier</span></h2>
                 </div>
             </div>
-            <div class="swiper-slide">
-                <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/5.jpg')}}" alt="slider-img">
-                <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> <span class="text__secondary">Your Trusted CNC Tools Supplier</span></h2>
-                </div>
-            </div>
         </div>
     </div>
 </section>
