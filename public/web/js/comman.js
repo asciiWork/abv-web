@@ -45,6 +45,7 @@ $(document).ready(function() {
     });
     $(document).on('click','.remove-cart-btn',function () {
         var pid = $(this).attr('data-id');
+        var prosize = $(this).attr('data-size');
         var isRefresh = $(this).attr('isRefresh');
         $('#AjaxLoaderDiv').fadeIn('slow');
         $.ajax({
@@ -52,7 +53,7 @@ $(document).ready(function() {
                         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
             type: "GET",
             url: $(this).attr("action"),
-            data: { id : pid},
+            data: { id : pid, prosize : prosize},
             success: function (result)
             {
                 $('#AjaxLoaderDiv').fadeOut('slow');
@@ -79,6 +80,7 @@ $(document).ready(function() {
     });
     $(document).on('click','.increase-decrease-cart-btn',function () {
         var pid = $(this).attr('data-id');
+        var prosize = $(this).attr('data-size');
         var ctype = $(this).attr('type');
         $('#AjaxLoaderDiv').fadeIn('slow');
         $.ajax({
@@ -86,7 +88,7 @@ $(document).ready(function() {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
             type: "POST",
             url: $(this).attr("action"),
-            data: { id : pid, ctype : ctype},
+            data: { id : pid, ctype : ctype, prosize : prosize},
             success: function (result)
             {
                 $('#AjaxLoaderDiv').fadeOut('slow');

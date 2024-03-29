@@ -84,21 +84,30 @@ class ProductsController extends Controller
                         $proSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
                         $cart = session()->get('cart');
                         if(!$cart) {
-                            $cart = [
-                                $id => [
-                                    'product_img' => $proImg->product_img_url,
-                                    'product_name' => $prd->product_name,
-                                    'prosize' => $prosize,
-                                    'price' => $proSize->product_current_price,
-                                    'slug' => $prd->product_slug,
-                                    'qnt' => $qnt,
-                                    'id' => $id,
-                                ]
+                            $cart[$id][$prosize]=[ 
+                                'product_img' => $proImg->product_img_url,
+                                'product_name' => $prd->product_name,
+                                'prosize' => $prosize,
+                                'price' => $proSize->product_current_price,
+                                'slug' => $prd->product_slug,
+                                'qnt' => $qnt,
+                                'id' => $id,
+                            ];                            
+                            session()->put('cart', $cart);
+                        }else if(isset($cart[$id]) && empty($cart[$id][$prosize])){
+                            $cart[$id][$prosize]=[ 
+                                'product_img' => $proImg->product_img_url,
+                                'product_name' => $prd->product_name,
+                                'prosize' => $prosize,
+                                'price' => $proSize->product_current_price,
+                                'slug' => $prd->product_slug,
+                                'qnt' => $qnt,
+                                'id' => $id,
                             ];
                             session()->put('cart', $cart);
                         }
                         else if(isset($cart[$id])){
-                            $cart[$id]['qnt']++;
+                            $cart[$id][$prosize]['qnt']++;
                             session()->put('cart', $cart);
                         }
                         else{
@@ -106,7 +115,7 @@ class ProductsController extends Controller
                             $proSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
                             $sesCart = session()->get('cart');
                             $sesCart = $sesCart + [
-                                $id => [
+                                $cart[$id][$prosize]= [
                                     'product_img' => $proImg->product_img_url,
                                     'product_name' => $prd->product_name,
                                     'prosize' => $prosize,
@@ -135,6 +144,7 @@ class ProductsController extends Controller
         $msg = 'Please try again later!';
         $data = array();
         $id = $request->get('id');
+        $prosize = $request->get('prosize');
         // $prd = Product::find($id);
         if(\Auth::check())
         {
@@ -152,7 +162,7 @@ class ProductsController extends Controller
         }else{
             $cart = session()->get('cart');
             if(isset($cart[$id])){
-                unset($cart[$id]);
+                unset($cart[$id][$prosize]);
                 session()->put('cart', $cart);
             }
             $status = 1;
@@ -165,7 +175,8 @@ class ProductsController extends Controller
         $status = 0;
         $msg = 'Please try again later!';
         $data = array();
-        $id = $request->get('id');
+        $id = $request->get('id');        
+        $prosize = $request->get('prosize');        
         $type = $request->get('ctype');        
         $prd = Product::find($id);
         if($prd){
@@ -224,14 +235,14 @@ class ProductsController extends Controller
                 $msg = 'Product has been updated!';
             }else{
                 $cart = session()->get('cart');
-                if(isset($cart[$id])){
+                if(isset($cart[$id][$prosize])){
                     if($type == 'plus'){
-                        $cart[$id]['qnt']++;
+                        $cart[$id][$prosize]['qnt']++;
                     }else{
-                        if($cart[$id]['qnt'] > 1){
-                            $cart[$id]['qnt']--;
+                        if($cart[$id][$prosize]['qnt'] > 1){
+                            $cart[$id][$prosize]['qnt']--;
                         }else{
-                            unset($cart[$id]);
+                            unset($cart[$id][$prosize]);
                         }
                     }
                     session()->put('cart', $cart);
