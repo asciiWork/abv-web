@@ -1,4 +1,4 @@
-<section class="hero__slider--section">
+<!-- <section class="hero__slider--section">
     <div class="slider__thumbnail--style5 hero__slider--activation swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
@@ -33,9 +33,9 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <!-- Start slider section -->
-<section class="hero__slider--section" style="display: none;">
+<section class="hero__slider--section">
     <div class="hero__slider--inner hero__slider--activation swiper">
         <div class="hero__slider--wrapper swiper-wrapper">
             <div class="swiper-slide ">

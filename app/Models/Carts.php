@@ -127,18 +127,21 @@ class Carts extends Model
                 if(is_array($prds) && !empty($prds))
                 {
                     $i = 0;
-                    foreach($prds as $p)
+                    foreach($prds as $prkey =>$pr)
                     {
-                       $data[$i]['id'] = $p['id']; 
-                       $data[$i]['product_id'] = $p['id']; 
-                       $data[$i]['product_img'] = $p['product_img']; 
-                       $data[$i]['product_name'] = $p['product_name']; 
-                       $data[$i]['prosize'] = $p['prosize']; 
-                       $data[$i]['price'] = $p['price']; 
-                       $data[$i]['qnt'] = $p['qnt'];
-                       $data[$i]['slug'] = $p['slug'];
-                       $data[$i]['total'] = $p['qnt'] * $p['price']; 
-                       $i++;
+                      foreach($pr as $key =>$p)
+                      {
+                        $data[$i]['id'] = $p['id']; 
+                        $data[$i]['product_id'] = $p['id']; 
+                        $data[$i]['product_img'] = $p['product_img']; 
+                        $data[$i]['product_name'] = $p['product_name']; 
+                        $data[$i]['prosize'] = $p['prosize']; 
+                        $data[$i]['price'] = $p['price']; 
+                        $data[$i]['qnt'] = $p['qnt'];
+                        $data[$i]['slug'] = $p['slug'];
+                        $data[$i]['total'] = $p['qnt'] * $p['price']; 
+                        $i++;
+                      }
                     }
                 }
             }

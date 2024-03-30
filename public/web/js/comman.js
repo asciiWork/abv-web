@@ -45,6 +45,7 @@ $(document).ready(function() {
     });
     $(document).on('click','.remove-cart-btn',function () {
         var pid = $(this).attr('data-id');
+        var prosize = $(this).attr('data-size');
         var isRefresh = $(this).attr('isRefresh');
         var pSize = $(this).attr('data-size');
         $('#AjaxLoaderDiv').fadeIn('slow');
@@ -80,6 +81,7 @@ $(document).ready(function() {
     });
     $(document).on('click','.increase-decrease-cart-btn',function () {
         var pid = $(this).attr('data-id');
+        var prosize = $(this).attr('data-size');
         var ctype = $(this).attr('type');
         var psize = $(this).attr('data-size');
         $('#AjaxLoaderDiv').fadeIn('slow');
