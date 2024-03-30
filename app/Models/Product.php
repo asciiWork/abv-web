@@ -19,8 +19,8 @@ class Product extends Model
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
             ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
-            ->where('product_img.pro_main', '1')
             ->where('product_category.status', '1')
+            ->where('product_img.pro_main', '1')
             ->get();
     	return $product;
 	}
@@ -93,6 +93,8 @@ class Product extends Model
 		$product = DB::table('product')
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
+            ->where('product_category.status', '1')
             ->where('product_img.pro_main', '1')
             ->orderBy('id', 'desc')
             ->inRandomOrder()->limit(5)

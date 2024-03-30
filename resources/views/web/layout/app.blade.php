@@ -88,7 +88,7 @@
 
   <script type="text/javascript" src="{{ asset('public/web/js/jquery.bootstrap-growl.min.js')}}"></script>
   <script type="text/javascript" src="{{ asset('public/web/js/parsley.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('public/web/js/comman.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('public/web/js/comman.js?124552')}}"></script>
   @yield('scripts')
 
 </body>

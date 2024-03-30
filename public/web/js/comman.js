@@ -46,13 +46,14 @@ $(document).ready(function() {
     $(document).on('click','.remove-cart-btn',function () {
         var pid = $(this).attr('data-id');
         var isRefresh = $(this).attr('isRefresh');
+        var pSize = $(this).attr('data-size');
         $('#AjaxLoaderDiv').fadeIn('slow');
         $.ajax({
             headers: {
                         'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
             type: "GET",
             url: $(this).attr("action"),
-            data: { id : pid},
+            data: { id : pid, size:pSize},
             success: function (result)
             {
                 $('#AjaxLoaderDiv').fadeOut('slow');
@@ -80,13 +81,14 @@ $(document).ready(function() {
     $(document).on('click','.increase-decrease-cart-btn',function () {
         var pid = $(this).attr('data-id');
         var ctype = $(this).attr('type');
+        var psize = $(this).attr('data-size');
         $('#AjaxLoaderDiv').fadeIn('slow');
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')},
             type: "POST",
             url: $(this).attr("action"),
-            data: { id : pid, ctype : ctype},
+            data: { id : pid, ctype : ctype, size : psize},
             success: function (result)
             {
                 $('#AjaxLoaderDiv').fadeOut('slow');

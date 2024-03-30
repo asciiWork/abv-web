@@ -81,15 +81,16 @@ class ProductsController extends Controller
                         }
                     }else{
                         $proImg = ProductImages::where('product_id',$id)->where('pro_main','1')->first();
-                        $proSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
+                        $prdSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
                         $cart = session()->get('cart');
+                        $cartSlug = $id. $prosize;
                         if(!$cart) {
                             $cart = [
-                                $id => [
+                                $cartSlug => [
                                     'product_img' => $proImg->product_img_url,
                                     'product_name' => $prd->product_name,
                                     'prosize' => $prosize,
-                                    'price' => $proSize->product_current_price,
+                                    'price' => $prdSize->product_current_price,
                                     'slug' => $prd->product_slug,
                                     'qnt' => $qnt,
                                     'id' => $id,
@@ -97,20 +98,20 @@ class ProductsController extends Controller
                             ];
                             session()->put('cart', $cart);
                         }
-                        else if(isset($cart[$id])){
-                            $cart[$id]['qnt']++;
+                        else if(isset($cart[$cartSlug])){
+                            $cart[$cartSlug]['qnt']++;
                             session()->put('cart', $cart);
                         }
                         else{
                             $proImg = ProductImages::where('product_id',$id)->where('pro_main','1')->first();
-                            $proSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
+                            $prdSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
                             $sesCart = session()->get('cart');
                             $sesCart = $sesCart + [
-                                $id => [
+                                $cartSlug => [
                                     'product_img' => $proImg->product_img_url,
                                     'product_name' => $prd->product_name,
                                     'prosize' => $prosize,
-                                    'price' => $proSize->product_current_price,
+                                    'price' => $prdSize->product_current_price,
                                     'slug' => $prd->product_slug,
                                     'qnt' => $qnt,
                                     'id' => $id,
@@ -135,6 +136,7 @@ class ProductsController extends Controller
         $msg = 'Please try again later!';
         $data = array();
         $id = $request->get('id');
+        $psize = $request->get('size');
         // $prd = Product::find($id);
         if(\Auth::check())
         {
@@ -151,8 +153,9 @@ class ProductsController extends Controller
             $msg = 'Product has been removed!';
         }else{
             $cart = session()->get('cart');
-            if(isset($cart[$id])){
-                unset($cart[$id]);
+            $uniq = $id.$psize;
+            if(isset($cart[$uniq])){
+                unset($cart[$uniq]);
                 session()->put('cart', $cart);
             }
             $status = 1;
@@ -166,7 +169,8 @@ class ProductsController extends Controller
         $msg = 'Please try again later!';
         $data = array();
         $id = $request->get('id');
-        $type = $request->get('ctype');        
+        $type = $request->get('ctype');
+        $psize = $request->get('size');
         $prd = Product::find($id);
         if($prd){
             if(\Auth::check())
@@ -224,14 +228,15 @@ class ProductsController extends Controller
                 $msg = 'Product has been updated!';
             }else{
                 $cart = session()->get('cart');
-                if(isset($cart[$id])){
+                $unq = $id.$psize;
+                if(isset($cart[$unq])){
                     if($type == 'plus'){
-                        $cart[$id]['qnt']++;
+                        $cart[$unq]['qnt']++;
                     }else{
-                        if($cart[$id]['qnt'] > 1){
-                            $cart[$id]['qnt']--;
+                        if($cart[$unq]['qnt'] > 1){
+                            $cart[$unq]['qnt']--;
                         }else{
-                            unset($cart[$id]);
+                            unset($cart[$unq]);
                         }
                     }
                     session()->put('cart', $cart);
