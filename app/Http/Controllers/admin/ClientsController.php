@@ -180,4 +180,12 @@ class ClientsController extends Controller
             })
             ->make(true);
     }
+    public function printAddress()
+    {
+        $data = array();
+        $data['page_title'] = "Client's Address";
+        $data['breadcrumb'] = array('Clients' => '');
+        $data['clients'] = Client::all();
+        return view($this->moduleViewName . ".printAddress", $data);
+    }
 }

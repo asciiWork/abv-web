@@ -10,7 +10,9 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\UserAddresses;
+use App\Models\Quotation;
 use App\Models\Contact;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -21,6 +23,8 @@ class AdminController extends Controller
         $userData=Auth::user();
         $data['userData'] = $userData;
         $data['ordData'] = [];//Order::getOrderData(\Auth::user()->id);
+        $data['sellingPrices'] = Admin::getSelling();
+
         return view('adminPanel.dashboard',$data);
     }
     public function contact()

@@ -1,5 +1,57 @@
 @extends('adminPanel.layout.appNew')
 @section('content')
+@include($moduleViewName.".search")
+
+<div class="row">
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-purple">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-wallet-2-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Yearly Total</h6>
+                <h2 class="my-2">{{ number_format($qnStatics['yearly_total'],2)}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-info">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-wallet-2-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Monthly Total</h6>
+                <h2 class="my-2">{{ number_format($qnStatics['monthly_total'],2)}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-info">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-wallet-2-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Today Total</h6>
+                <h2 class="my-2">{{ number_format($qnStatics['today_total'],2)}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xxl-3 col-sm-6">
+        <div class="card widget-flat text-bg-pink">
+            <div class="card-body">
+                <div class="float-end">
+                    <i class="ri-shopping-basket-line widget-icon"></i>
+                </div>
+                <h6 class="text-uppercase mt-0" title="Customers">Pending Quotations</h6>
+                <h2 class="my-2">{{ $qnStatics['total_qns']}}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -22,6 +74,8 @@
                             <th>Number</th>
                             <th>Created By</th>
                             <th>Client</th>
+                            <th>Date</th>
+                            <th>Due Date</th>
                             <th>Total</th>
                             <th>Action</th>
                         </tr>
@@ -43,20 +97,28 @@
             name: 'id'
         },
         {
-            data: 'user_id',
-            name: 'user_id'
+            data: 'quotation_number',
+            name: 'quotation_number'
         },
         {
-            data: 'user_id',
-            name: 'user_id'
+            data: 'uname',
+            name: 'admin_users.name'
         },
         {
-            data: 'user_id',
-            name: 'user_id'
+            data: 'cname',
+            name: 'clients.name'
         },
         {
-            data: 'user_id',
-            name: 'user_id'
+            data: 'quotation_date',
+            name: 'quotation_date'
+        },
+        {
+            data: 'quotation_due_date',
+            name: 'quotation_due_date'
+        },
+        {
+            data: 'final_total_amount',
+            name: 'final_total_amount'
         },
         {
             data: 'action',
@@ -65,5 +127,5 @@
         }
     ];
 </script>
-<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?123') }}"></script>
+<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?45') }}"></script>
 @endsection

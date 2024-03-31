@@ -45,4 +45,8 @@ class Client extends Model
 
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }
+    public static function allClients()
+    {
+        return Client::select(\DB::raw("CONCAT(name,' ',phone_1) as cname"),'id', 'address')->get();
+    }
 }

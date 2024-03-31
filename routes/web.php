@@ -33,9 +33,13 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('admin-users/data', [UsersController::class,'data'])->name('admin-users.data');
 	Route::resource('admin-users', UsersController::class);
 
+	Route::get('admin-clients/print-address', [ClientsController::class, 'printAddress'])->name('admin-clients.print-address');
 	Route::get('admin-clients/data', [ClientsController::class,'data'])->name('admin-clients.data');
 	Route::resource('admin-clients', ClientsController::class);
 
+	Route::get('admin-quotations/last-prices', [QuotationsController::class, 'lastPrices'])->name('admin-quotations.lastPrices');
+	Route::get('admin-quotations/download-invoice/{id}', [QuotationsController::class, 'downloadInvoice'])->name('admin-quotations.download-invoice');
+	Route::get('admin-quotations/make-invoice/{id}', [QuotationsController::class, 'makeInvoice'])->name('admin-quotations.make-invoice');
 	Route::get('admin-quotations/data', [QuotationsController::class,'data'])->name('admin-quotations.data');
 	Route::resource('admin-quotations', QuotationsController::class);
 

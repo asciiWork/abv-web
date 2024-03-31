@@ -31,7 +31,10 @@ $(document).ready(function() {
         ajax: {
             url: MODULE_URL,
             data: function(data) {
-                data.search_text = $("#search-frm input[name='search_text']").val();
+                data.search_user = $("#search-frm input[name='user_id']").val();
+                data.search_number = $("#search-frm input[name='number']").val();
+                data.search_client_name = $("#search-frm input[name='client_name']").val();
+                data.search_date = $("#search-frm input[name='date']").val();
             }
         },
         "order": [

@@ -2,67 +2,56 @@
 
 @section('content')
 <div class="row">
-    <div class="col-xxl-3 col-sm-6">
-        <div class="card widget-flat text-bg-pink">
+    @if($sellingPrices)
+    @foreach($sellingPrices as $user)
+    <div class="col-md-6">
+        <div class="card">
             <div class="card-body">
-                <div class="float-end">
-                   
+                <div class="d-flex align-items-start justify-content-between">
+                    <div class="d-flex">
+                        <a class="me-3" href="#">
+                            <img class="avatar-md rounded-circle bx-s" src="{{$user['image']}}" alt="">
+                        </a>
+                        <div class="info">
+                            <h5 class="fs-18 my-1">{{$user['name']}}</h5>
+                            <p class="text-muted fs-15">{{$user['phone']}}</p>
+                        </div>
+                    </div>
+                    <div class="">Sell</div>
                 </div>
-                <h6 class="text-uppercase mt-0" title="Customers">Total Vehicles</h6>
-                <h2 class="my-2">100</h2>
-                <p class="mb-0">
-                    <span class="badge bg-white bg-opacity-10 me-1"></span>
-                    <span class="text-nowrap"></span>
-                </p>
+                <hr>
+                <ul class="social-list list-inline mb-0 text-center">
+                    <li class="list-inline-item">
+                        <div class="card widget-flat text-bg-pink">
+                            <div class="card-body">
+                                <h6 class="text-uppercase mt-0" title="Customers">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yearly&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                                <h2 class="my-2">₹{{ number_format($user['yearly'],2)}}</h2>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <div class="card widget-flat text-bg-info">
+                            <div class="card-body">
+                                <h6 class="text-uppercase mt-0" title="Customers">Monthly </h6>
+                                <h2 class="my-2">₹{{ number_format($user['monthly'],2)}}</h2>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-inline-item">
+                        <div class="card widget-flat text-bg-purple">
+                            <div class="card-body">
+                                <h6 class="text-uppercase mt-0" title="Customers">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Today&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                                <h2 class="my-2">₹{{ number_format($user['today'],2)}}</h2>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
+            <!-- card-body -->
         </div>
-    </div> <!-- end col-->
-
-    <div class="col-xxl-3 col-sm-6">
-        <div class="card widget-flat text-bg-purple">
-            <div class="card-body">
-                <div class="float-end">
-                   
-                </div>
-                <h6 class="text-uppercase mt-0" title="Customers">Manufacturers</h6>
-                <h2 class="my-2">102</h2>
-                <p class="mb-0">
-                    <span class="badge bg-white bg-opacity-10 me-1"></span>
-                    <span class="text-nowrap"></span>
-                </p>
-            </div>
-        </div>
-    </div> <!-- end col-->
-
-    <div class="col-xxl-3 col-sm-6">
-        <div class="card widget-flat text-bg-info">
-            <div class="card-body">
-                <div class="float-end">
-                   
-                </div>
-                <h6 class="text-uppercase mt-0" title="Customers">Total Enquiries</h6>
-                <h2 class="my-2">103</h2>
-                <p class="mb-0">
-                    <span class="badge bg-white bg-opacity-25 me-1"></span>
-                    <span class="text-nowrap"></span>
-                </p>
-            </div>
-        </div>
+        <!-- card -->
     </div>
-    <div class="col-xxl-3 col-sm-6">
-        <div class="card widget-flat text-bg-warning">
-            <div class="card-body">
-                <div class="float-end">
-                   
-                </div>
-                <h6 class="text-uppercase mt-0" title="Customers">Total Enquiries</h6>
-                <h2 class="my-2">103</h2>
-                <p class="mb-0">
-                    <span class="badge bg-white bg-opacity-25 me-1"></span>
-                    <span class="text-nowrap"></span>
-                </p>
-            </div>
-        </div>
-    </div>
+    @endforeach
+    @endif
 </div>
 @endsection

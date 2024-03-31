@@ -66,15 +66,14 @@
                             <select name="client_id" data-toggle="select2" id="client-select-box" class="select2 form-control">
                                 <option value="">Select Client</option>
                                 @foreach($clients as $clr)
-                                <option value="{{$clr->id}}" data-address="{{$clr->address}}">{{$clr->cname}}</option>
+                                <option value="{{$clr->id}}" {{$formObj->client_id == $clr->id ? 'selected' : ''}} data-address="{{$clr->address}}">{{$clr->cname}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <h6 class="fs-14">Billing Address</h6>
-                        <address id="client-address">
-                        </address>
+                        {!! Form::textarea('client_address', null, ['id' => 'client-address', 'class' => 'form-control', 'rows'=>3]) !!}
                     </div>
                 </div>
 
@@ -95,50 +94,57 @@
                                     </tr>
                                 </thead>
                                 <tbody class="tbodyTr">
-                                    <tr id="tr-item-1">
-                                        <td class="">1</td>
+                                    @if($qnItems)
+                                    <?php $i = 1; ?>
+                                    @foreach($qnItems as $item)
+                                    <tr id="tr-item-{{$i}}">
+                                        <td class="">{{$i}}</td>
                                         <td>
-                                            <select name="product_id[]" data-row="1" id="product-option-1" data-toggle="select2" class="select2 form-control product-items">
+                                            <select name="product_id[]" data-row="{{$i}}" id="product-option-{{$i}}" data-toggle="select2" class="select2 form-control product-items">
                                                 <option value="">Select Product</option>
                                                 @foreach($products as $prd)
-                                                <option value="{{$prd->id}}" data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
+                                                <option value="{{$prd->id}}" {{$prd->id == $item['product_id'] ? 'selected' : ''}} data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
                                                 @endforeach
                                             </select>
-                                            <span id="last-product-price-1"></span>
+                                            <span id="last-product-price-{{$i}}"></span>
                                         </td>
-                                        <td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" value="0" id="product_actual_price-1">
-                                            <input name="product_size_id[]" type="hidden" value="" id="product-size-id-1">
-                                            <input name="item_name[]" type="hidden" value="" id="product-name-1">
+                                        <td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" value="{{$item['product_actual_price']}}" id="product_actual_price-{{$i}}">
+                                            <input name="product_size_id[]" type="hidden" value="{{$item['product_size_id']}}" id="product-size-id-{{$i}}">
+                                            <input name="item_name[]" type="hidden" value="{{$item['item_name']}}" id="product-name-{{$i}}">
                                         </td>
                                         <td>
                                             <div class="col-sm-8">
-                                                <input type="number" min="0" value="1" data-row="1" name="quantity[]" class="form-control item-qnt">
+                                                <input type="number" min="0" value="{{$item['quantity']}}" data-row="{{$i}}" name="quantity[]" class="form-control item-qnt">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-10">
-                                                <input type="text" value="" name="taxable_value[]" id="taxable-value-1" class="form-control taxable-value">
+                                                <input type="text" value="{{$item['taxable_value']}}" name="taxable_value[]" id="taxable-value-{{$i}}" class="form-control taxable-value">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-10">
-                                                <input type="text" value="" name="tax_amount[]" id="tax-amount-1" class="form-control tax_amount">
+                                                <input type="text" value="{{$item['tax_amount']}}" name="tax_amount[]" id="tax-amount-{{$i}}" class="form-control tax_amount">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="col-sm-10">
-                                                <input type="text" value="" name="total_amount[]" id="total-amount-1" class="total-amount form-control">
+                                                <input type="text" value="{{$item['total_amount']}}" name="total_amount[]" id="total-amount-{{$i}}" class="total-amount form-control">
                                             </div>
                                         </td>
                                         <td class="float-end">
+                                            <a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i></a>
                                         </td>
                                     </tr>
+                                    </tr>
+                                    <?php $i++; ?>
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
-                        </div> <!-- end table-responsive-->
+                        </div>
                     </div>
                 </div>
-                <!-- end row -->
                 <hr />
                 <div class="row">
                     <div class="col-sm-6">
@@ -147,12 +153,12 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="float-end mt-3 mt-sm-0">
-                            <p><b>Taxable Amount:</b> <span class="float-end final-taxable-total">000.00</span></p>
-                            <p><b>GST (18.0%):</b> <span class="float-end final-tax_amount">000.00</span></p>
-                            <p><b>Total:</b> <span class="float-end final-total">000.00</span></p>
-                            <input type="hidden" name="total_taxable_value" id="final-taxable-total-value">
-                            <input type="hidden" name="gst_amount" id="final-tax_amount-value">
-                            <input type="hidden" name="final_total_amount" id="final-total-value">
+                            <p><b>Taxable Amount:</b> <span class="float-end final-taxable-total">{{$formObj->total_taxable_value}}</span></p>
+                            <p><b>GST (18.0%):</b> <span class="float-end final-tax_amount">{{$formObj->gst_amount}}</span></p>
+                            <p><b>Total:</b> <span class="float-end final-total">{{$formObj->final_total_amount}}</span></p>
+                            <input type="hidden" value="{{$formObj->total_taxable_value}}" name="total_taxable_value" id="final-taxable-total-value">
+                            <input type="hidden" value="{{$formObj->gst_amount}}" name="gst_amount" id="final-tax_amount-value">
+                            <input type="hidden" value="{{$formObj->final_total_amount}}" name="final_total_amount" id="final-total-value">
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -162,7 +168,7 @@
                         <button type="submit" class="btn btn-primary" id="submit_btn">{{ $buttonText}}</button>
                     </div>
                 </div>
-                <input value=" 1" id="numRow" type="hidden">
+                <input value="{{count($qnItems)}}" id="numRow" type="hidden">
             </div>
             {!! Form::close() !!}
         </div>
@@ -175,14 +181,15 @@
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><select name="product_id[]" data-toggle="select2" class="select2 form-control product-items" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><div class = "col-sm-12" ><select name="product_id[]" data-toggle="select2" class="select2 form-control product-items" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select> </div> </td>';
             html += '<input name="product_name[]" type="hidden" value="" id="product-name-' + num + '">';
             html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
-            html += '<td><input name="product_actual_price[]" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"></td>';
+            html += '<td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" value="" id="product_actual_price-' + num + '"></td>';
             html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
             html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i ></a></td ></tr>';
+            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td>';
+            html += '<td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i ></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
@@ -204,16 +211,16 @@
                 var rowNo = $(this).attr('data-row');
                 var selectedOption = $(this).find('option:selected');
                 var price = selectedOption.data('price');
-                $('#product_actual_price-' + rowNo).val(price);
+                $('#product-amount-text-' + rowNo).html(price);
                 $('#product-name-' + rowNo).val(selectedOption.text());
                 $('#product-size-id-' + rowNo).val(selectedOption.data('product'));
+                $('#product_actual_price-' + rowNo).val(price);
                 $('#taxable-value-' + rowNo).val(price);
                 var result = parseFloat(price) * 0.18;
                 $('#tax-amount-' + rowNo).val(result);
                 $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
             }
             allTotalPrices();
-            getLastPrice(selectedOption.data('product'), rowNo);
         });
         $(document).on("change", ".item-qnt", function() {
             if ($(this).val() > 0) {
@@ -230,33 +237,10 @@
             if ($(this).val() > 0) {
                 var selectedOption = $(this).find('option:selected');
                 var address = selectedOption.data('address');
-                $('#client-address').html(address);
+                $('#client-address').val(address);
             }
         });
     });
-
-    function getLastPrice(product_size_id, rowNo) {
-        var client_id = $('#client-select-box').val();
-        if (client_id > 0) {
-            $.ajax({
-                type: 'GET',
-                url: "{{ route('admin-quotations.lastPrices') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "client_id": client_id,
-                    "product_size_id": product_size_id,
-                },
-                success: function(result) {
-                    $('#last-product-price-' + rowNo).html('LP: ' + result);
-                },
-                error: function(error) {
-                    alert(error);
-                }
-            });
-        } else {
-            $.NotificationApp.send("Note!", "Select client if want the last product price!", 'top-right', 'rgba(0,0,0,0.2)', 'info');
-        }
-    }
 
     function allTotalPrices() {
         var texts = document.getElementsByClassName("total-amount");
@@ -293,7 +277,7 @@
             gtamounts = parseFloat(gtamounts) + parseFloat(aa);
         }
         $('.final-tax_amount').html(parseFloat(gtamounts));
-        $('#final-tax_amount-value').html(parseFloat(gtamounts));
+        $('#final-tax_amount-value').val(parseFloat(gtamounts));
     }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
