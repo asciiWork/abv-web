@@ -9,7 +9,6 @@ use App\Models\QuotationItem;
 use App\Models\Client;
 use App\Models\LastInvoicePrice;
 use DataTables;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuotationsController extends Controller
 {
@@ -145,6 +144,26 @@ class QuotationsController extends Controller
         return view($this->moduleViewName . '.edit', $data);
     }
 
+    public function show($id)
+    {
+        $formObj = $this->modelObj;
+        if (\Auth::guard('admins')->user()->user_type_id != 1) {
+            $formObj = $formObj->where('user_id', \Auth::guard('admins')->user()->id);
+        }
+        $formObj = $formObj->find($id);
+
+        if (!$formObj) {
+            abort(404);
+        }
+        $qnItems = QuotationItem::where('quotation_id', $id)->get();
+
+        $data = array();
+        $data['invoice'] = $formObj;
+        $data['qnItems'] = $qnItems;
+        $data['client'] = Client::find($formObj->client_id);
+        $data['viewOrPdf'] = 0;
+        return view($this->moduleViewName . '.invoicePDF', $data);
+    }
     public function update(Request $request, $id)
     {
         $model = $this->modelObj->find($id);
@@ -231,7 +250,7 @@ class QuotationsController extends Controller
                         'isEdit' => ($row->is_invoice)?0:1,
                         'isDelete' => 0,
                         'isInvoice' => 1,
-                        'isDownload' => 1,
+                        'isView' => 1,
                     ]
                 )->render();
             })
@@ -318,11 +337,13 @@ class QuotationsController extends Controller
         $data['formObj'] = $formObj;
         $data['qnItems'] = $qnItems;
         $data['viewOrPdf'] = 0;
-        $pdf = PDF::loadView($this->moduleViewName . '.invoicePDF', $data)->setOptions(['defaultFont' => 'sans-serif', 'chroot'  => public_path('images/')]);
+       // return view($this->moduleViewName . '.invoicePDF', $data)->render();
+        //$pdf = PDF::loadView($this->moduleViewName . '.invoicePDF', $data)->setOptions(['defaultFont' => 'sans-serif', 'chroot'  => public_path('images/')]);
         $fileName = "quotation_" . $formObj->quotation_number. ".pdf";
         if($formObj->is_invoice){
             $fileName = "invoice_" . $formObj->invoice_number.".pdf";
         }
-        return $pdf->download($fileName);
+
+     //   return $pdf->download($fileName);
     }
 }

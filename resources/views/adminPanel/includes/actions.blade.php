@@ -12,9 +12,9 @@
         <i class="bi bi-eye-fill me-3 fs-20"></i>
     </a>
     @endif
-    @if(isset($isDownload) && $isDownload)
-    <a href="{{ route($currentRoute.'.download-invoice', $row->id) }}" class="btn btn-xs btn-purple" title="Download PDF">
-        <i class="bi bi-download"></i>
+    @if(isset($isView) && $isView)
+    <a href="{{ route($currentRoute.'.show',$row->id) }}" target="_blank" title="View" class="btn btn-xs btn-pink">
+        <i class="ri-eye-line"></i>
     </a>
     @endif
     @if(isset($isInvoice) && $isInvoice)
