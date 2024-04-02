@@ -1,5 +1,5 @@
-<!-- <section class="hero__slider--section">
-    <div class="slider__thumbnail--style5 hero__slider--activation swiper">
+<section class="hero__slider--section">
+    <div class="slider__thumbnail--style5 swiper swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/7.jpg')}}" alt="slider-img">
@@ -31,11 +31,17 @@
                     <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> <span class="text__secondary">Your Trusted CNC Tools Supplier</span></h2>
                 </div>
             </div>
+            <div class="swiper-slide">
+                <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/5.jpg')}}" alt="slider-img">
+                <div class="hero__content--style5 text-center">
+                    <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> <span class="text__secondary">Your Trusted CNC Tools Supplier</span></h2>
+                </div>
+            </div>
         </div>
     </div>
-</section> -->
+</section>
 <!-- Start slider section -->
-<section class="hero__slider--section">
+<section class="hero__slider--section" style="display: none;">
     <div class="hero__slider--inner hero__slider--activation swiper">
         <div class="hero__slider--wrapper swiper-wrapper">
             <div class="swiper-slide ">

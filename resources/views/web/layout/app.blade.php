@@ -65,6 +65,7 @@
     </svg></button>
 
   <!-- All Script JS Plugins here  -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script type="text/javascript">
     var http_host_js = '{{ url("/") }}';
     var readMoreBtns = document.querySelectorAll('.read-more-btn');
@@ -73,6 +74,19 @@
         var moreContent = this.previousElementSibling.querySelector('.more-content');
         moreContent.classList.toggle('hidden');
       });
+    });
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 3000, // Change slide every 3 seconds
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
     });
   </script>
   <script src="{{ asset('public/web/js/jquery.min.js')}}" type="text/javascript"></script>
