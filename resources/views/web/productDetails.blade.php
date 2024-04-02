@@ -8,7 +8,7 @@
     .psize {
         /*border: 1px solid;*/
         font-weight: 400;
-        font-size: 12px;
+        /*font-size: 12px;*/
         letter-spacing: 0;
     }
 
@@ -69,7 +69,7 @@
     }
     .psize:hover {
         color: #ffffff;
-        background: #212121;
+        background: #000081;
     }
 </style>
 @endsection
