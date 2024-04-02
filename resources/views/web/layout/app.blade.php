@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <title>Leading CNC machine tool Supplier in India | Abv Tools</title>
-  <meta name="description" content="Morden Bootstrap HTML5 Template">
+  <meta name="description" content="Leading CNC machine tool Supplier in India | Abv Tools">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/favicon.ico') }}">
 
   <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/swiper-bundle.min.css') }}">
