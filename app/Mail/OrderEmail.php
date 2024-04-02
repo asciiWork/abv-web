@@ -56,6 +56,7 @@ class OrderEmail extends Mailable
             $this->orderItems = $items;
             return $this->subject($subject)
             ->to($user->email)
+            ->cc(['abvtradesol@gmail.com'])
             ->markdown('emails.orderEmail');
         }
     }
