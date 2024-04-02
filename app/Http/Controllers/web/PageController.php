@@ -49,13 +49,14 @@ class PageController extends Controller
         $data['proReview']=$prore;
         return view('web.about', $data);
     }
-    public function products()
+    public function products(Request $request)
     {
+        $search_product=$request->get('search_product');
         $data = array();
         $data['page_title'] = 'Products';
         $data['breadcrumb'] = 'Products';
         $proData = new Product; 
-        $product =  $proData->get_Allproduct();
+        $product =  $proData->get_Allproduct($search_product);
         $data['productData']=$product;
         $newPro =  $proData->get_NewArrivals();
         $data['newProData']=$newPro;

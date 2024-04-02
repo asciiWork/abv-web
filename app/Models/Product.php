@@ -13,15 +13,19 @@ class Product extends Model
     {
         return $this->hasMany(ProductSize::class);
     }
-	public static function get_Allproduct()
+	public static function get_Allproduct($search='')
 	{
 		$product = DB::table('product')
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
             ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
             ->where('product_category.status', '1')
-            ->where('product_img.pro_main', '1')
-            ->get();
+            ->where('product_img.pro_main', '1');
+            if($search!=''){
+                $product =$product->where('product.product_name', 'like', "%$search%")
+                ->orWhere('product.product_detail', 'like', "%$search%");
+            }
+            $product =$product->get();
     	return $product;
 	}
     public function get_NewArrivals()
