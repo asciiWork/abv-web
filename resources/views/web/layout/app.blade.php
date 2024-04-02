@@ -99,6 +99,18 @@
       // Enable horizontal scrolling
       direction: 'horizontal',
     });
+    var swiper = new Swiper('.testimonialList', {
+        slidesPerView: 'auto', // Automatically adjust number of slides visible
+        spaceBetween: 20, // Add space between slides
+        loop: true, // Enable loop mode
+        centeredSlides: true, // Center the active slide
+        autoplay: {
+          delay: 3000, // Change slide every 3 seconds
+          disableOnInteraction: false,
+        },
+        // Enable horizontal scrolling
+        direction: 'horizontal',
+    });
     var colors = ["blue", "red"]
     var currentColor = 0
     var lis = document.querySelectorAll("#stepsId .text__secondary")
