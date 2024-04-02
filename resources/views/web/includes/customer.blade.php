@@ -11,7 +11,7 @@ $gogdata = \App\Models\GoogleReview::getReviewData();
         <div class="section__heading border-bottom mb-30">
             <h2 class="section__heading--maintitle">See What Customer Are Saying</h2>
         </div>
-        <div class="product__section--inner pb-15 product__swiper--activation swiper">
+        <div class="product__section--inner pb-15 product__swiper--activation swiper customerList">
             <div class="swiper-wrapper">
                 @if(isset($gogdata))
                 @foreach($gogdata as $gog)
