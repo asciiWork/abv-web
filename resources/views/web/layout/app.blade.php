@@ -90,7 +90,7 @@
     });
     var swiper = new Swiper('.customerList', {
       slidesPerView: 'auto', // Automatically adjust number of slides visible
-      spaceBetween: 10, // Add space between slides
+      spaceBetween: '28', // Add space between slides
       loop: true, // Enable loop mode
       autoplay: {
         delay: 4000, // Change slide every 3 seconds
