@@ -13,7 +13,7 @@
 <!-- End banner section -->
 
 <!-- Start product section -->
-@include('web.includes.product')
+
 <!-- End product section -->
 
 <!-- Start product section -->
