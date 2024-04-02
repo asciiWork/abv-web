@@ -3,6 +3,8 @@
 <style type="text/css">
     .tab-price {
         display: none;
+        font-size: 3.1rem;
+        font-weight: 600;
     }
 
     .psize {
@@ -192,16 +194,17 @@
                                 @foreach ($productSize->product_size as $r)
                                 <div id="{{$r->product_size}}" class="tab-price">
                                     <p></p>
-                                    <p class="product__details--info__meta--list">
+                                    <p class="">
                                         @if($r->product_old_price>0)
-                                        @if($r->product_old_price>0 && $r->product_current_price<=0) <strong>₹{{$r->product_old_price}}</strong>&nbsp;
+                                            @if($r->product_old_price>0 && $r->product_current_price<=0) 
+                                                ₹{{$r->product_old_price}}&nbsp;
                                             @elseif($r->product_current_price!=$r->product_old_price)
-                                            <strong><s>₹{{$r->product_old_price}}</s></strong>&nbsp;
+                                                <s>₹{{$r->product_old_price}}</s>&nbsp;
                                             @endif
-                                            @endif
-                                            @if($r->product_current_price>0)
+                                        @endif
+                                        @if($r->product_current_price>0)
                                             <strong class="current__price">₹{{$r->product_current_price}}</strong>
-                                            @endif
+                                        @endif
                                     </p>
                                 </div>
                                 @endforeach

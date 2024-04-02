@@ -80,7 +80,7 @@
       spaceBetween: 30,
       loop: true,
       autoplay: {
-        delay: 3000, // Change slide every 3 seconds
+        delay: 5000, // Change slide every 3 seconds
         disableOnInteraction: false,
       },
       pagination: {
@@ -88,6 +88,17 @@
         clickable: true,
       },
     });
+    var colors = ["blue", "red"]
+    var currentColor = 0
+    var lis = document.querySelectorAll("#stepsId .text__secondary")
+    function changeColor() {
+      --currentColor
+      if (currentColor < 0) currentColor = colors.length -1
+      for (var i = 0; i < lis.length; i++) {
+        lis[i].style.color = colors[(currentColor +i) % colors.length]
+      }
+    }
+    setInterval(changeColor, 1000);
   </script>
   <script src="{{ asset('public/web/js/jquery.min.js')}}" type="text/javascript"></script>
   <script src="{{ asset('public/web/js/bootstrap.min.js')}}" type="text/javascript"></script>
