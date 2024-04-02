@@ -231,14 +231,14 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                     <td class="checkout__total--calculated__text text-right" id="shipping_rate_txt">₹100.00</td>
                                 </tr>
                                 <tr class="checkout__total--items">
-                                    <td class="checkout__total--title text-left">GST(18%)</td>
-                                    <input type="hidden" id="gst_rate_amount" value="0">
-                                    <td class="checkout__total--calculated__text text-right" id="gst_rate_txt">₹100.00</td>
-                                </tr>
-                                <tr class="checkout__total--items">
                                     <td class="checkout__total--title text-left">COD</td>
                                     <input type="hidden" id="cod_rate_amount" value="0">
                                     <td class="checkout__total--calculated__text text-right" id="cod_rate_txt">2%</td>
+                                </tr>
+                                <tr class="checkout__total--items">
+                                    <td class="checkout__total--title text-left">GST(18%)</td>
+                                    <input type="hidden" id="gst_rate_amount" value="0">
+                                    <td class="checkout__total--calculated__text text-right" id="gst_rate_txt">₹100.00</td>
                                 </tr>
                             </tbody>
                             <tfoot class="checkout__total--footer">
@@ -323,11 +323,15 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 
     function finalAmount() {
         var totl = parseFloat($("#final_total_amount").val()) + parseFloat($("#shipping_rate_amount").val());
-        var gstAmount = parseFloat(totl) * 0.18;
-        $("#gst_rate_txt").html('₹' + parseFloat(gstAmount).toFixed(2));
-        var final_total_txt = totl + gstAmount;
-        var codAmount = parseFloat(final_total_txt) * 0.02;
+
+        var codAmount = parseFloat(totl) * 0.02;
         $("#cod_rate_txt").html('₹' + parseFloat(codAmount).toFixed(2));
+        
+        var gst_total = totl + codAmount;
+        var gstAmount = parseFloat(gst_total) * 0.18;
+        $("#gst_rate_txt").html('₹' + parseFloat(gstAmount).toFixed(2));
+
+        var final_total_txt = totl + gstAmount;
         final_total_txt = codAmount + final_total_txt;
         $("#final_total_txt").html('₹' + (parseFloat(final_total_txt).toFixed(2)));
     }

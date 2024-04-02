@@ -443,8 +443,8 @@ class ProductsController extends Controller
                     } else {
                         $shipping_flat_charge = ($total_qnt < 50)? 100:200;
                     }
-                    $gst_charge = ($total_price + $shipping_flat_charge) * 0.18;
-                    $cod_charge = ($gst_charge + $total_price + $shipping_flat_charge) * 0.02;
+                    $cod_charge = ($total_price + $shipping_flat_charge) * 0.02;
+                    $gst_charge = ($total_price + $shipping_flat_charge + $cod_charge) * 0.18;
                     $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
                     $orderTexes = 0;//Product::$orderTexes;
                     $obj->discount = 0;
