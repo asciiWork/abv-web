@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/favicon.ico') }}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('public/web/assets/img/apple-touch-icon.png') }}">
   <link rel="icon" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" type="image/png"> 
 
   <!-- ======= All CSS Plugins here ======== -->
