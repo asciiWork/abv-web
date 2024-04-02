@@ -4,37 +4,37 @@
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/7.jpg')}}" alt="slider-img">
                 <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Welcome To ABV Tools <br> Leading CNC machine tool Supplier and Manufacturer in India</h2>
+                    <h2 class="hero__content--style5__title h1 text__secondary blinking-text">Welcome To ABV Tools <br> Leading CNC machine tool Supplier and Manufacturer in India</h2>
                 </div>
             </div>
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/4.jpg')}}" alt="slider-img">
                 <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Empowering Precision, Elevating Performance: <br> Your CNC Tools Partner</h2>
+                    <h2 class="hero__content--style5__title h1 text__secondary blinking-text">Empowering Precision, Elevating Performance: <br> Your CNC Tools Partner</h2>
                 </div>
             </div>
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/2.jpg')}}" alt="slider-img">
                 <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
+                    <h2 class="hero__content--style5__title h1 text__secondary blinking-text">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
                 </div>
             </div>
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/6.jpg')}}" alt="slider-img">
                 <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
+                    <h2 class="hero__content--style5__title h1 text__secondary blinking-text">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
                 </div>
             </div>
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/3.jpg')}}" alt="slider-img">
                 <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
+                    <h2 class="hero__content--style5__title h1 text__secondary blinking-text">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
                 </div>
             </div>
             <div class="swiper-slide">
                 <img class="slider__thumbnail--img__style5" src="{{asset('public/web/assets/img/slider/5.jpg')}}" alt="slider-img">
                 <div class="hero__content--style5 text-center">
-                    <h2 class="hero__content--style5__title h1 text__secondary">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
+                    <h2 class="hero__content--style5__title h1 text__secondary blinking-text">Precision Beyond Measure <br> Your Trusted CNC Tools Supplier</h2>
                 </div>
             </div>
         </div>

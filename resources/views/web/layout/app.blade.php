@@ -5,9 +5,11 @@
   <meta charset="utf-8">
   <title>Leading CNC machine tool Supplier in India | Abv Tools</title>
   <meta name="description" content="Leading CNC machine tool Supplier in India | Abv Tools">
+  <meta property="og:image" content="{{ asset('public/web/assets/img/favicon.ico') }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/favicon.ico') }}">
+  <link rel="icon" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" type="image/png"> 
 
   <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/swiper-bundle.min.css') }}">
@@ -19,6 +21,16 @@
 
   <!-- Custom Style CSS -->
   <link rel="stylesheet" href="{{ asset('public/web/assets/css/style.css') }}">
+  <style type="text/css">
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .blinking-text {
+      animation: blink 1s infinite;
+    }
+  </style>
   @yield('stylecss')
 </head>
 
