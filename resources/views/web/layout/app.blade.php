@@ -14,7 +14,10 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Leading CNC machine tool Supplier in India | Abv Tools</title>
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/favicon.ico') }}">
-  <link rel="icon" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" type="image/png"> 
+  <link rel="icon" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" type="image/png">
+  <link rel="icon" sizes="32x32" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" /> 
+  <link rel="icon" sizes="192x192" href="{{ asset('public/web/assets/img/android-chrome-192x192.png') }}" /> 
+  <link rel="apple-touch-icon" href="{{ asset('public/web/assets/img/apple-touch-icon.png') }}" />    
 
   <!-- ======= All CSS Plugins here ======== -->
   <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/swiper-bundle.min.css') }}">
