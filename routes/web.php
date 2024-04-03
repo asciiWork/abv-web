@@ -56,6 +56,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 });
 Route::get('/', [PageController::class, 'index'])->name('web.index');
 Route::get('/about', [PageController::class, 'about'])->name('web.about');
+Route::get('/search-product', [PageController::class, 'searchProduct'])->name('web.search-product');
 Route::get('/products', [PageController::class, 'products'])->name('web.products');
 Route::get('/contact', [PageController::class, 'contact'])->name('web.contact');
 Route::post('/check-contact', [PageController::class, 'checkContactForm'])->name('web.check-contact');

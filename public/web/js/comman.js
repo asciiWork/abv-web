@@ -111,6 +111,51 @@ $(document).ready(function() {
             }
         });
     });
+    var purl= http_host_js + '/search-product';
+    $('.js-example-basic-single').select2({
+        allowClear:true,
+        placeholder: 'Search for a products...',
+        minimumInputLength: 2,
+        ajax: {
+            url: purl,
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return {
+                            id: item.product_name,
+                            text: item.product_name,
+                            description: item.product_detail,
+                            product_img: item.product_img_url
+                        }
+                    })
+                };
+            },
+            cache: true
+        },
+        templateResult: formatProduct,
+        templateSelection: formatProductSelection
+    });
+
+    function formatProduct (product) {
+        if (!product.id) {
+            return product.text;
+        }
+        var $product = $(
+            '<span><img style="display: inline;" width="40" src="' +http_host_js+'/public/web/assets/img/product/main-product/'+ product.product_img + '" class="img-flag" /> ' + product.text + '</span>'
+        );
+        return $product;
+    }
+
+    function formatProductSelection (product) {
+        return product.text;
+    }
 });
 function openQuickModal(pid)
 {
