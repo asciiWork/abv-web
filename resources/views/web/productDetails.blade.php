@@ -73,6 +73,10 @@
         color: #ffffff;
         background: #000081;
     }
+    .psize-active{
+        color: #ffffff;
+        background: #000081;
+    }
 </style>
 @endsection
 @section('content')
@@ -445,7 +449,13 @@
         var labelList = document.getElementById("labelList");
         var tabContents = document.querySelectorAll(".tab-price");
         var inputElement = document.getElementById("inputValue");
-
+        $(".psize").click(function() { 
+            var listItems = $(".psize"); 
+            for (let i = 0; i < listItems.length; i++) { 
+                listItems[i].classList.remove("psize-active"); 
+            } 
+            this.classList.add("psize-active"); 
+        });
         labelList.addEventListener("click", function(event) {
             var selectedTab = event.target.dataset.tab;
 
