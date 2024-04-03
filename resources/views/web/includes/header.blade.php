@@ -443,17 +443,14 @@ $productData = \App\Models\Product::get_Allproduct();
         <div class="predictive__search--box__inner">
             <h2 class="predictive__search--title" style="text-align: center;">Search Products</h2>
             <form class="predictive__search--form" method="get" action="{{ route('web.products') }}">
-                
-                    <select class="js-example-basic-single" name="search_product">
-                        <option value="">Search for a product...</option>
-                    </select>
-                    <!-- <input class="predictive__search--input" placeholder="Search Here" type="text" name="search_product"> -->
-                    
-                
+                <select class="js-example-basic-single" name="search_product">
+                    <option value="">Search for a product...</option>
+                </select>
                 <button class="predictive__search--button text-white" aria-label="search button"><svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="30.51" height="25.443" viewBox="0 0 512 512">
                         <path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32" />
                         <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448" />
-                    </svg> </button>
+                    </svg>
+                </button>
             </form>
         </div>
         <button class="predictive__search--close__btn" aria-label="search close" data-offcanvas>

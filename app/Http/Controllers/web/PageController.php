@@ -67,10 +67,6 @@ class PageController extends Controller
     public function searchProduct(Request $request)
     {
         $query = $request->input('q');
-        
-        /*$products = Product::where('product_name', 'like', "%$query%")
-                            ->orWhere('product_detail', 'like', "%$query%")
-                            ->get(['id', 'product_name', 'product_detail']);*/
         $products = \DB::table('product')
             ->select(['product.id', 'product.product_name', 'product.product_detail', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
