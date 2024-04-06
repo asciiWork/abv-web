@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductImages;
  
 class Product extends Model
 {
@@ -12,6 +13,10 @@ class Product extends Model
     public function product_size()
     {
         return $this->hasMany(ProductSize::class);
+    }
+    public function featuredImage()
+    {
+        return $this->hasOne(ProductImages::class)->where('pro_main', '1');
     }
 	public static function get_Allproduct($search='')
 	{
@@ -55,10 +60,20 @@ class Product extends Model
     }
 	public function productWithSize($id='')
 	{
-		$productWithSize = Product::with('product_size')
+		/*$productWithSize = Product::with('product_size')
         ->join('product_img', "product.id", "=", "product_img.product_id")
         ->where('product_img.pro_main', '1')
-        ->find($id);
+        ->find($id);*/
+        /*$productWithSize = product::whereHas('product_size', function ($query) use ($id){
+            $query->where('product_size.product_id', $id)->orderBy('id', 'ASC');
+        })
+        ->with('featuredImage','product_size')
+        ->find($id);*/
+        $productWithSize = Product::with([
+                    'featuredImage', 'product_size'
+                ])->whereHas('product_size', function ($query) use ($id) {
+                    $query->where('product_id', $id)->orderByDesc('id');
+                })->find($id);
         return $productWithSize;
 	}
     public function productSize($id=''){

@@ -77,6 +77,24 @@
         color: #ffffff;
         background: #000081;
     }
+    .ptable{
+        /*border-right: 1px solid black;
+        border-bottom: 1px solid black;*/
+        color: black;
+        font-size: medium;
+        font-weight: 400;
+    }
+    .ptsize{
+        cursor: pointer;
+    }
+    .ptsize:hover {
+        color: #ffffff !important;
+        background: #000081;
+    }
+    .ptsize-active{
+        color: #ffffff !important;
+        background: #000081;
+    }
 </style>
 @endsection
 @section('content')
@@ -188,30 +206,62 @@
                         <div class="product__variant--list mb-20">
                             <fieldset class="variant__input--fieldset">
                                 <legend class="product__variant--title mb-8">Size :</legend>
-                                <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
+                                @if($productWithSize->is_table_size=='0')
+                                    <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
+                                        @foreach ($productSize->product_size as $r)
+                                        <li class="variant__size--list mb-2">
+                                            <label data-tab="{{$r->product_size}}" class="variant__size--value psize" for="weight{{$r->id}}">{{$r->product_size}}</label>
+                                        </li>
+                                        @endforeach
+                                    </ul>
                                     @foreach ($productSize->product_size as $r)
-                                    <li class="variant__size--list mb-2">
-                                        <label data-tab="{{$r->product_size}}" class="variant__size--value psize" for="weight{{$r->id}}">{{$r->product_size}}</label>
-                                    </li>
+                                    <div id="{{$r->product_size}}" class="tab-price">
+                                        <p></p>
+                                        <p class="">
+                                            @if($r->product_old_price>0)
+                                                @if($r->product_old_price>0 && $r->product_current_price<=0) 
+                                                    ₹{{$r->product_old_price}}&nbsp;
+                                                @elseif($r->product_current_price!=$r->product_old_price)
+                                                    <s>₹{{$r->product_old_price}}</s>&nbsp;
+                                                @endif
+                                            @endif
+                                            @if($r->product_current_price>0)
+                                                <strong class="current__price">₹{{$r->product_current_price}}</strong>
+                                            @endif
+                                        </p>
+                                    </div>
                                     @endforeach
-                                </ul>
-                                @foreach ($productSize->product_size as $r)
-                                <div id="{{$r->product_size}}" class="tab-price">
-                                    <p></p>
-                                    <p class="">
-                                        @if($r->product_old_price>0)
+                                @else
+                                <table class="table table-bordered table-hover" style="border: 1px solid black;">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">CODE</th>
+                                      <th scope="col">SIZE</th>
+                                      <th scope="col">PRISE</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($productSize->product_size as $r)
+                                    <tr class="ptsize" data-tab="{{$r->product_size}}">
+                                        <td><strong>{{$r->product_code}}</strong></td>
+                                        <td><strong>{{$r->product_size}}</strong></td>
+                                            <td>
+                                            @if($r->product_old_price>0)
                                             @if($r->product_old_price>0 && $r->product_current_price<=0) 
                                                 ₹{{$r->product_old_price}}&nbsp;
                                             @elseif($r->product_current_price!=$r->product_old_price)
                                                 <s>₹{{$r->product_old_price}}</s>&nbsp;
                                             @endif
-                                        @endif
-                                        @if($r->product_current_price>0)
-                                            <strong class="current__price">₹{{$r->product_current_price}}</strong>
-                                        @endif
-                                    </p>
-                                </div>
-                                @endforeach
+                                            @endif
+                                            @if($r->product_current_price>0)
+                                                <strong>₹{{$r->product_current_price}}</strong>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                                @endif
                             </fieldset>
                         </div>
                         <div class="product__variant--list quantity d-flex align-items-center mb-20">
@@ -455,6 +505,15 @@
                 listItems[i].classList.remove("psize-active"); 
             } 
             this.classList.add("psize-active"); 
+        });
+        $(".ptsize").click(function(event) { 
+            var selectedTab = $(this).attr('data-tab');
+            var listItems = $(".ptsize"); 
+            for (let i = 0; i < listItems.length; i++) { 
+                listItems[i].classList.remove("ptsize-active"); 
+            } 
+            this.classList.add("ptsize-active");
+            inputElement.value = selectedTab; 
         });
         labelList.addEventListener("click", function(event) {
             var selectedTab = event.target.dataset.tab;

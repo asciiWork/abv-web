@@ -34,7 +34,7 @@ class RazorpayPaymentController extends Controller
                     //Update Order Status
                     $ord=Order::where('id',$order_id)->first();
                     $key=$ord->ordkey;
-                    $ord->order_status=Carts::$CONFIRM;
+                    $ord->order_status=Carts::$PLACED;
                     $ord->save();
 
                     $payData->user_id=$ord->user_id;

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Leading CNC machine tool Supplier in India | Abv Tools">
   <meta property="og:title" content="Leading CNC machine tool Supplier in India | Abv Tools">
   <meta property="og:description" content="Leading CNC machine tool Supplier in India | Abv Tools">
@@ -124,7 +124,7 @@
         // Enable horizontal scrolling
         direction: 'horizontal',
     });
-    var colors = ["blue", "red"]
+    /*var colors = ["blue", "red"]
     var currentColor = 0
     var lis = document.querySelectorAll("#stepsId .text__secondary")
     function changeColor() {
@@ -134,7 +134,7 @@
         lis[i].style.color = colors[(currentColor +i) % colors.length]
       }
     }
-    setInterval(changeColor, 1000);
+    setInterval(changeColor, 2500);*/
   </script>
   <script src="{{ asset('public/web/js/jquery.min.js')}}" type="text/javascript"></script>
   <script src="{{ asset('public/web/js/bootstrap.min.js')}}" type="text/javascript"></script>

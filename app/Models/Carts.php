@@ -127,10 +127,8 @@ class Carts extends Model
                 if(is_array($prds) && !empty($prds))
                 {
                     $i = 0;
-                    foreach($prds as $prkey =>$pr)
+                    foreach($prds as $prkey =>$p)
                     {
-                      foreach($pr as $key =>$p)
-                      {
                         $data[$i]['id'] = $p['id']; 
                         $data[$i]['product_id'] = $p['id']; 
                         $data[$i]['product_img'] = $p['product_img']; 
@@ -141,7 +139,6 @@ class Carts extends Model
                         $data[$i]['slug'] = $p['slug'];
                         $data[$i]['total'] = $p['qnt'] * $p['price']; 
                         $i++;
-                      }
                     }
                 }
             }
