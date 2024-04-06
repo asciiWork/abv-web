@@ -12,7 +12,7 @@ class Product extends Model
     protected $table = 'product';
     public function product_size()
     {
-        return $this->hasMany(ProductSize::class);
+        return $this->hasMany(ProductSize::class)->orderBy('order_no', 'ASC');
     }
     public function featuredImage()
     {
@@ -70,9 +70,12 @@ class Product extends Model
         ->with('featuredImage','product_size')
         ->find($id);*/
         $productWithSize = Product::with([
-                    'featuredImage', 'product_size'
+                    'featuredImage',
+                    'product_size' => function ($query) {
+                        $query->orderBy('order_no', 'ASC');
+                    }
                 ])->whereHas('product_size', function ($query) use ($id) {
-                    $query->where('product_id', $id)->orderByDesc('id');
+                    $query->where('product_id', $id);
                 })->find($id);
         return $productWithSize;
 	}
