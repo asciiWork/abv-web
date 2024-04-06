@@ -19,7 +19,7 @@ use Rap2hpoutre\FastExcel\FastExcel;
 
 class PageController extends Controller
 {
-     public function index()
+    public function index()
     {
         $data = array();
         $data['page_title'] = 'Home';
@@ -252,15 +252,14 @@ class PageController extends Controller
         return view('web.gallery', $data);
     }
     public function viewReceivedOrder($id,$key){
-        if($id){
-            $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$CONFIRM)->first();
-            if($tObj){
-                $data['order'] = $tObj;
-                $data['orderDet'] = OrderDetail::getOrders($id);
-                return view('web.orderComplete', $data);
-            }
+        $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->where('payment_status','paid')->first();
+        if($tObj){
+            $data['order'] = $tObj;
+            $data['orderDet'] = OrderDetail::getOrders($id);
+            return view('web.orderComplete', $data);
+        }else{
+            return redirect()->url('/');
         }
-        return abort(404);
     }
     public function viewOrderPay($id,$key){
         if($id){

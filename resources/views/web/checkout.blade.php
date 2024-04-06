@@ -254,7 +254,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                         <h3 class="payment__history--title mb-20">Payment Method</h3>
                         <ul class="payment__history--inner d-flex">
                             <li class="payment__history--list">
-                                <input id="payment_method_razorpay" type="radio" class="variant__color--list" name="payment_method" value="razorpay"> Razorpay
+                                <input id="payment_method_razorpay" type="radio" class="variant__color--list" name="payment_method" value="razorpay"> Payment
                             </li>
                             <li class="payment__history--list">
                                 <input id="payment_method_cod" type="radio" class="variant__color--list" name="payment_method" value="cod" checked="checked"> Cash on delivery

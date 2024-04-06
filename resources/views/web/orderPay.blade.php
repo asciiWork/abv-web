@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Partsix - Auto Parts & Car Accessories Shop HTML Template</title>
+    <title>{{env('APP_NAME')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/favicon.ico') }}">
@@ -12,7 +12,7 @@
     <!-- ======= All CSS Plugins here ======== -->
     <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/web/assets/css/plugins/glightbox.min.css') }}">
-   <!-- Plugin css -->
+    <!-- Plugin css -->
     <link rel="stylesheet" href="{{ asset('public/web/assets/css/vendor/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://icons.getbootstrap.com/assets/font/bootstrap-icons.min.css">
     <!-- Custom Style CSS -->
@@ -59,39 +59,29 @@
                         </div>
                     </div>
                     <div class="row py-4">
-                        <p>Thank you for your order, please click the button below to pay with Razorpay.</p>                        
+                        <p>Thank you for your order, please click the button below to pay with Razorpay.</p>
                     </div>
-                     <div class="row">                              
+                    <div class="row">
                         @if($message = Session::get('error'))
-                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <strong>Error!</strong> {{ $message }}
-                            </div>
-                        @endif      
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Error!</strong> {{ $message }}
+                        </div>
+                        @endif
                         @if($message = Session::get('success'))
-                            <div class="alert alert-success alert-dismissible fade {{ Session::has('success') ? 'show' : 'in' }}" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <strong>Success!</strong> {{ $message }}
-                            </div>
-                        @endif 
-                        <form action="{{ route('razorpay.payment.store') }}" method="POST" >
+                        <div class="alert alert-success alert-dismissible fade {{ Session::has('success') ? 'show' : 'in' }}" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <strong>Success!</strong> {{ $message }}
+                        </div>
+                        @endif
+                        <form action="{{ route('razorpay.payment.store') }}" method="POST">
                             <input type="hidden" name="order_id" value="{{$order->id}}">
                             @csrf
-                            <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                    data-key="{{ env('RAZORPAY_KEY') }}"
-                                    data-amount="{{(number_format($order->order_tax_amount_total,2)*100)}}"
-                                    data-buttontext="Pay Now"
-                                    data-name="Abv Tools"
-                                    data-description="Rozerpay"
-                                    data-image="{{asset('public/web/assets/img/abv.png')}}"
-                                    data-prefill.name="{{$order->bil_name}}"
-                                    data-prefill.email="{{$order->contact_email}}"
-                                    data-prefill.order_id="{{$order->id}}"
-                                    data-theme.color="#005bf2">
+                            <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{(number_format($order->order_tax_amount_total,2)*100)}}" data-buttontext="Pay Now" data-name="Abv Tools" data-description="Rozerpay" data-image="{{asset('public/web/assets/img/abv.png')}}" data-prefill.name="{{$order->bil_name}}" data-prefill.email="{{$order->contact_email}}" data-prefill.order_id="{{$order->id}}" data-theme.color="#005bf2">
                             </script>
                         </form>
                     </div>
@@ -113,9 +103,9 @@
     <script src="{{ asset('public/web/assets/js/vendor/popper.js') }}" defer="defer"></script>
     <script src="{{ asset('public/web/assets/js/vendor/bootstrap.min.js') }}" defer="defer"></script>
     <script>
-      $(window).on('load', function() {
-        $('.razorpay-payment-button').click();
-      });
+        $(window).on('load', function() {
+            $('.razorpay-payment-button').click();
+        });
     </script>
 </body>
 

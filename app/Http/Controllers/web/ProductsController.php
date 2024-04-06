@@ -371,6 +371,7 @@ class ProductsController extends Controller
                     $obj = new Order();
                 }
                 if($obj){
+                    $obj->order_number = Order::getOrderNo();
                     $obj->user_id = $userId;
                     $obj->ship_name = $request->get('ship_name');
                     $obj->ship_phone = $request->get('ship_phone');
@@ -398,11 +399,12 @@ class ProductsController extends Controller
                     $obj->order_date = date('Y-m-d H:s:i');
                     $obj->created_at = date('Y-m-d H:s:i');
                     $obj->updated_at = date('Y-m-d H:s:i');
-                    $obj->ordkey='wc_order_'.md5(date('Y-m-d H:s:i'));
                     $obj->payment_method = $request->get('payment_method');
                     $obj->save();
-
                     $orderId = $obj->id;
+                    $obj->ordkey = $orderId.'_rp_order_'.md5(date('Y-m-d H:s:i'));
+                    $obj->save();
+                    
                     $total_price = 0;
                     $total_qnt = 0;
 
@@ -448,7 +450,6 @@ class ProductsController extends Controller
                     $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
                     $orderTexes = 0;//Product::$orderTexes;
                     $obj->discount = 0;
-                    $obj->order_number = Order::getOrderNo();
                     $obj->tax = $gst_charge;
                     $obj->shipping_flat_charge = $shipping_flat_charge;
                     $obj->gst_charge = $gst_charge;
@@ -470,7 +471,6 @@ class ProductsController extends Controller
                     $status = 1;
                     $msg = 'Order has been placed!';
                     session()->forget('cart');
-                    $key='wc_order_'.md5(date('Y-m-d H:s:i'));
                     //mail for order
                     $orderData = array();
                     $orderData['id'] = $obj->id;
@@ -478,13 +478,14 @@ class ProductsController extends Controller
                     $orderData['password'] = $is_new_pass;
                     $orderData['is_new'] = $is_new;
                     $orderData['is_customer'] = 1;
-                    \Mail::send(new \App\Mail\OrderEmail($orderData));
+                   \Mail::send(new \App\Mail\OrderEmail($orderData));
 
                     $orderData['is_customer'] = 0;
                     $orderData['email'] = env("APP_EMAIL");
-                    \Mail::send(new \App\Mail\OrderEmail($orderData));
+                   \Mail::send(new \App\Mail\OrderEmail($orderData));
                     if($request->get('payment_method')=='razorpay'){
-                        $redirect='order-pay/'.$orderId.'/'.$key;
+                        $redirect='order-pay/'.$orderId.'/'. $obj->ordkey;
+                        $redirect = url($redirect);
                     }
                 }
             }
