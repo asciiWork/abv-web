@@ -60,23 +60,23 @@ class Product extends Model
     }
 	public function productWithSize($id='')
 	{
-		/*$productWithSize = Product::with('product_size')
+		$productWithSize = Product::with('product_size')
         ->join('product_img', "product.id", "=", "product_img.product_id")
         ->where('product_img.pro_main', '1')
-        ->find($id);*/
+        ->find($id);
         /*$productWithSize = product::whereHas('product_size', function ($query) use ($id){
             $query->where('product_size.product_id', $id)->orderBy('id', 'ASC');
         })
         ->with('featuredImage','product_size')
         ->find($id);*/
-        $productWithSize = Product::with([
-                    'featuredImage',
-                    'product_size' => function ($query) {
-                        $query->orderBy('order_no', 'ASC');
-                    }
-                ])->whereHas('product_size', function ($query) use ($id) {
-                    $query->where('product_id', $id);
-                })->find($id);
+        // $productWithSize = Product::with([
+        //             'featuredImage',
+        //             'product_size' => function ($query) {
+        //                 $query->orderBy('order_no', 'ASC');
+        //             }
+        //         ])->whereHas('product_size', function ($query) use ($id) {
+        //             $query->where('product_id', $id);
+        //         })->find($id);
         return $productWithSize;
 	}
     public function productSize($id=''){
