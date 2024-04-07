@@ -486,6 +486,7 @@ class ProductsController extends Controller
                     if($request->get('payment_method')=='razorpay'){
                         $redirect='order-pay/'.$orderId.'/'. $obj->ordkey;
                         $redirect = url($redirect);
+                        session()->put('orderId',$orderId);
                     }
                 }
             }
