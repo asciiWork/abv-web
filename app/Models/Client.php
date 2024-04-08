@@ -22,9 +22,9 @@ class Client extends Model
         $data = array();
         $rules = [
             'name' => 'required|min:2',
-            'phone_1' => 'required',
+            'phone_1' => 'required|numeric|digits_between:10,15',
         ];
-        if ($id) {
+        /*if ($id) {
             $rules += [
                 'email' => 'required|unique:users,email,' . $id,
             ];
@@ -32,7 +32,7 @@ class Client extends Model
             $rules += [
                 'email' => 'required|unique:users,email',
             ];
-        }
+        }*/
         $validator = \Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $messages = $validator->messages();
