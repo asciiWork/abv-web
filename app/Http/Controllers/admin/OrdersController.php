@@ -14,19 +14,44 @@ use DataTables;
 
 class OrdersController extends Controller
 {
+    public function __construct()
+    {
+        $this->moduleRouteText = "admin-orders";
+        $this->moduleViewName = "adminPanel.orders";
+        $this->list_url = route($this->moduleRouteText . ".index");
+
+        $module = "Orders";
+        $this->module = $module;
+
+        $this->modelObj = new Order();
+        $this->addMsg = $module . " has been added successfully!";
+        $this->updateMsg = $module . " has been updated successfully!";
+        $this->deleteMsg = $module . " has been deleted successfully!";
+        $this->deleteErrorMsg = $module . " can not deleted!";
+
+        view()->share("list_url", $this->list_url);
+        view()->share("moduleRouteText", $this->moduleRouteText);
+        view()->share("moduleViewName", $this->moduleViewName);
+    }
     public function index()
     {
+        /*------------ACL-----------------*/
+        if (!\App\Models\ACL::isAccess()) {
+            return abort(404);
+        }
+        /*--------------------------------*/
     	$data = array();
-        $data['page_title'] = 'Orders';
-        $data['breadcrumb'] = 'Orders';
+        $data['page_title'] = 'Manage Orders';
+        $data['breadcrumb'] = array('Admin Orders' => '');
+        $data['add_url'] = route($this->moduleRouteText . '.create');
         $data['records'] = Order::select('orders.*','users.name')->join('users','users.id','orders.user_id')->get();
-        return view('adminPanel.orders.index',$data);
+        return view($this->moduleViewName . ".index", $data);
     }
     public function show($id)
     {
         $data = array();
         $data['page_title'] = 'Orders';
-        $data['breadcrumb'] = 'Orders';
+        $data['breadcrumb'] = array('Admin Orders' => '');
         $obj = Order::find($id);
         if(!$obj){
             return abort(404); 

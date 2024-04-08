@@ -52,7 +52,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::resource('admin-products', AdminProductsController::class);
 	Route::resource('quatations', QuatationsController::class);
 	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
-	Route::get('/contact-quick-view', [AdminProductsController::class,'contactQuickView'])->name('contact-quick-view');
 });
 Route::get('/', [PageController::class, 'index'])->name('web.index');
 Route::get('/about', [PageController::class, 'about'])->name('web.about');

@@ -2,12 +2,12 @@
 <div class="leftside-menu">
 
     <!-- Brand Logo Light -->
-    <a href="/admin" class="logo logo-light">
+    <a href="{{ route('admin-dashboard') }}" class="logo logo-light">
         <span class="logo-lgs">
-            <img src="{{ asset('public/web/assets/img/abv.png') }}" alt="logo">
+            <img src="{{ asset('public/web/assets/img/favicon.ico') }}" alt="logo">
         </span>
         <span class="logo-sm">
-            <img src="{{ asset('public/web/assets/img/abv.png') }}" alt="small logo">
+            <img src="{{ asset('public/web/assets/img/favicon-32x32.png') }}" alt="small logo">
         </span>
     </a>
 
@@ -24,7 +24,7 @@
                 </a>
             </li>
             @if(\App\Models\ACL::isAccess())
-            <li class="side-nav-item">
+            <li class="side-nav-item {{ (request()->routeIs('admin-users.*'))?'menuitem-active':'' }}">
                 <a href="{{ route('admin-users.index') }}" class="side-nav-link">
                     <i class="ri-user-line"></i>
                     <span> Users </span>
@@ -48,6 +48,40 @@
                     <i class="ri-pages-line"></i>
                     <span> Quotations </span>
                 </a>
+            </li>
+            <li class="side-nav-item {{ (request()->routeIs('admin-orders.*'))?'menuitem-active':'' }}">
+                <a href="{{ route('admin-orders.index') }}" class="side-nav-link">
+                    <i class="ri-pages-line"></i>
+                    <span> Orders </span>
+                </a>                
+            </li>
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                    <i class="ri-pages-line"></i>
+                    <span> Category </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarPages">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('admin-category.index') }}">List</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="side-nav-item">
+                <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                    <i class="ri-pages-line"></i>
+                    <span> Product </span>
+                    <span class="menu-arrow"></span>
+                </a>
+                <div class="collapse" id="sidebarPages">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('admin-products.index') }}">List</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
         <div class="clearfix"></div>
