@@ -128,7 +128,7 @@
                     </div>
                     <div class="single__product--nav swiper">
                         <div class="swiper-wrapper">
-                            @foreach($proimges as $proimg)
+                            @foreach($proimgesSmall as $proimg)
                             <div class="swiper-slide">
                                 <div class="product__media--nav__items">
                                     <img class="product__media--nav__items--img" src="{{ asset('public/web/assets/img/product/main-product/') }}/{{ $proimg->product_img_url }}" alt="product-nav-img">

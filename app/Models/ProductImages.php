@@ -13,7 +13,12 @@ class ProductImages extends Model
 	
 	public function get_ProductImages($id)
 	{
-		$productimg = DB::table('product_img')->where("product_id", $id)->get();
+		$productimg = DB::table('product_img')->where("product_id", $id)->where('pro_main','0')->get();
+    	return $productimg;
+	}
+	public function get_ProductImagesSmall($id)
+	{
+		$productimg = DB::table('product_img')->where("product_id", $id)->where('pro_main','1')->get();
     	return $productimg;
 	}
 }
