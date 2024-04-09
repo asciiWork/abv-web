@@ -6,7 +6,9 @@
         font-size: 3.1rem;
         font-weight: 600;
     }
-
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    th{ background-image: linear-gradient(to bottom, #0a0aca, #088ad5);
+    color: #fff;}
     .psize {
         /*border: 1px solid;*/
         font-weight: 400;
@@ -206,7 +208,7 @@
                         <div class="product__variant--list mb-20">
                             <fieldset class="variant__input--fieldset">
                                 <legend class="product__variant--title mb-8">Size :</legend>
-                                @if($productWithSize->is_table_size=='0')
+                                @if($catData[0]->is_table_view=='0')
                                     <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
                                         @foreach ($productSize->product_size as $r)
                                         <li class="variant__size--list mb-2">
@@ -232,19 +234,29 @@
                                     </div>
                                     @endforeach
                                 @else
-                                <table class="table table-bordered table-hover" style="border: 1px solid black;">
+                                @php
+                                $dArray = explode('*',$productWithSize->product_dimension);
+                                @endphp
+                                <table class="table table-bordered table-hover" style="border: 1px solid #00000017;text-align: center;">
                                   <thead>
                                     <tr>
-                                      <th scope="col">CODE</th>
-                                      <th scope="col">SIZE</th>
+                                      <th scope="col">Code No</th>
+                                      @foreach ($dArray as $d)
+                                      <th scope="col">{{$d}}</th>
+                                      @endforeach
                                       <th scope="col">PRISE</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     @foreach ($productSize->product_size as $r)
+                                    @php                                    
+                                    $myArray = explode('*', $r->product_size);
+                                    @endphp
                                     <tr class="ptsize" data-tab="{{$r->product_size}}">
                                         <td><strong>{{$r->product_code}}</strong></td>
-                                        <td><strong>{{$r->product_size}}</strong></td>
+                                            @foreach ($myArray as $s)
+                                                <td><strong>{{$s}}</strong></td>
+                                            @endforeach
                                             <td>
                                             @if($r->product_old_price>0)
                                             @if($r->product_old_price>0 && $r->product_current_price<=0) 
