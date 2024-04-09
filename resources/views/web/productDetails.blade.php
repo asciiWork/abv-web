@@ -244,7 +244,7 @@
                                       @foreach ($dArray as $d)
                                       <th scope="col">{{$d}}</th>
                                       @endforeach
-                                      <th scope="col">PRISE</th>
+                                      <th scope="col">Price</th>
                                     </tr>
                                   </thead>
                                   <tbody>
