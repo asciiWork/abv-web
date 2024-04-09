@@ -190,7 +190,9 @@ class PageController extends Controller
         $data['catData']=$productCategory;
         $proimgs = new ProductImages; 
         $proimges =  $proimgs->get_ProductImages($product->id);
+        $proimgesSmall =  $proimgs->get_ProductImagesSmall($product->id);
         $data['proimges']=$proimges;
+        $data['proimgesSmall']=$proimgesSmall;
         $proreview = new ProductReview; 
         $prore =  $proreview->get_ProductReview($product->id);
         $data['proReview']=$prore;
