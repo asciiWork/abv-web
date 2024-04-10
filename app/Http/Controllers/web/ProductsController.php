@@ -267,7 +267,7 @@ class ProductsController extends Controller
     public function shoppingPost(Request $request)
     {
         $status = 0;
-        $redirect = '';
+        $redirect = url('/checkout');
         $msg = 'Please try again later.';
         $data = array();
         $userId = null;
@@ -393,6 +393,7 @@ class ProductsController extends Controller
                     $obj->bil_zipcode = $request->get('bil_zipcode');
 
                     $obj->country = $request->get('country');
+                    $obj->gst_number = $request->get('gst_number');
                     $obj->note = $request->get('note');
                     $obj->contact_email = $request->get('contact_email');
                     $obj->order_status = Carts::$PLACED;

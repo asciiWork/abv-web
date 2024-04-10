@@ -41,6 +41,46 @@ $(document).ready(function() {
         }
         return false;
     });
+    $('#submit-form-razorpay').submit(function() {
+        if ($(this).parsley('isValid')) {
+            $('#AjaxLoaderDiv').fadeIn('slow');
+            $('#submit-form-razorpay #submit-form-razorpay-button').attr('disabled', true);
+            $.ajax({
+                type: "POST",
+                url: $(this).attr("action"),
+                data: new FormData(this),
+                contentType: false,
+                processData: false,
+                enctype: 'multipart/form-data',
+                success: function(result) {
+                    $('#AjaxLoaderDiv').fadeOut('slow');
+                    if (result.status == 1) {
+                        $.bootstrapGrowl(result.msg, {
+                            type: 'success',
+                            delay: 4000
+                        });
+                        rurl=result.redirect;
+                        window.location = rurl;
+                    } else {
+                        $.bootstrapGrowl(result.msg, {
+                            type: 'danger',
+                            delay: 4000
+                        });
+                    }
+                    $('#submit-form-razorpay #submit-form-razorpay-button').attr('disabled', false);
+                },
+                error: function(error) {
+                    $('#AjaxLoaderDiv').fadeOut('slow');
+                    $.bootstrapGrowl("Internal server error !", {
+                        type: 'danger',
+                        delay: 4000
+                    });
+                    $('#submit-form #submit-form-button').attr('disabled', false);
+                }
+            });
+        }
+        return false;
+    });
     $(document).on('click','.remove-cart-btn',function () {
         var pid = $(this).attr('data-id');
         var prosize = $(this).attr('data-size');

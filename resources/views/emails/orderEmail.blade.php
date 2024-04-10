@@ -36,12 +36,17 @@ Order #{{$order->order_number}} ( {{date('M d, Y', strtotime($order->order_date)
 <h3 style="color: red;">Billing address</h3>
 <p>{{$order->bil_name}}<br>{{$order->bil_company}}
     <br>{{$order->bil_area}}, {{$order->bil_city}}<br>{{$order->bill_state}}, {{$order->bil_zipcode}}<br>{{$order->country}}<br>{{$order->contact_email}}
-    <br>{{$order->bil_phone}}
+    <br>{{$order->bil_phone}}<br>GST No. :{{$order->gst_number}}
 </p>
 
 <h3 style="color: red;">Shipping address</h3>
-<p>{{$order->ship_name}}<br>{{$order->ship_company}}
-    <br>{{$order->ship_area}}, {{$order->ship_city}}<br>{{$order->ship_state}}, {{$order->ship_zipcode}}<br>{{$order->country}}<br>{{$order->contact_email}}
+<p>@if($order->ship_name!=''){{$order->ship_name}}@else{{$order->bil_name}}@endif<br>
+	@if($order->ship_company!=''){{$order->ship_company}}@else{{$order->bil_company}}@endif<br>
+	@if($order->ship_area!=''){{$order->ship_area}}@else{{$order->bil_area}}@endif ,
+	@if($order->ship_city!=''){{$order->ship_city}}@else{{$order->bil_city}}@endif<br>
+	@if($order->ship_state!=''){{$order->ship_state}}@else{{$order->bill_state}}@endif ,
+	@if($order->ship_zipcode!=''){{$order->ship_zipcode}}@else{{$order->bil_zipcode}}@endif<br>
+	{{$order->country}}<br>{{$order->contact_email}}
     <br>{{$order->ship_phone}}
 </p>
 

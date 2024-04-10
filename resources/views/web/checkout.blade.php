@@ -6,7 +6,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 <!-- Start checkout page area -->
 <div class="checkout__page--area section--padding">
     <div class="container">
-        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form','redirect'=>url('/checkout')]) !!}
+        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form-razorpay']) !!}
         <div class="row">
             <div class="col-lg-7 col-md-6">
                 <div class="main checkout__mian">
