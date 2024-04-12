@@ -22,10 +22,11 @@ class AdminController extends Controller
         $data['page_title'] = 'Dashboard';
         $userData=Auth::user();
         $data['userData'] = $userData;
+        $data['records'] = User::all()->take(4);
         $data['ordData'] = [];//Order::getOrderData(\Auth::user()->id);
         $data['sellingPrices'] = Admin::getSelling();
 
-        return view('adminPanel.dashboard',$data);
+        return view('adminPanel-2.dashboard',$data);
     }
     public function contact()
     {
