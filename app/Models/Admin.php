@@ -59,7 +59,7 @@ class Admin extends Authenticatable
         $data = array();
         $rules = [
             'name' => 'required|min:2',
-            'phone' => 'required',
+            'phone' => 'required|numeric|digits_between:10,15',
         ];
         if($id){
             $rules += [

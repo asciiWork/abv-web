@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/favicon.ico') }}">
 
     <!-- Daterangepicker css -->
     <link rel="stylesheet" href="{{ asset('public/admin-theme/assetsNew/vendor/daterangepicker/daterangepicker.css') }}">
@@ -37,7 +37,7 @@
         <link href="{{ asset('public/admin-theme/assetsNew/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
         <!-- Icons css -->
-        <link href="{{ asset('public/admin-theme/assetsNew/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('public/admin-theme/assetsNew/css/icons.min.css?1231') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('public/admin-theme/assetsNew/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('styles')
 

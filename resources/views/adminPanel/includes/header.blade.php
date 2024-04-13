@@ -8,20 +8,20 @@
                             <!-- Logo light -->
                             <a href="index.html" class="logo-light">
                                 <span class="logo-lg">
-                                    <img src="{{ asset('adminTheme/assetsNew/images/logo.png') }}" alt="logo">
+                                    <img src="{{ asset('public/web/assets/img/favicon-32x32.png')}}" alt="logo">
                                 </span>
                                 <span class="logo-sm">
-                                    <img src="{{ asset('adminTheme/assetsNew/images/logo-sm.png') }}" alt="small logo">
+                                    <img src="{{ asset('public/web/assets/img/favicon-32x32.png')}}" alt="small logo">
                                 </span>
                             </a>
 
                             <!-- Logo Dark -->
                             <a href="index.html" class="logo-dark">
                                 <span class="logo-lg">
-                                    <img src="{{ asset('adminTheme/assetsNew/images/logo-dark.png') }}" alt="dark logo">
+                                    <img src="{{ asset('public/web/assets/img/favicon-32x32.png')}}" alt="dark logo">
                                 </span>
                                 <span class="logo-sm">
-                                    <img src="{{ asset('adminTheme/assetsNew/images/logo-sm.png') }}" alt="small logo">
+                                    <img src="{{ asset('public/web/assets/img/favicon-32x32.png')}}" alt="small logo">
                                 </span>
                             </a>
                         </div>

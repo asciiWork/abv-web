@@ -267,11 +267,11 @@ class ProductsController extends Controller
     public function shoppingPost(Request $request)
     {
         $status = 0;
-        $redirect = '';
+        $redirect = url('/checkout');
         $msg = 'Please try again later.';
         $data = array();
         $userId = null;
-        $email=$request->get('contact_email');
+        $email=$request->get('user_email');
         if(\Auth::check()){
             $authUser = \Auth::user();
             $userId=$authUser->id;
@@ -290,7 +290,8 @@ class ProductsController extends Controller
             'bil_street' => 'required',
             'bil_zipcode' => 'required',
             'bil_phone' => 'required',
-            'contact_email' => 'required|email'
+            'contact_email' => 'required|email',
+            'user_email' => 'required|email'
         ];
         $selState = $request->get('bil_state');
         if($request->get('ship_me')){
@@ -306,10 +307,12 @@ class ProductsController extends Controller
             ];
             $selState = $request->get('ship_state');
         }
-        if(!\Auth::user()){
+        if(!\Auth::check()){
             $vslidateArr = $vslidateArr + [
-                'contact_email' => 'required|email|unique:users,email,'
+                'user_email' => 'required|email|unique:users,email,'
             ];
+        }else{
+            $userId = \Auth::user()->id;
         }
 
         $validator = Validator::make($request->all(),$vslidateArr);
@@ -327,7 +330,6 @@ class ProductsController extends Controller
         }
         else
         {
-            $email = $request->get('news_email');
             $is_new = 0;
             $is_new_pass = date('Ymdhis').rand(8,2);
             $products = Carts::getCartData();
@@ -340,21 +342,21 @@ class ProductsController extends Controller
                 }else{
                     $name=$request->get("bil_name");
                 }
+                $nusr = User::where('email',$email)->first();
+                if(empty($nusr)){
+                    $is_new = 1;
+                    $user = new User();
+                    $user->name = $name;
+                    $user->email = $email;
+                    $user->password = bcrypt($is_new_pass);
+                    $user->save();
+                    $userId = $user->id;
+                    //mail to user for password
+                }
                 if($order_id > 0 && $obj){
                     if(\Auth::check()){
                         $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
                     }else{
-                        $nusr = User::where('email',$email)->first();
-                        if(empty($nusr)){
-                            $is_new = 1;
-                            $user = new User();
-                            $user->name = $name;
-                            $user->email = $email;
-                            $user->password = bcrypt($is_new_pass);
-                            $user->save();
-                            $userId = $user->id;
-                            //mail to user for password
-                        }
                     }
                 }else{
                     $nusr = User::where('email',$email)->first();
@@ -366,8 +368,8 @@ class ProductsController extends Controller
                         $user->save();
                         $userId = $user->id;
                         //mail to user for password
+                        $is_new = 1;
                     }
-                    $is_new = 1;
                     $obj = new Order();
                 }
                 if($obj){
@@ -393,6 +395,7 @@ class ProductsController extends Controller
                     $obj->bil_zipcode = $request->get('bil_zipcode');
 
                     $obj->country = $request->get('country');
+                    $obj->gst_number = $request->get('gst_number');
                     $obj->note = $request->get('note');
                     $obj->contact_email = $request->get('contact_email');
                     $obj->order_status = Carts::$PLACED;
@@ -445,7 +448,11 @@ class ProductsController extends Controller
                     } else {
                         $shipping_flat_charge = ($total_qnt < 50)? 100:200;
                     }
-                    $cod_charge = ($total_price + $shipping_flat_charge) * 0.02;
+                    if ($request->get('payment_method') == 'razorpay') {
+                        $cod_charge = 0;
+                    }else{
+                        $cod_charge = ($total_price + $shipping_flat_charge) * 0.02;
+                    }
                     $gst_charge = ($total_price + $shipping_flat_charge + $cod_charge) * 0.18;
                     $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
                     $orderTexes = 0;//Product::$orderTexes;

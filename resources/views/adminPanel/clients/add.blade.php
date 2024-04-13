@@ -10,29 +10,37 @@
             <div class="card-body">
                 {!! Form::model($formObj,['method' => $method,'files' => true, 'route' => [$action_url,$action_params],'class' => '', 'id' => 'module-frm', 'redirect-url' => route($back_url)]) !!}
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label class="form-label">Name<span class="required">*</span></label>
                             {!! Form::text('name', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Name']) !!}
                         </div>
+                    </div>
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label class="form-label">Phone 1<span class="required">*</span></label>
                             {!! Form::text('phone_1', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Phone']) !!}
                         </div>
+                    </div>
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label class="form-label">Phone 2</label>
                             {!! Form::text('phone_2', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Phone']) !!}
                         </div>
+                    </div>
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label class="form-label">Phone 3</label>
                             {!! Form::text('phone_3', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Phone']) !!}
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">Email<span class="required">*</span></label>
-                            {!! Form::text('email', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Email']) !!}
+                            <label class="form-label">Email</label>
+                            {!! Form::text('email', null, ['class' => 'form-control','placeholder' => 'Enter Email']) !!}
                         </div>
+                    </div>
+                    <div class="col-lg-4">
                         <div class="mb-3">
                             <label class="form-label">Address</label>
                             {!! Form::textarea('address',null,['class' => 'form-control', 'data-required' => true]) !!}

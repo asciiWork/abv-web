@@ -6,7 +6,9 @@
         font-size: 3.1rem;
         font-weight: 600;
     }
-
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    th{ background-image: linear-gradient(to bottom, #0a0aca, #088ad5);
+    color: #fff;}
     .psize {
         /*border: 1px solid;*/
         font-weight: 400;
@@ -93,7 +95,7 @@
     }
     .ptsize-active{
         color: #ffffff !important;
-        background: #000081;
+        background-color: #000081 !important;
     }
 </style>
 @endsection
@@ -206,7 +208,7 @@
                         <div class="product__variant--list mb-20">
                             <fieldset class="variant__input--fieldset">
                                 <legend class="product__variant--title mb-8">Size :</legend>
-                                @if($productWithSize->is_table_size=='0')
+                                @if($catData[0]->is_table_view=='0')
                                     <ul class="variant__size d-flex" id="labelList" style="flex-wrap: wrap;">
                                         @foreach ($productSize->product_size as $r)
                                         <li class="variant__size--list mb-2">
@@ -214,10 +216,51 @@
                                         </li>
                                         @endforeach
                                     </ul>
-                                    @foreach ($productSize->product_size as $r)
+                                @else
+                                    @php
+                                    $dArray = explode('*',$productWithSize->product_dimension);
+                                    @endphp
+                                    <table class="table table-bordered table-hover" style="border: 1px solid #00000017;text-align: center;">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col">Code No</th>
+                                          @foreach ($dArray as $d)
+                                          <th scope="col">{{$d}}</th>
+                                          @endforeach
+                                          <th scope="col">Price</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        @foreach ($productSize->product_size as $r)
+                                        @php                                    
+                                        $myArray = explode('*', $r->product_size);
+                                        @endphp
+                                        <tr class="ptsize" data-tab="{{$r->product_size}}">
+                                            <td><strong>{{$r->product_code}}</strong></td>
+                                                @foreach ($myArray as $s)
+                                                    <td><strong>{{$s}}</strong></td>
+                                                @endforeach
+                                                <td>
+                                                @if($r->product_old_price>0)
+                                                @if($r->product_old_price>0 && $r->product_current_price<=0) 
+                                                    ₹{{$r->product_old_price}}&nbsp;
+                                                @elseif($r->product_current_price!=$r->product_old_price)
+                                                    <s>₹{{$r->product_old_price}}</s>&nbsp;
+                                                @endif
+                                                @endif
+                                                @if($r->product_current_price>0)
+                                                    <strong>₹{{$r->product_current_price}}</strong>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                      </tbody>
+                                    </table>
+                                @endif
+                                @foreach ($productSize->product_size as $r)
                                     <div id="{{$r->product_size}}" class="tab-price">
                                         <p></p>
-                                        <p class="">
+                                        <p>
                                             @if($r->product_old_price>0)
                                                 @if($r->product_old_price>0 && $r->product_current_price<=0) 
                                                     ₹{{$r->product_old_price}}&nbsp;
@@ -226,42 +269,11 @@
                                                 @endif
                                             @endif
                                             @if($r->product_current_price>0)
-                                                <strong class="current__price">₹{{$r->product_current_price}}</strong>
+                                                <strong class="current__price" data-price="{{$r->product_current_price}}">₹{{$r->product_current_price}}</strong>
                                             @endif
                                         </p>
                                     </div>
                                     @endforeach
-                                @else
-                                <table class="table table-bordered table-hover" style="border: 1px solid black;">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">CODE</th>
-                                      <th scope="col">SIZE</th>
-                                      <th scope="col">PRISE</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    @foreach ($productSize->product_size as $r)
-                                    <tr class="ptsize" data-tab="{{$r->product_size}}">
-                                        <td><strong>{{$r->product_code}}</strong></td>
-                                        <td><strong>{{$r->product_size}}</strong></td>
-                                            <td>
-                                            @if($r->product_old_price>0)
-                                            @if($r->product_old_price>0 && $r->product_current_price<=0) 
-                                                ₹{{$r->product_old_price}}&nbsp;
-                                            @elseif($r->product_current_price!=$r->product_old_price)
-                                                <s>₹{{$r->product_old_price}}</s>&nbsp;
-                                            @endif
-                                            @endif
-                                            @if($r->product_current_price>0)
-                                                <strong>₹{{$r->product_current_price}}</strong>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                  </tbody>
-                                </table>
-                                @endif
                             </fieldset>
                         </div>
                         <div class="product__variant--list quantity d-flex align-items-center mb-20">
@@ -499,7 +511,13 @@
         var labelList = document.getElementById("labelList");
         var tabContents = document.querySelectorAll(".tab-price");
         var inputElement = document.getElementById("inputValue");
-        $(".psize").click(function() { 
+        $(".psize").click(function() {
+            var qnt = document.querySelector('input[name=qnt]').value=1;
+            const innerDiv = document.querySelector('.tab-price.active .current__price');
+            if(innerDiv){
+                var price=innerDiv.dataset.price;
+                innerDiv.textContent = '₹'+price;
+            } 
             var listItems = $(".psize"); 
             for (let i = 0; i < listItems.length; i++) { 
                 listItems[i].classList.remove("psize-active"); 
@@ -508,12 +526,39 @@
         });
         $(".ptsize").click(function(event) { 
             var selectedTab = $(this).attr('data-tab');
+            if (selectedTab) {
+                var qnt = document.querySelector('input[name=qnt]').value=1;
+                const innerDiv = document.querySelector('.tab-price.active .current__price');
+                if(innerDiv){
+                    var price=innerDiv.dataset.price;
+                    innerDiv.textContent = '₹'+price;
+                }
             var listItems = $(".ptsize"); 
             for (let i = 0; i < listItems.length; i++) { 
                 listItems[i].classList.remove("ptsize-active"); 
-            } 
-            this.classList.add("ptsize-active");
-            inputElement.value = selectedTab; 
+            }
+                tabContents.forEach(function(tab) {
+                    tab.classList.remove("active");
+                });
+                document.getElementById(selectedTab).classList.add("active");
+                this.classList.add("ptsize-active");
+                inputElement.value = selectedTab; 
+            }
+
+        });
+        $(".increase").click(function(event) {
+            var qnt = document.querySelector('input[name=qnt]').value;
+            const innerDiv = document.querySelector('.tab-price.active .current__price');
+            var price=innerDiv.dataset.price;
+            var finVal=price*qnt;
+            innerDiv.textContent = '₹'+finVal;
+        });
+        $(".decrease").click(function(event) {
+            var qnt = document.querySelector('input[name=qnt]').value;
+            const innerDiv = document.querySelector('.tab-price.active .current__price');
+            var price= innerDiv.dataset.price;
+            var p=qnt*price;
+            innerDiv.textContent = '₹'+p;
         });
         labelList.addEventListener("click", function(event) {
             var selectedTab = event.target.dataset.tab;
