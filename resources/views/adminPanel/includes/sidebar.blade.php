@@ -1,90 +1,82 @@
-<!-- ========== Left Sidebar Start ========== -->
-<div class="leftside-menu">
+<aside class="sidebar-wrapper">
+    <div class="sidebar-header">
+        <div class="logo-icon">
+            <img src="{{ asset('public/web/assets/img/favicon-32x32.png')}}" class="logo-img" alt="">
+        </div>
+        <div class="logo-name flex-grow-1">
+            <h5 class="mb-0">ABV TOOL</h5>
+        </div>
+        <div class="sidebar-close ">
+            <span class="material-symbols-outlined">close</span>
+        </div>
+    </div>
+    <div class="sidebar-nav" data-simplebar="true">
 
-    <!-- Brand Logo Light -->
-    <a href="{{ route('admin-dashboard') }}" class="logo logo-light">
-        <span class="logo-lgs">
-            <img src="{{ asset('public/web/assets/img/favicon.ico') }}" alt="logo">
-        </span>
-        <span class="logo-sm">
-            <img src="{{ asset('public/web/assets/img/favicon-32x32.png') }}" alt="small logo">
-        </span>
-    </a>
-
-     
-    <!-- Sidebar -left -->
-    <div class="h-100" id="leftside-menu-container" data-simplebar>
-        <!--- Sidemenu -->
-        <ul class="side-nav">
-
-            <li class="side-nav-item">
-                <a href="{{ route('admin-dashboard') }}" class="side-nav-link">
-                    <i class="ri-dashboard-3-line"></i>
-                    <span> Dashboard </span>
+        <!--navigation-->
+        <ul class="metismenu" id="menu">
+            <li>
+                <a href="{{ route('admin-dashboard') }}">
+                    <div class="parent-icon"><span class="material-symbols-outlined">home</span>
+                    </div>
+                    <div class="menu-title">Dashboard</div>
                 </a>
             </li>
             @if(\App\Models\ACL::isAccess())
-            <li class="side-nav-item {{ (request()->routeIs('admin-users.*'))?'menuitem-active':'' }}">
-                <a href="{{ route('admin-users.index') }}" class="side-nav-link">
-                    <i class="ri-user-line"></i>
-                    <span> Users </span>
+            <li>
+                <a href="{{ route('admin-users.index') }}">
+                    <div class="parent-icon"><span class="material-symbols-outlined">account_circle</span>
+                    </div>
+                    <div class="menu-title">Users</div>
                 </a>
             </li>
-            <li class="side-nav-item">
-                <a href="{{ route('admin-clients.index') }}" class="side-nav-link">
-                    <i class="ri-user-line"></i>
-                    <span> Clients </span>
+            <li>
+                <a href="{{ route('admin-clients.index') }}">
+                    <div class="parent-icon"><span class="material-symbols-outlined">account_circle</span>
+                    </div>
+                    <div class="menu-title">Clients</div>
                 </a>
             </li>
             @endif
-            <li class="side-nav-item">
-                <a href="{{ route('admin-clients.print-address') }}" class="side-nav-link">
-                    <i class="ri-pages-line"></i>
-                    <span> Client's Address </span>
+            <li>
+                <a href="{{ route('admin-clients.print-address') }}">
+                    <div class="parent-icon"><span class="material-symbols-outlined">distance</span>
+                    </div>
+                    <div class="menu-title">Client's Address</div>
                 </a>
             </li>
-            <li class="side-nav-item">
-                <a href="{{ route('admin-quotations.index') }}" class="side-nav-link">
-                    <i class="ri-pages-line"></i>
-                    <span> Quotations </span>
+            <li>
+                <a href="{{ route('admin-quotations.index') }}">
+                    <div class="parent-icon"><span class="material-symbols-outlined">receipt_long</span>
+                    </div>
+                    <div class="menu-title">Quotations</div>
                 </a>
-            </li>
-            <li class="side-nav-item {{ (request()->routeIs('admin-orders.*'))?'menuitem-active':'' }}">
-                <a href="{{ route('admin-orders.index') }}" class="side-nav-link">
-                    <i class="ri-pages-line"></i>
-                    <span> Orders </span>
-                </a>                
-            </li>
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                    <i class="ri-pages-line"></i>
-                    <span> Category </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarPages">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="{{ route('admin-category.index') }}">List</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                    <i class="ri-pages-line"></i>
-                    <span> Product </span>
-                    <span class="menu-arrow"></span>
-                </a>
-                <div class="collapse" id="sidebarPages">
-                    <ul class="side-nav-second-level">
-                        <li>
-                            <a href="{{ route('admin-products.index') }}">List</a>
-                        </li>
-                    </ul>
-                </div>
             </li>
         </ul>
-        <div class="clearfix"></div>
     </div>
-</div>
-<!-- ========== Left Sidebar End ========== -->
+    <div class="sidebar-bottom dropdown dropup-center dropup">
+        <div class="dropdown-toggle d-flex align-items-center px-3 gap-3 w-100 h-100" data-bs-toggle="dropdown">
+            <div class="user-img">
+                <?php $img = \App\Models\Admin::getAvtar(\Auth::guard('admins')->user()->image); ?>
+
+                <img src="{{$img}}" alt="">
+            </div>
+            <div class="user-info">
+                <h5 class="mb-0 user-name">{{\Auth::guard('admins')->user()->name}}</h5>
+                <p class="mb-0 user-designation">{{\Auth::guard('admins')->user()->phone}}</p>
+            </div>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="javascript:;"><span class="material-symbols-outlined me-2">
+                        account_circle
+                    </span><span>Profile</span></a>
+            </li>
+            <li>
+                <div class="dropdown-divider mb-0"></div>
+            </li>
+            <li><a class="dropdown-item" href="{{ route('admin_logout') }}"><span class="material-symbols-outlined me-2">
+                        logout
+                    </span><span>Logout</span></a>
+            </li>
+        </ul>
+    </div>
+</aside>

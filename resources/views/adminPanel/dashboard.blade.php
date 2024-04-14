@@ -1,57 +1,237 @@
-@extends('adminPanel.layout.appNew')
+    @extends('adminPanel.layouts.appNew')
 
-@section('content')
-<div class="row">
-    @if($sellingPrices)
-    @foreach($sellingPrices as $user)
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex align-items-start justify-content-between">
-                    <div class="d-flex">
-                        <a class="me-3" href="#">
-                            <img class="avatar-md rounded-circle bx-s" src="{{$user['image']}}" alt="">
-                        </a>
-                        <div class="info">
-                            <h5 class="fs-18 my-1">{{$user['name']}}</h5>
-                            <p class="text-muted fs-15">{{$user['phone']}}</p>
+    @section('content')
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-xl-4 row-cols-xxl-4">
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-primary border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Today Order</p>
+                            <h4 class="mb-0 text-primary">248</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-primary text-white">
+                            <i class="bi bi-basket2-fill"></i>
                         </div>
                     </div>
-                    <div class="">Sell</div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
-                <hr>
-                <ul class="social-list list-inline mb-0 text-center">
-                    <li class="list-inline-item">
-                        <div class="card widget-flat text-bg-pink">
-                            <div class="card-body">
-                                <h6 class="text-uppercase mt-0" title="Customers">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yearly&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-                                <h2 class="my-2">₹{{ number_format($user['yearly'],2)}}</h2>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-inline-item">
-                        <div class="card widget-flat text-bg-info">
-                            <div class="card-body">
-                                <h6 class="text-uppercase mt-0" title="Customers">Monthly </h6>
-                                <h2 class="my-2">₹{{ number_format($user['monthly'],2)}}</h2>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-inline-item">
-                        <div class="card widget-flat text-bg-purple">
-                            <div class="card-body">
-                                <h6 class="text-uppercase mt-0" title="Customers">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Today&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h6>
-                                <h2 class="my-2">₹{{ number_format($user['today'],2)}}</h2>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
             </div>
-            <!-- card-body -->
         </div>
-        <!-- card -->
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-success border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Monthly Order</p>
+                            <h4 class="mb-0 text-success">$1,245</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-success text-white">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-danger border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Total Order</p>
+                            <h4 class="mb-0 text-danger">24.25%</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-danger text-white">
+                            <i class="bi bi-graph-down-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-warning border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Total Sales</p>
+                            <h4 class="mb-0 text-warning">214</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-warning text-dark">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    @endforeach
-    @endif
-</div>
-@endsection
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-xl-4 row-cols-xxl-4">
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-primary border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Today Sale</p>
+                            <h4 class="mb-0 text-primary">248</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-primary text-white">
+                            <i class="bi bi-basket2-fill"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-success border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Weekly Sale</p>
+                            <h4 class="mb-0 text-success">$1,245</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-success text-white">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-danger border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Monthly Sale</p>
+                            <h4 class="mb-0 text-danger">24.25%</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-danger text-white">
+                            <i class="bi bi-graph-down-arrow"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-warning border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <p class="mb-1">Yearly Sale</p>
+                            <h4 class="mb-0 text-warning">214</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-warning text-dark">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h6 class="mb-0 fw-bold">Sales Overview Daily</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h6 class="mb-0 fw-bold">Sales Overview Weekly</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h6 class="mb-0 fw-bold">Sales Overview Monthly</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h6 class="mb-0 fw-bold">Sales Overview Yearly</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="chart1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-4">
+        @if($sellingPrices)
+        @foreach($sellingPrices as $user)
+        <div class="col">
+            <div class="card radius-15">
+                <div class="card-body text-center">
+                    <div class="">
+                        <img src="{{$user['image']}}" width="110" height="110" class="rounded-circle shadow" alt="">
+                        <h5 class="mb-0 mt-5">{{$user['name']}}</h5>
+                        <p class="mb-3">{{$user['phone']}}</p>
+                        <div class="list-inline contacts-social mt-3 mb-3"> <a href="javascript:;" class="list-inline-item bg-facebook text-white border-0"><i class="bx bxl-facebook"></i></a>
+                            <a href="{{route('admin-sales-overview')}}" class="list-inline-item bg-twitter text-white border-0"><i class="bx bxl-twitter"></i></a>
+                            <a href="{{route('admin-sales-overview')}}" class="list-inline-item bg-google text-white border-0"><i class="bx bxl-google"></i></a>
+                            <a href="{{route('admin-sales-overview')}}" class="list-inline-item bg-linkedin text-white border-0"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                        <div class="d-grid">
+                            <a href="{{route('admin-sales-overview')}}" class="btn btn-sm btn-outline-primary radius-15">View Sales Overview </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+        @endif
+    </div>
+    @endsection

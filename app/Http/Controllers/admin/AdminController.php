@@ -34,4 +34,10 @@ class AdminController extends Controller
         $data['records'] = Contact::get();
         return view('adminPanel.contactDetails',$data);
     }
+    public function salesOverview()
+    {
+        $data = array();
+        $data['page_title'] = 'Sales Overview';
+        return view('adminPanel.salesOverview',$data);
+    }
 }
