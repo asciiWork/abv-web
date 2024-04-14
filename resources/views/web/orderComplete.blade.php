@@ -66,12 +66,11 @@
                         </div>
                         <div class="col-md-3 col-sm-6 col-12 m-b-md">
                             <div class="text-center">
-                                <p>Payment method<br><b>{{$order->payment_method}}</b></p>
+                                <p>Payment method<br><b>{{($order->payment_method == 'cod')?'Unpaid':'Paid'}}</b></p>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <p>Pay with cash upon delivery.</p>
                         <aside class="checkout__sidebar sidebar border-radius-10">
                             <h3 class="checkout__order--summary__title">Your Order</h3>
                             <p>

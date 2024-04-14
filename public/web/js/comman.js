@@ -45,6 +45,7 @@ $(document).ready(function() {
         if ($(this).parsley('isValid')) {
             $('#AjaxLoaderDiv').fadeIn('slow');
             $('#submit-form-razorpay #submit-form-razorpay-button').attr('disabled', true);
+            $.bootstrapGrowl("Order Placing...", {type: 'warning',delay: 4000});
             $.ajax({
                 type: "POST",
                 url: $(this).attr("action"),

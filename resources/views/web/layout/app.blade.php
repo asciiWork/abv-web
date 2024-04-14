@@ -149,7 +149,7 @@
 
   <script type="text/javascript" src="{{ asset('public/web/js/jquery.bootstrap-growl.min.js')}}"></script>
   <script type="text/javascript" src="{{ asset('public/web/js/parsley.js')}}"></script>
-  <script type="text/javascript" src="{{ asset('public/web/js/comman.js?124552')}}"></script>
+  <script type="text/javascript" src="{{ asset('public/web/js/comman.js?45255')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
   @yield('scripts')
 

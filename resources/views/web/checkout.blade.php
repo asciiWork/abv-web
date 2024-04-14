@@ -178,7 +178,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                         <textarea name="note" class="checkout__notes--textarea__field border-radius-5" id="order" placeholder="Notes about your order, e.g. special notes for delivery." spellcheck="false"></textarea>
                     </div>
                     <div class="checkout__content--step__footer d-flex align-items-center">
-                        <a class="continue__shipping--btn primary__btn border-radius-5" href="{{ route('web.products') }}">Continue To Shipping</a>
+                        <a class="continue__shipping--btn primary__btn border-radius-5" href="{{ route('web.products') }}">Continue To Shopping</a>
                         <a class="previous__link--content" href="{{ route('web.cart') }}">Return to cart</a>
                     </div>
                 </div>

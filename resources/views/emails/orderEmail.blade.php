@@ -10,6 +10,7 @@
 # You’ve received the following order from {{ ($user)?$user->name:'' }}
 @endif
 
+<br /><br />
 @if($order->payment_status == 'paid')
 <p> Paid Order </p>
 @else
@@ -24,7 +25,7 @@ Order #{{$order->order_number}} ( {{date('M d, Y', strtotime($order->order_date)
 | Product | Quantity | Price |
 |:-------------:|:-----------:|:-----------:|
 @foreach($orderItems as $item)
-| {{ $item->product_name }} ({{ $item->prosize }}) | {{ $item->quantity }} | ₹{{ number_format($item->amount,2) }} |
+| {{ $item->product_name }} - ({{ $item->product_code }}) ({{ $item->prosize }}) | {{ $item->quantity }} | ₹{{ number_format($item->amount,2) }} |
 @endforeach
 |||-----------|
 | |Subtotal| ₹{{ number_format($order->total_amount,2) }} |
@@ -34,12 +35,11 @@ Order #{{$order->order_number}} ( {{date('M d, Y', strtotime($order->order_date)
 | |Total| ₹{{ number_format($order->order_tax_amount_total,2) }} |
 @endcomponent
 
-<p><strong>Payment method:</strong> Cash on delivery</p>
 <p><strong>Note:</strong> {{$order->note}}</p>
 
 <h3 style="color: red;">Billing address</h3>
 <p>{{$order->bil_name}}<br>{{$order->bil_company}}
-    <br>{{$order->bil_street}}, {{$order->bil_area}} {{$order->bil_city}}<br>{{$order->bill_state}}, {{$order->bil_zipcode}}<br>{{$order->country}}<br>{{$order->contact_email}}
+    <br>{{$order->bil_street}}, {{$order->bil_area}} {{$order->bil_city}}<br>{{$order->bil_state}}, {{$order->bil_zipcode}}<br>{{$order->country}}<br>{{$order->contact_email}}
     <br>{{$order->bil_phone}}<br>GST No. :{{$order->gst_number}}
 </p>
 
@@ -49,7 +49,7 @@ Order #{{$order->order_number}} ( {{date('M d, Y', strtotime($order->order_date)
     @if($order->ship_street!=''){{$order->ship_street}}@else{{$order->bil_street}}@endif ,
     @if($order->ship_area!=''){{$order->ship_area}}@else{{$order->bil_area}}@endif ,
     @if($order->ship_city!=''){{$order->ship_city}}@else{{$order->bil_city}}@endif<br>
-    @if($order->ship_state!=''){{$order->ship_state}}@else{{$order->bill_state}}@endif ,
+    @if($order->ship_state!=''){{$order->ship_state}}@else{{$order->bil_state}}@endif ,
     @if($order->ship_zipcode!=''){{$order->ship_zipcode}}@else{{$order->bil_zipcode}}@endif<br>
     {{$order->country}}<br>{{$order->contact_email}}
     <br>{{$order->ship_phone}}

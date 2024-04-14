@@ -42,7 +42,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('admin-quotations/data', [QuotationsController::class,'data'])->name('admin-quotations.data');
 	Route::resource('admin-quotations', QuotationsController::class);
 
-
 	Route::get('admin-orders/data', [OrdersController::class,'data'])->name('admin-orders.data');
 	Route::resource('admin-orders', OrdersController::class);
 	Route::get('admin-orders/invoice/{id}', [OrdersController::class,'orderInvoice'])->name('admin-orders.invoice');
@@ -50,7 +49,6 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::resource('admin-category', CategoriesController::class);
 	Route::get('admin-products/data', [AdminProductsController::class,'data'])->name('admin-products.data');
 	Route::resource('admin-products', AdminProductsController::class);
-	Route::resource('quatations', QuatationsController::class);
 	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
 });
 Route::get('/', [PageController::class, 'index'])->name('web.index');

@@ -49,13 +49,14 @@ class OrderEmail extends Mailable
         $user_id = ($obj)? $obj->user_id:'';
         $user = User::find($user_id);
         $items = OrderDetail::getOrders($this->id);
+        $sendEmail =  ($this->is_customer)? $user->email:env("APP_EMAIL");
         if ($obj) {
             $subject = ($this->is_customer)? 'Your Abv Tools order has been received!':'New Order #'. $obj->order_number;
             $this->user = $user;
             $this->order = $obj;
             $this->orderItems = $items;
             return $this->subject($subject)
-            ->to($user->email)
+            ->to($sendEmail)
             ->cc(['abvtradesol@gmail.com'])
             ->markdown('emails.orderEmail');
         }

@@ -39,7 +39,7 @@
                     <div class="row py-4">
                         <div class="col-md-2 col-sm-6 col-12 m-b-md">
                             <div class="text-center">
-                                <p>Order Number<br><b>{{$order->order_number}}</b></p>
+                                <p>Order Number<br><b>{{substr($order->order_number,5)}}</b></p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-12 m-b-md">
@@ -81,7 +81,7 @@
                         <form action="{{ route('razorpay.payment.store') }}" method="POST">
                             <input type="hidden" name="order_id" value="{{$order->id}}">
                             @csrf
-                            <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{(number_format($order->order_tax_amount_total,2)*100)}}" data-buttontext="Pay Now" data-name="Abv Tools" data-description="Rozerpay" data-image="{{asset('public/web/assets/img/abv.png')}}" data-prefill.name="{{$order->bil_name}}" data-prefill.email="{{$order->contact_email}}" data-prefill.order_id="{{$order->id}}" data-theme.color="#005bf2">
+                            <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ env('RAZORPAY_KEY') }}" data-amount="{{($order->order_tax_amount_total*100)}}" data-buttontext="Pay Now" data-name="Abv Tools" data-description="Rozerpay" data-image="{{asset('public/web/assets/img/abv.png')}}" data-prefill.name="{{$order->bil_name}}" data-prefill.email="{{$order->contact_email}}" data-prefill.order_id="{{$order->id}}" data-theme.color="#005bf2">
                             </script>
                         </form>
                     </div>

@@ -108,9 +108,9 @@
                     <div class="col-sm-6">
                         <h2>Billing Address</h2>
                         <p class="account__details--desc">{{$order->bil_name}}<br>
-                            {{$order->bil_street}} , {{$order->bil_area}}<br>
+                            {{$order->bil_street}}, {{$order->bil_area}}<br>
                             {{$order->bil_city}} {{$order->bil_zipcode}}<br>
-                            {{$order->bil_state}}<br>
+                            {{$order->bil_state}}, India<br>
                             {{$order->bil_phone}}<br>
                         </p>
                         <p>{{$order->contact_email}}</p>
@@ -119,11 +119,11 @@
                         <h2>Shipping Address</h2>
                         <p class="account__details--desc">
                             @if($order->ship_name) {{$order->ship_name}} @else {{$order->bil_name}} @endif <br>
-                            @if($order->ship_street) {{$order->ship_street}} @else {{$order->bil_street}} @endif ,
-                            @if($order->ship_area) {{$order->ship_area}} @else {{$order->bil_area}} @endif <br>
-                            @if($order->ship_city) {{$order->ship_city}} @else {{$order->bil_city}} @endif ,
+                            @if($order->ship_street){{$order->ship_street}}@else{{$order->bil_street}}@endif,
+                            @if($order->ship_area){{$order->ship_area}}@else{{$order->bil_area}}@endif<br>
+                            @if($order->ship_city) {{$order->ship_city}} @else {{$order->bil_city}} @endif 
                             @if($order->ship_zipcode) {{$order->ship_zipcode}} @else {{$order->bil_zipcode}} @endif <br>
-                            @if($order->ship_state) {{$order->ship_state}} @else {{$order->bil_state}} @endif <br>
+                            @if($order->ship_state){{$order->ship_state}}@else{{$order->bil_state}}@endif, India<br>
                             @if($order->ship_phone) {{$order->ship_phone}} @else {{$order->bil_phone}} @endif <br>
                         </p>
                     </div>

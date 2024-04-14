@@ -30,104 +30,71 @@ class ProductsController extends Controller
         $prosize = $request->get('prosize');
         $qnt = $request->get('qnt');
         $prd = Product::find($id);
-        if($prosize){
-            if($prd){
-                if(\Auth::check())
-                {
-                    $order_id = session()->get('order_id');
-                    $obj = Order::where('id',$order_id)->where('user_id',\Auth::user()->id)->first();
-                    if($obj && $order_id > 0){
-                        $tmpOrd = OrderDetail::where('order_id',$order_id)->where('product_id',$id)->where('prosize',$prosize)
-                        ->first();
-                        if($tmpOrd){
-                            $tmpOrd->quantity = $tmpOrd->quantity + $qnt;
-                            $tmpOrd->save();
-                            $tmpOrd->total_amount = $tmpOrd->amount * $tmpOrd->quantity;
-                            $tmpOrd->save();
-                        }
-                    }else{
-                        $authUser = \Auth::user();
-                        $cart = Carts::where('product_id',$id)->where('user_id',$authUser->id)->where('prosize',$prosize)->first();
-                        if($cart){
-                            $cart->quantity = $cart->quantity + $qnt;
-                            $cart->save();
-                        }else{
-                            $proSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
-                            $cart = new Carts();
-                            $cart->user_id = $authUser->id;
-                            $cart->product_id = $id;
-                            $cart->quantity = $qnt;
-                            $cart->prosize = $proSize->product_size;
-                            $cart->price = $proSize->product_current_price;
-                            $cart->created_at = \Carbon\Carbon::now();
-                            $cart->updated_at = \Carbon\Carbon::now();
-                            $cart->save();
-                        }
-                    }
-
-                    $status = 1;
-                    $msg = 'Product has been added!';
+        if($prosize && $prd){
+            $proImg = ProductImages::where('product_id', $id)->where('pro_main', '1')->first();
+            $prdSize = ProductSize::where('product_id', $id)->where('product_size', $prosize)->first();
+            $cartSlug = $id . $prosize;
+            $user_id = (\Auth::check())? \Auth::user()->id:'';
+            if(\Auth::check()){
+                $existsCart = Carts::where('user_id', $user_id)->where('product_id', $id)->where('prosize', $prosize)->first();
+                if($existsCart){
+                    $existsCart->quantity = $existsCart->quantity + 1;
+                    $existsCart->save();
                 }else{
-                    $order_id = session()->get('order_id');
-                    $obj = Order::where('id',$order_id)->first();
-                    if($obj && $order_id > 0){
-                        $tmpOrd = OrderDetail::where('order_id',$order_id)->where('product_id',$id)->where('prosize',$prosize)
-                        ->first();
-                        if($tmpOrd){
-                            $tmpOrd->quantity = $tmpOrd->quantity + $qnt;
-                            $tmpOrd->save();
-                            $tmpOrd->total_amount = $tmpOrd->amount * $tmpOrd->quantity;
-                            $tmpOrd->save();
-                        }
-                    }else{
-                        $proImg = ProductImages::where('product_id',$id)->where('pro_main','1')->first();
-                        $prdSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
-                        $cart = session()->get('cart');
-                        $cartSlug = $id. $prosize;
-                        if(!$cart) {
-                            $cart = [
-                                $cartSlug => [
-                                    'product_img' => $proImg->product_img_url,
-                                    'product_name' => $prd->product_name,
-                                    'prosize' => $prosize,
-                                    'price' => $prdSize->product_current_price,
-                                    'slug' => $prd->product_slug,
-                                    'qnt' => $qnt,
-                                    'id' => $id,
-                                ]
-                            ];
-                            session()->put('cart', $cart);
-                        }
-                        else if(isset($cart[$cartSlug])){
-                            $cart[$cartSlug]['qnt']++;
-                            session()->put('cart', $cart);
-                        }
-                        else{
-                            $proImg = ProductImages::where('product_id',$id)->where('pro_main','1')->first();
-                            $prdSize = ProductSize::where('product_id',$id)->where('product_size',$prosize)->first();
-                            $sesCart = session()->get('cart');
-                            $sesCart = $sesCart + [
-                                $cartSlug => [
-                                    'product_img' => $proImg->product_img_url,
-                                    'product_name' => $prd->product_name,
-                                    'prosize' => $prosize,
-                                    'price' => $prdSize->product_current_price,
-                                    'slug' => $prd->product_slug,
-                                    'qnt' => $qnt,
-                                    'id' => $id,
-                                ]
-                            ];
-                            session()->put('cart', $sesCart);
-                        }
-                    }
-                    $status = 1;
-                    $msg = 'Product has been added!';
+                    $tempCart = new Carts();
+                    $tempCart->price = $prdSize->product_current_price;
+                    $tempCart->prosize = $prosize;
+                    $tempCart->quantity = $qnt;
+                    $tempCart->user_id = $user_id;
+                    $tempCart->product_id = $id;
+                    $tempCart->save();
                 }
+                $status = 1;
+                $msg = 'Product has been added!';
+            }else{
+                $cart = session()->get('cart');
+                if (!$cart) {
+                    $cart = [
+                        $cartSlug => [
+                            'product_img' => $proImg->product_img_url,
+                            'product_name' => $prd->product_name,
+                            'prosize' => $prosize,
+                            'price' => $prdSize->product_current_price,
+                            'slug' => $prd->product_slug,
+                            'qnt' => $qnt,
+                            'product_id' => $id,
+                            'id' => $id,
+                            'user_id' => $user_id,
+                        ]
+                    ];
+                    session()->put('cart', $cart);
+                } else if (isset($cart[$cartSlug])) {
+                    $cart[$cartSlug]['qnt']++;
+                    session()->put('cart', $cart);
+                }else{
+                    $sesCart = session()->get('cart');
+                    $sesCart = $sesCart + [
+                        $cartSlug => [
+                            'product_img' => $proImg->product_img_url,
+                            'product_name' => $prd->product_name,
+                            'prosize' => $prosize,
+                            'price' => $prdSize->product_current_price,
+                            'slug' => $prd->product_slug,
+                            'qnt' => $qnt,
+                            'product_id' => $id,
+                            'id' => $id,
+                            'user_id' => $user_id,
+                        ]
+                    ];
+                    session()->put('cart', $sesCart);
+                }
+                $status = 1;
+                $msg = 'Product has been added!';
             }
         }else{
             $status = 0;
-            $msg = 'Please select size'; 
-        }       
+            $msg = 'Please select size';
+        }
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }
     public function removeCart(Request $request)
@@ -135,25 +102,17 @@ class ProductsController extends Controller
         $status = 0;
         $msg = 'Please try again later!';
         $data = array();
-        $id = $request->get('id');
-        $psize = $request->get('size');
-        // $prd = Product::find($id);
+        $product_id = $request->get('id');
+        $prosize = $request->get('size');
         if(\Auth::check())
         {
-            $authUser = \Auth::user();
-            $order_id = session()->get('order_id');
-            $obj = Order::where('id',$order_id)->where('user_id',$authUser->id)->first();
-            if($obj && $order_id > 0){
-                OrderDetail::where('order_id',$order_id)->delete();
-                Order::where('id',$order_id)->where('user_id',$authUser->id)->delete();
-            }else{
-                Carts::where('id',$id)->where('user_id',$authUser->id)->delete();
-            }
+            $user_id = \Auth::user()->id;
+            Carts::where('user_id', $user_id)->where('product_id', $product_id)->where('prosize', $prosize)->delete();
             $status = 1;
             $msg = 'Product has been removed!';
         }else{
             $cart = session()->get('cart');
-            $uniq = $id.$psize;
+            $uniq = $product_id. $prosize;
             if(isset($cart[$uniq])){
                 unset($cart[$uniq]);
                 session()->put('cart', $cart);
@@ -168,67 +127,33 @@ class ProductsController extends Controller
         $status = 0;
         $msg = 'Please try again later!';
         $data = array();
-        $id = $request->get('id');
         $type = $request->get('ctype');
-        $psize = $request->get('size');
-        $prd = Product::find($id);
+        $product_id = $request->get('id');
+        $prosize = $request->get('size');
+        $prd = Product::find($product_id);
         if($prd){
             if(\Auth::check())
             {
-                $authUser = \Auth::user();
-                $order_id = session()->get('order_id');
-                $obj = Order::where('id',$order_id)->where('user_id',$authUser->id)->first();
-                if($obj && $order_id > 0){
-                    $tmobj = OrderDetail::where('order_id',$order_id)->where('id',$id)->first();
-                    if($tmobj){
-                        if($type == 'plus'){
-                            $qnt=$tmobj->quantity + 1;
-                            $tmobj->quantity = $tmobj->quantity + 1;
-                            $tmobj->total_amount = $qnt *$tmobj->amount;
-                            $tmobj->save();
-
-                            $totOrdamt = OrderDetail::where('order_id', $order_id)->sum('total_amount');
-                            $obj->order_tax_amount_total =$totOrdamt;
-                            $obj->total_amount=$totOrdamt+$obj->shipping_charge;
-                            $obj->save();
-                        }else{
-                            if($tmobj->quantity > 1){
-                                $qnt=$tmobj->quantity - 1;
-                                $tmobj->quantity = $tmobj->quantity - 1;
-                                $tmobj->total_amount = $qnt *$tmobj->amount;
-                                $tmobj->save();
-
-                                $totOrdamt = OrderDetail::where('order_id', $order_id)->sum('total_amount');
-                                $obj->order_tax_amount_total =$totOrdamt;
-                                $obj->total_amount=$totOrdamt+$obj->shipping_charge;
-                                $obj->save();
-                            }else{
-                                $tmobj->delete();
-                            }
-                        }
-                    }
-                }else{
-                    $cart = Carts::where('id',$id)->where('user_id',$authUser->id)->first();
-                    if($cart){
-                        if($type == 'plus'){
-                            $cart->quantity = $cart->quantity + 1;
+                $user_id = \Auth::user()->id;
+                $cart = Carts::where('product_id', $product_id)->where('prosize', $prosize)->where('user_id', $user_id)->first();
+                if($cart){
+                    if($type == 'plus'){
+                        $cart->quantity = $cart->quantity + 1;
+                        $cart->save();
+                    }else{
+                        if($cart->quantity > 1){
+                            $cart->quantity = $cart->quantity - 1;
                             $cart->save();
                         }else{
-                            if($cart->quantity > 1){
-                                $cart->quantity = $cart->quantity - 1;
-                                $cart->save();
-                            }else{
-                                $cart->delete();
-                            }
+                            $cart->delete();
                         }
                     }
                 }
-
                 $status = 1;
                 $msg = 'Product has been updated!';
             }else{
                 $cart = session()->get('cart');
-                $unq = $id.$psize;
+                $unq = $product_id. $prosize;
                 if(isset($cart[$unq])){
                     if($type == 'plus'){
                         $cart[$unq]['qnt']++;
@@ -264,7 +189,7 @@ class ProductsController extends Controller
             return redirect('/cart');
         }
     }
-    public function shoppingPost(Request $request)
+    public function shoppingPostOld(Request $request)
     {
         $status = 0;
         $redirect = url('/checkout');
@@ -496,6 +421,265 @@ class ProductsController extends Controller
                         session()->put('orderId',$orderId);
                     }
                 }
+            }
+        }
+        return ['status' => $status, 'msg' => $msg, 'data' => $data, 'redirect' => $redirect];
+    }
+    public function shoppingPost(Request $request)
+    {
+        $status = 0;
+        $redirect = url('/checkout');
+        $msg = 'Please try again later.';
+        $data = array();
+        $userId = (\Auth::check())? \Auth::user()->id:'';
+        $email = $request->get('user_email');
+        if (!$userId) {
+            $confUser = User::where('email', $email)->first();
+            if ($confUser) {
+                return ['status' => 0, 'msg' => "Email alredy exists, please login first.", 'data' => $data];
+            }
+        }
+        $vslidateArr = [
+            'bil_name' => 'required|min:2',
+            'country' => 'required|not_in:-1',
+            'bil_state' => 'required',
+            'bil_city' => 'required',
+            'bil_street' => 'required',
+            'bil_zipcode' => 'required',
+            'bil_phone' => 'required',
+            'contact_email' => 'required|email',
+            'user_email' => 'required|email',
+            'payment_method' => 'required'
+        ];
+        $selState = $request->get('bil_state');
+        if ($request->get('ship_me')) {
+            $vslidateArr = $vslidateArr + [
+                'ship_name' => 'required|min:2',
+                'ship_country' => 'required',
+                'ship_state' => 'required',
+                'ship_city' => 'required',
+                'ship_street' => 'required',
+                'ship_area' => 'required',
+                'ship_zipcode' => 'required',
+                'ship_phone' => 'required',
+            ];
+            $selState = $request->get('ship_state');
+        }
+        if (!$userId) {
+            $vslidateArr = $vslidateArr + [
+                'user_email' => 'required|email|unique:users,email,'
+            ];
+        }
+        $validator = Validator::make($request->all(), $vslidateArr);
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) {
+                $msg .= $message . "<br />";
+            }
+        } else {
+            $is_new = 0;
+            $is_new_pass = date('Ymdhis') . rand(8, 2);
+            $products = Carts::getCartData();
+            $payment_method = $request->get('payment_method');
+            $username = (!empty($request->get("ship_name"))) ? $request->get("ship_name") : $request->get("bil_name");
+            if (!$userId) {
+                $is_new = 1;
+                $user = new User();
+                $user->name = $username;
+                $user->email = $email;
+                $user->password = bcrypt($is_new_pass);
+                $user->save();
+                $userId = $user->id;
+            }
+            if($payment_method == 'razorpay'){
+                $orderUniqueKey = 'rp_order_' . md5(date('Y-m-d H:s:i'));
+                $temp = new TempOrder();
+                $temp->order_number = $orderUniqueKey;
+                $temp->user_id = $userId;
+                $temp->ship_name = $request->get('ship_name');
+                $temp->ship_phone = $request->get('ship_phone');
+                $temp->ship_street = $request->get('ship_street');
+                $temp->ship_company = $request->get('ship_company');
+                $temp->ship_area = $request->get('ship_area');
+                $temp->ship_city = $request->get('ship_city');
+                $temp->ship_state = $request->get('ship_state');
+                $temp->ship_zipcode = $request->get('ship_zipcode');
+                $temp->ship_date = date('Y-m-d H:s:i');
+                $temp->bil_name = $request->get('bil_name');
+                $temp->bil_phone = $request->get('bil_phone');
+                $temp->bil_street = $request->get('bil_street');
+                $temp->bil_company = $request->get('bil_company');
+                $temp->bil_area = $request->get('bil_area');
+                $temp->bil_city = $request->get('bil_city');
+                $temp->bil_state = $request->get('bil_state');
+                $temp->bil_zipcode = $request->get('bil_zipcode');
+                $temp->country = $request->get('country');
+                $temp->gst_number = $request->get('gst_number');
+                $temp->note = $request->get('note');
+                $temp->is_new_user = $is_new;
+                $temp->is_new_pass = $is_new_pass;
+                $temp->is_new_email = $email;
+                $temp->contact_email = $request->get('contact_email');
+                $temp->order_status = Carts::$PLACED;
+                $temp->order_date = date('Y-m-d H:s:i');
+                $temp->created_at = date('Y-m-d H:s:i');
+                $temp->updated_at = date('Y-m-d H:s:i');
+                $temp->payment_method = 'razorpay';
+                $temp->save();
+                $orderId = $temp->id;
+                $temp->ordkey = $orderId .'_'. $orderUniqueKey;
+                $temp->save();
+
+                $total_price = 0;
+                $total_qnt = 0;
+                $shipping_flat_charge = 0;
+                $cod_charge = 0;
+                foreach ($products as $p) {
+                    $qnt = $p['qnt'];
+                    $slug = $p['slug'];
+                    $product_id = $p['product_id'];
+                    $amount = $p['price'];
+                    $prosize = $p['prosize'];
+                    $total_qnt += $p['qnt'];
+                    $prdcutObj = Product::where('product_slug', $slug)->first();
+                    if ($prdcutObj && $qnt > 0) {
+                        $tObj = new TempOrderDetail();
+                        $tObj->order_id = $orderId;
+                        $tObj->product_id = $product_id;
+                        $tObj->discount = 0;
+                        $tObj->amount = $amount;
+                        $tObj->quantity = $qnt;
+                        $tObj->total_amount = $qnt * $amount;
+                        $tObj->unit_price = $amount;
+                        $tObj->prosize = $prosize;
+                        $tObj->created_at = date('Y-m-d H:s:i');
+                        $tObj->updated_at = date('Y-m-d H:s:i');
+                        $tObj->save();
+                        $total_price = $total_price + $tObj->total_amount;
+                    }
+                }
+                if ($selState != 'Gujarat') {
+                    $shipping_flat_charge = ($total_qnt < 50) ? 130 : 260;
+                } else {
+                    $shipping_flat_charge = ($total_qnt < 50) ? 100 : 200;
+                }
+                $gst_charge = ($total_price + $shipping_flat_charge + $cod_charge) * 0.18;
+                $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
+                $temp->discount = 0;
+                $temp->tax = $gst_charge;
+                $temp->shipping_flat_charge = $shipping_flat_charge;
+                $temp->gst_charge = $gst_charge;
+                $temp->cod_charge = $cod_charge;
+                $temp->shipping_charge = $shipping_flat_charge;
+                $temp->total_amount = $total_price;
+                $temp->order_tax_amount_total = $order_tax_amount_total;
+                $temp->save();
+
+                $redirect = 'order-pay/' . $orderId . '/' . $temp->ordkey;
+                $redirect = url($redirect);
+                session()->put('orderId', $orderId);
+                return ['status' => 1, 'msg' => 'Pay Order', 'data' => $data, 'redirect' => $redirect];
+            }else{
+                $newOrder = new Order();
+                $newOrder->order_number = Order::getOrderNo();
+                $newOrder->user_id = $userId;
+                $newOrder->ship_name = $request->get('ship_name');
+                $newOrder->ship_phone = $request->get('ship_phone');
+                $newOrder->ship_street = $request->get('ship_street');
+                $newOrder->ship_company = $request->get('ship_company');
+                $newOrder->ship_area = $request->get('ship_area');
+                $newOrder->ship_city = $request->get('ship_city');
+                $newOrder->ship_state = $request->get('ship_state');
+                $newOrder->ship_zipcode = $request->get('ship_zipcode');
+                $newOrder->ship_date = date('Y-m-d H:s:i');
+                $newOrder->bil_name = $request->get('bil_name');
+                $newOrder->bil_phone = $request->get('bil_phone');
+                $newOrder->bil_street = $request->get('bil_street');
+                $newOrder->bil_company = $request->get('bil_company');
+                $newOrder->bil_area = $request->get('bil_area');
+                $newOrder->bil_city = $request->get('bil_city');
+                $newOrder->bil_state = $request->get('bil_state');
+                $newOrder->bil_zipcode = $request->get('bil_zipcode');
+                $newOrder->country = $request->get('country');
+                $newOrder->gst_number = $request->get('gst_number');
+                $newOrder->note = $request->get('note');
+                $newOrder->contact_email = $request->get('contact_email');
+                $newOrder->order_status = Carts::$PLACED;
+                $newOrder->order_date = date('Y-m-d H:s:i');
+                $newOrder->created_at = date('Y-m-d H:s:i');
+                $newOrder->updated_at = date('Y-m-d H:s:i');
+                $newOrder->payment_method = 'cod';
+                $newOrder->save();
+                $orderId = $newOrder->id;
+                $newOrder->ordkey = $orderId . '_rp_order_' . md5(date('Y-m-d H:s:i'));
+                $newOrder->save();
+
+                $total_price = 0;
+                $total_qnt = 0;
+                $shipping_flat_charge = 0;
+                foreach ($products as $p) {
+                    $qnt = $p['qnt'];
+                    $slug = $p['slug'];
+                    $product_id = $p['product_id'];
+                    $amount = $p['price'];
+                    $prosize = $p['prosize'];
+                    $total_qnt += $p['qnt'];
+                    $prdcutObj = Product::where('product_slug', $slug)->first();
+                    if ($prdcutObj && $qnt > 0) {
+                        $dOrder = new OrderDetail;
+                        $dOrder->order_id = $orderId;
+                        $dOrder->product_id = $product_id;
+                        $dOrder->discount = 0;
+                        $dOrder->amount = $amount;
+                        $dOrder->quantity = $qnt;
+                        $dOrder->total_amount = $qnt * $amount;
+                        $dOrder->unit_price = $amount;
+                        $dOrder->prosize = $prosize;
+                        $dOrder->created_at = date('Y-m-d H:s:i');
+                        $dOrder->updated_at = date('Y-m-d H:s:i');
+                        $dOrder->save();
+                        $total_price = $total_price + $dOrder->total_amount;
+                    }
+                }
+                if ($selState != 'Gujarat') {
+                    $shipping_flat_charge = ($total_qnt < 50) ? 130 : 260;
+                } else {
+                    $shipping_flat_charge = ($total_qnt < 50) ? 100 : 200;
+                }
+                $cod_charge = ($total_price + $shipping_flat_charge) * 0.02;
+                $gst_charge = ($total_price + $shipping_flat_charge + $cod_charge) * 0.18;
+                $order_tax_amount_total = $gst_charge + $total_price + $shipping_flat_charge + $cod_charge;
+                $newOrder->discount = 0;
+                $newOrder->tax = $gst_charge;
+                $newOrder->shipping_flat_charge = $shipping_flat_charge;
+                $newOrder->gst_charge = $gst_charge;
+                $newOrder->cod_charge = $cod_charge;
+                $newOrder->shipping_charge = $shipping_flat_charge;
+                $newOrder->total_amount = $total_price;
+                $newOrder->order_tax_amount_total = $order_tax_amount_total;
+                $newOrder->save();
+
+                if (\Auth::check()) {
+                    Carts::where('user_id', \Auth::user()->id)->delete();
+                }
+                UserAddresses::addOrderAddress($orderId, $userId);
+                $status = 1;
+                $msg = 'Order has been placed!';
+                session()->forget('cart');
+                //mail for order
+                $orderData = array();
+                $orderData['id'] = $orderId;
+                $orderData['email'] = $email;
+                $orderData['password'] = $is_new_pass;
+                $orderData['is_new'] = $is_new;
+                $orderData['is_customer'] = 1;
+                \Mail::send(new \App\Mail\OrderEmail($orderData));
+
+                $orderData['is_customer'] = 0;
+                $orderData['email'] = env("APP_EMAIL");
+                \Mail::send(new \App\Mail\OrderEmail($orderData));
             }
         }
         return ['status' => $status, 'msg' => $msg, 'data' => $data, 'redirect' => $redirect];

@@ -11,6 +11,8 @@ use App\Models\ProductImages;
 use App\Models\Contact;
 use App\Models\Carts;
 use App\Models\Order;
+use App\Models\TempOrder;
+use App\Models\TempOrderDetail;
 use App\Models\OrderDetail;
 use App\Models\UserAddresses;
 use App\Models\User;
@@ -245,7 +247,7 @@ class PageController extends Controller
         $ranProduct =  $proData->get_random_product();
         $data['ranProduct']=$ranProduct;
         return view('web.cart', $data);
-    }    
+    }
     public function gallery()
     {
         $data = array();
@@ -260,16 +262,16 @@ class PageController extends Controller
             $data['orderDet'] = OrderDetail::getOrders($id);
             return view('web.orderComplete', $data);
         }else{
-            return redirect()->url('/');
+            return redirect()->route('web.index');
         }
     }
     public function viewOrderPay($id,$key){
         if($id){
-            $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->first();
+            $tObj = TempOrder::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->first();
             if($tObj){
                 session()->put('orderId',$id);
                 $data['order'] = $tObj;
-                $data['orderDet'] = OrderDetail::getOrders($id);
+                $data['orderDet'] = TempOrderDetail::getOrders($id);
                 return view('web.orderPay', $data);
             }
         }
