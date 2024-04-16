@@ -1,4 +1,4 @@
-@extends('adminPanel.layout.appNew')
+@extends('adminPanel.layouts.appNew')
 @section('content')
 
 <div class="row">
@@ -57,6 +57,6 @@
     </div>
 </div>
 @endsection
-@section('scripts')
-<script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
+@section('adminscript')
+<script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js?1234') }}"></script>
 @endsection

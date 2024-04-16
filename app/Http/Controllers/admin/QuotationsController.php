@@ -39,6 +39,8 @@ class QuotationsController extends Controller
         $data['breadcrumb'] = array('Admin Quotations' => '');
         $data['qnStatics'] = Quotation::getStatics();
         $data['add_url'] = route($this->moduleRouteText . '.create');
+        $data['quaData'] = Quotation::quaData();
+        $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
     public function create()

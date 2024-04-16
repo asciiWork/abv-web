@@ -22,7 +22,18 @@ class AdminController extends Controller
         $data['page_title'] = 'Dashboard';
         $userData=Auth::user();
         $data['userData'] = $userData;
-        $data['ordData'] = [];//Order::getOrderData(\Auth::user()->id);
+        $data['totalOrdersToday']= Quotation::totalOrdersToday();
+        $data['MonthlyOrders']= Quotation::MonthlyOrders();
+        $data['totalOrders']= Quotation::totalOrders();
+        $data['totalSale']= Quotation::totalSale();
+        $data['totalSaleToday']= Quotation::totalSaleToday();
+        $data['totalSaleWeekly']= Quotation::totalSaleWeekly();
+        $data['monthlySale']= Quotation::monthlySale();
+        $data['yearSale']= Quotation::yearSale();
+        $data['dailySalesOverview']= Quotation::dailySalesOverview();
+        $data['weeklySalesOverview']= Quotation::weeklySalesOverview();
+        $data['monthlySalesOverview']= Quotation::monthlySalesOverview();
+        $data['yearlySalesOverview']= Quotation::yearlySalesOverview();
         $data['sellingPrices'] = Admin::getSelling();
 
         return view('adminPanel.dashboard',$data);
@@ -34,10 +45,27 @@ class AdminController extends Controller
         $data['records'] = Contact::get();
         return view('adminPanel.contactDetails',$data);
     }
-    public function salesOverview()
+    public function salesOverview($id)
     {
         $data = array();
         $data['page_title'] = 'Sales Overview';
+        $userData=Admin::find($id);
+        if(!$userData){
+            return abort(404); 
+        }
+        $data['userData'] = $userData;
+        $data['totalOrders']= Quotation::totalOrders($id);
+        $data['totalOrdersToday']= Quotation::totalOrdersToday($id);
+        $data['MonthlyOrders']= Quotation::MonthlyOrders($id);
+        $data['totalSale']= Quotation::totalSale($id);
+        $data['totalSaleToday']= Quotation::totalSaleToday($id);
+        $data['totalSaleWeekly']= Quotation::totalSaleWeekly($id);
+        $data['monthlySale']= Quotation::monthlySale($id);
+        $data['yearSale']= Quotation::yearSale($id);
+        $data['dailySalesOverview']= Quotation::dailySalesOverview($id);
+        $data['weeklySalesOverview']= Quotation::weeklySalesOverview($id);
+        $data['monthlySalesOverview']= Quotation::monthlySalesOverview($id);
+        $data['yearlySalesOverview']= Quotation::yearlySalesOverview($id);
         return view('adminPanel.salesOverview',$data);
     }
 }

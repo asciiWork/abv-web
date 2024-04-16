@@ -1,6 +1,8 @@
-@extends('adminPanel.layout.appNew')
-@section('styles')
-<link href="{{ asset('public/admin-theme/assetsNew/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+@extends('adminPanel.layouts.appNew')
+@section('adminStyle')
+<link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 @endsection
 @section('content')
 <div class="row">
@@ -15,7 +17,7 @@
                 <!-- Invoice Logo-->
                 <div class="clearfix">
                     <div class="float-start mb-3">
-                        <img src="{{asset('public/web/assets/img/abv.png')}}" alt="dark logo">
+                        <img src="{{asset('public/web/assets/img/favicon.ico')}}" alt="dark logo">
                     </div>
                     <div class="float-end">
                         <h4 class="m-0 d-print-none">Quotation</h4>
@@ -90,7 +92,7 @@
                                         <th>Taxable Value</th>
                                         <th>Tax Amount(18%)</th>
                                         <th>Amount</th>
-                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><i class=" ri-file-add-line"></i></a></th>
+                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><span class="material-symbols-outlined">new_window</span></a></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tbodyTr">
@@ -133,7 +135,7 @@
                                             </div>
                                         </td>
                                         <td class="float-end">
-                                            <a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i></a>
+                                            <a class="btn btn-danger delete-item-tr"><span class="material-symbols-outlined">disabled_by_default</span></a>
                                         </td>
                                     </tr>
                                     </tr>
@@ -175,7 +177,7 @@
     </div>
 </div>
 @endsection
-@section('scripts')
+@section('adminscript')
 <script>
     $(document).ready(function() {
         $('#add_tr').click(function() {
@@ -189,17 +191,17 @@
             html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td>';
-            html += '<td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i ></a></td ></tr>';
+            html += '<td class="float-end" ><a class="btn btn-danger delete-item-tr"><span class="material-symbols-outlined">disabled_by_default</span></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
                 $('#product-option-' + num).append($(this).clone());
             });
-            $(".select2").select2({
+            /*$(".select2").select2({
                 placeholder: "Search Client",
                 allowClear: true,
                 width: null
-            });
+            });*/
         });
         $(document).on("click", ".delete-item-tr", function() {
             $(this).closest('tr').remove();
@@ -281,5 +283,6 @@
     }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
-<script src=" {{ asset('public/admin-theme/assetsNew/vendor/select2/js/select2.min.js') }}"></script>
+<script src=" {{ asset('public/admin-theme/assetsRoksyn/plugins/select2/js/select2.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection

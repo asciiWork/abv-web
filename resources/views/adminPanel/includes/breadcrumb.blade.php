@@ -20,3 +20,15 @@
         </nav>
     </div>
 </div>
+<div id="successAlert" class="alert border-0 bg-success-subtle alert-dismissible fade" style="display: none;">
+    <div class="d-flex align-items-center">
+      <div class="text-success" id="successMessage"></div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<div id="errorAlert" class="alert border-0 bg-danger-subtle alert-dismissible fade" style="display: none;">
+    <div class="d-flex align-items-center">
+      <div class="text-danger" id="errorMessage"></div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>

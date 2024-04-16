@@ -1,3 +1,6 @@
+@php
+$crrRoute = \Route::currentRouteName();
+@endphp
 <aside class="sidebar-wrapper">
     <div class="sidebar-header">
         <div class="logo-icon">
@@ -14,7 +17,7 @@
 
         <!--navigation-->
         <ul class="metismenu" id="menu">
-            <li>
+            <li class="{{ ($crrRoute == 'admin-dashboard')?'mm-active':'' }}">
                 <a href="{{ route('admin-dashboard') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">home</span>
                     </div>
@@ -22,14 +25,14 @@
                 </a>
             </li>
             @if(\App\Models\ACL::isAccess())
-            <li>
+            <li class="{{ (request()->routeIs('admin-users.*'))?'mm-active':'' }}">
                 <a href="{{ route('admin-users.index') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">account_circle</span>
                     </div>
                     <div class="menu-title">Users</div>
                 </a>
             </li>
-            <li>
+            <li class="{{ (request()->routeIs('admin-clients.*'))?'mm-active':'' }}">
                 <a href="{{ route('admin-clients.index') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">account_circle</span>
                     </div>
@@ -37,14 +40,14 @@
                 </a>
             </li>
             @endif
-            <li>
+            <li class="{{ ($crrRoute == 'admin-clients.print-address')?'mm-active':'' }}">
                 <a href="{{ route('admin-clients.print-address') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">distance</span>
                     </div>
                     <div class="menu-title">Client's Address</div>
                 </a>
             </li>
-            <li>
+            <li class="{{ (request()->routeIs('admin-quotations.*'))?'mm-active':'' }}">
                 <a href="{{ route('admin-quotations.index') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">receipt_long</span>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class Quotation extends Model
 {
@@ -16,6 +17,12 @@ class Quotation extends Model
         return Quotation::select('quotations.*','admin_users.name as uname','clients.name as cname')
         ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
         ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id');
+    }
+    public static function quaData()
+    {
+        return Quotation::select('quotations.*','admin_users.name as uname','clients.name as cname')
+        ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
+        ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')->get();
     }
     public static function getQuotationNumber()
     {
@@ -106,5 +113,146 @@ class Quotation extends Model
         }
 
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
+    }
+    public static function totalOrdersToday($user_id=''){
+        $startOfDay = Carbon::now()->startOfDay();
+        $endOfDay = Carbon::now()->endOfDay();
+        $totalOrdersToday= Quotation::where('is_invoice',1)->whereBetween('created_at', [$startOfDay, $endOfDay]);
+        if($user_id!=''){
+            $totalOrdersToday =$totalOrdersToday->where('user_id',$user_id);
+        }
+        return $totalOrdersToday->count();
+    }
+    public static function MonthlyOrders($user_id=''){
+        $MonthlyOrders= Quotation::where('is_invoice',1)->whereMonth('created_at', Carbon::now()->month)
+        ->whereYear('created_at', Carbon::now()->year);
+        if($user_id!=''){
+            $MonthlyOrders =$MonthlyOrders->where('user_id',$user_id);
+        }
+        return $MonthlyOrders->count();
+    }
+    public static function totalOrders($user_id=''){
+        $totalOrders= Quotation::where('is_invoice',1);
+        if($user_id!=''){
+                $totalOrders =$totalOrders->where('user_id',$user_id);
+        }
+        return $totalOrders->count();
+    }
+    public static function totalSale($user_id=''){
+        $totalSale=DB::table('quotations')
+        ->where('is_invoice',1);
+        if($user_id!=''){
+            $totalSale =$totalSale->where('user_id',$user_id);
+        }
+        return $totalSale->sum('final_total_amount');
+    }
+    public static function totalSaleToday($user_id=''){
+        $today = Carbon::today()->toDateString();
+        $totalSaleToday=Quotation::whereDate('created_at', $today)->where('is_invoice',1);
+        if($user_id!=''){
+            $totalSaleToday =$totalSaleToday->where('user_id',$user_id);
+        }
+        return $totalSaleToday->sum('final_total_amount');
+    }
+    public static function totalSaleWeekly($user_id=''){
+        $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
+        $endOfWeek = Carbon::now()->endOfWeek()->toDateString();
+        $totalSaleWeekly= Quotation::whereBetween('created_at', [$startOfWeek, $endOfWeek])->where('is_invoice',1);
+        if($user_id!=''){
+                $totalSaleWeekly =$totalSaleWeekly->where('user_id',$user_id);
+        }
+        return $totalSaleWeekly->sum('final_total_amount');
+    }
+    public static function monthlySale($user_id=''){
+        $startOfMonth = Carbon::now()->startOfMonth()->toDateString();
+        $endOfMonth = Carbon::now()->endOfMonth()->toDateString();
+        $monthlySale=Quotation::whereBetween('created_at', [$startOfMonth, $endOfMonth])->where('is_invoice',1);
+        if($user_id!=''){
+                $monthlySale =$monthlySale->where('user_id',$user_id);
+        }
+        return $monthlySale->sum('final_total_amount');
+    }
+    public static function yearSale($user_id=''){
+        $startOfYear = Carbon::now()->startOfYear();
+        $endOfYear = Carbon::now()->endOfYear();
+        $yearSale=Quotation::whereBetween('created_at', [$startOfYear, $endOfYear])->where('is_invoice',1);
+        if($user_id!=''){
+                $yearSale =$yearSale->where('user_id',$user_id);
+        }
+        return $yearSale->sum('final_total_amount');
+    }
+    public static function dailySalesOverview($user_id=''){
+        $dailyData = Quotation::select(
+            DB::raw('DAYNAME(created_at) as day_name'),
+            DB::raw('COUNT(id) as total_orders')
+        )->where('is_invoice',1);
+        if($user_id!=''){
+            $dailyData =$dailyData->where('user_id',$user_id);
+        }
+        $dailyData=$dailyData->groupBy('day_name')
+        ->orderByRaw("FIELD(day_name, 'Mon', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')")
+        ->get();
+        $dailyOverviewTot = $salesdayName=[];
+        foreach ($dailyData as $data) {
+            $dailyOverviewTot[] = $data->total_orders;
+            $salesdayName[] = $data->day_name;
+            $data->day_name. $data->total_orders;
+        }
+        return ['dailyOverviewTot'=>$dailyOverviewTot,'salesdayName'=>$salesdayName];
+    }
+    public static function weeklySalesOverview($user_id=''){
+      $salesOverview = Quotation::select(
+            DB::raw('YEAR(created_at) as year_number'),
+            DB::raw('WEEK(created_at, 1) as week_number'), // 1 specifies that the week starts on Monday
+            DB::raw('COUNT(id) as total_orders')
+        )->where('is_invoice',1);
+        if($user_id!=''){
+            $salesOverview =$salesOverview->where('user_id',$user_id);
+        }
+        $salesOverview = $salesOverview->groupBy('year_number', 'week_number')->get();
+
+        $weekOverviewTot = $salesweekNum=[];
+        foreach ($salesOverview as $overview) {
+            $weekOverviewTot[] = $overview->total_orders;
+            $salesweekNum[] = 'Week '.$overview->week_number;
+        }
+        return ['weekOverviewTot'=>$weekOverviewTot,'salesweekNum'=>$salesweekNum];
+    }
+    public static function monthlySalesOverview($user_id=''){
+        $monthlyData = Quotation::select(
+            DB::raw('YEAR(created_at) as year_number'),
+            DB::raw('MONTH(created_at) as month_number'),
+            DB::raw('SUM(final_total_amount ) as total_sum_of_price'),
+            DB::raw('COUNT(id) as total_orders')
+        )->where('is_invoice',1);
+        if($user_id!=''){
+            $monthlyData =$monthlyData->where('user_id',$user_id);
+        }
+        $monthlyData=$monthlyData->groupBy('year_number', 'month_number')->get();
+        $monthNames = [1 => 'Jan',2 => 'Feb',3 => 'Mar',4 => 'Apr',5 => 'May',6 => 'Jun',7 => 'Jul',8 => 'Aug',9 => 'Sep',10 => 'Oct',11 => 'Nov',12 => 'Dec'];
+        $monthOverviewTot=$monthName = [];
+        foreach ($monthlyData as $data) {
+          $monthName[] = $monthNames[$data->month_number];
+          $monthOverviewTot[] = $data->total_orders;
+        }
+        return ['monthOverviewTot'=>$monthOverviewTot,'monthName'=>$monthName];
+    }
+    public static function yearlySalesOverview($user_id=''){
+        $yearlyData = Quotation::select(
+            DB::raw('YEAR(created_at) as year_number'),
+            DB::raw('SUM(final_total_amount) as total_sum_of_price'),
+            DB::raw('COUNT(id) as total_orders')
+        )->where('is_invoice',1);
+        if($user_id!=''){
+            $yearlyData =$yearlyData->where('user_id',$user_id);
+        }
+        $yearlyData=$yearlyData->groupBy('year_number')
+        ->get();
+        $yearOverviewTot = $salesyearNum=[];
+        foreach ($yearlyData as $data) {
+            $yearOverviewTot[] = $data->total_orders;
+            $salesyearNum[] = 'Year '.$data->year_number;
+        }
+        return ['yearOverviewTot'=>$yearOverviewTot,'salesyearNum'=>$salesyearNum];
     }
 }

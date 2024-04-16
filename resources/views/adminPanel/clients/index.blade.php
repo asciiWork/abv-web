@@ -1,69 +1,84 @@
-@extends('adminPanel.layout.appNew')
+@extends('adminPanel.layouts.appNew')
+@section('adminStyle')
+<link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
+@endsection
 @section('content')
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <div>
-                    <a href="{{$add_url}}" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        Add New
-                    </a>
-                </div>
-            </div>
-            <div class="card-body">
-                <table id="server-side-datatables" class="table table-striped dt-responsive nowrap w-100">
-                    <thead>
+<div class="row g-3">
+    <!-- <div class="col-auto">
+        <div class="position-relative">
+            <input class="form-control px-5" type="text" placeholder="Search Customers">
+            <span class="material-symbols-outlined position-absolute ms-3 translate-middle-y start-0 top-50 fs-5">search</span>
+        </div>
+    </div> -->
+    <div class="col-auto">
+        <div class="d-flex align-items-center gap-2 justify-content-lg-end">
+            <a href="{{$add_url}}" class="btn btn-primary px-4"><i class="bi bi-plus-lg me-2"></i>Add New</a>
+        </div>
+    </div>
+</div><!--end row-->
+<div class="card mt-4">
+    <div class="card-body">
+        <div class="customer-table">
+            <div class="table-responsive white-space-nowrap">
+                <table id="example1" class="table align-middle">
+                    <thead class="table-light">
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Address</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody> </tbody>
+                    <tbody>
+                        @foreach($clientData as $usr)
+                            <tr>
+                                <td>
+                                    <a href="javascript:;">#{{ $usr->id }}</a>
+                                </td>
+                                <td>{{ $usr->name }}</td>
+                                <td>{{ $usr->email }}</td>
+                                <td>
+                                    <?php
+                                    $phone = '# '. $usr->phone_1;
+                                    if($usr->phone_2){
+                                        $phone .= '<br># '. $usr->phone_2;
+                                    }
+                                    if($usr->phone_3){
+                                        $phone .= '<br># ' . $usr->phone_3;
+                                    }
+                                    echo $phone;                                    
+                                    ?>
+                                </td>
+                                <td>
+                                    <a href="{{ route($currentRoute.'.edit',$usr->id) }}"><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Edit<i class="bi bi-pencil-square ms-2"></i></span></a>
+                                </td>
+                            </tr>
+                        @endforeach  
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
                 </table>
-
-            </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
-</div> <!-- end row-->
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
-@section('scripts')
+@section('adminscript')
+<script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
 <script type="text/javascript">
-    var MODULE_URL = "{!! route($moduleRouteText.'.data') !!}";
-    var dataColumns = [{
-            data: 'id',
-            name: 'id'
-        },
-        {
-            data: 'name',
-            name: 'name'
-        },
-        {
-            data: 'email',
-            name: 'email'
-        },
-        {
-            data: 'phone_1',
-            name: 'phone_1'
-        },
-        {
-            data: 'address',
-            name: 'address'
-        },
-        {
-            data: 'action',
-            orderable: false,
-            searchable: false
-        }
-    ];
+    $(document).ready(function() {
+        $('#example1').DataTable();
+    });
 </script>
 <script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?123') }}"></script>
 @endsection

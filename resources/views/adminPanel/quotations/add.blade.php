@@ -1,6 +1,6 @@
-@extends('adminPanel.layout.appNew')
-@section('styles')
-<link href="{{ asset('public/admin-theme/assetsNew/vendor/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+@extends('adminPanel.layouts.appNew')
+@section('adminStyle')
+<link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <div class="row">
@@ -15,7 +15,7 @@
                 <!-- Invoice Logo-->
                 <div class="clearfix">
                     <div class="float-start mb-3">
-                        <img src="{{asset('public/web/assets/img/abv.png')}}" alt="dark logo">
+                        <img src="{{asset('public/web/assets/img/favicon.ico')}}" alt="dark logo">
                     </div>
                     <div class="float-end">
                         <h4 class="m-0 d-print-none">Quotation</h4>
@@ -91,7 +91,7 @@
                                         <th>Taxable Value</th>
                                         <th>Tax Amount(18%)</th>
                                         <th>Amount</th>
-                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><i class=" ri-file-add-line"></i></a></th>
+                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><span class="material-symbols-outlined">new_window</span></a></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tbodyTr">
@@ -169,30 +169,30 @@
     </div>
 </div>
 @endsection
-@section('scripts')
+@section('adminscript')
 <script>
     $(document).ready(function() {
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><select name="product_id[]" data-toggle="select2" class="select2 form-control product-items" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><select name="product_id[]" data-toggle="select2" class="select2 form-control product-items" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select><span id="last-product-price-' + num + '"></span></td>';
             html += '<input name="product_name[]" type="hidden" value="" id="product-name-' + num + '">';
             html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
             html += '<td><input name="product_actual_price[]" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"></td>';
             html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
             html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="ri-file-reduce-line"></i ></a></td ></tr>';
+            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><span class="material-symbols-outlined">disabled_by_default</span></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
                 $('#product-option-' + num).append($(this).clone());
             });
-            $(".select2").select2({
+            /*$(".select2").select2({
                 placeholder: "Search Client",
                 allowClear: true,
                 width: null
-            });
+            });*/
         });
         $(document).on("click", ".delete-item-tr", function() {
             $(this).closest('tr').remove();
@@ -254,7 +254,15 @@
                 }
             });
         } else {
-            $.NotificationApp.send("Note!", "Select client if want the last product price!", 'top-right', 'rgba(0,0,0,0.2)', 'info');
+            /*$.NotificationApp.send("Note!", "Select client if want the last product price!", 'top-right', 'rgba(0,0,0,0.2)', 'info');*/
+            Lobibox.notify('info', {
+                title: 'Note!',
+                pauseDelayOnHover: true,
+                continueDelayOnInactiveTab: false,
+                position: 'top right',
+                icon: 'bi bi-info-circle-fill',
+                msg: 'Select client if want the last product price!'
+            });
         }
     }
 
@@ -297,5 +305,5 @@
     }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
-<script src=" {{ asset('public/admin-theme/assetsNew/vendor/select2/js/select2.min.js') }}"></script>
+<script src=" {{ asset('public/admin-theme/assetsRoksyn/plugins/select2/js/select2.min.js') }}"></script>
 @endsection

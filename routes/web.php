@@ -30,7 +30,7 @@ Route::prefix('/admin')->controller(AdminLoginController::class)->group(function
     });
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('/dashboard', [AdminController::class,'index'])->name('admin-dashboard');
-	Route::get('/dashboard/sales-overview', [AdminController::class, 'salesOverview'])->name('admin-sales-overview');
+	Route::get('/dashboard/sales-overview/{id}', [AdminController::class, 'salesOverview'])->name('admin-sales-overview');
 	Route::get('admin-users/data', [UsersController::class,'data'])->name('admin-users.data');
 	Route::resource('admin-users', UsersController::class);
 

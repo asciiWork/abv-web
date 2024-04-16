@@ -38,6 +38,8 @@ class ClientsController extends Controller
         $data['page_title'] = "Manage Clients";
         $data['breadcrumb'] = array('Clients' => '');
         $data['add_url'] = route($this->moduleRouteText . '.create');
+        $data['clientData'] = Client::select('*')->get();;
+        $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
     public function create()

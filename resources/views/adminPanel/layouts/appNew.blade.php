@@ -7,15 +7,15 @@
     <title>Abv Tools | Management System</title>
 
     <!--plugins-->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet">
     <!-- loader-->
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/pace.min.css') }}" rel="stylesheet">
     <script src="{{ asset('public/admin-theme/assetsRoksyn/js/pace.min.js') }}"></script>
     <!--Styles-->
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('public/admin-theme/assetsRoksyn/css/icons.css') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -24,6 +24,7 @@
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/semi-dark-theme.css') }}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/minimal-theme.css') }}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/shadow-theme.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('public/admin-theme/assetsRoksyn/plugins/notifications/css/lobibox.min.css')}}">
     @yield('adminStyle')
 </head>
 
@@ -92,12 +93,11 @@
     <script src="{{ asset('public/admin-theme/assetsRoksyn/js/jquery.min.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/metismenu/js/metisMenu.min.js')}}"></script>
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/simplebar/js/simplebar.min.js')}}"></script>
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/apex/apexcharts.min.js')}}"></script>
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/index.js')}}"></script>
     <!--BS Scripts-->
     <script src="{{ asset('public/admin-theme/assetsRoksyn/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/js/main.js')}}"></script>
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/notifications/js/lobibox.min.js')}}"></script>
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/notifications/js/notifications.min.js')}}"></script>
     @yield('adminscript')
 </body>
 

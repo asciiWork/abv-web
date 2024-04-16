@@ -43,7 +43,9 @@ class UsersController extends Controller
         $data = array();
         $data['page_title'] = "Manage Admin Users";
         $data['breadcrumb'] = array('Admin Users' => '');
+        $data['userData'] = Admin::select('*')->get();;
         $data['add_url'] = route($this->moduleRouteText . '.create');
+        $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
     public function create()

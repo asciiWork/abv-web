@@ -31,6 +31,7 @@ class Admin extends Authenticatable
         }
         $users = $users->get();
         foreach ($users as $user) {
+            $data[$user->id]['id'] = $user->id;
             $data[$user->id]['name'] = $user->name;
             $data[$user->id]['phone'] = $user->phone;
             $data[$user->id]['image'] = Admin::getAvtar($user->image);

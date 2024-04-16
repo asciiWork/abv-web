@@ -1,4 +1,4 @@
-@extends('adminPanel.layout.appNew')
+@extends('adminPanel.layouts.appNew')
 @section('content')
 
 <div class="row">
@@ -36,7 +36,7 @@
     </div>
 </div>
 @endsection
-@section('scripts')
+@section('adminscript')
 <script>
     $(document).ready(function() {
         $(document).on("change", "#client-select-box", function() {

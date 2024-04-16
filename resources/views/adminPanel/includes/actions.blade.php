@@ -1,7 +1,7 @@
 <div class="flex gap-4 items-center module-action">
     @if(isset($isEdit) && $isEdit)
-    <a href="{{ route($currentRoute.'.edit',$row->id) }}" title="Edit" class="btn btn-xs btn-primary">
-        <i class="ri-edit-line"></i>
+    <a href="{{ route($currentRoute.'.edit',$row->id) }}" title="Edit" class="">
+        <span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Edit<i class="bi bi-check2 ms-2"></i></span>
     </a>
     @endif
     @if(isset($isDelete) && $isDelete)
@@ -19,8 +19,8 @@
     @endif
     @if(isset($isInvoice) && $isInvoice)
     @if($row->is_invoice == 0)
-    <a data-id="{{ $row->id }}" href="{{ route($currentRoute.'.make-invoice', $row->id) }}" onclick="return confirm('Are you sure you want to make this as invoice?')" title="Make as invoice" class="btn btn-xs btn-warning">
-        <i class="ri-file-2-line"></i>
+    <a data-id="{{ $row->id }}" href="{{ route($currentRoute.'.make-invoice', $row->id) }}" onclick="return confirm('Are you sure you want to make this as invoice?')" title="Make as invoice">
+        <span class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Invoice<i class="bi bi-check2 ms-2"></i></span>
     </a>
     @endif
     @endif
