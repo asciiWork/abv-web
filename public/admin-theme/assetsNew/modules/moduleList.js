@@ -31,6 +31,10 @@ $(document).ready(function() {
         ajax: {
             url: MODULE_URL,
             data: function(data) {
+                data.search_name = $("#search-frm input[name='search_name']").val();
+                data.search_company = $("#search-frm input[name='search_company']").val();
+                data.search_phone = $("#search-frm input[name='search_phone']").val();
+                data.search_address = $("#search-frm input[name='search_address']").val();
                 data.search_user = $("#search-frm input[name='user_id']").val();
                 data.search_number = $("#search-frm input[name='number']").val();
                 data.search_client_name = $("#search-frm input[name='client_name']").val();
@@ -41,14 +45,5 @@ $(document).ready(function() {
             [0, "desc"]
         ],
         columns: dataColumns,
-        "language": {
-            "paginate": {
-                "previous": "<i class='ri-arrow-left-s-line'>",
-                "next": "<i class='ri-arrow-right-s-line'>"
-            }
-        },
-        "drawCallback": function () {
-            $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
-        }
     });
 });

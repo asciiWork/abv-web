@@ -3,11 +3,6 @@
         <div class="btn-toggle-menu">
             <span class="material-symbols-outlined">menu</span>
         </div>
-        <div class="d-lg-block d-none search-bar">
-            <button class="btn btn-sm w-100 d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <span class="material-symbols-outlined">search</span>Search
-            </button>
-        </div>
         <ul class="navbar-nav top-right-menu gap-2">
             <li class="nav-item d-lg-none d-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <a class="nav-link" href="javascript:;"><span class="material-symbols-outlined">

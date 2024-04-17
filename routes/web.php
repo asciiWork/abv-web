@@ -34,6 +34,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('admin-users/data', [UsersController::class,'data'])->name('admin-users.data');
 	Route::resource('admin-users', UsersController::class);
 
+	Route::post('admin-clients/print-address/search', [ClientsController::class, 'printAddressSearch'])->name('admin-clients.search-address');
 	Route::get('admin-clients/print-address', [ClientsController::class, 'printAddress'])->name('admin-clients.print-address');
 	Route::get('admin-clients/data', [ClientsController::class,'data'])->name('admin-clients.data');
 	Route::resource('admin-clients', ClientsController::class);

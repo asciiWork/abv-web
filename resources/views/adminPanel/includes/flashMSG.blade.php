@@ -1,14 +1,14 @@
 @if(Session::has('success_message'))
-<div class="alert alert-primary alert-dismissible text-bg-primary border-0 fade show" role="alert">
-	<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-	<strong>{!! Session::get('success_message')!!}</strong>
+<div class="alert border-0 border-success border-start border-4 bg-success-subtle alert-dismissible fade show">
+	<div class="text-success">{!! Session::get('success_message')!!}</div>
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 
 @if(Session::has('error_message'))
-<div class="alert alert-warning alert-dismissible text-bg-primary border-0 fade show" role="alert">
-	<button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
-	<strong>{!! Session::get('error_message')!!}</strong>
+<div class="alert border-0 border-danger border-start border-4 bg-danger-subtle alert-dismissible fade show">
+	<div class="text-danger">{!! Session::get('error_message')!!}</div>
+	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
 

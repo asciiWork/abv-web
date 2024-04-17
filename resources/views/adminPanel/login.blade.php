@@ -28,7 +28,7 @@
            <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
             <div class="card border-3">
                 <div class="card-body p-5">
-                    <img src="{{ asset('public/web/assets/img/favicon-32x32.png')}}" class="mb-4" width="45" alt="">
+                    <img src="{{ asset('public/web/assets/img/logo/ABV-logo.png')}}" class="mb-4" width="100" alt="">
                     <h4 class="fw-bold">Get Started Now</h4>
                     <p class="mb-0">Enter your credentials to login your account</p>
                     <div class="form-body mt-4">

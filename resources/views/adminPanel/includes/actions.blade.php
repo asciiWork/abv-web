@@ -1,12 +1,10 @@
+@if(isset($isEdit) && $isEdit)
+<a href="{{ route($currentRoute.'.edit',$row->id) }}"><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Edit<i class="bi bi-pencil-square ms-2"></i></span></a>
+@endif
+@if(isset($isDelete) && $isDelete)
+<a data-id="{{ $row->id }}" href="{{ route($currentRoute.'.destroy', $row->id) }}" title="Delete" class="btn-delete-record"><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Edit<i class="bi bi-trash-square ms-2"></i></span></a>
+@endif
 <div class="flex gap-4 items-center module-action">
-    @if(isset($isEdit) && $isEdit)
-    <a href="{{ route($currentRoute.'.edit',$row->id) }}" title="Edit" class="">
-        <span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Edit<i class="bi bi-check2 ms-2"></i></span>
-    </a>
-    @endif
-    @if(isset($isDelete) && $isDelete)
-    <a data-id="{{ $row->id }}" href="{{ route($currentRoute.'.destroy', $row->id) }}" title="Delete" class="text-reset fs-16 px-1 btn-delete-record"> <i class="ri-delete-bin-2-line"></i></a>
-    @endif
     @if(isset($isViewModel) && $isViewModel)
     <a data-id="{{ $row->id }}" href="{{ route($currentRoute.'.show', $row->id) }}" class="hover:text-info" id="viewModelBtn">
         <i class="bi bi-eye-fill me-3 fs-20"></i>

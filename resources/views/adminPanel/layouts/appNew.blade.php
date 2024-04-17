@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Abv Tools | Management System</title>
+    <title>ABV Tool | Management System</title>
 
     <!--plugins-->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet">
     <!-- loader-->
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/pace.min.css') }}" rel="stylesheet">
     <script src="{{ asset('public/admin-theme/assetsRoksyn/js/pace.min.js') }}"></script>
@@ -18,7 +18,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('public/admin-theme/assetsRoksyn/css/icons.css') }}">
 
+    <link rel="icon" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" type="image/png">
+    <link rel="icon" sizes="32x32" href="{{ asset('public/web/assets/img/favicon-32x32.png') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/dark-theme.css') }}" rel="stylesheet">
     <link href="{{ asset('public/admin-theme/assetsRoksyn/css/semi-dark-theme.css') }}" rel="stylesheet">
@@ -43,6 +46,7 @@
     <!--start main content-->
     <main class="page-content">
         @include('adminPanel.includes.breadcrumb')
+        @include('adminPanel.includes.flashMSG')
         @yield('content')
 
     </main>
@@ -94,11 +98,13 @@
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/metismenu/js/metisMenu.min.js')}}"></script>
     <!--BS Scripts-->
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/main.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/notifications/js/lobibox.min.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/notifications/js/notifications.min.js')}}"></script>
-    @yield('adminscript')
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/main.js')}}"></script>
+    @yield('adminScript')
 </body>
 
 </html>

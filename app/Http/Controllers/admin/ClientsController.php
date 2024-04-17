@@ -37,8 +37,8 @@ class ClientsController extends Controller
         $data = array();
         $data['page_title'] = "Manage Clients";
         $data['breadcrumb'] = array('Clients' => '');
+        $data['back_url'] = route($this->moduleRouteText . '.index');
         $data['add_url'] = route($this->moduleRouteText . '.create');
-        $data['clientData'] = Client::select('*')->get();;
         $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
@@ -52,7 +52,7 @@ class ClientsController extends Controller
         $data['formObj'] = $this->modelObj;
         $data['isEdit'] = 0;
         $data['page_title'] = "Add " . $this->module;
-        $data['breadcrumb'] = array('Admin Users' => 'admin/admin-clients', 'Add Client' => '');
+        $data['breadcrumb'] = array('Clients' => 'admin/admin-clients', 'Add Client' => '');
         $data['action_url'] = $this->moduleRouteText . ".store";
         $data['back_url'] = $this->moduleRouteText . ".index";
         $data['action_params'] = 0;
@@ -105,7 +105,7 @@ class ClientsController extends Controller
         $data['formObj'] = $formObj;
         $data['isEdit'] = 1;
         $data['page_title'] = "Edit " . $this->module;
-        $data['breadcrumb'] = array('Admin Users' => 'admin/admin-users', 'Edit User' => '');
+        $data['breadcrumb'] = array('Clients' => 'admin/admin-clients', 'Edit Client' => '');
         $data['back_url'] = $this->moduleRouteText . ".index";
         $data['buttonText'] = "Update";
         $data['action_url'] = $this->moduleRouteText . ".update";
@@ -179,6 +179,26 @@ class ClientsController extends Controller
             })
             ->rawColumns(['phone_1', 'action'])
             ->filter(function ($query) {
+                $search_name = request()->get("search_name");
+                $search_company = request()->get("search_company");
+                $search_phone = request()->get("search_phone");
+                $search_address = request()->get("search_address");
+                if(!empty($search_name)) {
+                    $query = $query->where("name", 'LIKE','%'.$search_name.'%');
+                }
+                if(!empty($search_company)) {
+                    $query = $query->where("company_name", 'LIKE','%'.$search_company.'%');
+                }
+                if(!empty($search_phone)) {
+                    $query = $query->where(function($qry) use ($search_phone){
+                        $qry = $qry->where('phone_1','LIKE','%'. $search_phone.'%')
+                        ->orWhere('phone_3', 'LIKE', '%' . $search_phone . '%')
+                        ->orWhere('phone_2', 'LIKE', '%' . $search_phone . '%');
+                    });
+                }
+                if(!empty($search_address)) {
+                    $query = $query->where("address", 'LIKE','%'.$search_address.'%');
+                }
             })
             ->make(true);
     }
@@ -189,5 +209,38 @@ class ClientsController extends Controller
         $data['breadcrumb'] = array('Clients' => '');
         $data['clients'] = Client::all();
         return view($this->moduleViewName . ".printAddress", $data);
+    }
+    public function printAddressSearch(Request $request)
+    {
+        $search_phone = ($request->get('search_phone'))? $request->get('search_phone'):0;
+        $search_name = ($request->get('search_name'))? $request->get('search_name'):0;
+        $data = array();
+        $status = 0;
+        $msg = 'Not Found!';
+        $client = Client::select('*');
+        if($search_phone){
+            $client = $client->where(function($qry)use($search_phone){
+                $qry = $qry->where('phone_1','LIKE','%'. $search_phone.'%')
+                ->orWhere('phone_2','LIKE','%'. $search_phone.'%')
+                ->orWhere('phone_3','LIKE','%'. $search_phone.'%');
+            });
+        }
+        if($search_name){
+            $client = $client->where('name','LIKE','%'. $search_name.'%');
+        }
+        $client = $client->first();
+        if($client){
+            $msg = 'Search Result';
+            $status = 1;
+            $data['name'] = $client->name;
+            $data['phone'] = $client->phone_1;
+            $data['address'] = $client->address;
+            $data['state'] = $client->state;
+            $data['city'] = $client->city;
+            $data['pincode'] = $client->pincode;
+        }
+
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];
+
     }
 }

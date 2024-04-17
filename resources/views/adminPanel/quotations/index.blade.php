@@ -124,18 +124,6 @@
                             </tr>
                         @endforeach 
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Number</th>
-                            <th>Created By</th>
-                            <th>Client</th>
-                            <th>Date</th>
-                            <th>Due Date</th>
-                            <th>Total</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
                 </table>
 
             </div> <!-- end card body-->
