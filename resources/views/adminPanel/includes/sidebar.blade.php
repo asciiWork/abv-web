@@ -17,7 +17,7 @@ $crrRoute = \Route::currentRouteName();
 
         <!--navigation-->
         <ul class="metismenu" id="menu">
-            <li class="{{ ($crrRoute == 'admin-dashboard')?'mm-active':'' }}">
+            <li class="{{ ($crrRoute == 'admin-dashboard' || $crrRoute == 'admin-sales-overview')?'mm-active':'' }}">
                 <a href="{{ route('admin-dashboard') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">home</span>
                     </div>
@@ -32,7 +32,7 @@ $crrRoute = \Route::currentRouteName();
                     <div class="menu-title">Users</div>
                 </a>
             </li>
-            <li class="{{ (request()->routeIs('admin-clients.*'))?'mm-active':'' }}">
+            <li class="{{ ($crrRoute =='admin-clients.index' || $crrRoute =='admin-clients.create' || $crrRoute =='admin-clients.edit')?'mm-active':'' }}">
                 <a href="{{ route('admin-clients.index') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">account_circle</span>
                     </div>
