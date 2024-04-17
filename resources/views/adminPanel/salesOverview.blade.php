@@ -1,23 +1,20 @@
 @extends('adminPanel.layouts.appNew')
 @section('adminStyle')
 <style type="text/css">
-    .apexcharts-tooltip.apexcharts-theme-light{
+    .apexcharts-tooltip.apexcharts-theme-light {
         color: black;
     }
 </style>
 @endsection
 @section('content')
+<?php $img = \App\Models\Admin::getAvtar($userData->image); ?>
 
 <div class="row">
     <div class="col-12 col-lg-4 d-flex">
         <div class="card w-100">
             <div class="card-body">
                 <div class="customer-profile text-center">
-                    @if($userData->image!='')
-                    <img src="{{ asset('public/uploads/users/') }}/{{$userData->image}}" width="120" height="120" class="rounded-circle" alt="">
-                    @else
-                    <img src="{{ asset('public/uploads/users/default-user.jpg') }}" width="120" height="120" class="rounded-circle" alt="">
-                    @endif
+                    <img src="{{ $img }}" width="120" height="120" class="rounded-circle" alt="">
                     <div class="mt-4">
                         <h5 class="mb-1 customer-name fw-bold">{{$userData->name}}</h5>
                         <p class="mb-0 customer-designation">Admin</p>
@@ -251,17 +248,17 @@
     </div>
 </div>
 @endsection
-@section('adminscript')
-    <script type="text/javascript">
-        var dailyOverviewTot = {!! json_encode($dailySalesOverview['dailyOverviewTot']) !!};
-        var salesdayName = {!! json_encode($dailySalesOverview['salesdayName']) !!};
-        var weekOverviewTot = {!! json_encode($weeklySalesOverview['weekOverviewTot']) !!};
-        var salesweekNum = {!! json_encode($weeklySalesOverview['salesweekNum']) !!};
-        var monthOverviewTot = {!! json_encode($monthlySalesOverview['monthOverviewTot']) !!};
-        var monthName = {!! json_encode($monthlySalesOverview['monthName']) !!};
-        var yearOverviewTot = {!! json_encode($yearlySalesOverview['yearOverviewTot']) !!};
-        var salesyearNum = {!! json_encode($yearlySalesOverview['salesyearNum']) !!};
-    </script>
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/apex/apexcharts.min.js')}}"></script>
-    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/index.js')}}"></script>
+@section('adminScript')
+<script type="text/javascript">
+    var dailyOverviewTot = <?php echo json_encode($dailySalesOverview['dailyOverviewTot']); ?>;
+    var salesdayName = <?php echo json_encode($dailySalesOverview['salesdayName']); ?>;
+    var weekOverviewTot = <?php echo json_encode($weeklySalesOverview['weekOverviewTot']); ?>;
+    var salesweekNum = <?php echo json_encode($weeklySalesOverview['salesweekNum']); ?>;
+    var monthOverviewTot = <?php echo json_encode($monthlySalesOverview['monthOverviewTot']); ?>;
+    var monthName = <?php echo json_encode($monthlySalesOverview['monthName']); ?>;
+    var yearOverviewTot = <?php echo json_encode($yearlySalesOverview['yearOverviewTot']); ?>;
+    var salesyearNum = <?php echo json_encode($yearlySalesOverview['salesyearNum']); ?>;
+</script>
+<script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/apex/apexcharts.min.js')}}"></script>
+<script src="{{ asset('public/admin-theme/assetsRoksyn/js/index.js')}}"></script>
 @endsection

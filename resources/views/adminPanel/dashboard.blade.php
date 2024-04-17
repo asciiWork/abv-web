@@ -243,30 +243,14 @@
     @endsection
     @section('adminScript')
     <script type="text/javascript">
-        var dailyOverviewTot = {
-            !!json_encode($dailySalesOverview['dailyOverviewTot']) !!
-        };
-        var salesdayName = {
-            !!json_encode($dailySalesOverview['salesdayName']) !!
-        };
-        var weekOverviewTot = {
-            !!json_encode($weeklySalesOverview['weekOverviewTot']) !!
-        };
-        var salesweekNum = {
-            !!json_encode($weeklySalesOverview['salesweekNum']) !!
-        };
-        var monthOverviewTot = {
-            !!json_encode($monthlySalesOverview['monthOverviewTot']) !!
-        };
-        var monthName = {
-            !!json_encode($monthlySalesOverview['monthName']) !!
-        };
-        var yearOverviewTot = {
-            !!json_encode($yearlySalesOverview['yearOverviewTot']) !!
-        };
-        var salesyearNum = {
-            !!json_encode($yearlySalesOverview['salesyearNum']) !!
-        };
+        var dailyOverviewTot = <?php echo json_encode($dailySalesOverview['dailyOverviewTot']); ?>;
+        var salesdayName = <?php echo json_encode($dailySalesOverview['salesdayName']); ?>;
+        var weekOverviewTot = <?php echo json_encode($weeklySalesOverview['weekOverviewTot']); ?>;
+        var salesweekNum = <?php echo json_encode($weeklySalesOverview['salesweekNum']); ?>;
+        var monthOverviewTot = <?php echo json_encode($monthlySalesOverview['monthOverviewTot']); ?>;
+        var monthName = <?php echo json_encode($monthlySalesOverview['monthName']); ?>;
+        var yearOverviewTot = <?php echo json_encode($yearlySalesOverview['yearOverviewTot']); ?>;
+        var salesyearNum = <?php echo json_encode($yearlySalesOverview['salesyearNum']); ?>;
     </script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/apex/apexcharts.min.js')}}"></script>
     <script src="{{ asset('public/admin-theme/assetsRoksyn/js/index.js')}}"></script>
