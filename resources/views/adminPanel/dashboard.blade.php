@@ -241,7 +241,7 @@
         @endif
     </div>
     @endsection
-    @section('adminscript')
+    @section('adminScript')
     <script type="text/javascript">
         var dailyOverviewTot = {
             !!json_encode($dailySalesOverview['dailyOverviewTot']) !!

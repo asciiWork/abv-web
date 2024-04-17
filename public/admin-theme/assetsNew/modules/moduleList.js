@@ -35,10 +35,11 @@ $(document).ready(function() {
                 data.search_company = $("#search-frm input[name='search_company']").val();
                 data.search_phone = $("#search-frm input[name='search_phone']").val();
                 data.search_address = $("#search-frm input[name='search_address']").val();
-                data.search_user = $("#search-frm input[name='user_id']").val();
-                data.search_number = $("#search-frm input[name='number']").val();
-                data.search_client_name = $("#search-frm input[name='client_name']").val();
-                data.search_date = $("#search-frm input[name='date']").val();
+                data.search_user = $("#search-frm input[name='search_user']").val();
+                data.search_qn_number = $("#search-frm input[name='search_qn_number']").val();
+                data.search_client_name = $("#search-frm input[name='search_client_name']").val();
+                data.search_date = $("#search-frm input[name='search_date']").val();
+                data.search_client_phone = $("#search-frm input[name='search_client_phone']").val();
             }
         },
         "order": [

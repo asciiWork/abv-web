@@ -1,6 +1,8 @@
 @extends('adminPanel.layouts.appNew')
 @section('adminStyle')
-<link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/select2/css/select2.min.css?4345') }}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
 <div class="row">
@@ -11,11 +13,9 @@
             </div>
             {!! Form::model($formObj,['method' => $method,'files' => true, 'route' => [$action_url,$action_params],'class' => '', 'id' => 'module-frm', 'redirect-url' => route($back_url)]) !!}
             <div class="card-body">
-
-                <!-- Invoice Logo-->
                 <div class="clearfix">
                     <div class="float-start mb-3">
-                        <img src="{{asset('public/web/assets/img/favicon.ico')}}" alt="dark logo">
+                        <img src="{{asset('public/web/assets/img/logo/ABV-logo.png')}}" width="100" alt="dark logo">
                     </div>
                     <div class="float-end">
                         <h4 class="m-0 d-print-none">Quotation</h4>
@@ -63,10 +63,10 @@
                     <div class="col-6">
                         <h6 class="fs-14">Customer</h6>
                         <div class="col-sm-6">
-                            <select name="client_id" data-toggle="select2" id="client-select-box" class="select2 form-control">
+                            <select name="client_id" class="form-select" id="client-select-box" data-placeholder="Choose one thing">
                                 <option value="">Select Client</option>
                                 @foreach($clients as $clr)
-                                <option value="{{$clr->id}}" data-address="{{$clr->address}}">{{$clr->cname}}</option>
+                                <option value="{{$clr->id}}" data-address="{{$clr->address}}" data-city="{{$clr->city}}" data-state="{{$clr->state}}">{{$clr->cname}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -91,7 +91,7 @@
                                         <th>Taxable Value</th>
                                         <th>Tax Amount(18%)</th>
                                         <th>Amount</th>
-                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><span class="material-symbols-outlined">new_window</span></a></th>
+                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><i class="bi bi-plus-lg"></i></a></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tbodyTr">
@@ -169,7 +169,7 @@
     </div>
 </div>
 @endsection
-@section('adminscript')
+@section('adminScript')
 <script>
     $(document).ready(function() {
         $('#add_tr').click(function() {
@@ -182,7 +182,7 @@
             html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
             html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><span class="material-symbols-outlined">disabled_by_default</span></a></td ></tr>';
+            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
@@ -230,7 +230,10 @@
             if ($(this).val() > 0) {
                 var selectedOption = $(this).find('option:selected');
                 var address = selectedOption.data('address');
-                $('#client-address').html(address);
+                var state = selectedOption.data('state');
+                var city = selectedOption.data('city');
+                var fullAdd = address + ' ' + city + ', ' + state;
+                $('#client-address').html(fullAdd);
             }
         });
     });
@@ -247,7 +250,7 @@
                     "product_size_id": product_size_id,
                 },
                 success: function(result) {
-                    $('#last-product-price-' + rowNo).html('LP: ' + result);
+                    $('#last-product-price-' + rowNo).html('<span class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">LP: ' + result + '</span>');
                 },
                 error: function(error) {
                     alert(error);
@@ -305,5 +308,6 @@
     }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src=" {{ asset('public/admin-theme/assetsRoksyn/plugins/select2/js/select2.min.js') }}"></script>
 @endsection

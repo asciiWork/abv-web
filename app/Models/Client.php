@@ -47,6 +47,6 @@ class Client extends Model
     }
     public static function allClients()
     {
-        return Client::select(\DB::raw("CONCAT(name,' ',phone_1) as cname"),'id', 'address')->get();
+        return Client::select(\DB::raw("CONCAT(name,' ',phone_1) as cname"),'id', 'address','city','state')->get();
     }
 }

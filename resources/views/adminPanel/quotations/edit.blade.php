@@ -13,11 +13,9 @@
             </div>
             {!! Form::model($formObj,['method' => $method,'files' => true, 'route' => [$action_url,$action_params],'class' => '', 'id' => 'module-frm', 'redirect-url' => route($back_url)]) !!}
             <div class="card-body">
-
-                <!-- Invoice Logo-->
                 <div class="clearfix">
                     <div class="float-start mb-3">
-                        <img src="{{asset('public/web/assets/img/favicon.ico')}}" alt="dark logo">
+                        <img src="{{asset('public/web/assets/img/logo/ABV-logo.png')}}" width="100" alt="dark logo">
                     </div>
                     <div class="float-end">
                         <h4 class="m-0 d-print-none">Quotation</h4>
@@ -92,7 +90,7 @@
                                         <th>Taxable Value</th>
                                         <th>Tax Amount(18%)</th>
                                         <th>Amount</th>
-                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><span class="material-symbols-outlined">new_window</span></a></th>
+                                        <th class="float-end"><a id="add_tr" class="btn btn-primary"><i class="bi bi-plus-lg"></i></a></th>
                                     </tr>
                                 </thead>
                                 <tbody class="tbodyTr">
@@ -135,7 +133,7 @@
                                             </div>
                                         </td>
                                         <td class="float-end">
-                                            <a class="btn btn-danger delete-item-tr"><span class="material-symbols-outlined">disabled_by_default</span></a>
+                                            <a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
                                     </tr>
@@ -177,9 +175,14 @@
     </div>
 </div>
 @endsection
-@section('adminscript')
+@section('adminScript')
 <script>
     $(document).ready(function() {
+        // $("#client-select-box").select2({
+        //         placeholder: "Search Client",
+        //         allowClear: true,
+        //         width: null
+        //     });
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
@@ -191,17 +194,12 @@
             html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td>';
-            html += '<td class="float-end" ><a class="btn btn-danger delete-item-tr"><span class="material-symbols-outlined">disabled_by_default</span></a></td ></tr>';
+            html += '<td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
                 $('#product-option-' + num).append($(this).clone());
             });
-            /*$(".select2").select2({
-                placeholder: "Search Client",
-                allowClear: true,
-                width: null
-            });*/
         });
         $(document).on("click", ".delete-item-tr", function() {
             $(this).closest('tr').remove();

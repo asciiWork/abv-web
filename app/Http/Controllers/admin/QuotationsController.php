@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Quotation;
 use App\Models\QuotationItem;
 use App\Models\Client;
+use App\Models\Admin;
 use App\Models\LastInvoicePrice;
 use DataTables;
 
@@ -36,10 +37,9 @@ class QuotationsController extends Controller
     {
         $data = array();
         $data['page_title'] = "Manage Quotations";
-        $data['breadcrumb'] = array('Admin Quotations' => '');
+        $data['breadcrumb'] = array('Quotations' => '');
         $data['qnStatics'] = Quotation::getStatics();
         $data['add_url'] = route($this->moduleRouteText . '.create');
-        $data['quaData'] = Quotation::quaData();
         $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
@@ -230,17 +230,31 @@ class QuotationsController extends Controller
         $model = $this->modelObj->listData();
         return Datatables::eloquent($model)
             ->editColumn('quotation_number', function ($row) {
-                $html = 'Q: '. $row->quotation_number;
+                $html = '<span class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Q: '. $row->quotation_number. '</span>';
                 if($row->is_invoice){
-                    $html .= '<br/>I: &nbsp;&nbsp;'. $row->invoice_number;
+                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">I: '. $row->invoice_number.'</span>';
                 }
                 return $html;
             })
+            ->editColumn('final_total_amount', function ($row) {
+                return number_format($row->final_total_amount,2);
+            })
+            ->editColumn('cname', function ($row) {
+                return $row->cname.'<br/>'. $row->cphone;
+            })
+            ->editColumn('quotation_due_date', function ($row) {
+                return date('Y, M-d',strtotime($row->quotation_due_date));
+            })
             ->editColumn('quotation_date', function ($row) {
-                $html = 'Q: '. $row->quotation_date;
+                $html = 'Q: '. date('Y, M-d',strtotime($row->quotation_date));
                 if($row->is_invoice){
-                    $html .= '<br/>I: &nbsp;&nbsp;'. $row->invoice_date;
+                    $html .= '<br/>I: &nbsp;&nbsp;'. date('Y, M-d', strtotime($row->invoice_date));
                 }
+                return $html;
+            })
+            ->editColumn('user_id', function ($row) {
+                $url = Admin::getAvtar($row->uimg);
+                $html = '<img src="'.$url. '" class="rounded-circle" width="40" height="40"> &nbsp;'. $row->uname;
                 return $html;
             })
             ->addColumn('action', function ($row) {
@@ -256,11 +270,12 @@ class QuotationsController extends Controller
                     ]
                 )->render();
             })
-            ->rawColumns(['action', 'quotation_number', 'quotation_date'])
+            ->rawColumns(['action', 'quotation_number', 'quotation_date', 'user_id', 'cname'])
             ->filter(function ($query) {
                 $search_user = request()->get("search_user");
-                $search_number = request()->get("search_number");
+                $search_qn_number = request()->get("search_qn_number");
                 $search_client_name = request()->get("search_client_name");
+                $search_client_phone = request()->get("search_client_phone");
                 $search_date = request()->get("search_date");
                 if(\Auth::guard('admins')->user()->user_type_id != 1)
                 {
@@ -269,17 +284,17 @@ class QuotationsController extends Controller
                 if (!empty($search_user)) {
                     $query = $query->where("admin_users.name", "LIKE", '%'. $search_user.'%');
                 }
-                if (!empty($search_number)) {
-                        $query = $query->where(function ($qry) use ($search_number) {
-                            $qry = $qry->where("quotations.quotation_number", "LIKE", '%' . $search_number . '%')
-                                ->orWhere("quotations.invoice_number", "LIKE", '%' . $search_number . '%');
+                if (!empty($search_qn_number)) {
+                        $query = $query->where(function ($qry) use ($search_qn_number) {
+                            $qry = $qry->where("quotations.quotation_number", "LIKE", '%' . $search_qn_number . '%')
+                                ->orWhere("quotations.invoice_number", "LIKE", '%' . $search_qn_number . '%');
                         });
                 }
                 if (!empty($search_client_name)) {
-                    $query = $query->where(function($qry) use ($search_client_name){
-                        $qry = $qry->where("clients.name", "LIKE", '%'. $search_client_name.'%')
-                            ->orWhere("clients.phone_1", "LIKE", '%'. $search_client_name.'%');
-                    });
+                    $query = $query->where("clients.name", "LIKE", '%'. $search_client_name.'%');
+                }
+                if (!empty($search_client_phone)) {
+                    $query = $query->where("clients.phone_1", "LIKE", '%'. $search_client_phone.'%');
                 }
                 if (!empty($search_date)) {
                     $query = $query->where("quotations.quotation_date", "LIKE", '%'. date('Y-m-d',strtotime($search_date)).'%');

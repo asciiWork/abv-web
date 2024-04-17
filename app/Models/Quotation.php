@@ -14,15 +14,9 @@ class Quotation extends Model
 
     public function listData()
     {
-        return Quotation::select('quotations.*','admin_users.name as uname','clients.name as cname')
+        return Quotation::select('quotations.*', 'admin_users.image as uimg','admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
         ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
         ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id');
-    }
-    public static function quaData()
-    {
-        return Quotation::select('quotations.*','admin_users.name as uname','clients.name as cname')
-        ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
-        ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')->get();
     }
     public static function getQuotationNumber()
     {

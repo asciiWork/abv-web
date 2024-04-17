@@ -13,32 +13,40 @@
                             <div class="row">
                                 <div class="col-lg-3">
                                     <div class="mb-3">
-                                        <label class="form-label">Created By</label>
-                                        {!! Form::text('user_id', null, ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="mb-3">
-                                        <label class="form-label">Number</label>
-                                        {!! Form::text('number', null, ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="mb-3">
-                                        <label class="form-label">Client</label>
-                                        {!! Form::text('client_name', null, ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="mb-3">
                                         <label class="form-label">Date</label>
-                                        {!! Form::date('date', null, ['class' => 'form-control']) !!}
+                                        {!! Form::date('search_date', null, ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
-                            </div>
-                            <div class="mb-3 text-center">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <a href="{{ route('admin-quotations.index') }}" class="btn btn-warning">Reset</a>
+                                <div class="col-lg-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Client Name</label>
+                                        {!! Form::text('search_client_name', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Client Phone</label>
+                                        {!! Form::text('search_client_phone', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Created By</label>
+                                        {!! Form::text('search_user', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="mb-3">
+                                        <label class="form-label">Qn Number</label>
+                                        {!! Form::text('search_qn_number', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="text-center mt-4">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                        <a href="{{ route('admin-quotations.index') }}" class="btn btn-warning">Reset</a>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -47,4 +55,4 @@
         </div>
     </div>
 </div>
-<br/>
+<br />
