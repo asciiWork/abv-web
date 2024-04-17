@@ -227,7 +227,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                 </tr>
                                 <tr class="checkout__total--items">
                                     <td class="checkout__total--title text-left">Shipping Rate</td>
-                                    <input type="hidden" id="shipping_rate_amount" value="0">
+                                    <input type="hidden" id="shipping_rate_amount" value="100">
                                     <td class="checkout__total--calculated__text text-right" id="shipping_rate_txt">₹100.00</td>
                                 </tr>
                                 <tr class="checkout__total--items">
@@ -284,6 +284,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                 }
             });
         });
+        finalAmount();
         $('.bil_state_change').change(function() {
             var shippState = $('.ship_state_change').val();
             var final_total_qnt = $("#final_total_qnt").val()
