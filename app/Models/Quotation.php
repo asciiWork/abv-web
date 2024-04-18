@@ -48,23 +48,30 @@ class Quotation extends Model
     }
     public static function getStatics()
     {
+        $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
+        $endOfWeek = Carbon::now()->endOfWeek()->toDateString();
+
         $yearly_total = Quotation::where('invoice_date','LIKE','%'.date('Y').'%');
         $monthly_total = Quotation::where('invoice_date','LIKE','%'.date('Y-m').'%');
         $today_total = Quotation::where('invoice_date','LIKE','%'.date('Y-m-d').'%');
+        $week_total= Quotation::whereBetween('invoice_date', [$startOfWeek, $endOfWeek]);
         $total_qns = Quotation::where('is_invoice',0);
 
         if (\Auth::guard('admins')->user()->user_type_id != 1) {
             $yearly_total = $yearly_total->where('user_id',\Auth::guard('admins')->user()->id);
             $monthly_total = $monthly_total->where('user_id',\Auth::guard('admins')->user()->id);
             $today_total = $today_total->where('user_id',\Auth::guard('admins')->user()->id);
+            $week_total = $week_total->where('user_id',\Auth::guard('admins')->user()->id);
             $total_qns = $total_qns->where('user_id',\Auth::guard('admins')->user()->id);
         }
-        $yearly_total = $yearly_total->sum('final_total_amount');
-        $monthly_total = $monthly_total->sum('final_total_amount');
-        $today_total = $today_total->sum('final_total_amount');
+        $yearly_total = $yearly_total->count();
+        $monthly_total = $monthly_total->count();
+        $today_total = $today_total->count();
+        $week_total = $week_total->count();
         $total_qns = $total_qns->count();
 
         return ['yearly_total'=> $yearly_total,
+            'week_total' => $week_total,
             'today_total' => $today_total,
             'monthly_total' => $monthly_total,
             'total_qns' => $total_qns,
@@ -117,6 +124,15 @@ class Quotation extends Model
         }
         return $totalOrdersToday->count();
     }
+    public static function totalOrderWeekly($user_id=''){
+        $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
+        $endOfWeek = Carbon::now()->endOfWeek()->toDateString();
+        $totalOrderWeekly= Quotation::whereBetween('created_at', [$startOfWeek, $endOfWeek])->where('is_invoice',1);
+        if($user_id!=''){
+                $totalOrderWeekly =$totalOrderWeekly->where('user_id',$user_id);
+        }
+        return $totalOrderWeekly->count();
+    }
     public static function MonthlyOrders($user_id=''){
         $MonthlyOrders= Quotation::where('is_invoice',1)->whereMonth('created_at', Carbon::now()->month)
         ->whereYear('created_at', Carbon::now()->year);
@@ -124,6 +140,15 @@ class Quotation extends Model
             $MonthlyOrders =$MonthlyOrders->where('user_id',$user_id);
         }
         return $MonthlyOrders->count();
+    }
+    public static function yearOrders($user_id=''){
+        $startOfYear = Carbon::now()->startOfYear();
+        $endOfYear = Carbon::now()->endOfYear();
+        $yearSale=Quotation::whereBetween('created_at', [$startOfYear, $endOfYear])->where('is_invoice',1);
+        if($user_id!=''){
+                $yearSale =$yearSale->where('user_id',$user_id);
+        }
+        return $yearSale->count();
     }
     public static function totalOrders($user_id=''){
         $totalOrders= Quotation::where('is_invoice',1);

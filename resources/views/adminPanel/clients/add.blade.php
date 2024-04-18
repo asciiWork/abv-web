@@ -29,9 +29,9 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
+                            <label class="form-label">Email<span class="required">*</span></label>
                             <div class="position-relative input-icon">
-                                {!! Form::text('email', null, ['class' => 'form-control','placeholder' => 'Enter Email']) !!}
+                                {!! Form::text('email', null, ['class' => 'form-control','data-required' => true,'placeholder' => 'Enter Email']) !!}
                                 <span class="position-absolute top-50 translate-middle-y"><i class="bi bi-chat-left-text"></i></span>
                             </div>
                         </div>

@@ -32,6 +32,24 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="">
+                            <p class="mb-1">Weekly Order</p>
+                            <h4 class="mb-0 text-success">{{ $totalOrderWeekly }}</h4>
+                        </div>
+                        <div class="ms-auto widget-icon bg-success text-white">
+                            <i class="bi bi-basket2-fill"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 4.5px;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-success border-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="">
                             <p class="mb-1">Monthly Order</p>
                             <h4 class="mb-0 text-success">{{ $MonthlyOrders }}</h4>
                         </div>
@@ -50,8 +68,8 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="">
-                            <p class="mb-1">Total Order</p>
-                            <h4 class="mb-0 text-danger">{{ $totalOrders }}</h4>
+                            <p class="mb-1">Yearly Order</p>
+                            <h4 class="mb-0 text-danger">{{ $yearOrders }}</h4>
                         </div>
                         <div class="ms-auto widget-icon bg-danger text-white">
                             <i class="bi bi-basket2-fill"></i>
@@ -59,24 +77,6 @@
                     </div>
                     <div class="progress mt-3" style="height: 4.5px;">
                         <div class="progress-bar bg-danger" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10 border-0 border-start border-warning border-4">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="">
-                            <p class="mb-1">Total Sales</p>
-                            <h4 class="mb-0 text-warning">₹{{ number_format($totalSale,2) }}</h4>
-                        </div>
-                        <div class="ms-auto widget-icon bg-warning text-dark">
-                            <i class="bi bi-currency-dollar"></i>
-                        </div>
-                    </div>
-                    <div class="progress mt-3" style="height: 4.5px;">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>

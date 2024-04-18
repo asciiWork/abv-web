@@ -31,13 +31,15 @@
                 {!! Form::close() !!}
                 <hr />
                 <div><br /><br /></div>
-                <address class="m-t-5 m-b-5" id="printableText">
-                    <strong class="text-inverse" id="client-name">Client Name</strong><br>
-                    <span id="client-address">Street Address</span><br>
-                    <span id="client-city">City</span>, <span id="client-pincode">Pin code</span><br>
-                    <span id="client-state">State</span><br>
-                    Mo: <span id="client-phone">Mobile Number</span><br>
-                </address>
+                <div class="col-12 col-lg-4 col-xl-3">
+                    <address class="m-t-5 m-b-5" id="printableText">
+                        <strong class="text-inverse" id="client-name">Client Name</strong><br>
+                        <span id="client-address">Street Address</span><br>
+                        <span id="client-city">City</span>, <span id="client-pincode">Pin code</span><br>
+                        <span id="client-state">State</span><br>
+                        Mo: <span id="client-phone">Mobile Number</span><br>
+                    </address>
+                </div>
                 <br />
                 <div class="mb-3 text-center">
                     <button type="button" onclick="printText()" class="btn btn-primary">Print</button>

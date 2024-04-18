@@ -59,7 +59,30 @@
                     </div>
                 </div>
             </li>
-
+            <li class="nav-item dropdown dropdown-large" style="display: none;">
+                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                  <div class="position-relative">
+                    <span class="notify-badge">8</span>
+                    <span class="material-symbols-outlined">
+                      notifications_none
+                      </span>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end mt-lg-2">
+                  <a href="javascript:;">
+                    <div class="msg-header">
+                      <p class="msg-header-title">Notifications</p>
+                      <p class="msg-header-clear ms-auto">Marks all as read</p>
+                    </div>
+                  </a>
+                  <div class="header-notifications-list">
+                    
+                  </div>
+                  <a href="javascript:;">
+                    <div class="text-center msg-footer">View All</div>
+                  </a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="offcanvas" href="#ThemeCustomizer"><span class="material-symbols-outlined">
                         settings

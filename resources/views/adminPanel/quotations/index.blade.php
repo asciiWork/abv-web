@@ -6,8 +6,8 @@
       <div class="card-body">
         <div class="d-flex align-items-center">
           <div class="">
-            <p class="mb-1">Yearly Total</p>
-            <h4 class="mb-0 text-primary">{{ number_format($qnStatics['yearly_total'],2)}}</h4>
+            <p class="mb-1">Today Total</p>
+            <h4 class="mb-0 text-primary">{{ $qnStatics['today_total']}}</h4>
           </div>
           <div class="ms-auto widget-icon bg-primary text-white">
             <i class="bi bi-currency-dollar"></i>
@@ -24,8 +24,8 @@
       <div class="card-body">
         <div class="d-flex align-items-center">
           <div class="">
-            <p class="mb-1">Monthly Total</p>
-            <h4 class="mb-0 text-success">{{ number_format($qnStatics['monthly_total'],2)}}</h4>
+            <p class="mb-1">Weekly Total</p>
+            <h4 class="mb-0 text-success">{{ $qnStatics['week_total']}}</h4>
           </div>
           <div class="ms-auto widget-icon bg-success text-white">
             <i class="bi bi-currency-dollar"></i>
@@ -42,8 +42,8 @@
       <div class="card-body">
         <div class="d-flex align-items-center">
           <div class="">
-            <p class="mb-1">Today Total</p>
-            <h4 class="mb-0 text-danger">{{ number_format($qnStatics['today_total'],2)}}</h4>
+            <p class="mb-1">Monthly Total</p>
+            <h4 class="mb-0 text-danger">{{ $qnStatics['monthly_total']}}</h4>
           </div>
           <div class="ms-auto widget-icon bg-danger text-white">
             <i class="bi bi-currency-dollar"></i>
@@ -60,8 +60,8 @@
       <div class="card-body">
         <div class="d-flex align-items-center">
           <div class="">
-            <p class="mb-1">Pending Quotations</p>
-            <h4 class="mb-0 text-warning">{{ $qnStatics['total_qns'] }}</h4>
+            <p class="mb-1">Yearly Total</p>
+            <h4 class="mb-0 text-warning">{{ $qnStatics['yearly_total'] }}</h4>
           </div>
           <div class="ms-auto widget-icon bg-warning text-white">
             <i class="bi bi-basket2-fill"></i>

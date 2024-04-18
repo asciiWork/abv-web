@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\User;
 use App\Models\Order;
@@ -20,10 +22,12 @@ class AdminController extends Controller
     {
     	$data = array();
         $data['page_title'] = 'Dashboard';
-        $userData=Auth::user();
+        $userData=Auth::guard('admins')->user();
         $data['userData'] = $userData;
         $data['totalOrdersToday']= Quotation::totalOrdersToday();
+        $data['totalOrderWeekly']= Quotation::totalOrderWeekly();
         $data['MonthlyOrders']= Quotation::MonthlyOrders();
+        $data['yearOrders']= Quotation::yearOrders();
         $data['totalOrders']= Quotation::totalOrders();
         $data['totalSale']= Quotation::totalSale();
         $data['totalSaleToday']= Quotation::totalSaleToday();
@@ -44,6 +48,69 @@ class AdminController extends Controller
         $data['page_title'] = 'Contacts';
         $data['records'] = Contact::get();
         return view('adminPanel.contactDetails',$data);
+    }
+    public function adminProfile()
+    {
+        $data = array();
+        $userData=Auth::guard('admins')->user();
+        $data['userimg'] = Admin::getAvtar($userData->image);
+        $data['userData'] = $userData;
+        $data['page_title'] = 'Profile';
+        $data['back_url'] = "admin-profile";
+        return view('adminPanel.adminProfile',$data);
+    }
+    public function UpdateAdminAccount(Request $request){
+        $status = 1;
+        $msg = 'Account has been updated successfully.';
+        $data = array();
+        $user = Auth::guard('admins')->user();
+        $id = $user->id;
+        $passcng=0;
+        $vslidateArr = [
+            'name' => 'required|min:2',
+            'email' => 'required|unique:admin_users,email,'.$id,
+            'phone' => 'required',
+        ];
+        if($request->get('current_password') ){
+            $vslidateArr = $vslidateArr + [
+            'current_password' => 'required',
+            'password' => 'required|confirmed|min:4',           
+            ];
+            $user = Auth::guard('admins')->user();
+            if (!Hash::check($request->current_password, $user->password)) {
+                return ['status' => 0, 'msg' => 'The current password is incorrect.', 'data' => $data];
+            }else{
+                $passcng=1;
+            }
+        }
+
+        $validator = Validator::make($request->all(),$vslidateArr);
+        // check validations
+        if ($validator->fails()) 
+        {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) 
+            {
+                $msg .= $message . "<br />";
+            }
+        }
+        else
+        {
+            
+            $user = Admin::find($id);
+            if($user){
+                if($passcng==1){
+                    $user->password = bcrypt($request->get('password'));
+                }
+                $user->name = $request->get('name');
+                $user->email = trim($request->get('email'));
+                $user->phone = trim($request->get('phone'));
+                $user->save();
+            }
+        }
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }
     public function salesOverview($id)
     {

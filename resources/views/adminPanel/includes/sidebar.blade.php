@@ -69,7 +69,7 @@ $crrRoute = \Route::currentRouteName();
             </div>
         </div>
         <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="javascript:;"><span class="material-symbols-outlined me-2">
+            <li><a class="dropdown-item" href="{{ route('admin-profile') }}"><span class="material-symbols-outlined me-2">
                         account_circle
                     </span><span>Profile</span></a>
             </li>

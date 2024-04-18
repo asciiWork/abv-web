@@ -1,8 +1,12 @@
 @extends('adminPanel.layouts.appNew')
 @section('adminStyle')
-<link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<style type="text/css">
+    .select2-selection__rendered{
+        color: #ffffff !important;
+    }
+</style>
 @endsection
 @section('content')
 <div class="row">
@@ -63,7 +67,7 @@
                     <div class="col-6">
                         <h6 class="fs-14">Customer</h6>
                         <div class="col-sm-6">
-                            <select name="client_id" data-toggle="select2" id="client-select-box" class="select2 form-control">
+                            <select name="client_id" id="client-select-box" class="form-select" data-placeholder="Select Client">
                                 <option value="">Select Client</option>
                                 @foreach($clients as $clr)
                                 <option value="{{$clr->id}}" {{$formObj->client_id == $clr->id ? 'selected' : ''}} data-address="{{$clr->address}}">{{$clr->cname}}</option>
@@ -100,7 +104,7 @@
                                     <tr id="tr-item-{{$i}}">
                                         <td class="">{{$i}}</td>
                                         <td>
-                                            <select name="product_id[]" data-row="{{$i}}" id="product-option-{{$i}}" data-toggle="select2" class="select2 form-control product-items">
+                                            <select name="product_id[]" data-row="{{$i}}" id="product-option-{{$i}}" class="form-select product-items">
                                                 <option value="">Select Product</option>
                                                 @foreach($products as $prd)
                                                 <option value="{{$prd->id}}" {{$prd->id == $item['product_id'] ? 'selected' : ''}} data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
@@ -178,15 +182,10 @@
 @section('adminScript')
 <script>
     $(document).ready(function() {
-        // $("#client-select-box").select2({
-        //         placeholder: "Search Client",
-        //         allowClear: true,
-        //         width: null
-        //     });
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><div class = "col-sm-12" ><select name="product_id[]" data-toggle="select2" class="select2 form-control product-items" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select> </div> </td>';
+            html += '<td><div class = "col-sm-12" ><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select> </div> </td>';
             html += '<input name="product_name[]" type="hidden" value="" id="product-name-' + num + '">';
             html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
             html += '<td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" value="" id="product_actual_price-' + num + '"></td>';
@@ -200,6 +199,12 @@
             $('#product-option-1 option').each(function() {
                 $('#product-option-' + num).append($(this).clone());
             });
+            $( '.form-select' ).select2( {
+                allowClear: true,
+                theme: "bootstrap-5",
+                width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+                placeholder: $( this ).data( 'placeholder' ),
+            } );
         });
         $(document).on("click", ".delete-item-tr", function() {
             $(this).closest('tr').remove();
@@ -281,6 +286,6 @@
     }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>
-<script src=" {{ asset('public/admin-theme/assetsRoksyn/plugins/select2/js/select2.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('public/admin-theme/assetsRoksyn/plugins/select2/js/select2-custom.js')}}"></script>
 @endsection
