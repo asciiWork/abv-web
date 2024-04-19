@@ -154,7 +154,9 @@ class AdminController extends Controller
         $data['userData'] = $userData;
         $data['totalOrders']= Quotation::totalOrders($id);
         $data['totalOrdersToday']= Quotation::totalOrdersToday($id);
+        $data['totalOrderWeekly']= Quotation::totalOrderWeekly($id);
         $data['MonthlyOrders']= Quotation::MonthlyOrders($id);
+        $data['yearOrders']= Quotation::yearOrders($id);
         $data['totalSale']= Quotation::totalSale($id);
         $data['totalSaleToday']= Quotation::totalSaleToday($id);
         $data['totalSaleWeekly']= Quotation::totalSaleWeekly($id);

@@ -65,8 +65,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="mb-1">Monthly Order</p>
-                                <h4 class="mb-0 text-success">{{ $MonthlyOrders }}</h4>
+                                <p class="mb-1">Weekly Order</p>
+                                <h4 class="mb-0 text-success">{{ $totalOrderWeekly }}</h4>
                             </div>
                             <div class="ms-auto widget-icon bg-success text-white">
                                 <i class="bi bi-currency-dollar"></i>
@@ -83,8 +83,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="mb-1">Total Order</p>
-                                <h4 class="mb-0 text-danger">{{ $totalOrders }}</h4>
+                                <p class="mb-1">Monthly Order</p>
+                                <h4 class="mb-0 text-danger">{{ $MonthlyOrders }}</h4>
                             </div>
                             <div class="ms-auto widget-icon bg-danger text-white">
                                 <i class="bi bi-graph-down-arrow"></i>
@@ -101,8 +101,8 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="">
-                                <p class="mb-1">Total Sales</p>
-                                <h4 class="mb-0 text-warning">₹{{ number_format($totalSale,2) }}</h4>
+                                <p class="mb-1">Yearly Order</p>
+                                <h4 class="mb-0 text-warning">₹{{ $yearOrders }}</h4>
                             </div>
                             <div class="ms-auto widget-icon bg-warning text-dark">
                                 <i class="bi bi-people-fill"></i>
