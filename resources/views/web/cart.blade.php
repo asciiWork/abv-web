@@ -4,6 +4,9 @@
     .container.demo {
         margin-top: 4em
     }
+    .cart__content--variant {
+        color: #000000 !important;
+    }
 </style>
 <!-- cart section start -->
 <section class="cart__section section--padding">
