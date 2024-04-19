@@ -110,6 +110,15 @@
 
 @section('adminScript')
 <script type="text/javascript">
+    $(document).click(function (e) {
+        if ($(e.target).is('#chngPassModal')) {
+            $('#scfrm').empty();
+            $('#erfrm').empty();
+            document.getElementById('errorModalBody').style.display = 'none';
+            document.getElementById('successModalBody').style.display = 'none';
+            var form = document.getElementById('chpass').reset();
+        }
+    });
     $(document).ready(function() {
         $('#datatable-module').DataTable({});
         $('.closebtn').click(function (e) {
