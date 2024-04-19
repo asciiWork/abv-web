@@ -54,6 +54,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
 	Route::get('/admin-profile', [AdminController::class,'adminProfile'])->name('admin-profile');
 	Route::post('update-admin-account', [AdminController::class, 'UpdateAdminAccount'])->name("update-admin-account");
+	Route::post('update-admin-pass', [AdminController::class, 'UpdateAdminPass'])->name("update-admin-pass");
 });
 Route::get('/', [PageController::class, 'index'])->name('web.index');
 Route::get('/about', [PageController::class, 'about'])->name('web.about');

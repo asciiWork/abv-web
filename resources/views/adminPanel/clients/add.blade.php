@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">Client Name<span class="required">*</span></label>
+                            <label class="form-label">Client Name<span class="text-danger">*</span></label>
                             <div class="position-relative input-icon">
                                 {!! Form::text('name', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Name']) !!}
                                 <span class="position-absolute top-50 translate-middle-y"><i class="bi bi-person"></i></span>
@@ -29,16 +29,16 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">Email<span class="required">*</span></label>
+                            <label class="form-label">Email</label>
                             <div class="position-relative input-icon">
-                                {!! Form::text('email', null, ['class' => 'form-control','data-required' => true,'placeholder' => 'Enter Email']) !!}
+                                {!! Form::text('email', null, ['class' => 'form-control','placeholder' => 'Enter Email']) !!}
                                 <span class="position-absolute top-50 translate-middle-y"><i class="bi bi-chat-left-text"></i></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">Phone 1<span class="required">*</span></label>
+                            <label class="form-label">Phone 1<span class="text-danger">*</span></label>
                             <div class="position-relative input-icon">
                                 {!! Form::text('phone_1', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Phone']) !!}
                                 <span class="position-absolute top-50 translate-middle-y"><i class="bi bi-telephone"></i></span>

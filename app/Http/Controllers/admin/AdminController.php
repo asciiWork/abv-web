@@ -59,6 +59,37 @@ class AdminController extends Controller
         $data['back_url'] = "admin-profile";
         return view('adminPanel.adminProfile',$data);
     }
+    public function UpdateAdminPass(Request $request){
+        $id =$request->get('admin_id');
+        $status = 1;
+        $msg = 'Password has been updated successfully.';
+        $user = Admin::find($id);
+        $vslidateArr = [
+            'password' => 'required|confirmed|min:4',           
+        ];
+
+        $validator = Validator::make($request->all(),$vslidateArr);
+        // check validations
+        if ($validator->fails()) 
+        {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) 
+            {
+                $msg .= $message . "<br />";
+            }
+        }
+        else
+        {
+            $user = Admin::find($id);
+            if($user){
+                $user->password = bcrypt($request->get('password'));
+                $user->save();
+            }
+        }
+        return response()->json(['status' => $status, 'msg' => $msg]);
+    }
     public function UpdateAdminAccount(Request $request){
         $status = 1;
         $msg = 'Account has been updated successfully.';
