@@ -16,24 +16,208 @@
 @else
 <p> Pay with cash upon delivery. </p>
 @endif
-
 @component('mail::button', ['url' => '/'])
 Order #{{$order->order_number}} ( {{date('M d, Y', strtotime($order->order_date))}})
 @endcomponent
 <br />
-@component('mail::table')
-| Product | Quantity | Price |
-|:-------------:|:-----------:|:-----------:|
-@foreach($orderItems as $item)
-| {{ $item->product_name }} - ({{ $item->product_code }}) ({{ $item->prosize }}) | {{ $item->quantity }} | ₹{{ number_format($item->amount,2) }} |
-@endforeach
-|||-----------|
-| |Subtotal| ₹{{ number_format($order->total_amount,2) }} |
-| |Shipping| ₹{{ number_format($order->shipping_flat_charge,2) }} |
-| |GST| ₹{{ number_format($order->gst_charge,2) }} |
-| |COD| ₹{{ number_format($order->cod_charge,2) }} |
-| |Total| ₹{{ number_format($order->order_tax_amount_total,2) }} |
-@endcomponent
+<table style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    background-color: #ffffff;
+    border-color: #e8e5ef;
+    border-radius: 2px;
+    border-width: 1px;
+    margin: 0 auto;
+    padding: 0;
+    width: 570px;">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($orderItems as $item)
+        <tr style="display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;">
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;"> {{ $item->product_name }} - ({{ $item->product_code }})
+                ({!! htmlentities($item->prosize) !!})
+            </td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;"> {{ $item->quantity }}</td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: right;
+    border-top: 1px solid #a6acb4;"> ₹{{ number_format($item->amount,2) }} </td>
+        </tr>
+        @endforeach
+        <tr style="display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;">
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;">
+            </td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;">Subtotal</td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: right;
+    border-top: 1px solid #a6acb4;"> ₹{{ number_format($order->total_amount,2) }} </td>
+        </tr>
+        <tr style="display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;">
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;">
+            </td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;">Shipping</td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: right;
+    border-top: 1px solid #a6acb4;"> ₹{{ number_format($order->shipping_flat_charge,2) }} </td>
+        </tr>
+        <tr style="display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;">
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;">
+            </td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;">GST</td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: right;
+    border-top: 1px solid #a6acb4;"> ₹{{ number_format($order->gst_charge,2) }} </td>
+        </tr>
+        <tr style="display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;">
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;">
+            </td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;">COD</td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: right;
+    border-top: 1px solid #a6acb4;"> ₹{{ number_format($order->cod_charge,2) }} </td>
+        </tr>
+        <tr style="display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;">
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;">
+            </td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: center;
+    border-top: 1px solid #a6acb4;">Total</td>
+            <td style="box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    color: #74787e;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    padding: 10px 0; text-align: right;
+    border-top: 1px solid #a6acb4;"> ₹{{ number_format($order->order_tax_amount_total,2) }} </td>
+        </tr>
+    </tbody>
+</table>
+<br />
 
 <p><strong>Note:</strong> {{$order->note}}</p>
 
