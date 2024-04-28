@@ -58,6 +58,7 @@ class ClientsController extends Controller
         $data['action_params'] = 0;
         $data['buttonText'] = "Save";
         $data["method"] = "POST";
+        $data["stateList"] = Client::stateList();
         return view($this->moduleViewName . '.add', $data);
     }
     public function store(Request $request)
@@ -111,6 +112,7 @@ class ClientsController extends Controller
         $data['action_url'] = $this->moduleRouteText . ".update";
         $data['action_params'] = $formObj->id;
         $data['method'] = "PUT";
+        $data["stateList"] = Client::stateList();
         return view($this->moduleViewName . '.add', $data);
     }
 
@@ -158,6 +160,13 @@ class ClientsController extends Controller
 
         $model = $this->modelObj->listData();
         return Datatables::eloquent($model)
+            ->editColumn('company_name', function ($row) {
+                $html = $row->company_name;
+                if($row->gstn){
+                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">GSTN: '. $row->gstn. '</span>';
+                }
+                return $html;
+            })
             ->addColumn('phone_1', function ($row) {
                 $phone = '# '. $row->phone_1;
                 if($row->phone_2)
@@ -177,7 +186,7 @@ class ClientsController extends Controller
                     ]
                 )->render();
             })
-            ->rawColumns(['phone_1', 'action'])
+            ->rawColumns(['phone_1', 'action', 'company_name'])
             ->filter(function ($query) {
                 $search_name = request()->get("search_name");
                 $search_company = request()->get("search_company");
@@ -230,11 +239,12 @@ class ClientsController extends Controller
         }
         $client = $client->first();
         if($client){
+            $address = wordwrap($client->address, 10, "\n");
             $msg = 'Search Result';
             $status = 1;
             $data['name'] = $client->name;
             $data['phone'] = $client->phone_1;
-            $data['address'] = $client->address;
+            $data['address'] = $address;
             $data['state'] = $client->state;
             $data['city'] = $client->city;
             $data['pincode'] = $client->pincode;

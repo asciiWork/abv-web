@@ -9,6 +9,7 @@ use App\Models\QuotationItem;
 use App\Models\Client;
 use App\Models\Admin;
 use App\Models\LastInvoicePrice;
+use App\Models\Product;
 use DataTables;
 
 class QuotationsController extends Controller
@@ -77,13 +78,27 @@ class QuotationsController extends Controller
                 $qData->quotation_number = $request->get('quotation_number');
                 $qData->quotation_date = $request->get('quotation_date');
                 $qData->quotation_due_date = $request->get('quotation_due_date');
-                $qData->total_taxable_value = round($request->get('total_taxable_value'),2);
-                $qData->shipping_amount = $request->get('shipping_amount');
-                $qData->gst_amount = round($request->get('gst_amount'),2);
+                $qData->total_amount_value = round($request->get('total_amount_value'),2);
                 $qData->final_total_amount = round($request->get('final_total_amount'),2);
                 $qData->client_address = $request->get('client_address');
+                $qData->ship_address = $request->get('ship_address');
+                $qData->ship_city = $request->get('ship_city');
+                $qData->ship_state = $request->get('ship_state');
+                $qData->ship_pincode = $request->get('ship_pincode');
+                $qData->bill_address = $request->get('bill_address');
+                $qData->bill_city = $request->get('bill_city');
+                $qData->bill_state = $request->get('bill_state');
+                $qData->bill_pincode = $request->get('bill_pincode');
+                $qData->client_gstn = $request->get('client_gstn');
+                $qData->shipping_amount = $request->get('shipping_amount');
+                $qData->igst_amount = $request->get('igst_amount');
+                $qData->cgst_amount = $request->get('cgst_amount');
+                $qData->sgst_amount = $request->get('sgst_amount');
+                $qData->is_igst = $request->get('is_igst');
                 $qData->save();
                 $qID = $qData->id;
+                $qData->final_total_amount_words = Quotation::convertNumberToWords($qData->final_total_amount);
+                $qData->save();
 
                 $allProducts = $request->get('product_id');
                 $product_size_id = $request->get('product_size_id');
@@ -92,7 +107,9 @@ class QuotationsController extends Controller
                 $alltax_amount = $request->get('tax_amount');
                 $alltotal_amount = $request->get('total_amount');
                 $product_actual_price = $request->get('product_actual_price');
+                $allhsn_code = $request->get('product_hsn_code');
                 $item_name = $request->get('item_name');
+                $total_qnt = 0;
                 for ($i=0; $i < count($allProducts); $i++) {
                     $qnData = new QuotationItem();
                     $qnData->quotation_id = $qID;
@@ -104,8 +121,14 @@ class QuotationsController extends Controller
                     $qnData->taxable_value = isset($alltaxable_value[$i])?$alltaxable_value[$i]:'';
                     $qnData->tax_amount = isset($alltax_amount[$i])?$alltax_amount[$i]:'';
                     $qnData->total_amount = isset($alltotal_amount[$i])?$alltotal_amount[$i]:'';
+                    $qnData->product_hsn_code = isset($allhsn_code[$i])?$allhsn_code[$i]:'';
                     $qnData->save();
+                    $total_qnt += $qnData->quantity;
+
+                    Product::where('id', $qnData->product_id)->update(['hsn_code'=> $qnData->product_hsn_code]);
                 }
+                $qData->total_qnt = $total_qnt;
+                $qData->save();
 
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
@@ -164,7 +187,7 @@ class QuotationsController extends Controller
         $data['qnItems'] = $qnItems;
         $data['client'] = Client::find($formObj->client_id);
         $data['viewOrPdf'] = 0;
-        return view($this->moduleViewName . '.invoicePDF', $data);
+        return view($this->moduleViewName . '.show', $data);
     }
     public function update(Request $request, $id)
     {
@@ -185,12 +208,27 @@ class QuotationsController extends Controller
                 $model->quotation_number = $request->get('quotation_number');
                 $model->quotation_date = $request->get('quotation_date');
                 $model->quotation_due_date = $request->get('quotation_due_date');
-                $model->total_taxable_value = round($request->get('total_taxable_value'),2);
-                $model->shipping_amount = $request->get('shipping_amount');
-                $model->gst_amount = round($request->get('gst_amount'),2);
-                $model->final_total_amount = round($request->get('final_total_amount'),2);
+                $model->total_amount_value = round($request->get('total_amount_value'), 2);
+                $model->final_total_amount = round($request->get('final_total_amount'), 2);
                 $model->client_address = $request->get('client_address');
+                $model->ship_address = $request->get('ship_address');
+                $model->ship_city = $request->get('ship_city');
+                $model->ship_state = $request->get('ship_state');
+                $model->ship_pincode = $request->get('ship_pincode');
+                $model->bill_address = $request->get('bill_address');
+                $model->bill_city = $request->get('bill_city');
+                $model->bill_state = $request->get('bill_state');
+                $model->bill_pincode = $request->get('bill_pincode');
+                $model->client_gstn = $request->get('client_gstn');
+                $model->shipping_amount = $request->get('shipping_amount');
+                $model->igst_amount = $request->get('igst_amount');
+                $model->cgst_amount = $request->get('cgst_amount');
+                $model->sgst_amount = $request->get('sgst_amount');
+                $model->is_igst = $request->get('is_igst');
                 $model->save();
+                $model->final_total_amount_words = Quotation::convertNumberToWords($model->final_total_amount);
+                $model->save();
+
 
                 $allProducts = $request->get('product_id');
                 $product_size_id = $request->get('product_size_id');
@@ -200,7 +238,9 @@ class QuotationsController extends Controller
                 $alltotal_amount = $request->get('total_amount');
                 $product_actual_price = $request->get('product_actual_price');
                 $item_name = $request->get('item_name');
+                $allhsn_code = $request->get('product_hsn_code');
                 QuotationItem::where('quotation_id', $id)->delete();
+                $total_qnt=0;
                 for ($i = 0; $i < count($allProducts); $i++) {
                     $qnData = new QuotationItem();
                     $qnData->quotation_id = $id;
@@ -212,8 +252,12 @@ class QuotationsController extends Controller
                     $qnData->taxable_value = isset($alltaxable_value[$i]) ? $alltaxable_value[$i] : '';
                     $qnData->tax_amount = isset($alltax_amount[$i]) ? $alltax_amount[$i] : '';
                     $qnData->total_amount = isset($alltotal_amount[$i]) ? $alltotal_amount[$i] : '';
+                    $qnData->product_hsn_code = isset($allhsn_code[$i]) ? $allhsn_code[$i] : '';
                     $qnData->save();
+                    $total_qnt += $qnData->quantity;
                 }
+                $model->total_qnt = $total_qnt;
+                $model->save();
 
                 session()->flash('success_message', $msg);
             } catch (\Exception $e) {

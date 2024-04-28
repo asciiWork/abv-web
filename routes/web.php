@@ -14,6 +14,7 @@ use  App\Http\Controllers\admin\AdminProductsController;
 use  App\Http\Controllers\admin\QuotationsController;
 use  App\Http\Controllers\admin\AdminLoginController;
 use  App\Http\Controllers\admin\ClientsController;
+use  App\Http\Controllers\admin\InvoicesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('admin-quotations/make-invoice/{id}', [QuotationsController::class, 'makeInvoice'])->name('admin-quotations.make-invoice');
 	Route::get('admin-quotations/data', [QuotationsController::class,'data'])->name('admin-quotations.data');
 	Route::resource('admin-quotations', QuotationsController::class);
+
+	Route::get('admin-invoices/data', [InvoicesController::class,'data'])->name('admin-invoices.data');
+	Route::resource('admin-invoices', InvoicesController::class);
 
 	Route::get('admin-orders/data', [OrdersController::class,'data'])->name('admin-orders.data');
 	Route::resource('admin-orders', OrdersController::class);

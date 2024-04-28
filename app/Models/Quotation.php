@@ -16,7 +16,15 @@ class Quotation extends Model
     {
         return Quotation::select('quotations.*', 'admin_users.image as uimg','admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
         ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
-        ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id');
+        ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')
+        ->where('quotations.is_invoice', '=', 0);
+    }
+    public function invoiceListData()
+    {
+        return Quotation::select('quotations.*', 'admin_users.image as uimg','admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
+        ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
+        ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')
+        ->where('quotations.is_invoice', '=', 1);
     }
     public static function getQuotationNumber()
     {
@@ -80,7 +88,7 @@ class Quotation extends Model
     public static function allProducts()
     {
         $product = DB::table('product_size')
-        ->select('product_size.id', 'product.id as product_id', 'product_size.product_code','product.product_name', 'product_size.product_size', 'product_size.product_current_price as price')
+        ->select('product_size.id', 'product.hsn_code', 'product.id as product_id', 'product_size.product_code','product.product_name', 'product_size.product_size', 'product_size.product_current_price as price')
         ->leftJoin('product', 'product.id', '=', 'product_size.product_id')
         ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
         ->where('product_category.status', '1')
@@ -94,14 +102,18 @@ class Quotation extends Model
         $msg = '';
         $data = array();
         $rules = [
-           'quotation_number' => 'required|min:2',
-           'quotation_date' => 'required',
-           'quotation_due_date' => 'required',
-           'client_id' => 'required',
+            'quotation_number' => 'required|min:2',
+            'quotation_date' => 'required|date',
+            'quotation_due_date' => 'required|date',
+            'client_id' => 'required',
             'product_id.*' => 'required',
-            'taxable_value' => 'required',
-            'tax_amount' => 'required',
-            'total_amount' => 'required',
+            'ship_address' => 'required',
+            'ship_city' => 'required',
+            'ship_state' => 'required',
+            'ship_pincode' => 'required',
+            'total_amount_value' => 'required',
+            'shipping_amount' => 'required',
+            'final_total_amount' => 'required',
         ];
         $validator = \Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -112,7 +124,13 @@ class Quotation extends Model
                 $msg .= $message . "<br />";
             }
         }
-
+        $quotation_date = date('Y-m-d',strtotime($request->get('quotation_date')));
+        $client_id = $request->get('client_id');
+        $isAlredySedt = Quotation::where('is_invoice', 0)->where('client_id', $client_id)->where('quotation_date', '>', $quotation_date)->first();
+        if(!empty($isAlredySedt)){
+            $msg = 'Last Quotation sent date:: '.$isAlredySedt->quotation_date;
+            return ['status' => 0, 'msg' => $msg, 'data' => $data];
+        }
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }
     public static function totalOrdersToday($user_id=''){
@@ -273,5 +291,69 @@ class Quotation extends Model
             $salesyearNum[] = 'Year '.$data->year_number;
         }
         return ['yearOverviewTot'=>$yearOverviewTot,'salesyearNum'=>$salesyearNum];
+    }
+    public static function convertNumberToWords($number)
+    {
+        return 'abc rupp';
+        $number = intval($number);
+        // An array of words for numbers 0 to 19
+        $words = array(
+            0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three', 4 => 'four', 5 => 'five',
+            6 => 'six', 7 => 'seven', 8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven',
+            12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen', 16 => 'sixteen',
+            17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen'
+        );
+        
+        // An array of words for multiples of 10
+        $tens = array(
+            20 => 'twenty', 30 => 'thirty', 40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+            70 => 'seventy', 80 => 'eighty', 90 => 'ninety'
+        );
+        
+        // Special cases for thousands, millions, billions, etc.
+        $places = array('', 'thousand', 'million', 'billion', 'trillion', 'quadrillion');
+        
+        // Split the number into groups of three digits
+        $numberGroups = array_reverse(array_chunk(str_split(str_pad($number, ceil(strlen($number) / 3) * 3, '0', STR_PAD_LEFT)), 3));
+        
+        // Initialize an empty array to store the words
+        $result = array();
+        
+        foreach ($numberGroups as $groupIndex => $group) {
+            // Initialize an empty array to store the words for this group
+            $groupResult = array();
+            
+            // Extract the hundreds, tens, and ones digits from this group
+            list($hundreds, $tens, $ones) = $group;
+            
+            // Convert the hundreds digit to words
+            if ($hundreds != '0') {
+                $groupResult[] = $words[$hundreds] . ' hundred';
+            }
+            
+            // Convert the tens and ones digits to words
+            $twoDigitNumber = $tens * 10 + $ones;
+            if ($twoDigitNumber != '0') {
+                if ($twoDigitNumber < 20) {
+                    $groupResult[] = $words[$twoDigitNumber];
+                } else {
+                    $groupResult[] = $tens[$tens * 10];
+                    if ($ones != '0') {
+                        $groupResult[] = $words[$ones];
+                    }
+                }
+            }
+            
+            // Add the place (thousand, million, etc.) to the group result, if necessary
+            if (!empty($groupResult)) {
+                $groupResult[] = $places[$groupIndex];
+            }
+            
+            // Combine the group result into a single string and add it to the overall result
+            $result[] = implode(' ', $groupResult);
+        }
+        
+        // Combine the result array into a single string and return it
+        return implode(' ', array_reverse($result));
     }
 }
