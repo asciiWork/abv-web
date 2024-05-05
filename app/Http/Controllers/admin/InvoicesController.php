@@ -67,8 +67,9 @@ class InvoicesController extends Controller
                 return view(
                     "adminPanel.includes.actions",
                     [
-                        'currentRoute' => $this->moduleRouteText,
+                        'currentRoute' => "admin-quotations",
                         'row' => $row,
+                        'isView' => 1,
                     ]
                 )->render();
             })

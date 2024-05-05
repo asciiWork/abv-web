@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="mb-3">
-                            <label class="form-label">GSTN</label>
+                            <label class="form-label">GSTIN</label>
                             <div class="position-relative input-icon">
                                 {!! Form::text('gstn', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter GSTN']) !!}
                                 <span class="position-absolute top-50 translate-middle-y"><i class="bi bi-file"></i></span>

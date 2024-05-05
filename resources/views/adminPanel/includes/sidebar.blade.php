@@ -61,6 +61,13 @@ $crrRoute = \Route::currentRouteName();
                     <div class="menu-title">Invoices</div>
                 </a>
             </li>
+            <li class="{{ (request()->routeIs('admin-inventories.*'))?'mm-active':'' }}">
+                <a href="{{ route('admin-inventories.index') }}">
+                    <div class="parent-icon"><span class="material-symbols-outlined">list</span>
+                    </div>
+                    <div class="menu-title">Inventory</div>
+                </a>
+            </li>
         </ul>
     </div>
     <div class="sidebar-bottom dropdown dropup-center dropup">

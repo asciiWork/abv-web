@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\UserDevice;
 
 class AdminLoginController extends Controller
 {
@@ -26,6 +27,14 @@ class AdminLoginController extends Controller
         $credentials = ['email'=>$request->get('email'), 'password'=>$request->get('password'), 'status'=>1];
     
         if (\Auth::guard("admins")->attempt($credentials)) {
+
+            $user_agent = $request->userAgent();
+            $ip = Admin::GetUserIp();
+            UserDevice::updateOrCreate(
+                ['user_id' => \Auth::guard("admins")->user()->id, 'user_agent' => $user_agent],
+                ['user_agent' => $user_agent, 'ip_address'=> $ip, 'last_logged_at'=>date('Y-m-d H:i:s')]
+            );
+
             return redirect()->route('admin-dashboard');
         }
         return back()->withErrors([

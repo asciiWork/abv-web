@@ -48,7 +48,7 @@ class Client extends Model
     }
     public static function allClients()
     {
-        return Client::select(\DB::raw("CONCAT(name,' ',phone_1) as cname"),'id', 'address','city','state', 'pincode','gstn',"ship_address", "ship_city", "ship_state", "ship_pincode")->get();
+        return Client::select(\DB::raw("CONCAT(name,' - ',phone_1,' ',company_name) as cname"),'id', 'address','city','state', 'pincode','gstn',"ship_address", "ship_city", "ship_state", "ship_pincode")->get();
     }
     public static function stateList()
     {

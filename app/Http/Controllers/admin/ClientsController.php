@@ -163,7 +163,7 @@ class ClientsController extends Controller
             ->editColumn('company_name', function ($row) {
                 $html = $row->company_name;
                 if($row->gstn){
-                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">GSTN: '. $row->gstn. '</span>';
+                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">GSTIN: '. $row->gstn. '</span>';
                 }
                 return $html;
             })

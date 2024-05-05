@@ -142,7 +142,7 @@
                                             </select>
                                             <span id="last-product-price-{{$i}}"></span>
                                         </td>
-                                        <td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" value="{{$item['product_actual_price']}}" id="product_actual_price-{{$i}}">
+                                        <td><input name="product_actual_price[]" data-row="{{$i}}" type="text" class="form-control product_actual_price" value="{{$item['product_actual_price']}}" id="product_actual_price-{{$i}}">
                                             <input name="product_size_id[]" type="hidden" value="{{$item['product_size_id']}}" id="product-size-id-{{$i}}">
                                             <input name="item_name[]" type="hidden" value="{{$item['item_name']}}" id="product-name-{{$i}}">
                                         </td>
@@ -211,9 +211,11 @@
                             {!! Form::hidden('sgst_amount', null, ['class' => 'form-control','id'=>'sgst-tax_amount-value']) !!}
                             {!! Form::hidden('final_total_amount', null, ['class' => 'form-control','id'=>'final-total-value']) !!}
                             {!! Form::hidden('is_igst', null, ['class' => 'form-control','id'=>'is_igst']) !!}
+                            {!! Form::hidden('final_total_amount_words', null, ['class' => 'form-control','id'=>'final-total-value-words']) !!}
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <p class="text-left" id="final_total_amount_words"></p>
                 </div>
                 <div class="mt-4">
                     <div class="text-center">
@@ -235,9 +237,9 @@
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
             html += '<td><div class = "col-sm-12" ><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select> </div> </td>';
-            html += '<input name="product_name[]" type="hidden" value="" id="product-name-' + num + '">';
+            html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
             html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
-            html += '<td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" value="" id="product_actual_price-' + num + '"></td>';
+            html += '<td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" data-row="' + num + '" value="" id="product_actual_price-' + num + '"></td>';
             html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
             html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
             html += '<td ><div class="col-sm-10"><input type="hidden" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ><input type="text" value="" name="hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
@@ -277,7 +279,16 @@
             allTotalPrices();
         });
         $(document).on("change", ".product_actual_price", function() {
-            allTotalPrices();
+            if ($(this).val() > 0) {
+                var rowNo = $(this).attr('data-row');
+                var price = $(this).val();
+                $('#product_actual_price-' + rowNo).val(price);
+                $('#taxable-value-' + rowNo).val(price);
+                var result = parseFloat(price) * 0.18;
+                $('#tax-amount-' + rowNo).val(result);
+                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                allTotalPrices();
+            }
         });
         $(document).on("change", ".item-qnt", function() {
             if ($(this).val() > 0) {
@@ -363,6 +374,7 @@
             }
         }
         $('#total_qnt').html(parseInt(totalQ));
+        convertAmountToIndianWords(amountFormat(amounts));
     }
 
     function amountFormat(amount) {
@@ -380,6 +392,36 @@
             $('#sgst_row').show();
             $('#cgst_row').show();
         }
+    }
+
+    function convertAmountToIndianWords(amount) {
+        var totalAmount = parseInt(amount);
+        var decimalPart = Math.round((amount - Math.floor(amount)) * 100);
+        var rupees = inWords(totalAmount);
+        var paise = inWords(decimalPart);
+        var wordsAmount = rupees + ' Rupees and ' + paise + ' Paise';
+        $('#final-total-value-words').val(wordsAmount);
+        $('#final_total_amount_words').html(wordsAmount);
+    }
+
+    function inWords(total_amount) {
+        var num = total_amount;
+        var a = ['', 'one ', 'two ', 'three ', 'four ', 'five ', 'six ', 'seven ', 'eight ', 'nine ', 'ten ', 'eleven ', 'twelve ', 'thirteen ', 'fourteen ', 'fifteen ', 'sixteen ', 'seventeen ', 'eighteen ', 'nineteen '];
+        var b = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+
+        if ((num = num.toString()).length > 9) return 'overflow';
+        n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+        if (!n) return;
+        var str = '';
+        str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
+        str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
+        str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
+        str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
+        str += (n[5] != 0) ? ((str != '') ? '' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) : '';
+        str = str.replace(/\w\S*/g, function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+        return str;
     }
 </script>
 <script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js') }}"></script>

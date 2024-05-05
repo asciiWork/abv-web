@@ -15,6 +15,7 @@ use  App\Http\Controllers\admin\QuotationsController;
 use  App\Http\Controllers\admin\AdminLoginController;
 use  App\Http\Controllers\admin\ClientsController;
 use  App\Http\Controllers\admin\InvoicesController;
+use  App\Http\Controllers\admin\InventoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 
 	Route::get('admin-invoices/data', [InvoicesController::class,'data'])->name('admin-invoices.data');
 	Route::resource('admin-invoices', InvoicesController::class);
+
+	Route::get('admin-inventories/data', [InventoriesController::class,'data'])->name('admin-inventories.data');
+	Route::resource('admin-inventories', InventoriesController::class);
 
 	Route::get('admin-orders/data', [OrdersController::class,'data'])->name('admin-orders.data');
 	Route::resource('admin-orders', OrdersController::class);

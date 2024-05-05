@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\UserAddresses;
+use App\Models\UserDevice;
 use DataTables;
 
 class UsersController extends Controller
@@ -130,6 +131,7 @@ class UsersController extends Controller
         $data['action_url'] = $this->moduleRouteText . ".update";
         $data['action_params'] = $formObj->id;
         $data['method'] = "PUT";
+        $data['devices'] = UserDevice::where('user_id',$id)->get();
         return view($this->moduleViewName . '.add', $data);
     }
 

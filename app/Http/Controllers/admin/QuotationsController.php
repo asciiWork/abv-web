@@ -11,6 +11,7 @@ use App\Models\Admin;
 use App\Models\LastInvoicePrice;
 use App\Models\Product;
 use DataTables;
+//use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuotationsController extends Controller
 {
@@ -95,10 +96,9 @@ class QuotationsController extends Controller
                 $qData->cgst_amount = $request->get('cgst_amount');
                 $qData->sgst_amount = $request->get('sgst_amount');
                 $qData->is_igst = $request->get('is_igst');
+                $qData->final_total_amount_words = $request->get('final_total_amount_words');
                 $qData->save();
                 $qID = $qData->id;
-                $qData->final_total_amount_words = Quotation::convertNumberToWords($qData->final_total_amount);
-                $qData->save();
 
                 $allProducts = $request->get('product_id');
                 $product_size_id = $request->get('product_size_id');
@@ -130,6 +130,21 @@ class QuotationsController extends Controller
                 $qData->total_qnt = $total_qnt;
                 $qData->save();
 
+                if($request->get('is_invoice')){
+                    $qData->invoice_number = Quotation::getInvoiceNumber();
+                    $qData->invoice_date = date('Y-m-d');
+                    $qData->is_invoice = 1;
+                    $qData->save();
+                    $itemssss = QuotationItem::where('quotation_id', $qID)->get();
+                    foreach ($itemssss as $itm) {
+                        $lst = new LastInvoicePrice();
+                        $lst->product_id = $itm->product_id;
+                        $lst->product_size_id = $itm->product_size_id;
+                        $lst->client_id = $qData->client_id;
+                        $lst->price = $itm->product_actual_price;
+                        $lst->save();
+                    }
+                }
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
                 $status = 0;
@@ -169,7 +184,7 @@ class QuotationsController extends Controller
         return view($this->moduleViewName . '.edit', $data);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
         $formObj = $this->modelObj;
         if (\Auth::guard('admins')->user()->user_type_id != 1) {
@@ -187,7 +202,19 @@ class QuotationsController extends Controller
         $data['qnItems'] = $qnItems;
         $data['client'] = Client::find($formObj->client_id);
         $data['viewOrPdf'] = 0;
-        return view($this->moduleViewName . '.show', $data);
+        if($request->get('isPdf')){
+            // $pdf = PDF::loadView($this->moduleViewName . '.pdf', $data)->setOptions(['chroot'  => public_path('images/')]);
+            // $fileName = "quotation_" . $formObj->quotation_number . ".pdf";
+            // if ($formObj->is_invoice) {
+            //     $fileName = "invoice_" . $formObj->invoice_number . ".pdf";
+            // }
+            // return $pdf->download($fileName);
+            return view($this->moduleViewName . '.pdf', $data)->render();
+        } else if ($request->get('isPrint')){
+            return view($this->moduleViewName . '.pdf', $data)->render();
+        }else{
+            return view($this->moduleViewName . '.show', $data);
+        }
     }
     public function update(Request $request, $id)
     {
@@ -225,10 +252,8 @@ class QuotationsController extends Controller
                 $model->cgst_amount = $request->get('cgst_amount');
                 $model->sgst_amount = $request->get('sgst_amount');
                 $model->is_igst = $request->get('is_igst');
+                $model->final_total_amount_words = $request->get('final_total_amount_words');
                 $model->save();
-                $model->final_total_amount_words = Quotation::convertNumberToWords($model->final_total_amount);
-                $model->save();
-
 
                 $allProducts = $request->get('product_id');
                 $product_size_id = $request->get('product_size_id');

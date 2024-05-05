@@ -49,8 +49,8 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route($currentRoute.'.edit',$usr->id) }}"><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">Edit<i class="bi bi-pencil-square ms-2"></i></span></a>
-                                <a href="javascript:void(0);" class="chngPass" data-id="{{ $usr->id }}"><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold"><i class="bi bi-key"></i></span></a>
+                                <a href="{{ route($currentRoute.'.edit',$usr->id) }}"><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold"><i class="bi bi-pencil-square"></i></span></a>
+                                <a href="javascript:void(0);" class="chngPass" data-id="{{ $usr->id }}"><span class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold"><i class="bi bi-key"></i></span></a>
                             </td>
                         </tr>
                         @endforeach

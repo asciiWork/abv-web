@@ -78,6 +78,35 @@
                 {!! Form::close() !!}
             </div>
         </div>
+        @if(isset($devices) && !empty($devices))
+        <div class="col-12 col-lg-6 col-xl-5 d-flex">
+            <div class="card w-100">
+                <div class="card-header bg-transparent">
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h6 class="mb-0 fw-bold">Logged In Devices</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="team-list">
+                        @foreach($devices as $device)
+                        <div class="d-flex align-items-center gap-3 border-start border-success border-4 border-0 px-2 py-1">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1 fw-bold">{{$device->user_agent}}</h6>
+                                <span class="">{{$device->last_logged_at}}</span>
+                            </div>
+                            <div class="form-check form-switch form-check-success border-0">
+                                {{$device->ip_address}}
+                            </div>
+                        </div>
+                        @endforeach
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection
