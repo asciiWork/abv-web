@@ -10,19 +10,25 @@
             <div class="card-body">
                 {!! Form::open(['method' => 'Post','route' => ['admin-clients.search-address'],'id' => 'search-module-frm', 'redirect-url' => '']) !!}
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="mb-4">
                             <label class="form-label">Client Name</label>
                             {!! Form::text('search_name', null, ['class' => 'form-control','placeholder'=>'Search Name']) !!}
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
+                        <div class="mb-4">
+                            <label class="form-label">Company Name</label>
+                            {!! Form::text('search_company', null, ['class' => 'form-control','placeholder'=>'Search Company']) !!}
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
                         <div class="mb-4">
                             <label class="form-label">Phone</label>
                             {!! Form::text('search_phone', null, ['class' => 'form-control','placeholder'=>'Search Phone']) !!}
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="mb-4 mt-4 text-center">
                             <button type="submit" class="btn btn-primary" id="search_form_btn">Search</button>
                         </div>
@@ -33,8 +39,11 @@
                 <div><br /><br /></div>
                 <div class="col-12 col-lg-4 col-xl-3">
                     <address class="m-t-5 m-b-5" id="printableText">
+                        <strong class="text-inverse">To,</strong><br>
+                        <strong class="text-inverse" id="client-company">Company Name</strong><br>
                         <strong class="text-inverse" id="client-name">Client Name</strong><br>
                         <span id="client-address">Street Address</span><br>
+                        <span id="client-landmark">Landmark</span><br>
                         <span id="client-city">City</span>, <span id="client-pincode">Pin code</span><br>
                         <span id="client-state">State</span><br>
                         Mo: <span id="client-phone">Mobile Number</span><br>
@@ -59,5 +68,5 @@
         document.body.innerHTML = originalContent;
     }
 </script>
-<script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js?0285') }}"></script>
+<script src=" {{ asset('public/admin-theme/assetsNew/modules/moduleForm.js?024545485') }}"></script>
 @endsection

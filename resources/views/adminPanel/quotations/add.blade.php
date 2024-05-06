@@ -55,7 +55,7 @@
                             <p class="fs-13">
                             <div class="input-group mb-2">
                                 <div class="input-group-text">Quotation Due Date</div>
-                                {!! Form::date('quotation_due_date', null, ['class' => 'form-control']) !!}
+                                {!! Form::date('quotation_due_date', date('Y-m-d'), ['class' => 'form-control']) !!}
                             </div>
                             </p>
                         </div>
@@ -70,7 +70,7 @@
                             <select name="client_id" class="form-select" id="client-select-box" data-placeholder="Select Client">
                                 <option value="">Select Client</option>
                                 @foreach($clients as $clr)
-                                <option value="{{$clr->id}}" data-billaddress="{{$clr->address}}" data-billcity="{{$clr->city}}" data-billstate="{{$clr->state}}" data-billpincode="{{$clr->pincode}}" data-shipAddress="{{$clr->ship_address}}" data-shipCity="{{$clr->ship_city}}" data-shipState="{{$clr->ship_state}}" data-shipPincode="{{$clr->ship_pincode}}" data-gstn="{{$clr->gstn}}" data-address="{{$clr->address}}" data-city="{{$clr->city}}" data-state="{{$clr->state}}">{{$clr->cname}}</option>
+                                <option value="{{$clr->id}}" data-billaddress="{{$clr->address}}" data-billcity="{{$clr->city}}" data-billlandmark="{{$clr->landmark}}" data-shiplandmark="{{$clr->ship_landmark}}" data-billstate="{{$clr->state}}" data-billpincode="{{$clr->pincode}}" data-shipAddress="{{$clr->ship_address}}" data-shipCity="{{$clr->ship_city}}" data-shipState="{{$clr->ship_state}}" data-shipPincode="{{$clr->ship_pincode}}" data-gstn="{{$clr->gstn}}" data-address="{{$clr->address}}" data-city="{{$clr->city}}" data-state="{{$clr->state}}">{{$clr->cname}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -79,6 +79,9 @@
                         <h6 class="fs-14">Billing Address</h6>
                         <div class="input-group"><span class="input-group-text">Street</span>
                             <input name="bill_address" id="bill_address" type="text" class="form-control">
+                        </div>
+                        <div class="input-group"><span class="input-group-text">Landmark</span>
+                            <input name="bill_landmark" id="bill_landmark" type="text" class="form-control">
                         </div>
                         <div class="input-group"><span class="input-group-text">City</span>
                             <input name="bill_city" id="bill_city" type="text" class="form-control">
@@ -95,6 +98,9 @@
                         <div class="input-group"><span class="input-group-text">Street</span>
                             <input name="ship_address" id="ship_address" type="text" class="form-control">
                         </div>
+                        <div class="input-group"><span class="input-group-text">Landmark</span>
+                            <input name="ship_landmark" id="ship_landmark" type="text" class="form-control">
+                        </div>
                         <div class="input-group"><span class="input-group-text">City</span>
                             <input name="ship_city" id="ship_city" type="text" class="form-control">
                         </div>
@@ -106,7 +112,7 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <h6 class="fs-14">GSTN</h6>
+                        <h6 class="fs-14">GSTIN</h6>
                         {!! Form::text('client_gstn', null, ['class' => 'form-control','id'=>'client_gstn']) !!}
                     </div>
                 </div>
@@ -118,12 +124,11 @@
                                 <thead class="border-top border-bottom bg-light-subtle border-light">
                                     <tr>
                                         <th>#</th>
-                                        <th width="25%">Item</th>
-                                        <th>Rate/Item</th>
-                                        <th>Qnt</th>
-                                        <th>Taxable Value</th>
-                                        <th>HSN Code</th>
-                                        <th>Amount</th>
+                                        <th width="35%">Item</th>
+                                        <th width="17%">HSN Code</th>
+                                        <th width="17%">Rate/Item</th>
+                                        <th width="17%">Qty.</th>
+                                        <th width="17%" style="text-align: center;">Amount</th>
                                         <th class="float-end"><a id="add_tr" class="btn btn-primary"><i class="bi bi-plus-lg"></i></a></th>
                                     </tr>
                                 </thead>
@@ -137,38 +142,32 @@
                                                 <option value="{{$prd->id}}" data-hsnCode="{{$prd->hsn_code}}" data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
                                                 @endforeach
                                             </select>
-                                            <span id="last-product-price-1"></span>
                                             <input name="item_name[]" type="hidden" value="" id="product-name-1">
                                         </td>
-                                        <td><input name="product_actual_price[]" type="text" data-row="1" class="form-control product_actual_price" value="0" id="product_actual_price-1">
-                                            <input name="product_size_id[]" type="hidden" value="" id="product-size-id-1">
-                                        </td>
                                         <td>
-                                            <div class="col-sm-8">
-                                                <input type="number" min="0" value="1" data-row="1" name="quantity[]" class="form-control item-qnt">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="" name="taxable_value[]" id="taxable-value-1" class="form-control taxable-value">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="hidden" value="" name="tax_amount[]" id="tax-amount-1" class="form-control tax_amount">
+                                            <div class="col-sm-12">
                                                 <input type="text" value="" name="product_hsn_code[]" id="hsn-code-1" class="form-control hsn-code">
                                             </div>
                                         </td>
+                                        <td><input name="product_actual_price[]" type="text" data-row="1" class="form-control product_actual_price" value="0" id="product_actual_price-1">
+                                            <input name="product_size_id[]" type="hidden" value="" id="product-size-id-1">
+                                            <span id="last-product-price-1"></span>
+                                        </td>
                                         <td>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="" name="total_amount[]" id="total-amount-1" class="total-amount form-control">
+                                            <div class="col-sm-12">
+                                                <input type="number" min="0" value="1" data-row="1" name="quantity[]" class="form-control item-qnt" id="item-qnt-1">
                                             </div>
+                                        </td>
+                                        <td align="center">
+                                            <h6 id="total-amount-txt-1">000.00</h6>
+                                            <input type="hidden" value="" name="total_amount[]" id="total-amount-1" class="total-amount form-control">
                                         </td>
                                         <td class="float-end">
                                         </td>
                                     </tr>
                                 </tbody>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -191,9 +190,12 @@
                         <div class="float-end mt-3 mt-sm-0">
                             <p><b>Total Amount:</b> <span class="float-end final-taxable-total">000.00</span></p>
                             <p>
-                            <div class="input-group mb-3"> <span class="input-group-text">Shipping Charge</span>
+                            <div class="input-group mb-3"> <span class="input-group-text">Discount</span>
+                                <input name="discount" id="discount-value" value="0" type="number" class="form-control text-right" min="0" max="100"><span class="input-group-text">%</span><span class="input-group-text">Shipping Charge</span>
                                 <input name="shipping_amount" id="shipping-charge-value" value="0" type="text" class="form-control text-right">
                             </div>
+                            </p>
+                            <p><b>Sub Total:</b> <span class="float-end sub-final-total">000.00</span></p>
                             <p id="igst_row"><b>IGST (18.0%):</b> <span class="float-end igst-tax_amount">000.00</span></p>
                             <p id="cgst_row"><b>CGST (9.0%):</b> <span class="float-end cgst-tax_amount">000.00</span></p>
                             <p id="sgst_row"><b>SGST (9.0%):</b> <span class="float-end sgst-tax_amount">000.00</span></p>
@@ -203,6 +205,7 @@
                             <input type="hidden" name="cgst_amount" id="cgst-tax_amount-value">
                             <input type="hidden" name="sgst_amount" id="sgst-tax_amount-value">
                             <input type="hidden" name="final_total_amount" id="final-total-value">
+                            <input type="hidden" name="sub_final_total_amount" id="sub-final-total-value">
                             <input type="hidden" name="final_total_amount_words" id="final-total-value-words">
                             <input type="hidden" value="0" name="is_igst" id="is_igst">
                             <input type="hidden" value="0" name="is_invoice" id="is_invoice">
@@ -214,7 +217,9 @@
                 <div class="mt-4">
                     <div class="text-center">
                         <button type="button" class="btn btn-primary" id="create_qtn">{{ $buttonText}}</button>
+                        @if(\Auth::guard('admins')->user()->user_type_id == 1)
                         <button type="button" class="btn btn-warning" id="create_invoice">Make as Invoice</button>
+                        @endif
                     </div>
                 </div>
                 <input value=" 1" id="numRow" type="hidden">
@@ -240,14 +245,13 @@
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select></td>';
             html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
             html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
-            html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"></td>';
-            html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
-            html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="hidden" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
+            html += '<td ><div class="col-sm-12"><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
+            html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><div class="col-sm-12"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control" id="item-qnt-' + num + '"></div ></td>';
+            html += '<td class="" align="center"><h6 id="total-amount-txt-' + num + '">000.00</h6><input type="hidden" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
@@ -274,10 +278,8 @@
                 $('#product-name-' + rowNo).val(selectedOption.text());
                 $('#product-size-id-' + rowNo).val(selectedOption.data('product'));
                 $('#hsn-code-' + rowNo).val(selectedOption.data('hsnCode'));
-                $('#taxable-value-' + rowNo).val(price);
-                var result = parseFloat(price) * 0.18;
-                $('#tax-amount-' + rowNo).val(result);
-                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                $('#total-amount-txt-' + rowNo).html(price);
+                $('#total-amount-' + rowNo).val(price);
             }
             allTotalPrices();
             getLastPrice(selectedOption.data('product'), rowNo);
@@ -287,10 +289,9 @@
                 var rowNo = $(this).attr('data-row');
                 var price = $(this).val();
                 $('#product_actual_price-' + rowNo).val(price);
-                $('#taxable-value-' + rowNo).val(price);
-                var result = parseFloat(price) * 0.18;
-                $('#tax-amount-' + rowNo).val(result);
-                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                var totl = parseFloat(price) * parseFloat($('#item-qnt-' + rowNo).val());
+                $('#total-amount-' + rowNo).val(totl);
+                $('#total-amount-txt-' + rowNo).html(totl);
                 allTotalPrices();
             }
         });
@@ -298,18 +299,22 @@
             if ($(this).val() > 0) {
                 var rowNo = $(this).attr('data-row');
                 var totl = parseFloat($('#product_actual_price-' + rowNo).val()) * parseFloat($(this).val());
-                $('#taxable-value-' + rowNo).val(totl);
-                var result = parseFloat(totl) * 0.18;
-                $('#tax-amount-' + rowNo).val(result);
-                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                $('#total-amount-' + rowNo).val(totl);
+                $('#total-amount-txt-' + rowNo).html(totl);
             }
             allTotalPrices();
         });
         $(document).on("change", "#shipping-charge-value", function() {
             allTotalPrices();
         });
+        $(document).on("change", "#discount-value", function() {
+            allTotalPrices();
+        });
         $(document).on("change", "#client-select-box", function() {
             $('#is_igst').val(0);
+            $('#igst_row').hide();
+            $('#sgst_row').hide();
+            $('#cgst_row').hide();
             if ($(this).val() > 0) {
                 var selectedOption = $(this).find('option:selected');
                 var address = selectedOption.data('address');
@@ -330,6 +335,8 @@
                 $('#bill_city').val(selectedOption.data('billcity'));
                 $('#bill_state').val(selectedOption.data('billstate'));
                 $('#bill_pincode').val(selectedOption.data('billpincode'));
+                $('#ship_landmark').val(selectedOption.data('shiplandmark'));
+                $('#bill_landmark').val(selectedOption.data('billlandmark'));
             }
         });
     });
@@ -379,11 +386,22 @@
         $('.final-taxable-total').html(amountFormat(tamounts));
         $('#final-taxable-total-value').val(amountFormat(tamounts));
 
+        var discountValue = $('#discount-value').val();
+        if (discountValue == "NaN" || discountValue == null || discountValue == "") {
+            discountValue = parseFloat("0");
+        }
+        var withDiscout = parseFloat(tamounts) * (parseInt(discountValue) / 100);
+        var finalWithDiscount = parseFloat(tamounts) - parseFloat(withDiscout);
+
         var shippingChargeValue = $('#shipping-charge-value').val();
         if (shippingChargeValue == "NaN" || shippingChargeValue == null || shippingChargeValue == "") {
             shippingChargeValue = parseFloat("0");
         }
-        var countGst = parseFloat(tamounts) + parseFloat(shippingChargeValue);
+        var countGst = parseFloat(finalWithDiscount) + parseFloat(shippingChargeValue);
+
+        $('.sub-final-total').html(amountFormat(countGst));
+        $('#sub-final-total-value').val(amountFormat(countGst));
+
         var is_igst = $('#is_igst').val();
         var iResult = 0;
         if (is_igst == 1) {
@@ -391,11 +409,12 @@
             $('.igst-tax_amount').html(iResult);
             $('#igst-tax_amount-value').val(iResult);
         } else {
-            var iResult = amountFormat(parseFloat(countGst) * 0.9);
+            var iResult = amountFormat(parseFloat(countGst) * 0.09);
             $('.sgst-tax_amount').html(iResult);
             $('#sgst-tax_amount-value').val(iResult);
             $('.cgst-tax_amount').html(iResult);
             $('#cgst-tax_amount-value').val(iResult);
+            iResult = iResult + iResult;
         }
         amounts = parseFloat(countGst) + parseFloat(iResult);
         $('.final-total').html(amountFormat(amounts));

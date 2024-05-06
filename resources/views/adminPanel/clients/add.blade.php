@@ -89,6 +89,10 @@
                         <label class="form-label">Street Address</label>
                         {!! Form::textarea('address',null,['class' => 'form-control', 'data-required' => true, 'rows'=>3]) !!}
                     </div>
+                    <div class="col-lg-12 mb-1">
+                        <label class="form-label">Landmark</label>
+                        {!! Form::text('landmark',null,['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Landmark']) !!}
+                    </div>
                     <div class="col-lg-12 mb-2">
                         <label class="form-label">City</label>
                         <div class="position-relative input-icon">
@@ -120,6 +124,10 @@
                     <div class="col-lg-12 mb-1">
                         <label class="form-label">Street Address</label>
                         {!! Form::textarea('ship_address',null,['class' => 'form-control', 'data-required' => true, 'rows'=>3]) !!}
+                    </div>
+                    <div class="col-lg-12 mb-1">
+                        <label class="form-label">Landmark</label>
+                        {!! Form::text('ship_landmark',null,['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Landmark']) !!}
                     </div>
                     <div class="col-lg-12 mb-2">
                         <label class="form-label">City</label>

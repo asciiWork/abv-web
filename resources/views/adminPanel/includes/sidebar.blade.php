@@ -32,6 +32,7 @@ $crrRoute = \Route::currentRouteName();
                     <div class="menu-title">Users</div>
                 </a>
             </li>
+            @endif
             <li class="{{ ($crrRoute =='admin-clients.index' || $crrRoute =='admin-clients.create' || $crrRoute =='admin-clients.edit')?'mm-active':'' }}">
                 <a href="{{ route('admin-clients.index') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">account_circle</span>
@@ -39,7 +40,6 @@ $crrRoute = \Route::currentRouteName();
                     <div class="menu-title">Clients</div>
                 </a>
             </li>
-            @endif
             <li class="{{ ($crrRoute == 'admin-clients.print-address')?'mm-active':'' }}">
                 <a href="{{ route('admin-clients.print-address') }}">
                     <div class="parent-icon"><span class="material-symbols-outlined">distance</span>
@@ -59,13 +59,6 @@ $crrRoute = \Route::currentRouteName();
                     <div class="parent-icon"><span class="material-symbols-outlined">backup_table</span>
                     </div>
                     <div class="menu-title">Invoices</div>
-                </a>
-            </li>
-            <li class="{{ (request()->routeIs('admin-inventories.*'))?'mm-active':'' }}">
-                <a href="{{ route('admin-inventories.index') }}">
-                    <div class="parent-icon"><span class="material-symbols-outlined">list</span>
-                    </div>
-                    <div class="menu-title">Inventory</div>
                 </a>
             </li>
         </ul>

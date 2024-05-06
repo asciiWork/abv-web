@@ -11,7 +11,7 @@ use App\Models\Admin;
 use App\Models\LastInvoicePrice;
 use App\Models\Product;
 use DataTables;
-//use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuotationsController extends Controller
 {
@@ -86,6 +86,8 @@ class QuotationsController extends Controller
                 $qData->ship_city = $request->get('ship_city');
                 $qData->ship_state = $request->get('ship_state');
                 $qData->ship_pincode = $request->get('ship_pincode');
+                $qData->bill_landmark = $request->get('bill_landmark');
+                $qData->ship_landmark = $request->get('ship_landmark');
                 $qData->bill_address = $request->get('bill_address');
                 $qData->bill_city = $request->get('bill_city');
                 $qData->bill_state = $request->get('bill_state');
@@ -96,6 +98,8 @@ class QuotationsController extends Controller
                 $qData->cgst_amount = $request->get('cgst_amount');
                 $qData->sgst_amount = $request->get('sgst_amount');
                 $qData->is_igst = $request->get('is_igst');
+                $qData->sub_final_total_amount = $request->get('sub_final_total_amount');
+                $qData->discount = $request->get('discount');
                 $qData->final_total_amount_words = $request->get('final_total_amount_words');
                 $qData->save();
                 $qID = $qData->id;
@@ -135,15 +139,15 @@ class QuotationsController extends Controller
                     $qData->invoice_date = date('Y-m-d');
                     $qData->is_invoice = 1;
                     $qData->save();
-                    $itemssss = QuotationItem::where('quotation_id', $qID)->get();
-                    foreach ($itemssss as $itm) {
-                        $lst = new LastInvoicePrice();
-                        $lst->product_id = $itm->product_id;
-                        $lst->product_size_id = $itm->product_size_id;
-                        $lst->client_id = $qData->client_id;
-                        $lst->price = $itm->product_actual_price;
-                        $lst->save();
-                    }
+                }
+                $itemssss = QuotationItem::where('quotation_id', $qID)->get();
+                foreach ($itemssss as $itm) {
+                    $lst = new LastInvoicePrice();
+                    $lst->product_id = $itm->product_id;
+                    $lst->product_size_id = $itm->product_size_id;
+                    $lst->client_id = $qData->client_id;
+                    $lst->price = $itm->product_actual_price;
+                    $lst->save();
                 }
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
@@ -160,9 +164,9 @@ class QuotationsController extends Controller
     {
         $formObj = $this->modelObj;
         if (\Auth::guard('admins')->user()->user_type_id != 1) {
-            $formObj = $formObj->where('user_id', \Auth::guard('admins')->user()->id);
+            $formObj = $formObj->where('user_id', \Auth::guard('admins')->user()->id)->where('is_invoice', 0);
         }
-        $formObj = $formObj->where('is_invoice', 0)->find($id);
+        $formObj = $formObj->where('is_paid', 0)->find($id);
 
         if (!$formObj) {
             abort(404);
@@ -186,6 +190,12 @@ class QuotationsController extends Controller
 
     public function show($id, Request $request)
     {
+        // return view($this->moduleViewName . '.demoPdf');
+
+        // $pdf = PDF::loadView($this->moduleViewName . '.demoPdf')->setOptions(['chroot'  => public_path('images/')]);
+        // $fileName = "quotation_.pdf";
+        // return $pdf->download($fileName);
+
         $formObj = $this->modelObj;
         if (\Auth::guard('admins')->user()->user_type_id != 1) {
             $formObj = $formObj->where('user_id', \Auth::guard('admins')->user()->id);
@@ -250,8 +260,12 @@ class QuotationsController extends Controller
                 $model->shipping_amount = $request->get('shipping_amount');
                 $model->igst_amount = $request->get('igst_amount');
                 $model->cgst_amount = $request->get('cgst_amount');
+                $model->bill_landmark = $request->get('bill_landmark');
+                $model->ship_landmark = $request->get('ship_landmark');
                 $model->sgst_amount = $request->get('sgst_amount');
                 $model->is_igst = $request->get('is_igst');
+                $model->sub_final_total_amount = $request->get('sub_final_total_amount');
+                $model->discount = $request->get('discount');
                 $model->final_total_amount_words = $request->get('final_total_amount_words');
                 $model->save();
 
@@ -299,9 +313,9 @@ class QuotationsController extends Controller
         $model = $this->modelObj->listData();
         return Datatables::eloquent($model)
             ->editColumn('quotation_number', function ($row) {
-                $html = '<span class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text2 fw-bold">Q: '. $row->quotation_number. '</span>';
+                $html = '<span class="lable-table bg-warning-subtle text-warning rounded border border-warning-subtle font-text4 fw-bold">Q: '. $row->quotation_number. '</span>';
                 if($row->is_invoice){
-                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">I: '. $row->invoice_number.'</span>';
+                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text4 fw-bold">I: '. $row->invoice_number.'</span>';
                 }
                 return $html;
             })
@@ -327,6 +341,7 @@ class QuotationsController extends Controller
                 return $html;
             })
             ->addColumn('action', function ($row) {
+                $markAsInvoice = (\Auth::guard('admins')->user()->user_type_id == 1)?1:0;
                 return view(
                     "adminPanel.includes.actions",
                     [
@@ -334,7 +349,7 @@ class QuotationsController extends Controller
                         'row' => $row,
                         'isEdit' => ($row->is_invoice)?0:1,
                         'isDelete' => 0,
-                        'isInvoice' => 1,
+                        'isInvoice' => $markAsInvoice,
                         'isView' => 1,
                     ]
                 )->render();
@@ -373,12 +388,17 @@ class QuotationsController extends Controller
     }
     public function makeInvoice($id, Request $request)
     {
+        /*------------ACL-----------------*/
+        if (!\App\Models\ACL::isAccess()) {
+            return abort(404);
+        }
+        /*--------------------------------*/
+
         $formObj = $this->modelObj;
         if (\Auth::guard('admins')->user()->user_type_id != 1){
             $formObj = $formObj->where('user_id', \Auth::guard('admins')->user()->id);
         }
         $formObj = $formObj->where('is_invoice',0)->find($id);
-
         if (!$formObj) {
             abort(404);
         }

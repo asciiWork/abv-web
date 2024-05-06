@@ -82,6 +82,8 @@ $(document).ready(function() {
                             delay: 5000
                         });
                         $('#client-name').text(result.data.name);
+                        $('#client-company').text(result.data.company_name);
+                        $('#client-landmark').text(result.data.landmark);
                         $('#client-phone').text(result.data.phone);
                         $('#client-city').text(result.data.city);
                         $('#client-state').text(result.data.state);

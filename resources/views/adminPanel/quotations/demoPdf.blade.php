@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
-    <title>ABV Tool</title>
+    <link href="css/style.css" rel="stylesheet" media="print">
+
+    <title>Demo</title>
     <style>
         .main-tabel-dv td {
             padding: 0px;
@@ -56,6 +58,10 @@
             min-width: 200px;
             margin: 5px 0px
         }
+
+        @media screen and (max-width:600px) {}
+
+        @media screen and (max-width:480px) {}
     </style>
 </head>
 
@@ -68,18 +74,12 @@
                         <tbody>
                             <tr>
                                 <td width="50%">
-                                    <b>
-                                        @if($invoice->is_invoice)
-                                        <a href="#">I N V O I C E</a>
-                                        @else
-                                        <a href="#">Q U O T A T I O N</a>
-                                        @endif
-                                    </b>
+                                    <a href="#">Q U O TAT I O N</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td width="50%">
-                                    <b>ABV TOOL</b>
+                                    ABV TOOL
                                 </td>
                             </tr>
                             <tr>
@@ -89,23 +89,27 @@
                             </tr>
                             <tr>
                                 <td width="50%">
-                                    A-205, Krish Elite Commercial Complex
-                                    Nr Vishala Land Mark,B/H Sankalp International School, Ahmedabad
-                                    Ahmedabad-382350, Gujarat, India
+                                    A- 205, Kris,hErlt,ecootKermE, ecoaEtp
+                                    xK,GUAJAR5,T3 T02
                                 </td>
                             </tr>
+
                         </tbody>
                     </table>
+
                 </td>
                 <td align="right" width="50%" valign="top">
+
                     <table width="120" height="100">
                         <tr>
                             <td>
-                                <img src="{{asset('public/admin-theme/invoiceAssets/images/logo.gif')}}" alt="" width="250" height="auto">
+                                <img src="images/logo.gif" alt="" width="250" height="auto">
                             </td>
                         </tr>
                     </table>
+
                 </td>
+
             </tr>
             <tr>
                 <td align="left" width="100%">
@@ -116,17 +120,24 @@
                                     <b> Mobile</b> 7874427439, 8469555348
                                 </td>
                                 <td>
-                                    <b>Email</b> abvtradesol@gmail.com
+                                    <b>Email</b> <a href="#">abvtradesol@gmail.com</a>
                                 </td>
                             </tr>
+
                             <tr>
                                 <td width="320">
-                                    <b> Website</b> <a href="www.abvtool.in">www.abvtool.in</a>
+                                    <b> Website</b> <a href="#">www.abvtool.in</a>
                                 </td>
+
                             </tr>
+
+
                         </tbody>
                     </table>
+
                 </td>
+
+
             </tr>
             <tr>
                 <table width="991" class="pad-tb-dv">
@@ -135,45 +146,45 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        @if($invoice->is_invoice)
-                                        <b>Quotation #: {{$invoice->invoice_number}} </b>
-                                        @else
-                                        <b>Quotation #: {{$invoice->quotation_number}} </b>
-                                        @endif
+                                        <b>Quotation #: EST-35 </b>
                                     </td>
                                 </tr>
+
+
                             </tbody>
                         </table>
+
                     </td>
                     <td align="left">
                         <table>
                             <tbody>
                                 <tr>
                                     <td>
-                                        @if($invoice->is_invoice)
-                                        <b>Invoice Date : {{date('d-m-Y',strtotime($invoice->invoice_date))}}</b>
-                                        @else
-                                        <b>Quotation Date : {{date('d-m-Y',strtotime($invoice->quotation_date))}}</b>
-                                        @endif
+                                        <b>Quotation Date : O1 Dec 2023</b>
                                     </td>
                                 </tr>
+
+
                             </tbody>
                         </table>
+
                     </td>
                     <td align="left">
                         <table>
                             <tbody>
                                 <tr>
                                     <td>
-                                        @if(!$invoice->is_invoice)
-                                        <b>Due Date: {{date('d-m-Y',strtotime($invoice->quotation_due_date))}}</b>
-                                        @endif
+                                        <b>Due Date</b>: O1 Dec 2023
                                     </td>
                                 </tr>
+
+
                             </tbody>
                         </table>
+
                     </td>
                 </table>
+
             </tr>
             <br>
             <tr>
@@ -183,83 +194,85 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <b>Billing Address:</b>
+                                        Customer Details:
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>{{$client->company_name}}</b>
+                                        <b>Mr.Bharat</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->bill_address}}
+                                        <b>INhOSIGNS</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->bill_landmark}}
+                                        <b>GSTIN: 2FAA9hIF3H261ZH</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->bill_city}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        {{$invoice->bill_state}}, {{$invoice->bill_pincode}}, India.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>GSTIN: </b>{{$invoice->client_gstn}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Mo: </b>{{$client->phone_1}}
+                                        Ph: 9945259977
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+
                     </td>
-                    @if(!empty($invoice->ship_address))
                     <td align="left" valign="top">
                         <table>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <b>Shipping Address:</b>
+                                        <b>Billing address:</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->ship_address}}
+                                        No.41
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->ship_landmark}}
+                                        Kanakapura Main Road, Bengaluru
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->ship_city}}
+                                        Bengaluru Urban, KARNATAKA, 560062
+                                    </td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </td>
+                </table>
+            </tr>
+            <br>
+            <tr>
+                <table width="50%">
+                    <td align="left">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Place of Supply:
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        {{$invoice->ship_state}}, {{$invoice->ship_pincode}}, India.
+                                        <b>2F-KACNATAKA</b>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </td>
-                    @endif
                 </table>
             </tr>
-            <br>
             <br>
             <tr>
                 <table width="991px" class="main-tabel-dv">
@@ -267,24 +280,41 @@
                         <tr>
                             <th>#</th>
                             <th>Item</th>
-                            <th align="center">HSN Code</th>
                             <th>Rate / Item</th>
-                            <th>Qty.</th>
-                            <th align="right">Amount</th>
+                            <th>Qty</th>
+                            <th>Taxable Value</th>
+                            <th>Tax Amount</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 1; ?>
-                        @foreach($qnItems as $itm)
                         <tr>
-                            <td>{{$i++}}</td>
-                            <td>{{$itm->item_name}}</td>
-                            <td align="center">{{ $itm->product_hsn_code}}</td>
-                            <td>{{$itm->product_actual_price}}</td>
-                            <td >{{$itm->quantity}}</td>
-                            <td align="right">{{ number_format($itm->total_amount,2)}}</td>
+                            <td>1</td>
+                            <td>OVOLO BIT </td>
+                            <td>369.00</td>
+                            <td>5 NOS</td>
+                            <td>1,845.00</td>
+                            <td>3.32.10 (18%)</td>
+                            <td>2,177.10</td>
                         </tr>
-                        @endforeach
+                        <tr>
+                            <td>1</td>
+                            <td>OVOLO BIT </td>
+                            <td>369.00</td>
+                            <td>5 NOS</td>
+                            <td>1,845.00</td>
+                            <td>3.32.10 (18%)</td>
+                            <td>2,177.10</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>OVOLO BIT </td>
+                            <td>369.00</td>
+                            <td>5 NOS</td>
+                            <td>1,845.00</td>
+                            <td>3.32.10 (18%)</td>
+                            <td>2,177.10</td>
+                        </tr>
                     </tbody>
                 </table>
                 <table width="991" class="total-blg-dv">
@@ -293,85 +323,64 @@
                             <table width="450">
                                 <tr>
                                     <td>
-                                        <b>Total Amount</b>
+                                        <b>Taxable Amount</b>
                                     </td>
                                     <td>
-                                        <b>₹{{ number_format($invoice->total_amount_value,2)}}</b>
+                                        <b>₹7000.00</b>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>Discount</b>
+                                        <b>Delivery Shipping Charges</b> - SAC: 9968
                                     </td>
                                     <td>
-                                        <b>{{ $invoice->discount}}%</b>
+                                        <b>₹150.00</b>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <b>Shipping Charge</b>
-                                    </td>
-                                    <td>
-                                        <b>₹{{ number_format($invoice->shipping_amount,2)}}</b>
-                                    </td>
-                                </tr>
-                                @if($invoice->is_igst)
                                 <tr>
                                     <td>
                                         <b>IGST 18.0%</b>
                                     </td>
                                     <td>
-                                        <b>₹{{ number_format($invoice->igst_amount,2)}}</b>
+                                        <b>₹1,287.00</b>
                                     </td>
                                 </tr>
-                                @else
-                                <tr>
-                                    <td>
-                                        <b>SGST 09.0%</b>
-                                    </td>
-                                    <td>
-                                        <b>₹{{ number_format($invoice->sgst_amount,2)}}</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>CGST 09.0%</b>
-                                    </td>
-                                    <td>
-                                        <b>₹{{ number_format($invoice->cgst_amount,2)}}</b>
-                                    </td>
-                                </tr>
-                                @endif
+
+
                             </table>
                             <table width="320" class="ttl-blg">
+
                                 <tr class="border-b-blg">
                                     <td style="font-size: 25px;">
                                         <b>Total</b>
                                     </td>
                                     <td style="font-size: 25px;">
-                                        <b>₹{{ number_format($invoice->final_total_amount,2)}}</b>
+                                        <b>₹8,437.00</b>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
                     <br>
+
                 </table>
             </tr>
             <br />
             <tr>
                 <table width="991px">
+
                     <tbody>
                         <tr>
                             <td>
                                 <table class="main-tabel-blg" style="border-bottom: 1px solid rgba(23, 23, 172, 0.8);">
                                     <tr>
-                                        <td width="320"></td>
-                                        <td width="920">Total amount (in words) : {{$invoice->final_total_amount_words}} Only.</td>
+                                        <td width="320">Total Items / Qty : 3/ 15,000</td>
+                                        <td width="920">Total amount (in words) : INR Eight Thousand, Four Hundred And Thirty-sevan Rupees Only.</td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
+
                     </tbody>
                 </table>
             </tr>
@@ -379,7 +388,9 @@
             <br />
             <tr>
                 <table width="991px">
+
                     <tbody>
+
                         <tr>
                             <td>
                                 <table>
@@ -388,7 +399,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src="{{asset('public/admin-theme/invoiceAssets/images/code.png')}}" alt="" height="120" width="120">
+                                            <img src="images/code.png" alt="" height="120" width="120">
                                         </td>
                                     </tr>
                                 </table>
@@ -423,7 +434,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src="{{asset('public/admin-theme/invoiceAssets/images/sign.png')}}" alt="" width="200">
+                                            <img src="images/Rectangle 1.png" alt="" width="200">
                                         </td>
                                     </tr>
                                     <tr>
@@ -438,31 +449,6 @@
             </tr>
             <br />
             <br />
-            <tr>
-                <table width="991px">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td><b>Terms & conditions</b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            1. Goods once sold will not be taken back.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            2. Subject to Ahmedabad jurisdiction
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </tr>
             <br />
             <br />
             <br />
@@ -475,6 +461,40 @@
             <br />
             <br />
             <br />
+
+            <tr>
+                <table width="991px">
+
+                    <tbody>
+
+                        <tr>
+                            <td align="left">
+                                <table>
+                                    <tr>
+                                        <td><b><a href="https://getswipe.in/">Swipe | Simple Invoicing, Billing and Payments | Visit getswipe.in</a></b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Page 1/1 This is a digitally signed document.</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td align="right">
+                                <table>
+
+                                    <tr>
+                                        <td>
+                                            <img src="images/footer-logo.png" alt="" width="120">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </tr>
         </tbody>
     </table>
 </body>

@@ -46,6 +46,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('admin-quotations/data', [QuotationsController::class,'data'])->name('admin-quotations.data');
 	Route::resource('admin-quotations', QuotationsController::class);
 
+	Route::post('admin-invoices/mark-as-paid', [InvoicesController::class, 'markAsPaid'])->name('admin-invoices.mark-as-paid');
 	Route::get('admin-invoices/data', [InvoicesController::class,'data'])->name('admin-invoices.data');
 	Route::resource('admin-invoices', InvoicesController::class);
 

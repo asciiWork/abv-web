@@ -70,7 +70,7 @@
                             <select name="client_id" id="client-select-box" class="form-select" data-placeholder="Select Client">
                                 <option value="">Select Client</option>
                                 @foreach($clients as $clr)
-                                <option value="{{$clr->id}}" {{$formObj->client_id == $clr->id ? 'selected' : ''}} data-shipAddress="{{$clr->ship_address}}" data-shipCity="{{$clr->ship_city}}" data-shipState="{{$clr->ship_state}}" data-shipPincode="{{$clr->ship_pincode}}" data-gstn="{{$clr->gstn}}" data-address="{{$clr->address}}" data-city="{{$clr->city}}" data-state="{{$clr->state}}">{{$clr->cname}}</option>
+                                <option value="{{$clr->id}}" {{$formObj->client_id == $clr->id ? 'selected' : ''}} data-billlandmark="{{$clr->landmark}}" data-shiplandmark="{{$clr->ship_landmark}}" data-shipAddress="{{$clr->ship_address}}" data-shipCity="{{$clr->ship_city}}" data-shipState="{{$clr->ship_state}}" data-shipPincode="{{$clr->ship_pincode}}" data-gstn="{{$clr->gstn}}" data-address="{{$clr->address}}" data-city="{{$clr->city}}" data-state="{{$clr->state}}">{{$clr->cname}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -79,6 +79,9 @@
                         <h6 class="fs-14">Billing Address</h6>
                         <div class="input-group"><span class="input-group-text">Street</span>
                             {!! Form::text('bill_address', null, ['class' => 'form-control','id'=>'bill_address']) !!}
+                        </div>
+                        <div class="input-group"><span class="input-group-text">Landmark</span>
+                            {!! Form::text('bill_landmark', null, ['class' => 'form-control','id'=>'bill_landmark']) !!}
                         </div>
                         <div class="input-group"><span class="input-group-text">City</span>
                             {!! Form::text('bill_city', null, ['class' => 'form-control','id'=>'bill_city']) !!}
@@ -95,6 +98,9 @@
                         <div class="input-group"><span class="input-group-text">Street</span>
                             {!! Form::text('ship_address', null, ['class' => 'form-control','id'=>'ship_address']) !!}
                         </div>
+                        <div class="input-group"><span class="input-group-text">Landmark</span>
+                            {!! Form::text('ship_landmark', null, ['class' => 'form-control','id'=>'ship_landmark']) !!}
+                        </div>
                         <div class="input-group"><span class="input-group-text">City</span>
                             {!! Form::text('ship_city', null, ['class' => 'form-control','id'=>'ship_city']) !!}
                         </div>
@@ -106,7 +112,7 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <h6 class="fs-14">GSTN</h6>
+                        <h6 class="fs-14">GSTIN</h6>
                         {!! Form::text('client_gstn', null, ['class' => 'form-control','id'=>'client_gstn']) !!}
                     </div>
                 </div>
@@ -118,12 +124,11 @@
                                 <thead class="border-top border-bottom bg-light-subtle border-light">
                                     <tr>
                                         <th>#</th>
-                                        <th width="25%">Item</th>
-                                        <th>Rate/Item</th>
-                                        <th>Qnt</th>
-                                        <th>Taxable Value</th>
-                                        <th>HSN Code</th>
-                                        <th>Amount</th>
+                                        <th width="35%">Item</th>
+                                        <th width="17%">HSN Code</th>
+                                        <th width="17%">Rate/Item</th>
+                                        <th width="17%">Qty.</th>
+                                        <th width="17%" style="text-align: center;">Amount</th>
                                         <th class="float-end"><a id="add_tr" class="btn btn-primary"><i class="bi bi-plus-lg"></i></a></th>
                                     </tr>
                                 </thead>
@@ -140,31 +145,24 @@
                                                 <option value="{{$prd->id}}" data-hsnCode="{{$prd->hsn_code}}" {{$prd->id == $item['product_id'] ? 'selected' : ''}} data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
                                                 @endforeach
                                             </select>
-                                            <span id="last-product-price-{{$i}}"></span>
+                                        </td>
+                                        <td>
+                                            <input type="text" value="{{$item['product_hsn_code']}}" data-row="{{$i}}" name="product_hsn_code[]" id="hsn-code-{{$i}}" class="form-control hsn-code">
                                         </td>
                                         <td><input name="product_actual_price[]" data-row="{{$i}}" type="text" class="form-control product_actual_price" value="{{$item['product_actual_price']}}" id="product_actual_price-{{$i}}">
                                             <input name="product_size_id[]" type="hidden" value="{{$item['product_size_id']}}" id="product-size-id-{{$i}}">
                                             <input name="item_name[]" type="hidden" value="{{$item['item_name']}}" id="product-name-{{$i}}">
+                                            <span id="last-product-price-{{$i}}"></span>
                                         </td>
                                         <td>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-12">
                                                 <input type="number" min="0" value="{{$item['quantity']}}" data-row="{{$i}}" name="quantity[]" class="form-control item-qnt">
                                             </div>
                                         </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="{{$item['taxable_value']}}" name="taxable_value[]" id="taxable-value-{{$i}}" class="form-control taxable-value">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="hidden" value="{{$item['tax_amount']}}" data-row="{{$i}}" name="tax_amount[]" id="tax-amount-{{$i}}" class="form-control tax_amount">
-                                                <input type="text" value="{{$item['product_hsn_code']}}" data-row="{{$i}}" name="product_hsn_code[]" id="hsn-code-{{$i}}" class="form-control hsn-code">
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="col-sm-10">
-                                                <input type="text" value="{{$item['total_amount']}}" name="total_amount[]" id="total-amount-{{$i}}" class="total-amount form-control">
+                                        <td class="" align="center">
+                                            <div class="col-sm-12">
+                                                <h6 id="total-amount-txt-{{$i}}">{{$item['total_amount']}}</h6>
+                                                <input type="hidden" value="{{$item['total_amount']}}" name="total_amount[]" id="total-amount-{{$i}}" class="total-amount form-control">
                                             </div>
                                         </td>
                                         <td class="float-end">
@@ -177,6 +175,7 @@
                                     @endif
                                 </tbody>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -198,9 +197,12 @@
                         <div class="float-end mt-3 mt-sm-0">
                             <p><b>Total Amount:</b> <span class="float-end final-taxable-total">{{$formObj->total_amount_value}}</span></p>
                             <p>
-                            <div class="input-group mb-3"> <span class="input-group-text">Shipping Charge</span>
+                            <div class="input-group mb-3"><span class="input-group-text">Discount</span>
+                                <input name="discount" id="discount-value" value="{{$formObj->discount}}" type="number" class="form-control text-right" min="0" max="100"><span class="input-group-text">%</span> <span class="input-group-text">Shipping Charge</span>
                                 <input name="shipping_amount" id="shipping-charge-value" value="{{$formObj->shipping_amount}}" type="text" class="form-control text-right">
                             </div>
+                            </p>
+                            <p><b>Sub Total:</b> <span class="float-end sub-final-total">{{$formObj->sub_final_total_amount}}</span></p>
                             <p id="igst_row"><b>IGST (18.0%):</b> <span class="float-end igst-tax_amount">{{$formObj->igst_amount}}</span></p>
                             <p id="cgst_row"><b>CGST (9.0%):</b> <span class="float-end cgst-tax_amount">{{$formObj->cgst_amount}}</span></p>
                             <p id="sgst_row"><b>SGST (9.0%):</b> <span class="float-end sgst-tax_amount">{{$formObj->sgst_amount}}</span></p>
@@ -210,6 +212,7 @@
                             {!! Form::hidden('cgst_amount', null, ['class' => 'form-control','id'=>'cgst-tax_amount-value']) !!}
                             {!! Form::hidden('sgst_amount', null, ['class' => 'form-control','id'=>'sgst-tax_amount-value']) !!}
                             {!! Form::hidden('final_total_amount', null, ['class' => 'form-control','id'=>'final-total-value']) !!}
+                            {!! Form::hidden('sub_final_total_amount', null, ['class' => 'form-control','id'=>'sub-final-total-value']) !!}
                             {!! Form::hidden('is_igst', null, ['class' => 'form-control','id'=>'is_igst']) !!}
                             {!! Form::hidden('final_total_amount_words', null, ['class' => 'form-control','id'=>'final-total-value-words']) !!}
                         </div>
@@ -236,14 +239,13 @@
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><div class = "col-sm-12" ><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" > Select Product</option></select> </div> </td>';
+            html += '<td><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select></td>';
             html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
             html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
-            html += '<td><input name="product_actual_price[]" type="text" class="form-control product_actual_price" data-row="' + num + '" value="" id="product_actual_price-' + num + '"></td>';
-            html += '<td><div class="col-sm-8"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control"></div ></td>';
-            html += '<td ><div class = "col-sm-10" ><input type="text" value="" name="taxable_value[]" id="taxable-value-' + num + '" class="form-control taxable-value" ></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="hidden" value="" name="tax_amount[]" id="tax-amount-' + num + '" class="form-control tax_amount" ><input type="text" value="" name="hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
-            html += '<td ><div class="col-sm-10"><input type="text" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></div></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
+            html += '<td ><div class="col-sm-12"><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
+            html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><div class="col-sm-12"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control" id="item-qnt-' + num + '"></div ></td>';
+            html += '<td class="" align="center"><h6 id="total-amount-txt-' + num + '">000.00</h6><input type="hidden" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
             $('.tbodyTr').append(html);
             $('#numRow').val(num);
             $('#product-option-1 option').each(function() {
@@ -266,27 +268,24 @@
                 var rowNo = $(this).attr('data-row');
                 var selectedOption = $(this).find('option:selected');
                 var price = selectedOption.data('price');
-                $('#product-amount-text-' + rowNo).html(price);
-                $('#hsn-code-' + rowNo).val(selectedOption.data('hsnCode'));
+                $('#product_actual_price-' + rowNo).val(price);
                 $('#product-name-' + rowNo).val(selectedOption.text());
                 $('#product-size-id-' + rowNo).val(selectedOption.data('product'));
-                $('#product_actual_price-' + rowNo).val(price);
-                $('#taxable-value-' + rowNo).val(price);
-                var result = parseFloat(price) * 0.18;
-                $('#tax-amount-' + rowNo).val(result);
-                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                $('#hsn-code-' + rowNo).val(selectedOption.data('hsnCode'));
+                $('#total-amount-txt-' + rowNo).html(price);
+                $('#total-amount-' + rowNo).val(price);
             }
             allTotalPrices();
+            getLastPrice(selectedOption.data('product'), rowNo);
         });
         $(document).on("change", ".product_actual_price", function() {
             if ($(this).val() > 0) {
                 var rowNo = $(this).attr('data-row');
                 var price = $(this).val();
                 $('#product_actual_price-' + rowNo).val(price);
-                $('#taxable-value-' + rowNo).val(price);
-                var result = parseFloat(price) * 0.18;
-                $('#tax-amount-' + rowNo).val(result);
-                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                var totl = parseFloat(price) * parseFloat($('#item-qnt-' + rowNo).val());
+                $('#total-amount-' + rowNo).val(totl);
+                $('#total-amount-txt-' + rowNo).html(totl);
                 allTotalPrices();
             }
         });
@@ -294,18 +293,22 @@
             if ($(this).val() > 0) {
                 var rowNo = $(this).attr('data-row');
                 var totl = parseFloat($('#product_actual_price-' + rowNo).val()) * parseFloat($(this).val());
-                $('#taxable-value-' + rowNo).val(totl);
-                var result = parseFloat(totl) * 0.18;
-                $('#tax-amount-' + rowNo).val(result);
-                $('#total-amount-' + rowNo).val(parseFloat($('#tax-amount-' + rowNo).val()) + parseFloat($('#taxable-value-' + rowNo).val()));
+                $('#total-amount-' + rowNo).val(totl);
+                $('#total-amount-txt-' + rowNo).html(totl);
             }
             allTotalPrices();
         });
         $(document).on("change", "#shipping-charge-value", function() {
             allTotalPrices();
         });
+        $(document).on("change", "#discount-value", function() {
+            allTotalPrices();
+        });
         $(document).on("change", "#client-select-box", function() {
             $('#is_igst').val(0);
+            $('#igst_row').hide();
+            $('#sgst_row').hide();
+            $('#cgst_row').hide();
             if ($(this).val() > 0) {
                 var selectedOption = $(this).find('option:selected');
                 var address = selectedOption.data('address');
@@ -326,6 +329,8 @@
                 $('#bill_city').val(selectedOption.data('billcity'));
                 $('#bill_state').val(selectedOption.data('billstate'));
                 $('#bill_pincode').val(selectedOption.data('billpincode'));
+                $('#ship_landmark').val(selectedOption.data('shiplandmark'));
+                $('#bill_landmark').val(selectedOption.data('billlandmark'));
             }
         });
     });
@@ -343,11 +348,22 @@
         $('.final-taxable-total').html(amountFormat(tamounts));
         $('#final-taxable-total-value').val(amountFormat(tamounts));
 
+        var discountValue = $('#discount-value').val();
+        if (discountValue == "NaN" || discountValue == null || discountValue == "") {
+            discountValue = parseFloat("0");
+        }
+        var withDiscout = parseFloat(tamounts) * (parseInt(discountValue) / 100);
+        var finalWithDiscount = parseFloat(tamounts) - parseFloat(withDiscout);
+
         var shippingChargeValue = $('#shipping-charge-value').val();
         if (shippingChargeValue == "NaN" || shippingChargeValue == null || shippingChargeValue == "") {
             shippingChargeValue = parseFloat("0");
         }
-        var countGst = parseFloat(tamounts) + parseFloat(shippingChargeValue);
+        var countGst = parseFloat(finalWithDiscount) + parseFloat(shippingChargeValue);
+
+        $('.sub-final-total').html(amountFormat(countGst));
+        $('#sub-final-total-value').val(amountFormat(countGst));
+
         var is_igst = $('#is_igst').val();
         var iResult = 0;
         if (is_igst == 1) {
@@ -355,11 +371,12 @@
             $('.igst-tax_amount').html(iResult);
             $('#igst-tax_amount-value').val(iResult);
         } else {
-            var iResult = amountFormat(parseFloat(countGst) * 0.9);
+            var iResult = amountFormat(parseFloat(countGst) * 0.09);
             $('.sgst-tax_amount').html(iResult);
             $('#sgst-tax_amount-value').val(iResult);
             $('.cgst-tax_amount').html(iResult);
             $('#cgst-tax_amount-value').val(iResult);
+            iResult = iResult + iResult;
         }
         amounts = parseFloat(countGst) + parseFloat(iResult);
         $('.final-total').html(amountFormat(amounts));

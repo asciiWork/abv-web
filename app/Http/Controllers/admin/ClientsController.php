@@ -30,10 +30,6 @@ class ClientsController extends Controller
     }
     public function index()
     {
-        /*------------ACL-----------------*/
-        if(!\App\Models\ACL::isAccess()){return abort(404);}
-        /*--------------------------------*/
-        
         $data = array();
         $data['page_title'] = "Manage Clients";
         $data['breadcrumb'] = array('Clients' => '');
@@ -44,10 +40,6 @@ class ClientsController extends Controller
     }
     public function create()
     {
-        /*------------ACL-----------------*/
-        if(!\App\Models\ACL::isAccess()){return abort(404);}
-        /*--------------------------------*/
-
         $data = array();
         $data['formObj'] = $this->modelObj;
         $data['isEdit'] = 0;
@@ -63,12 +55,6 @@ class ClientsController extends Controller
     }
     public function store(Request $request)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
         $data = array();
         $status = 1;
         $msg = $this->addMsg;
@@ -78,7 +64,9 @@ class ClientsController extends Controller
             return ['status' => $checkValidation['status'], 'msg' => $checkValidation['msg'], 'data' => $checkValidation['data']];
         } else {
             try {
-                $this->modelObj::create($request->all());
+                $rData = $request->all();
+                $rData['user_id'] = \Auth::guard('admins')->user()->id;
+                $this->modelObj::create($rData);
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
                 $status = 0;
@@ -92,12 +80,6 @@ class ClientsController extends Controller
 
     public function edit($id, Request $request)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
         $formObj = $this->modelObj->find($id);
         if (!$formObj) {
             abort(404);
@@ -118,12 +100,6 @@ class ClientsController extends Controller
 
     public function update(Request $request, $id)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
         $model = $this->modelObj->find($id);
         $data = array();
         $status = 1;
@@ -138,7 +114,9 @@ class ClientsController extends Controller
             return ['status' => $checkValidation['status'], 'msg' => $checkValidation['msg'], 'data' => $checkValidation['data']];
         } else {
             try {
-                $recordId = $model->update($request->all());
+                $rData = $request->all();
+                $rData['user_id'] = \Auth::guard('admins')->user()->id;
+                $recordId = $model->update($rData);
 
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
@@ -152,12 +130,6 @@ class ClientsController extends Controller
 
     public function data(Request $request)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
         $model = $this->modelObj->listData();
         return Datatables::eloquent($model)
             ->editColumn('company_name', function ($row) {
@@ -223,10 +195,14 @@ class ClientsController extends Controller
     {
         $search_phone = ($request->get('search_phone'))? $request->get('search_phone'):0;
         $search_name = ($request->get('search_name'))? $request->get('search_name'):0;
+        $search_company = ($request->get('search_company'))? $request->get('search_company'):0;
         $data = array();
         $status = 0;
         $msg = 'Not Found!';
         $client = Client::select('*');
+        if (\Auth::guard('admins')->user()->user_type_id != 1) {
+            $client = $client->where('user_id', \Auth::guard('admins')->user()->id);
+        }
         if($search_phone){
             $client = $client->where(function($qry)use($search_phone){
                 $qry = $qry->where('phone_1','LIKE','%'. $search_phone.'%')
@@ -236,6 +212,9 @@ class ClientsController extends Controller
         }
         if($search_name){
             $client = $client->where('name','LIKE','%'. $search_name.'%');
+        }
+        if($search_company){
+            $client = $client->where('company_name','LIKE','%'. $search_company.'%');
         }
         $client = $client->first();
         if($client){
@@ -248,6 +227,8 @@ class ClientsController extends Controller
             $data['state'] = $client->state;
             $data['city'] = $client->city;
             $data['pincode'] = $client->pincode;
+            $data['company_name'] = $client->company_name;
+            $data['landmark'] = $client->landmark;
         }
 
         return ['status' => $status, 'msg' => $msg, 'data' => $data];

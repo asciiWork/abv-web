@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    $(document).on('click', '.open-payment-form', function() {
+        jQuery('#invoicePayment_invoice_id').val($(this).attr('data-id'));
+    });
+    $(document).on('click', '.open-payment-view', function() {
+       jQuery('#invoicePaymentViewModel #view-payment-details').html($(this).attr('data-detail'));
+       jQuery('#invoicePaymentViewModel #view-payment-date').html($(this).attr('data-date'));
+       jQuery('#invoicePaymentViewModel #view-payment-type').html($(this).attr('data-type'));
+    });
     $(document).on('click', '.module-action .btn-delete-record', function() {
         $text = 'Are you sure ?';
         if ($(this).attr('title') == "delete user") {

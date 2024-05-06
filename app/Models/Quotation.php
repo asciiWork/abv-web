@@ -21,9 +21,10 @@ class Quotation extends Model
     }
     public function invoiceListData()
     {
-        return Quotation::select('quotations.*', 'admin_users.image as uimg','admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
+        return Quotation::select('quotations.*', 'admin_users.image as uimg', 'invoice_payments.payment_date', 'invoice_payments.payment_type', 'invoice_payments.payment_detail', 'admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
         ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
         ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')
+        ->leftJoin('invoice_payments', 'quotations.id', 'invoice_payments.quotation_id')
         ->where('quotations.is_invoice', '=', 1);
     }
     public static function getQuotationNumber()
@@ -59,11 +60,11 @@ class Quotation extends Model
         $startOfWeek = Carbon::now()->startOfWeek()->toDateString();
         $endOfWeek = Carbon::now()->endOfWeek()->toDateString();
 
-        $yearly_total = Quotation::where('invoice_date','LIKE','%'.date('Y').'%');
-        $monthly_total = Quotation::where('invoice_date','LIKE','%'.date('Y-m').'%');
-        $today_total = Quotation::where('invoice_date','LIKE','%'.date('Y-m-d').'%');
-        $week_total= Quotation::whereBetween('invoice_date', [$startOfWeek, $endOfWeek]);
-        $total_qns = Quotation::where('is_invoice',0);
+        $yearly_total = Quotation::where('invoice_date','LIKE','%'.date('Y').'%')->where('is_invoice', 1);
+        $monthly_total = Quotation::where('invoice_date','LIKE','%'.date('Y-m').'%')->where('is_invoice', 1);
+        $today_total = Quotation::where('invoice_date','LIKE','%'.date('Y-m-d').'%')->where('is_invoice', 1);
+        $week_total= Quotation::whereBetween('invoice_date', [$startOfWeek, $endOfWeek])->where('is_invoice', 1);
+        $total_qns = Quotation::where('is_invoice',1);
 
         if (\Auth::guard('admins')->user()->user_type_id != 1) {
             $yearly_total = $yearly_total->where('user_id',\Auth::guard('admins')->user()->id);
@@ -130,6 +131,27 @@ class Quotation extends Model
         if(!empty($isAlredySedt)){
             $msg = 'Last Quotation sent date:: '.$isAlredySedt->quotation_date;
             return ['status' => 0, 'msg' => $msg, 'data' => $data];
+        }
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];
+    }
+    public static function validationRulePayment($request)
+    {
+        $status = 1;
+        $msg = '';
+        $data = array();
+        $rules = [
+            'payment_date' => 'required|date',
+            'payment_type' => 'required',
+            'payment_detail' => $request->payment_type != 'COD' ? 'required' : 'nullable'
+        ];
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            $status = 0;
+            $msg = "";
+            foreach ($messages->all() as $message) {
+                $msg .= $message . "<br />";
+            }
         }
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
     }

@@ -71,22 +71,22 @@
                                     <tr>
                                         <td width="50%">
                                             <b>
-                                            @if($invoice->is_invoice)
-                                            <a href="#">I N V O I C E</a>
-                                            @else
-                                            <a href="#">Q U O T A T I O N</a>
-                                            @endif
+                                                @if($invoice->is_invoice)
+                                                <a href="#">I N V O I C E</a>
+                                                @else
+                                                <a href="#">Q U O T A T I O N</a>
+                                                @endif
                                             </b>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="50%">
-                                            ABV TOOL
+                                            <b>ABV TOOL</b>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="50%">
-                                            GSTIN <b>24ATKPV5305Q1Z0</b>
+                                            <b>GSTIN: 24ATKPV5305Q1Z0</b>
                                         </td>
                                     </tr>
                                     <tr>
@@ -118,12 +118,12 @@
                                             <b> Mobile</b> 7874427439, 8469555348
                                         </td>
                                         <td>
-                                            <b>Email</b> <a href="#">abvtradesol@gmail.com</a>
+                                            <b>Email </b> abvtradesol@gmail.com
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="320">
-                                            <b> Website</b> <a href="#">www.abvtool.in</a>
+                                            <b> Website</b> <a href="www.abvtool.in">www.abvtool.in</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -200,6 +200,11 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                {{$invoice->bill_landmark}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 {{$invoice->bill_city}}
                                             </td>
                                         </tr>
@@ -237,6 +242,11 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                {{$invoice->ship_landmark}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 {{$invoice->ship_city}}
                                             </td>
                                         </tr>
@@ -256,14 +266,13 @@
                     <tr>
                         <table width="991px" class="main-tabel-dv">
                             <thead>
-                                <tr>
+                                <tr style="background-color: aliceblue;">
                                     <th>#</th>
                                     <th>Item</th>
-                                    <th align="center">HSN Code</th>
-                                    <th>Rate / Item</th>
-                                    <th>Qty</th>
-                                    <th align="right">Taxable Value</th>
-                                    <th align="right">Amount</th>
+                                    <th style="text-align: center;">HSN Code</th>
+                                    <th style="text-align: center;">Rate / Item</th>
+                                    <th style="text-align: center;" align="right">Qty.</th>
+                                    <th style="text-align: right;" align="right">Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -272,11 +281,10 @@
                                 <tr>
                                     <td>{{$i++}}</td>
                                     <td>{{$itm->item_name}}</td>
-                                    <td align="center">{{ $itm->product_hsn_code}}</td>
-                                    <td>{{$itm->product_actual_price}}</td>
-                                    <td>{{$itm->quantity}}</td>
-                                    <td align="right">{{ number_format($itm->taxable_value,2)}}</td>
-                                    <td align="right">{{ number_format($itm->total_amount,2)}}</td>
+                                    <td style="text-align: center;" align="center">{{ $itm->product_hsn_code}}</td>
+                                    <td style="text-align: center;">{{$itm->product_actual_price}}</td>
+                                    <td style="text-align: center;">{{$itm->quantity}}</td>
+                                    <td style="text-align: right;" align="right">{{ number_format($itm->total_amount,2)}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -291,6 +299,14 @@
                                             </td>
                                             <td>
                                                 <b>₹{{ number_format($invoice->total_amount_value,2)}}</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Discount</b>
+                                            </td>
+                                            <td>
+                                                <b>{{$invoice->discount}} %</b>
                                             </td>
                                         </tr>
                                         <tr>

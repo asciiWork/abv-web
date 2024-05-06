@@ -104,6 +104,80 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="invoicePaymentModel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Invoice Payment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      {!! Form::open(['route'=>['admin-invoices.mark-as-paid'],'method' => 'POST','id'=>'module-frm', 'redirect-url' => route($back_url)])!!}
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <label class="form-label">Payment Date<span class="text-danger">*</span></label>
+            {!! Form::date('payment_date', null, ['class' => 'form-control', 'data-required' => true]) !!}
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-lg-12">
+            <label class="form-label">Payment Type<span class="text-danger">*</span></label>
+            {!! Form::select('payment_type', [''=>'Select Type','COD'=>'COD','Cheque'=>'Cheque','Transaction'=>'Transaction'],null, ['class' => 'form-control', 'data-required' => true]) !!}
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-lg-12">
+            <label class="form-label">Payment Details/Transaction No</label>
+            {!! Form::text('payment_detail', null, ['class' => 'form-control', 'data-required' => true]) !!}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" name="invoice_id" value="" id="invoicePayment_invoice_id">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger">Mark as Paid</button>
+      </div>
+      {!! Form::close()!!}
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="invoicePaymentViewModel" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Invoice Payment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <strong>Payment Date:</strong>
+            <span id="view-payment-date">Payment Date</span>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-lg-12">
+            <strong>Payment Type:</strong>
+            <span id="view-payment-type">Payment Type</span>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-lg-12">
+            <strong>Payment Details:</strong>
+            <span id="view-payment-details">Payment Details</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
 @endsection
 
 @section('adminScript')
@@ -140,5 +214,6 @@
     }
   ];
 </script>
-<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?35645') }}"></script>
+<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?334545') }}"></script>
+<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleForm.js?44564566') }}"></script>
 @endsection
