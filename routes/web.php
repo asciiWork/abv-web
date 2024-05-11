@@ -38,6 +38,7 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 
 	Route::post('admin-clients/print-address/search', [ClientsController::class, 'printAddressSearch'])->name('admin-clients.search-address');
 	Route::get('admin-clients/print-address', [ClientsController::class, 'printAddress'])->name('admin-clients.print-address');
+	Route::get('admin-clients/lock/{id}', [ClientsController::class, 'lock'])->name('admin-clients.locking');
 	Route::get('admin-clients/data', [ClientsController::class,'data'])->name('admin-clients.data');
 	Route::resource('admin-clients', ClientsController::class);
 
@@ -47,6 +48,8 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::resource('admin-quotations', QuotationsController::class);
 
 	Route::post('admin-invoices/mark-as-paid', [InvoicesController::class, 'markAsPaid'])->name('admin-invoices.mark-as-paid');
+	Route::get('admin-invoices/payments', [InvoicesController::class, 'paymentsIndex'])->name('admin-invoices.payments');
+	Route::get('admin-invoices/payments-data', [InvoicesController::class, 'paymentsData'])->name('admin-invoices.paymentsData');
 	Route::get('admin-invoices/data', [InvoicesController::class,'data'])->name('admin-invoices.data');
 	Route::resource('admin-invoices', InvoicesController::class);
 

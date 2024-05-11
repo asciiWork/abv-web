@@ -231,8 +231,12 @@ class PageController extends Controller
         $data['productData']=$product;
         if($slug){
             $cat=$catData->get_categoryBy_slug($slug);
-            $data['Catsl'] = $cat; 
-            $data['catPro'] =  $proData->get_catProduct($cat[0]->id);
+            if(count($cat)){
+                $data['Catsl'] = $cat; 
+                $data['catPro'] =  $proData->get_catProduct($cat[0]->id);
+            }else{
+                return abort(404);
+            }
         }
         return view('web.productCategory', $data);
     }

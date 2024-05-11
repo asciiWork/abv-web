@@ -281,7 +281,7 @@
                             <td>{{$itm->item_name}}</td>
                             <td align="center">{{ $itm->product_hsn_code}}</td>
                             <td>{{$itm->product_actual_price}}</td>
-                            <td >{{$itm->quantity}}</td>
+                            <td>{{$itm->quantity}}</td>
                             <td align="right">{{ number_format($itm->total_amount,2)}}</td>
                         </tr>
                         @endforeach
@@ -388,7 +388,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src="{{asset('public/admin-theme/invoiceAssets/images/code.png')}}" alt="" height="120" width="120">
+                                            <img src="{{asset('public/admin-theme/invoiceAssets/images/qrcode.png')}}" alt="" height="120" width="120">
                                         </td>
                                     </tr>
                                 </table>

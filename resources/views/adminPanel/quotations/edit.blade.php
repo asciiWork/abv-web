@@ -138,25 +138,31 @@
                                     @foreach($qnItems as $item)
                                     <tr id="tr-item-{{$i}}">
                                         <td class="">{{$i}}</td>
+                                        @if($item['product_size_id']>0)
                                         <td>
-                                            <select name="product_id[]" data-row="{{$i}}" id="product-option-{{$i}}" class="form-select product-items">
+                                            <select name="product_size_id[]" data-row="{{$i}}" id="product-option-{{$i}}" class="form-select product-items">
                                                 <option value="">Select Product</option>
                                                 @foreach($products as $prd)
-                                                <option value="{{$prd->id}}" data-hsnCode="{{$prd->hsn_code}}" {{$prd->id == $item['product_id'] ? 'selected' : ''}} data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
+                                                <option value="{{$prd->id}}" data-hsnCode="{{$prd->hsn_code}}" {{$prd->id == $item['product_size_id'] ? 'selected' : ''}} data-sizeproduct="{{$prd->product_size_id}}" data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
                                                 @endforeach
                                             </select>
                                         </td>
+                                        @else
+                                        <td>
+                                            <input name="product_size_id[]" type="text" data-row="{{$i}}" value="{{$item['item_name']}}" id="product-option-{{$i}}" class="form-control">
+                                        </td>
+                                        @endif
                                         <td>
                                             <input type="text" value="{{$item['product_hsn_code']}}" data-row="{{$i}}" name="product_hsn_code[]" id="hsn-code-{{$i}}" class="form-control hsn-code">
                                         </td>
                                         <td><input name="product_actual_price[]" data-row="{{$i}}" type="text" class="form-control product_actual_price" value="{{$item['product_actual_price']}}" id="product_actual_price-{{$i}}">
-                                            <input name="product_size_id[]" type="hidden" value="{{$item['product_size_id']}}" id="product-size-id-{{$i}}">
+                                            <input name="product_id[]" type="hidden" value="{{$item['product_size_id']}}" id="product-size-id-{{$i}}">
                                             <input name="item_name[]" type="hidden" value="{{$item['item_name']}}" id="product-name-{{$i}}">
                                             <span id="last-product-price-{{$i}}"></span>
                                         </td>
                                         <td>
                                             <div class="col-sm-12">
-                                                <input type="number" min="0" value="{{$item['quantity']}}" data-row="{{$i}}" name="quantity[]" class="form-control item-qnt">
+                                                <input type="number" min="0" value="{{$item['quantity']}}" id="item-qnt-{{$i}}" data-row="{{$i}}" name="quantity[]" class="form-control item-qnt">
                                             </div>
                                         </td>
                                         <td class="" align="center">
@@ -182,6 +188,14 @@
                                     <td>
                                         <div>Total: &nbsp;<span id="total_qnt">{{$formObj->total_qnt}}</span></div>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a id="add_new_product_tr" class="btn btn-success btn-sm">New Product</a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                         </div>
@@ -239,9 +253,9 @@
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select></td>';
+            html += '<td><select name="product_size_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select></td>';
             html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
-            html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
+            html += '<input name="product_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
             html += '<td ><div class="col-sm-12"><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
             html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"><span id="last-product-price-' + num + '"></span></td>';
             html += '<td><div class="col-sm-12"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control" id="item-qnt-' + num + '"></div ></td>';
@@ -257,6 +271,19 @@
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
                 placeholder: $(this).data('placeholder'),
             });
+        });
+        $('#add_new_product_tr').click(function() {
+            let num = parseInt($('#numRow').val()) + 1;
+            var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
+            html += '<td><input name="product_size_id[]" type="text" data-row="' + num + '" value="" id="product-option-' + num + '" class="form-control"></td>';
+            html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
+            html += '<input name="product_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
+            html += '<td ><div class="col-sm-12"><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
+            html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><div class="col-sm-12"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control" id="item-qnt-' + num + '"></div ></td>';
+            html += '<td class="" align="center"><h6 id="total-amount-txt-' + num + '">000.00</h6><input type="hidden" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
+            $('.tbodyTr').append(html);
+            $('#numRow').val(num);
         });
         $(document).on("click", ".delete-item-tr", function() {
             $(this).closest('tr').remove();

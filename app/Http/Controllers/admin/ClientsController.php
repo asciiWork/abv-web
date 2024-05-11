@@ -80,7 +80,12 @@ class ClientsController extends Controller
 
     public function edit($id, Request $request)
     {
-        $formObj = $this->modelObj->find($id);
+        $formObj = $this->modelObj;
+        if (!\App\Models\ACL::isAdmin()) {
+            $formObj = $formObj->where('is_lock',0)->where('user_id', \Auth::guard('admins')->user()->id);
+        }
+        $formObj = $formObj->find($id);
+
         if (!$formObj) {
             abort(404);
         }
@@ -100,9 +105,14 @@ class ClientsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $model = $this->modelObj->find($id);
         $data = array();
         $status = 1;
+        $model = $this->modelObj;
+        if (!\App\Models\ACL::isAdmin()) {
+            $model = $model->where('is_lock', 0)->where('user_id', \Auth::guard('admins')->user()->id);
+        }
+        $model = $model->find($id);
+
         $msg = $this->updateMsg;
 
         $checkValidation = $this->modelObj::validationRule($request, $id);
@@ -148,13 +158,15 @@ class ClientsController extends Controller
                 return $phone;
             })
             ->addColumn('action', function ($row) {
+                $isLocked = (\App\Models\ACL::isAdmin())?1:0;
                 return view(
                     "adminPanel.includes.actions",
                     [
                         'currentRoute' => $this->moduleRouteText,
                         'row' => $row,
-                        'isEdit' => 1,
+                        'isEdit' => (!$isLocked && $row->is_lock)?0:1,
                         'isDelete' => 0,
+                        'isLocked' => $isLocked,
                     ]
                 )->render();
             })
@@ -190,6 +202,25 @@ class ClientsController extends Controller
         $data['breadcrumb'] = array('Clients' => '');
         $data['clients'] = Client::all();
         return view($this->moduleViewName . ".printAddress", $data);
+    }
+    public function lock($id, Request $request)
+    {
+        /*------------ACL-----------------*/
+        if (!\App\Models\ACL::isAccess()) {
+            return abort(404);
+        }
+        /*--------------------------------*/
+
+        $formObj = $this->modelObj;
+        $formObj = $formObj->find($id);
+        if (!$formObj) {
+            abort(404);
+        }
+        $formObj->is_lock = ($formObj->is_lock==1)?0:1;
+        $formObj->save();
+        session()->flash('success_message', "Client Updated!");
+
+        return redirect()->route($this->moduleRouteText . '.index');
     }
     public function printAddressSearch(Request $request)
     {

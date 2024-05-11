@@ -75,6 +75,10 @@
   </div>
 </div>
 @include($moduleViewName.".search")
+<div class="align-end product-count d-flex justify-content-end align-items-center gap-3 gap-lg-4 mb-3 fw-bold flex-wrap font-text1">
+  <a href=""><span class="me-1">Total Amount with GST </span>(<span class="text-secondary" id="total-with-gst">000.00</span>)</a>
+  <a href=""><span class="me-1">Total Amount without GST </span>(<span class="text-secondary" id="total-without-gst">000.00</span>)</a>
+</div>
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -82,6 +86,9 @@
         <div>
           <a href="{{$add_url}}" class="btn btn-primary">
             <i class="bi bi-plus-lg me-2"></i> Add New </a>
+            @if($is_paymentLog)
+            <a href="{{route('admin-invoices.payments')}}" class="btn btn-success px-4"><i class="bi bi-cash me-2"></i>Payment Log</a>
+            @endif
         </div>
       </div>
       <div class="card-body">
@@ -91,6 +98,7 @@
               <th>ID</th>
               <th>Number</th>
               <th>Created By</th>
+              <th width="20%">Company</th>
               <th>Client</th>
               <th>Date</th>
               <th>Total</th>
@@ -169,14 +177,14 @@
           <div class="col-lg-12">
             <strong>Payment Details:</strong>
             <span id="view-payment-details">Payment Details</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
-</div>
 </div>
 @endsection
 
@@ -194,6 +202,10 @@
     {
       data: 'user_id',
       name: 'admin_users.name'
+    },
+    {
+      data: 'comname',
+      name: 'clients.company_name'
     },
     {
       data: 'cname',
@@ -214,6 +226,6 @@
     }
   ];
 </script>
-<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?334545') }}"></script>
+<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?25022') }}"></script>
 <script src="{{ asset('public/admin-theme/assetsNew/modules/moduleForm.js?44564566') }}"></script>
 @endsection

@@ -31,6 +31,12 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="mb-3">
+                                        <label class="form-label">Client Company</label>
+                                        {!! Form::text('search_company', null, ['class' => 'form-control']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="mb-3">
                                         <label class="form-label">Created By</label>
                                         {!! Form::text('search_user', null, ['class' => 'form-control']) !!}
                                     </div>

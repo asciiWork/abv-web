@@ -288,6 +288,14 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            <tr style="border: none;">
+                                <td style="border-bottom:none;"></td>
+                                <td style="border-bottom:none;"></td>
+                                <td style="border-bottom:none;"></td>
+                                <td style="border-bottom:none;"></td>
+                                <td style="border-bottom:none; text-align: center;">Total: {{$invoice->total_qnt}}</td>
+                                <td style="border-bottom:none;"></td>
+                            </tr>
                         </table>
                         <table width="991" class="total-blg-dv">
                             <tr align="right">
@@ -390,7 +398,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="{{asset('public/admin-theme/invoiceAssets/images/code.png')}}" alt="" height="120" width="120">
+                                                    <img src="{{asset('public/admin-theme/invoiceAssets/images/qrcode.png')}}" alt="" height="120" width="120">
                                                 </td>
                                             </tr>
                                         </table>

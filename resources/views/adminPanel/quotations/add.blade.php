@@ -136,10 +136,10 @@
                                     <tr id="tr-item-1">
                                         <td class="">1</td>
                                         <td>
-                                            <select name="product_id[]" data-row="1" id="product-option-1" class="form-select product-items" data-placeholder="Select Product">
+                                            <select name="product_size_id[]" data-row="1" id="product-option-1" class="form-select product-items" data-placeholder="Select Product">
                                                 <option value="">Select Product</option>
                                                 @foreach($products as $prd)
-                                                <option value="{{$prd->id}}" data-hsnCode="{{$prd->hsn_code}}" data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
+                                                <option value="{{$prd->id}}" data-hsnCode="{{$prd->hsn_code}}" data-sizeproduct="{{$prd->product_size_id}}" data-product="{{$prd->product_id}}" data-price="{{$prd->price}}">{{$prd->product_code}}-{{$prd->product_name}} [{{$prd->product_size}}]</option>
                                                 @endforeach
                                             </select>
                                             <input name="item_name[]" type="hidden" value="" id="product-name-1">
@@ -150,7 +150,7 @@
                                             </div>
                                         </td>
                                         <td><input name="product_actual_price[]" type="text" data-row="1" class="form-control product_actual_price" value="0" id="product_actual_price-1">
-                                            <input name="product_size_id[]" type="hidden" value="" id="product-size-id-1">
+                                            <input name="product_id[]" type="hidden" value="" id="product-size-id-1">
                                             <span id="last-product-price-1"></span>
                                         </td>
                                         <td>
@@ -174,6 +174,14 @@
                                     <td>
                                         <div>Total: &nbsp;<span id="total_qnt">0</span></div>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a id="add_new_product_tr" class="btn btn-success btn-sm">New Product</a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                         </div> <!-- end table-responsive-->
@@ -242,12 +250,25 @@
         });
         $('#sgst_row').hide();
         $('#cgst_row').hide();
+        $('#add_new_product_tr').click(function() {
+            let num = parseInt($('#numRow').val()) + 1;
+            var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
+            html += '<td><input name="product_size_id[]" type="text" data-row="' + num + '" value="" id="product-option-' + num + '" class="form-control"></td>';
+            html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
+            html += '<input name="product_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
+            html += '<td ><div class="col-sm-12"><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
+            html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"><span id="last-product-price-' + num + '"></span></td>';
+            html += '<td><div class="col-sm-12"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control" id="item-qnt-' + num + '"></div ></td>';
+            html += '<td class="" align="center"><h6 id="total-amount-txt-' + num + '">000.00</h6><input type="hidden" value="" name="total_amount[]" id="total-amount-' + num + '" class="form-control total-amount"></td> <td class="float-end" ><a class="btn btn-danger delete-item-tr"><i class="bi bi-trash"></i></a></td ></tr>';
+            $('.tbodyTr').append(html);
+            $('#numRow').val(num);
+        });
         $('#add_tr').click(function() {
             let num = parseInt($('#numRow').val()) + 1;
             var html = '<tr id="tr-item-' + num + '"><td> ' + (num) + ' </td>';
-            html += '<td><select name="product_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select></td>';
+            html += '<td><select name="product_size_id[]" class="form-select product-items" data-placeholder="Select Product" data-row="' + num + '" id="product-option-' + num + '"><option value = "" >Select Product</option></select></td>';
             html += '<input name="item_name[]" type="hidden" value="" id="product-name-' + num + '">';
-            html += '<input name="product_size_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
+            html += '<input name="product_id[]" type="hidden" value="" id="product-size-id-' + num + '">';
             html += '<td ><div class="col-sm-12"><input type="text" value="" name="product_hsn_code[]" id="hsn-code-' + num + '" class="form-control hsn-code"></div ></td>';
             html += '<td><input name="product_actual_price[]" data-row="' + num + '" class="form-control product_actual_price" type="text" value="0" id="product_actual_price-' + num + '"><span id="last-product-price-' + num + '"></span></td>';
             html += '<td><div class="col-sm-12"><input type="number" min="0" value="1" data-row="' + num + '" name="quantity[]" class="item-qnt form-control" id="item-qnt-' + num + '"></div ></td>';
@@ -276,13 +297,13 @@
                 var price = selectedOption.data('price');
                 $('#product_actual_price-' + rowNo).val(price);
                 $('#product-name-' + rowNo).val(selectedOption.text());
-                $('#product-size-id-' + rowNo).val(selectedOption.data('product'));
+                $('#product-size-id-' + rowNo).val(selectedOption.data('sizeproduct'));
                 $('#hsn-code-' + rowNo).val(selectedOption.data('hsnCode'));
                 $('#total-amount-txt-' + rowNo).html(price);
                 $('#total-amount-' + rowNo).val(price);
             }
             allTotalPrices();
-            getLastPrice(selectedOption.data('product'), rowNo);
+            getLastPrice($(this).val(), rowNo);
         });
         $(document).on("change", ".product_actual_price", function() {
             if ($(this).val() > 0) {

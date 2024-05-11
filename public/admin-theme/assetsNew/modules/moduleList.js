@@ -47,7 +47,15 @@ $(document).ready(function() {
                 data.search_qn_number = $("#search-frm input[name='search_qn_number']").val();
                 data.search_client_name = $("#search-frm input[name='search_client_name']").val();
                 data.search_date = $("#search-frm input[name='search_date']").val();
+                data.search_start_date = $("#search-frm input[name='search_start_date']").val();
+                data.search_end_date = $("#search-frm input[name='search_end_date']").val();
                 data.search_client_phone = $("#search-frm input[name='search_client_phone']").val();
+                data.search_type = $("#search-frm input[name='search_type']").val();
+            },
+            dataSrc: function(response) {
+                $("#total-with-gst").html(response.amount_with_gst);
+                $("#total-without-gst").html(response.amount_without_gst);
+                return response.data;
             }
         },
         "order": [

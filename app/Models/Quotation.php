@@ -14,18 +14,53 @@ class Quotation extends Model
 
     public function listData()
     {
-        return Quotation::select('quotations.*', 'admin_users.image as uimg','admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
+        return Quotation::select('quotations.*', 'admin_users.image as uimg','admin_users.name as uname','clients.name as cname', 'clients.company_name as comname', 'clients.phone_1 as cphone')
         ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
         ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')
         ->where('quotations.is_invoice', '=', 0);
     }
     public function invoiceListData()
     {
-        return Quotation::select('quotations.*', 'admin_users.image as uimg', 'invoice_payments.payment_date', 'invoice_payments.payment_type', 'invoice_payments.payment_detail', 'admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
+        return Quotation::select('quotations.*', 'admin_users.image as uimg', 'invoice_payments.payment_date', 'invoice_payments.payment_type','clients.company_name as comname','invoice_payments.payment_detail', 'admin_users.name as uname','clients.name as cname', 'clients.phone_1 as cphone')
         ->leftJoin('admin_users', 'admin_users.id', '=', 'quotations.user_id')
         ->leftJoin('clients', 'clients.id', '=', 'quotations.client_id')
         ->leftJoin('invoice_payments', 'quotations.id', 'invoice_payments.quotation_id')
         ->where('quotations.is_invoice', '=', 1);
+    }
+    public static function listFilter($query)
+    {
+        $search_user = request()->get("search_user");
+        $search_qn_number = request()->get("search_qn_number");
+        $search_client_name = request()->get("search_client_name");
+        $search_client_phone = request()->get("search_client_phone");
+        $search_company = request()->get("search_company");
+        $search_start_date = request()->get("search_start_date");
+        $search_end_date = request()->get("search_end_date");
+        if (\Auth::guard('admins')->user()->user_type_id != 1) {
+            $query = $query->where("admin_users.id", \Auth::guard('admins')->user()->id);
+        }
+        if (!empty($search_company)) {
+            $query = $query->where("clients.company_name", "LIKE", '%' . $search_company . '%');
+        }
+        if (!empty($search_user)) {
+            $query = $query->where("admin_users.name", "LIKE", '%' . $search_user . '%');
+        }
+        if (!empty($search_qn_number)) {
+            $query = $query->where("quotations.invoice_number", "LIKE", '%' . $search_qn_number . '%');
+        }
+        if (!empty($search_client_name)) {
+            $query = $query->where("clients.name", "LIKE", '%' . $search_client_name . '%');
+        }
+        if (!empty($search_client_phone)) {
+            $query = $query->where("clients.phone_1", "LIKE", '%' . $search_client_phone . '%');
+        }
+        if (!empty($search_start_date)) {
+            $query = $query->where("quotations.invoice_date", ">=", date('Y-m-d', strtotime($search_start_date)));
+        }
+        if (!empty($search_end_date)) {
+            $query = $query->where("quotations.invoice_date", "<=", date('Y-m-d', strtotime($search_end_date)));
+        }
+        return $query;
     }
     public static function getQuotationNumber()
     {
@@ -89,7 +124,7 @@ class Quotation extends Model
     public static function allProducts()
     {
         $product = DB::table('product_size')
-        ->select('product_size.id', 'product.hsn_code', 'product.id as product_id', 'product_size.product_code','product.product_name', 'product_size.product_size', 'product_size.product_current_price as price')
+        ->select('product_size.id', 'product_size.id as product_size_id', 'product.hsn_code', 'product.id as product_id', 'product_size.product_code','product.product_name', 'product_size.product_size', 'product_size.product_current_price as price')
         ->leftJoin('product', 'product.id', '=', 'product_size.product_id')
         ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
         ->where('product_category.status', '1')
@@ -107,7 +142,7 @@ class Quotation extends Model
             'quotation_date' => 'required|date',
             'quotation_due_date' => 'required|date',
             'client_id' => 'required',
-            'product_id.*' => 'required',
+            'product_size_id.*' => 'required',
             'bill_address' => 'required',
             'bill_city' => 'required',
             'bill_state' => 'required',

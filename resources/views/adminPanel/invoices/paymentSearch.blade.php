@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="mb-3">
-                                        <label class="form-label">Created By</label>
-                                        {!! Form::text('search_user', null, ['class' => 'form-control']) !!}
+                                        <label class="form-label">Type</label>
+                                        {!! Form::text('search_type', null, ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
@@ -52,7 +52,7 @@
                                 <div class="col-lg-3">
                                     <div class="text-center mt-4">
                                         <button type="submit" class="btn btn-primary">Search</button>
-                                        <a href="{{ route('admin-invoices.index') }}" class="btn btn-warning">Reset</a>
+                                        <a href="{{ route('admin-invoices.payments') }}" class="btn btn-warning">Reset</a>
                                     </div>
                                 </div>
                             </div>

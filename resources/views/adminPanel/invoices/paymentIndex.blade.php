@@ -1,29 +1,21 @@
 @extends('adminPanel.layouts.appNew')
 @section('content')
- 
-@include($moduleViewName.".search")
+
+@include($moduleViewName.".paymentSearch")
 <div class="row">
   <div class="col-12">
     <div class="card">
-      <div class="card-header">
-        <div>
-          <a href="{{$add_url}}" class="btn btn-primary">
-            <i class="bi bi-plus-lg me-2"></i> Add New </a>
-        </div>
-      </div>
       <div class="card-body">
         <table id="server-side-datatables" class="table" style="width:100%">
           <thead>
             <tr>
               <th>ID</th>
               <th>Number</th>
-              <th>Created By</th>
               <th width="20%">Company</th>
               <th>Client</th>
               <th>Date</th>
-              <th>Due Date</th>
               <th>Total</th>
-              <th>Action</th>
+              <th>Type</th>
             </tr>
           </thead>
           <tbody>
@@ -37,18 +29,14 @@
 
 @section('adminScript')
 <script type="text/javascript">
-  var MODULE_URL = "{!! route($moduleRouteText.'.data') !!}";
+  var MODULE_URL = "{!! route($moduleRouteText.'.paymentsData') !!}";
   var dataColumns = [{
       data: 'id',
       name: 'id'
     },
     {
-      data: 'quotation_number',
-      name: 'quotation_number'
-    },
-    {
-      data: 'user_id',
-      name: 'admin_users.name'
+      data: 'invoice_number',
+      name: 'quotations.invoice_number'
     },
     {
       data: 'comname',
@@ -59,23 +47,18 @@
       name: 'clients.name'
     },
     {
-      data: 'quotation_date',
-      name: 'quotation_date'
-    },
-    {
-      data: 'quotation_due_date',
-      name: 'quotation_due_date'
+      data: 'payment_date',
+      name: 'payment_date'
     },
     {
       data: 'final_total_amount',
-      name: 'final_total_amount'
+      name: 'quotations.final_total_amount'
     },
     {
-      data: 'action',
-      orderable: false,
-      searchable: true
+      data: 'payment_type',
+      name: 'payment_type'
     }
   ];
 </script>
-<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?35645') }}"></script>
+<script src="{{ asset('public/admin-theme/assetsNew/modules/moduleList.js?252022') }}"></script>
 @endsection

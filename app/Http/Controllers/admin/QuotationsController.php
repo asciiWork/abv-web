@@ -118,8 +118,8 @@ class QuotationsController extends Controller
                     $qnData = new QuotationItem();
                     $qnData->quotation_id = $qID;
                     $qnData->product_id = isset($allProducts[$i])?$allProducts[$i]:'';
-                    $qnData->product_size_id = isset($product_size_id[$i])?$product_size_id[$i]:'';
-                    $qnData->item_name = isset($item_name[$i])?$item_name[$i]:'';
+                    $qnData->product_size_id = (isset($product_size_id[$i]) && intval($product_size_id[$i]))?$product_size_id[$i]:'';
+                    $qnData->item_name = (isset($item_name[$i]) && intval($product_size_id[$i]))?$item_name[$i]: $product_size_id[$i];
                     $qnData->product_actual_price = isset($product_actual_price[$i])?$product_actual_price[$i]:'';
                     $qnData->quantity = isset($allQuantity[$i])?$allQuantity[$i]:'';
                     $qnData->taxable_value = isset($alltaxable_value[$i])?$alltaxable_value[$i]:'';
@@ -284,8 +284,8 @@ class QuotationsController extends Controller
                     $qnData = new QuotationItem();
                     $qnData->quotation_id = $id;
                     $qnData->product_id = isset($allProducts[$i]) ? $allProducts[$i] : '';
-                    $qnData->product_size_id = isset($product_size_id[$i]) ? $product_size_id[$i] : '';
-                    $qnData->item_name = isset($item_name[$i]) ? $item_name[$i] : '';
+                    $qnData->product_size_id = (isset($product_size_id[$i]) && intval($product_size_id[$i])) ? $product_size_id[$i] : '';
+                    $qnData->item_name = (isset($item_name[$i]) && intval($product_size_id[$i])) ? $item_name[$i] : $product_size_id[$i];
                     $qnData->product_actual_price = isset($product_actual_price[$i]) ? $product_actual_price[$i] : '';
                     $qnData->quantity = isset($allQuantity[$i]) ? $allQuantity[$i] : '';
                     $qnData->taxable_value = isset($alltaxable_value[$i]) ? $alltaxable_value[$i] : '';
@@ -359,6 +359,7 @@ class QuotationsController extends Controller
                 $search_user = request()->get("search_user");
                 $search_qn_number = request()->get("search_qn_number");
                 $search_client_name = request()->get("search_client_name");
+                $search_company = request()->get("search_company");
                 $search_client_phone = request()->get("search_client_phone");
                 $search_date = request()->get("search_date");
                 if(\Auth::guard('admins')->user()->user_type_id != 1)
@@ -376,6 +377,9 @@ class QuotationsController extends Controller
                 }
                 if (!empty($search_client_name)) {
                     $query = $query->where("clients.name", "LIKE", '%'. $search_client_name.'%');
+                }
+                if (!empty($search_company)) {
+                    $query = $query->where("clients.company_name", "LIKE", '%'. $search_company.'%');
                 }
                 if (!empty($search_client_phone)) {
                     $query = $query->where("clients.phone_1", "LIKE", '%'. $search_client_phone.'%');

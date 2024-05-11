@@ -14,5 +14,10 @@ class ACL extends Model
         $authRole = \Auth::guard("admins")->user()->user_type_id;
         return ($authRole == 1)?1:0;
     }
+    public static function isAdmin()
+    {
+        $authRole = \Auth::guard("admins")->user()->user_type_id;
+        return ($authRole == 1)?1:0;
+    }
     
 }
