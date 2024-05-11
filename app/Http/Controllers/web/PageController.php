@@ -11,6 +11,8 @@ use App\Models\ProductImages;
 use App\Models\Contact;
 use App\Models\Carts;
 use App\Models\Order;
+use App\Models\TempOrder;
+use App\Models\TempOrderDetail;
 use App\Models\OrderDetail;
 use App\Models\UserAddresses;
 use App\Models\User;
@@ -19,7 +21,7 @@ use Rap2hpoutre\FastExcel\FastExcel;
 
 class PageController extends Controller
 {
-     public function index()
+    public function index()
     {
         $data = array();
         $data['page_title'] = 'Home';
@@ -49,19 +51,35 @@ class PageController extends Controller
         $data['proReview']=$prore;
         return view('web.about', $data);
     }
-    public function products()
+    public function products(Request $request)
     {
+        $search_product=$request->get('search_product');
         $data = array();
         $data['page_title'] = 'Products';
         $data['breadcrumb'] = 'Products';
         $proData = new Product; 
-        $product =  $proData->get_Allproduct();
+        $product =  $proData->get_Allproduct($search_product);
         $data['productData']=$product;
         $newPro =  $proData->get_NewArrivals();
         $data['newProData']=$newPro;
         $data['recentPro'] =  $proData->get_BestSellerOrRecent('recent');
         $data['bestSeller'] =  $proData->get_BestSellerOrRecent('best_seller');
         return view('web.products', $data);
+    }
+    public function searchProduct(Request $request)
+    {
+        $query = $request->input('q');
+        $products = \DB::table('product')
+            ->select(['product.id', 'product.product_name', 'product.product_detail', 'product_img.product_img_url','product_img.pro_main'])
+            ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
+            ->where('product_category.status', '1')
+            ->where('product_img.pro_main', '1')
+            ->where('product.product_name', 'like', "%$query%")
+            ->orWhere('product.product_detail', 'like', "%$query%")
+            ->get(['product.id', 'product.product_name', 'product.product_detail','product_img.product_img_url']);
+
+        return response()->json($products);
     }
     public function contact()
     {
@@ -174,7 +192,9 @@ class PageController extends Controller
         $data['catData']=$productCategory;
         $proimgs = new ProductImages; 
         $proimges =  $proimgs->get_ProductImages($product->id);
+        $proimgesSmall =  $proimgs->get_ProductImagesSmall($product->id);
         $data['proimges']=$proimges;
+        $data['proimgesSmall']=$proimgesSmall;
         $proreview = new ProductReview; 
         $prore =  $proreview->get_ProductReview($product->id);
         $data['proReview']=$prore;
@@ -211,8 +231,12 @@ class PageController extends Controller
         $data['productData']=$product;
         if($slug){
             $cat=$catData->get_categoryBy_slug($slug);
-            $data['Catsl'] = $cat; 
-            $data['catPro'] =  $proData->get_catProduct($cat[0]->id);
+            if(count($cat)){
+                $data['Catsl'] = $cat; 
+                $data['catPro'] =  $proData->get_catProduct($cat[0]->id);
+            }else{
+                return abort(404);
+            }
         }
         return view('web.productCategory', $data);
     }
@@ -227,7 +251,7 @@ class PageController extends Controller
         $ranProduct =  $proData->get_random_product();
         $data['ranProduct']=$ranProduct;
         return view('web.cart', $data);
-    }    
+    }
     public function gallery()
     {
         $data = array();
@@ -236,23 +260,22 @@ class PageController extends Controller
         return view('web.gallery', $data);
     }
     public function viewReceivedOrder($id,$key){
-        if($id){
-            $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$CONFIRM)->first();
-            if($tObj){
-                $data['order'] = $tObj;
-                $data['orderDet'] = OrderDetail::getOrders($id);
-                return view('web.orderComplete', $data);
-            }
+        $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->where('payment_status','paid')->first();
+        if($tObj){
+            $data['order'] = $tObj;
+            $data['orderDet'] = OrderDetail::getOrders($id);
+            return view('web.orderComplete', $data);
+        }else{
+            return redirect()->route('web.index');
         }
-        return abort(404);
     }
     public function viewOrderPay($id,$key){
         if($id){
-            $tObj = Order::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->first();
+            $tObj = TempOrder::where('id',$id)->where('ordkey',$key)->where('order_status',Carts::$PLACED)->first();
             if($tObj){
                 session()->put('orderId',$id);
                 $data['order'] = $tObj;
-                $data['orderDet'] = OrderDetail::getOrders($id);
+                $data['orderDet'] = TempOrderDetail::getOrders($id);
                 return view('web.orderPay', $data);
             }
         }

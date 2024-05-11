@@ -98,7 +98,7 @@
                                                     <span class="product__badge">-{{ $pro->product_offer_per }}%</span>
                                                 </div>
                                                 <div class="product__card--content">
-                                                    <h3 class="product__card--title"><a href="{{$pro->product_slug}}">{{ $pro->product_name }}</a></h3>
+                                                    <h3 class="product__card--title"><a href="{{ URL::to('product-details/') }}/{{$pro->product_slug}}">{{ $pro->product_name }}</a></h3>
                                                     <div class="product__card--price">
                                                         <span class="current__price">₹{{ $pro->product_min_price }}</span> - 
                                                         <span class="current__price">₹{{ $pro->product_max_price }}</span>

@@ -1,0 +1,32 @@
+@keyframes blink {
+  /*0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }*/
+    0%{ opacity: 1; color: red; }    
+    50%{ opacity: 0; color: blue; }  
+    100%{ opacity: 1; color: red; } 
+}
+.blinking-text {
+  animation: blink 5s infinite;
+}
+.select2-container{
+  width: 92% !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 5px;
+  left: 25px;
+}
+.select2-selection--single{
+  border: none !important;
+  height: 5rem !important;
+  padding: 10px 80px 0 10px;
+  font-size: 1.6rem;
+}
+.selection{
+  width: 100%;
+}
+.predictive__search--box__inner {
+  text-align: left;
+}
+.predictive__search--form {
+  width: 100%;
+}

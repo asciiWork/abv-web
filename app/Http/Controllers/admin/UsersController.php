@@ -10,6 +10,7 @@ use App\Models\Admin;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\UserAddresses;
+use App\Models\UserDevice;
 use DataTables;
 
 class UsersController extends Controller
@@ -43,7 +44,9 @@ class UsersController extends Controller
         $data = array();
         $data['page_title'] = "Manage Admin Users";
         $data['breadcrumb'] = array('Admin Users' => '');
+        $data['userData'] = Admin::select('*')->get();;
         $data['add_url'] = route($this->moduleRouteText . '.create');
+        $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
     public function create()
@@ -128,6 +131,7 @@ class UsersController extends Controller
         $data['action_url'] = $this->moduleRouteText . ".update";
         $data['action_params'] = $formObj->id;
         $data['method'] = "PUT";
+        $data['devices'] = UserDevice::where('user_id',$id)->get();
         return view($this->moduleViewName . '.add', $data);
     }
 

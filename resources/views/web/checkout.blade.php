@@ -6,7 +6,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 <!-- Start checkout page area -->
 <div class="checkout__page--area section--padding">
     <div class="container">
-        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form','redirect'=>url('/checkout')]) !!}
+        {!! Form::open(['route'=>'web.shipping-post','id'=>'submit-form-razorpay']) !!}
         <div class="row">
             <div class="col-lg-7 col-md-6">
                 <div class="main checkout__mian">
@@ -23,7 +23,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                         <div class="customer__information">
                             <div class="checkout__email--phone mb-12">
                                 <label>
-                                    <input class="checkout__input--field border-radius-5" required placeholder="Email" value="{{$authEmail}}" name="news_email" type="email">
+                                    <input class="checkout__input--field border-radius-5" required placeholder="Email" value="{{$authEmail}}" name="user_email" type="email">
                                 </label>
                             </div>
                             <div class="checkout__checkbox">
@@ -178,7 +178,7 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                         <textarea name="note" class="checkout__notes--textarea__field border-radius-5" id="order" placeholder="Notes about your order, e.g. special notes for delivery." spellcheck="false"></textarea>
                     </div>
                     <div class="checkout__content--step__footer d-flex align-items-center">
-                        <a class="continue__shipping--btn primary__btn border-radius-5" href="{{ route('web.products') }}">Continue To Shipping</a>
+                        <a class="continue__shipping--btn primary__btn border-radius-5" href="{{ route('web.products') }}">Continue To Shopping</a>
                         <a class="previous__link--content" href="{{ route('web.cart') }}">Return to cart</a>
                     </div>
                 </div>
@@ -227,18 +227,18 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                                 </tr>
                                 <tr class="checkout__total--items">
                                     <td class="checkout__total--title text-left">Shipping Rate</td>
-                                    <input type="hidden" id="shipping_rate_amount" value="0">
+                                    <input type="hidden" id="shipping_rate_amount" value="100">
                                     <td class="checkout__total--calculated__text text-right" id="shipping_rate_txt">₹100.00</td>
-                                </tr>
-                                <tr class="checkout__total--items">
-                                    <td class="checkout__total--title text-left">GST(18%)</td>
-                                    <input type="hidden" id="gst_rate_amount" value="0">
-                                    <td class="checkout__total--calculated__text text-right" id="gst_rate_txt">₹100.00</td>
                                 </tr>
                                 <tr class="checkout__total--items">
                                     <td class="checkout__total--title text-left">COD</td>
                                     <input type="hidden" id="cod_rate_amount" value="0">
                                     <td class="checkout__total--calculated__text text-right" id="cod_rate_txt">2%</td>
+                                </tr>
+                                <tr class="checkout__total--items">
+                                    <td class="checkout__total--title text-left">GST(18%)</td>
+                                    <input type="hidden" id="gst_rate_amount" value="0">
+                                    <td class="checkout__total--calculated__text text-right" id="gst_rate_txt">₹100.00</td>
                                 </tr>
                             </tbody>
                             <tfoot class="checkout__total--footer">
@@ -254,10 +254,10 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
                         <h3 class="payment__history--title mb-20">Payment Method</h3>
                         <ul class="payment__history--inner d-flex">
                             <li class="payment__history--list">
-                                <input id="payment_method_razorpay" type="radio" class="variant__color--list" name="payment_method" value="razorpay"> Razorpay
+                                <input id="payment_method_razorpay" type="radio" class="variant__color--list payment-radio" name="payment_method" value="razorpay"> Payment
                             </li>
                             <li class="payment__history--list">
-                                <input id="payment_method_cod" type="radio" class="variant__color--list" name="payment_method" value="cod" checked="checked"> Cash on delivery
+                                <input id="payment_method_cod" type="radio" class="variant__color--list payment-radio" name="payment_method" value="cod" checked="checked"> Cash on delivery
                             </li>
                             <!-- <li class="payment__history--list"><button class="payment__history--link primary__btn" type="submit">Paypal</button></li> -->
                         </ul>
@@ -274,6 +274,17 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 @section('scripts')
 <script>
     jQuery(document).ready(function() {
+        var radioButtons = document.querySelectorAll('.payment-radio');
+        radioButtons.forEach(function(radioButton) {
+            radioButton.addEventListener('change', function() {
+                if (this.value === 'razorpay') {
+                    finalAmount();
+                } else if (this.value === 'cod') {
+                    finalAmount();
+                }
+            });
+        });
+        finalAmount();
         $('.bil_state_change').change(function() {
             var shippState = $('.ship_state_change').val();
             var final_total_qnt = $("#final_total_qnt").val()
@@ -323,11 +334,23 @@ $authEmail = (\Auth::check()) ? \Auth::user()->email : '';
 
     function finalAmount() {
         var totl = parseFloat($("#final_total_amount").val()) + parseFloat($("#shipping_rate_amount").val());
-        var gstAmount = parseFloat(totl) * 0.18;
+
+        var codRadioButton = document.getElementById("payment_method_cod");
+        var codAmount = 0;
+        if (codRadioButton.checked) {
+            var codAmount = parseFloat(totl) * 0.02;
+            $("#cod_rate_amount").val(codAmount);
+            $("#cod_rate_txt").html('₹' + parseFloat(codAmount).toFixed(2));
+        } else {
+            $("#cod_rate_amount").val(0);
+            $("#cod_rate_txt").html('₹0.00');
+        }
+
+        var gst_total = totl + codAmount;
+        var gstAmount = parseFloat(gst_total) * 0.18;
         $("#gst_rate_txt").html('₹' + parseFloat(gstAmount).toFixed(2));
+
         var final_total_txt = totl + gstAmount;
-        var codAmount = parseFloat(final_total_txt) * 0.02;
-        $("#cod_rate_txt").html('₹' + parseFloat(codAmount).toFixed(2));
         final_total_txt = codAmount + final_total_txt;
         $("#final_total_txt").html('₹' + (parseFloat(final_total_txt).toFixed(2)));
     }

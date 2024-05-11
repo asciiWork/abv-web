@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
     <title>ABV Tool - Admin Dashboard</title>
@@ -8,84 +8,93 @@
     <meta content="Techzaa" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/web/assets/img/fav.ico') }}">
-    <!-- Theme Config Js -->
-    <script src="{{ asset('public/admin-theme/assetsNew/js/config.js') }}" ></script>
-    <!-- App css -->
-    <link href="{{ asset('public/admin-theme/assetsNew/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
-    <!-- Icons css -->
-    <link href="{{ asset('public/admin-theme/assetsNew/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <!--plugins-->
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet">
+    <!--Styles-->
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ asset('public/admin-theme/assetsRoksyn/css/icons.css')}}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/css/main.css')}}" rel="stylesheet">
+    <link href="{{ asset('public/admin-theme/assetsRoksyn/css/dark-theme.css')}}" rel="stylesheet">
 </head>
 
 <body class="authentication-bg position-relative">
-    <div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5 position-relative">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xxl-6 col-lg-6">
-                        <div class="card overflow-hidden">
-                            <div class="row g-0">
-                                <div class="col-lg-12">
-                                    <div class="d-flex flex-column h-100">
-                                        <div class="auth-brand p-4">
-                                            <a href="/" class="logo-dark" style="text-align: center;">
-                                                <img src="{{ asset('public/web/assets/img/abv.png') }}" alt="dark logo" height="100">
-                                            </a>
-                                        </div>
-                                        <div class="p-4 my-auto">
-                                            
-                                            <h4 class="fs-20">Sign In</h4>
-                                            <p class="text-muted mb-3">Enter your email address and password to access account. </p>
-                                             @if ($errors->any())
-                                                <div class="alert alert-danger">
-                                                    <ul>
-                                                        @foreach ($errors->all() as $error)
-                                                            <li>{{ $error }}</li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            @endif
-                                            <!-- form -->
-                                            <form  action="{{route('admin_login_post')}}" method="POST">
-                                                @csrf
-                                                <div class="mb-3">
-                                                    <label for="emailaddress" class="form-label">Email address</label>
-                                                    <input class="form-control" type="email" id="emailaddress" required="" name="email" placeholder="Enter your email" value="{{old('email')}} ">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="password" class="form-label">Password</label>
-                                                    <input name="password" class="form-control" type="password" required="" id="password" placeholder="Enter your password">
-
-                                                </div>
-
-                                                <div class="mb-0 text-start">
-                                                    <button class="btn btn-soft-primary w-100" type="submit">
-                                                        <i class="ri-login-circle-fill me-1"></i> <span class="fw-bold">Log In</span> </button>
-                                                </div>
-
-                                            </form>
-                                            <!-- end form-->
-                                        </div>
+    <div class="container-fluid my-5">
+        <div class="row">
+           <div class="col-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4 mx-auto">
+            <div class="card border-3">
+                <div class="card-body p-5">
+                    <img src="{{ asset('public/web/assets/img/logo/ABV-logo.png')}}" class="mb-4" width="100" alt="">
+                    <h4 class="fw-bold">Get Started Now</h4>
+                    <p class="mb-0">Enter your credentials to login your account</p>
+                    <div class="form-body mt-4">
+                        @if ($errors->any())
+                            <div class="alert border-0 bg-danger-subtle alert-dismissible fade show py-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="fs-3 text-danger"><span class="material-symbols-outlined">cancel</span>
                                     </div>
-                                </div> <!-- end col -->
+                                    <div class="ms-3">
+                                        @foreach ($errors->all() as $error)
+                                        <div class="text-danger">{{ $error }}</div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
-                        </div>
+                        @endif
+                        <form class="row g-3" action="{{route('admin_login_post')}}" method="post">
+                            @csrf
+                            <div class="col-12">
+                                <label for="inputEmailAddress" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="inputEmailAddress" placeholder="Enter your email" required="required">
+                            </div>
+                            <div class="col-12">
+                                <label for="inputChoosePassword" class="form-label">Password</label>
+                                <div class="input-group" id="show_hide_password">
+                                    <input type="password" name="password" class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password" required="required"> 
+                                    <a href="javascript:;" class="input-group-text bg-transparent"><i class="bi bi-eye-slash-fill"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+                                </div> -->
+                            </div>
+                            <div class="col-12">
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <!-- end row -->
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
-        </div>
-    <!-- end page -->
-    <footer class="footer footer-alt fw-medium">
-        <span class="text-dark">
-            <script>document.write(new Date().getFullYear())</script> © {{env('APP_NAME')}} All rights reserved.
-        </span>
-    </footer>
-    <!-- Vendor js -->
-    <script src="{{ asset('public/admin-theme/assetsNew/js/vendor.min.js') }}" ></script>
-    <!-- App js -->
-    <script src="{{ asset('public/admin-theme/assetsNew/js/app.min.js') }}"></script>
-    
+                </div>
+           </div>
+        </div><!--end row-->
+     </div>
+    <!--plugins-->
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/jquery.min.js')}}"></script>
+    <script src="{{ asset('public/admin-theme/assetsRoksyn/js/bootstrap.bundle.min.js')}}"></script>
+    <script>
+      $(document).ready(function () {
+        $("#show_hide_password a").on('click', function (event) {
+          event.preventDefault();
+          if ($('#show_hide_password input').attr("type") == "text") {
+            $('#show_hide_password input').attr('type', 'password');
+            $('#show_hide_password i').addClass("bi-eye-slash-fill");
+            $('#show_hide_password i').removeClass("bi-eye-fill");
+          } else if ($('#show_hide_password input').attr("type") == "password") {
+            $('#show_hide_password input').attr('type', 'text');
+            $('#show_hide_password i').removeClass("bi-eye-slash-fill");
+            $('#show_hide_password i').addClass("bi-eye-fill");
+          }
+        });
+      });
+    </script>    
 </body>
-
 </html>

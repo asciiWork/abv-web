@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Lab404\Impersonate\Models\Impersonate;
 use DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\Quotation;
 
 class Admin extends Authenticatable
 {
@@ -20,6 +21,25 @@ class Admin extends Authenticatable
     public function listData()
     {
         return Admin::select('*');
+    }
+    public static function getSelling()
+    {
+        $data = array();
+        $users = Admin::where('status',1);
+        if (\Auth::guard('admins')->user()->user_type_id != 1) {
+            $users = $users->where('id', \Auth::guard('admins')->user()->user_type_id);
+        }
+        $users = $users->get();
+        foreach ($users as $user) {
+            $data[$user->id]['id'] = $user->id;
+            $data[$user->id]['name'] = $user->name;
+            $data[$user->id]['phone'] = $user->phone;
+            $data[$user->id]['image'] = Admin::getAvtar($user->image);
+            $data[$user->id]['yearly'] = Quotation::where('invoice_date', 'LIKE', '%' . date('Y') . '%')->where('user_id', $user->id)->sum('final_total_amount');
+            $data[$user->id]['monthly'] = Quotation::where('invoice_date', 'LIKE', '%' . date('Y-m') . '%')->where('user_id', $user->id)->sum('final_total_amount');
+            $data[$user->id]['today'] = Quotation::where('invoice_date', 'LIKE', '%' . date('Y-m-d') . '%')->where('user_id', $user->id)->sum('final_total_amount');
+        }
+        return $data;
     }
     public static function getAvtar($image)
     {
@@ -40,7 +60,7 @@ class Admin extends Authenticatable
         $data = array();
         $rules = [
             'name' => 'required|min:2',
-            'phone' => 'required',
+            'phone' => 'required|numeric|digits_between:10,15',
         ];
         if($id){
             $rules += [
@@ -64,5 +84,25 @@ class Admin extends Authenticatable
         }
 
         return ['status' => $status, 'msg' => $msg, 'data' => $data];
+    }
+
+    public static function GetUserIp()
+    {
+        $ipaddress = '';
+        if (isset($_SERVER['HTTP_CLIENT_IP']))
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if (isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if (isset($_SERVER['HTTP_X_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if (isset($_SERVER['HTTP_FORWARDED_FOR']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if (isset($_SERVER['HTTP_FORWARDED']))
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if (isset($_SERVER['REMOTE_ADDR']))
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
     }
 }

@@ -13,7 +13,7 @@
 <!-- End banner section -->
 
 <!-- Start product section -->
-@include('web.includes.product')
+
 <!-- End product section -->
 
 <!-- Start product section -->
@@ -239,9 +239,54 @@
 <!-- End product section -->
 
 <!-- Start blog section -->
-<section class="blog__section section--padding">
+<section class="blog__section">
 </section>
 <!-- End blog section -->
+
+<section class="testimonial__section testimonial__bg section--padding">
+    <div class="container">
+        <div class="section__heading style2 text-center mb-40">
+            <h2 class="section__heading--maintitle">Our Customers</h2>
+        </div>
+        <div class="testimonial__section--inner">
+            <div class="testimonial__active--one  swiper testimonialList">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial__items--thumbnail">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/anovi.png') }}" alt="testimonial-img">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial__items--thumbnail">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/kgs.png') }}" alt="testimonial-img">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial__items--thumbnail">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/sumip.png') }}" alt="testimonial-img">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial__items--thumbnail">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/tilara.png') }}" alt="testimonial-img">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial__items--thumbnail">
+                            <img class="testimonial__items--thumbnail__img" src="{{ asset('public/web/assets/img/logo/woodsden.png') }}" alt="testimonial-img">
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper__nav--btn swiper-button-next">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+                <div class="swiper__nav--btn swiper-button-prev">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
 @section('scripts')
 

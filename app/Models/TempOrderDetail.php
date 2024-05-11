@@ -10,9 +10,13 @@ class TempOrderDetail extends Model
 {
     use HasFactory;
     protected $table = 'temp_order_details';
-    public $timestamps = false;
 
-    public static function getOrders($id){
-    	return $tObj = TempOrderDetail::where('temp_order_id',$id)->get();
+    public static function getOrders($id)
+    {
+        $data = TempOrderDetail::select('temp_order_details.*', 'product.product_name')
+        ->join('product', 'temp_order_details.product_id', 'product.id')
+        ->where('order_id', $id)
+        ->get();
+        return $data;
     }
 }

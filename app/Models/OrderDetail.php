@@ -13,9 +13,11 @@ class OrderDetail extends Model
     public $timestamps = false;
 
     public static function getOrders($id){
-    	$data = OrderDetail::select('order_details.*','product.product_name')
+    	$data = OrderDetail::select('order_details.*','product.product_name', 'product_size.product_code as product_code')
                 ->join('product','order_details.product_id','product.id')
-                ->where('order_id',$id)
+                ->leftJoin('product_size', 'product_size.product_id','product.id')
+                ->where('order_details.order_id',$id)
+                ->groupBy('order_details.id')
                 ->get();
         return $data;
     }

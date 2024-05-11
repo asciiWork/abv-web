@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    $(document).on('click', '.open-payment-form', function() {
+        jQuery('#invoicePayment_invoice_id').val($(this).attr('data-id'));
+    });
+    $(document).on('click', '.open-payment-view', function() {
+       jQuery('#invoicePaymentViewModel #view-payment-details').html($(this).attr('data-detail'));
+       jQuery('#invoicePaymentViewModel #view-payment-date').html($(this).attr('data-date'));
+       jQuery('#invoicePaymentViewModel #view-payment-type').html($(this).attr('data-type'));
+    });
     $(document).on('click', '.module-action .btn-delete-record', function() {
         $text = 'Are you sure ?';
         if ($(this).attr('title') == "delete user") {
@@ -31,21 +39,28 @@ $(document).ready(function() {
         ajax: {
             url: MODULE_URL,
             data: function(data) {
-                data.search_text = $("#search-frm input[name='search_text']").val();
+                data.search_name = $("#search-frm input[name='search_name']").val();
+                data.search_company = $("#search-frm input[name='search_company']").val();
+                data.search_phone = $("#search-frm input[name='search_phone']").val();
+                data.search_address = $("#search-frm input[name='search_address']").val();
+                data.search_user = $("#search-frm input[name='search_user']").val();
+                data.search_qn_number = $("#search-frm input[name='search_qn_number']").val();
+                data.search_client_name = $("#search-frm input[name='search_client_name']").val();
+                data.search_date = $("#search-frm input[name='search_date']").val();
+                data.search_start_date = $("#search-frm input[name='search_start_date']").val();
+                data.search_end_date = $("#search-frm input[name='search_end_date']").val();
+                data.search_client_phone = $("#search-frm input[name='search_client_phone']").val();
+                data.search_type = $("#search-frm input[name='search_type']").val();
+            },
+            dataSrc: function(response) {
+                $("#total-with-gst").html(response.amount_with_gst);
+                $("#total-without-gst").html(response.amount_without_gst);
+                return response.data;
             }
         },
         "order": [
             [0, "desc"]
         ],
         columns: dataColumns,
-        "language": {
-            "paginate": {
-                "previous": "<i class='ri-arrow-left-s-line'>",
-                "next": "<i class='ri-arrow-right-s-line'>"
-            }
-        },
-        "drawCallback": function () {
-            $('.dataTables_paginate > .pagination').addClass('pagination-rounded');
-        }
     });
 });

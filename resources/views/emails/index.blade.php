@@ -1,1 +1,1 @@
-Hi, end user
+{!! $body !!}

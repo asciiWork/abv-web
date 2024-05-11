@@ -5,23 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductImages;
  
 class Product extends Model
 {
     protected $table = 'product';
     public function product_size()
     {
-        return $this->hasMany(ProductSize::class);
+        return $this->hasMany(ProductSize::class)->orderBy('order_no', 'ASC');
     }
-	public static function get_Allproduct()
+    public function featuredImage()
+    {
+        return $this->hasOne(ProductImages::class)->where('pro_main', '1');
+    }
+	public static function get_Allproduct($search='')
 	{
 		$product = DB::table('product')
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
             ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
-            ->where('product_img.pro_main', '1')
             ->where('product_category.status', '1')
-            ->get();
+            ->where('product_img.pro_main', '1');
+            if($search!=''){
+                $product =$product->where('product.product_name', 'like', "%$search%")
+                ->orWhere('product.product_detail', 'like', "%$search%");
+            }
+            $product =$product->get();
     	return $product;
 	}
     public function get_NewArrivals()
@@ -55,6 +64,19 @@ class Product extends Model
         ->join('product_img', "product.id", "=", "product_img.product_id")
         ->where('product_img.pro_main', '1')
         ->find($id);
+        /*$productWithSize = product::whereHas('product_size', function ($query) use ($id){
+            $query->where('product_size.product_id', $id)->orderBy('id', 'ASC');
+        })
+        ->with('featuredImage','product_size')
+        ->find($id);*/
+        // $productWithSize = Product::with([
+        //             'featuredImage',
+        //             'product_size' => function ($query) {
+        //                 $query->orderBy('order_no', 'ASC');
+        //             }
+        //         ])->whereHas('product_size', function ($query) use ($id) {
+        //             $query->where('product_id', $id);
+        //         })->find($id);
         return $productWithSize;
 	}
     public function productSize($id=''){
@@ -93,6 +115,8 @@ class Product extends Model
 		$product = DB::table('product')
             ->select(['product.*', 'product_img.product_img_url','product_img.pro_main'])
             ->join('product_img', "product.id", "=", "product_img.product_id")
+            ->leftJoin('product_category', 'product_category.id', '=', 'product.category_id')
+            ->where('product_category.status', '1')
             ->where('product_img.pro_main', '1')
             ->orderBy('id', 'desc')
             ->inRandomOrder()->limit(5)

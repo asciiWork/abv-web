@@ -4,6 +4,9 @@
     .container.demo {
         margin-top: 4em
     }
+    .cart__content--variant {
+        color: #000000 !important;
+    }
 </style>
 <!-- cart section start -->
 <section class="cart__section section--padding">
@@ -30,8 +33,7 @@
                                     <tr class="cart__table--body__items">
                                         <td class="cart__table--body__list">
                                             <div class="cart__product d-flex align-items-center">
-                                                <button class="cart__remove--btn remove-cart-btn" aria-label="search button" type="button" data-id="{{ $c['id'] }}" action="{{ route('remove-cart') }}" isRefresh="1">
-
+                                                <button class="cart__remove--btn remove-cart-btn" aria-label="search button" type="button" data-size="{{ $c['prosize'] }}" data-id="{{ $c['id'] }}" action="{{ route('remove-cart') }}" isRefresh="1">
                                                     <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16px" height="16px">
                                                         <path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z" />
                                                     </svg>
@@ -50,11 +52,11 @@
                                         </td>
                                         <td class="cart__table--body__list">
                                             <div class="quantity__box">
-                                                <a type="minus" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity decrease" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Decrease Value">-</a>
+                                                <a type="minus" data-size="{{ $c['prosize'] }}" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity decrease" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Decrease Value">-</a>
                                                 <label>
                                                     <input type="number" name="qnt" class="quantity__number quickview__value--number" value="{{$c['qnt']}}" data-counter />
                                                 </label>
-                                                <a type="plus" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity increase" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Increase Value">+</a>
+                                                <a type="plus" data-size="{{ $c['prosize'] }}" data-id="{{ $c['id'] }}" class="increase-decrease-cart-btn quantity__value quickview__value--quantity increase" aria-label="quantity value" action="{{route('inc-dec-cart')}}" value="Increase Value">+</a>
                                             </div>
                                         </td>
                                         <td class="cart__table--body__list">
@@ -133,7 +135,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                           <!--  <div>
+                            <!--  <div>
                                 <table class="cart__summary--total__table">
                                     <tbody>
                                         <tr class="cart__summary--total__list">

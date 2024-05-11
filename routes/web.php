@@ -14,6 +14,8 @@ use  App\Http\Controllers\admin\AdminProductsController;
 use  App\Http\Controllers\admin\QuotationsController;
 use  App\Http\Controllers\admin\AdminLoginController;
 use  App\Http\Controllers\admin\ClientsController;
+use  App\Http\Controllers\admin\InvoicesController;
+use  App\Http\Controllers\admin\InventoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +32,29 @@ Route::prefix('/admin')->controller(AdminLoginController::class)->group(function
     });
 Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::get('/dashboard', [AdminController::class,'index'])->name('admin-dashboard');
+	Route::get('/dashboard/sales-overview/{id}', [AdminController::class, 'salesOverview'])->name('admin-sales-overview');
 	Route::get('admin-users/data', [UsersController::class,'data'])->name('admin-users.data');
 	Route::resource('admin-users', UsersController::class);
 
+	Route::post('admin-clients/print-address/search', [ClientsController::class, 'printAddressSearch'])->name('admin-clients.search-address');
+	Route::get('admin-clients/print-address', [ClientsController::class, 'printAddress'])->name('admin-clients.print-address');
+	Route::get('admin-clients/lock/{id}', [ClientsController::class, 'lock'])->name('admin-clients.locking');
 	Route::get('admin-clients/data', [ClientsController::class,'data'])->name('admin-clients.data');
 	Route::resource('admin-clients', ClientsController::class);
 
+	Route::get('admin-quotations/last-prices', [QuotationsController::class, 'lastPrices'])->name('admin-quotations.lastPrices');
+	Route::get('admin-quotations/make-invoice/{id}', [QuotationsController::class, 'makeInvoice'])->name('admin-quotations.make-invoice');
 	Route::get('admin-quotations/data', [QuotationsController::class,'data'])->name('admin-quotations.data');
 	Route::resource('admin-quotations', QuotationsController::class);
 
+	Route::post('admin-invoices/mark-as-paid', [InvoicesController::class, 'markAsPaid'])->name('admin-invoices.mark-as-paid');
+	Route::get('admin-invoices/payments', [InvoicesController::class, 'paymentsIndex'])->name('admin-invoices.payments');
+	Route::get('admin-invoices/payments-data', [InvoicesController::class, 'paymentsData'])->name('admin-invoices.paymentsData');
+	Route::get('admin-invoices/data', [InvoicesController::class,'data'])->name('admin-invoices.data');
+	Route::resource('admin-invoices', InvoicesController::class);
+
+	Route::get('admin-inventories/data', [InventoriesController::class,'data'])->name('admin-inventories.data');
+	Route::resource('admin-inventories', InventoriesController::class);
 
 	Route::get('admin-orders/data', [OrdersController::class,'data'])->name('admin-orders.data');
 	Route::resource('admin-orders', OrdersController::class);
@@ -47,12 +63,14 @@ Route::group(['prefix'=>'admin','middleware' => ['admin']], function(){
 	Route::resource('admin-category', CategoriesController::class);
 	Route::get('admin-products/data', [AdminProductsController::class,'data'])->name('admin-products.data');
 	Route::resource('admin-products', AdminProductsController::class);
-	Route::resource('quatations', QuatationsController::class);
 	Route::get('/contact', [AdminController::class,'contact'])->name('admin-contacts');
-	Route::get('/contact-quick-view', [AdminProductsController::class,'contactQuickView'])->name('contact-quick-view');
+	Route::get('/admin-profile', [AdminController::class,'adminProfile'])->name('admin-profile');
+	Route::post('update-admin-account', [AdminController::class, 'UpdateAdminAccount'])->name("update-admin-account");
+	Route::post('update-admin-pass', [AdminController::class, 'UpdateAdminPass'])->name("update-admin-pass");
 });
 Route::get('/', [PageController::class, 'index'])->name('web.index');
 Route::get('/about', [PageController::class, 'about'])->name('web.about');
+Route::get('/search-product', [PageController::class, 'searchProduct'])->name('web.search-product');
 Route::get('/products', [PageController::class, 'products'])->name('web.products');
 Route::get('/contact', [PageController::class, 'contact'])->name('web.contact');
 Route::post('/check-contact', [PageController::class, 'checkContactForm'])->name('web.check-contact');

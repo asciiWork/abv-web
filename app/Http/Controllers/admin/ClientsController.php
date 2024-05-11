@@ -30,42 +30,31 @@ class ClientsController extends Controller
     }
     public function index()
     {
-        /*------------ACL-----------------*/
-        if(!\App\Models\ACL::isAccess()){return abort(404);}
-        /*--------------------------------*/
-        
         $data = array();
         $data['page_title'] = "Manage Clients";
         $data['breadcrumb'] = array('Clients' => '');
+        $data['back_url'] = route($this->moduleRouteText . '.index');
         $data['add_url'] = route($this->moduleRouteText . '.create');
+        $data['currentRoute'] = $this->moduleRouteText;
         return view($this->moduleViewName . ".index", $data);
     }
     public function create()
     {
-        /*------------ACL-----------------*/
-        if(!\App\Models\ACL::isAccess()){return abort(404);}
-        /*--------------------------------*/
-
         $data = array();
         $data['formObj'] = $this->modelObj;
         $data['isEdit'] = 0;
         $data['page_title'] = "Add " . $this->module;
-        $data['breadcrumb'] = array('Admin Users' => 'admin/admin-clients', 'Add Client' => '');
+        $data['breadcrumb'] = array('Clients' => 'admin/admin-clients', 'Add Client' => '');
         $data['action_url'] = $this->moduleRouteText . ".store";
         $data['back_url'] = $this->moduleRouteText . ".index";
         $data['action_params'] = 0;
         $data['buttonText'] = "Save";
         $data["method"] = "POST";
+        $data["stateList"] = Client::stateList();
         return view($this->moduleViewName . '.add', $data);
     }
     public function store(Request $request)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
         $data = array();
         $status = 1;
         $msg = $this->addMsg;
@@ -75,7 +64,9 @@ class ClientsController extends Controller
             return ['status' => $checkValidation['status'], 'msg' => $checkValidation['msg'], 'data' => $checkValidation['data']];
         } else {
             try {
-                $this->modelObj::create($request->all());
+                $rData = $request->all();
+                $rData['user_id'] = \Auth::guard('admins')->user()->id;
+                $this->modelObj::create($rData);
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
                 $status = 0;
@@ -89,13 +80,12 @@ class ClientsController extends Controller
 
     public function edit($id, Request $request)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
+        $formObj = $this->modelObj;
+        if (!\App\Models\ACL::isAdmin()) {
+            $formObj = $formObj->where('is_lock',0)->where('user_id', \Auth::guard('admins')->user()->id);
         }
-        /*--------------------------------*/
+        $formObj = $formObj->find($id);
 
-        $formObj = $this->modelObj->find($id);
         if (!$formObj) {
             abort(404);
         }
@@ -103,26 +93,26 @@ class ClientsController extends Controller
         $data['formObj'] = $formObj;
         $data['isEdit'] = 1;
         $data['page_title'] = "Edit " . $this->module;
-        $data['breadcrumb'] = array('Admin Users' => 'admin/admin-users', 'Edit User' => '');
+        $data['breadcrumb'] = array('Clients' => 'admin/admin-clients', 'Edit Client' => '');
         $data['back_url'] = $this->moduleRouteText . ".index";
         $data['buttonText'] = "Update";
         $data['action_url'] = $this->moduleRouteText . ".update";
         $data['action_params'] = $formObj->id;
         $data['method'] = "PUT";
+        $data["stateList"] = Client::stateList();
         return view($this->moduleViewName . '.add', $data);
     }
 
     public function update(Request $request, $id)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
-        $model = $this->modelObj->find($id);
         $data = array();
         $status = 1;
+        $model = $this->modelObj;
+        if (!\App\Models\ACL::isAdmin()) {
+            $model = $model->where('is_lock', 0)->where('user_id', \Auth::guard('admins')->user()->id);
+        }
+        $model = $model->find($id);
+
         $msg = $this->updateMsg;
 
         $checkValidation = $this->modelObj::validationRule($request, $id);
@@ -134,7 +124,9 @@ class ClientsController extends Controller
             return ['status' => $checkValidation['status'], 'msg' => $checkValidation['msg'], 'data' => $checkValidation['data']];
         } else {
             try {
-                $recordId = $model->update($request->all());
+                $rData = $request->all();
+                $rData['user_id'] = \Auth::guard('admins')->user()->id;
+                $recordId = $model->update($rData);
 
                 session()->flash('success_message', $this->addMsg);
             } catch (\Exception $e) {
@@ -148,14 +140,15 @@ class ClientsController extends Controller
 
     public function data(Request $request)
     {
-        /*------------ACL-----------------*/
-        if (!\App\Models\ACL::isAccess()) {
-            return abort(404);
-        }
-        /*--------------------------------*/
-
         $model = $this->modelObj->listData();
         return Datatables::eloquent($model)
+            ->editColumn('company_name', function ($row) {
+                $html = $row->company_name;
+                if($row->gstn){
+                    $html .= '<br/><span class="lable-table bg-primary-subtle text-primary rounded border border-primary-subtle font-text2 fw-bold">GSTIN: '. $row->gstn. '</span>';
+                }
+                return $html;
+            })
             ->addColumn('phone_1', function ($row) {
                 $phone = '# '. $row->phone_1;
                 if($row->phone_2)
@@ -165,19 +158,111 @@ class ClientsController extends Controller
                 return $phone;
             })
             ->addColumn('action', function ($row) {
+                $isLocked = (\App\Models\ACL::isAdmin())?1:0;
                 return view(
                     "adminPanel.includes.actions",
                     [
                         'currentRoute' => $this->moduleRouteText,
                         'row' => $row,
-                        'isEdit' => 1,
+                        'isEdit' => (!$isLocked && $row->is_lock)?0:1,
                         'isDelete' => 0,
+                        'isLocked' => $isLocked,
                     ]
                 )->render();
             })
-            ->rawColumns(['phone_1', 'action'])
+            ->rawColumns(['phone_1', 'action', 'company_name'])
             ->filter(function ($query) {
+                $search_name = request()->get("search_name");
+                $search_company = request()->get("search_company");
+                $search_phone = request()->get("search_phone");
+                $search_address = request()->get("search_address");
+                if(!empty($search_name)) {
+                    $query = $query->where("name", 'LIKE','%'.$search_name.'%');
+                }
+                if(!empty($search_company)) {
+                    $query = $query->where("company_name", 'LIKE','%'.$search_company.'%');
+                }
+                if(!empty($search_phone)) {
+                    $query = $query->where(function($qry) use ($search_phone){
+                        $qry = $qry->where('phone_1','LIKE','%'. $search_phone.'%')
+                        ->orWhere('phone_3', 'LIKE', '%' . $search_phone . '%')
+                        ->orWhere('phone_2', 'LIKE', '%' . $search_phone . '%');
+                    });
+                }
+                if(!empty($search_address)) {
+                    $query = $query->where("address", 'LIKE','%'.$search_address.'%');
+                }
             })
             ->make(true);
+    }
+    public function printAddress()
+    {
+        $data = array();
+        $data['page_title'] = "Client's Address";
+        $data['breadcrumb'] = array('Clients' => '');
+        $data['clients'] = Client::all();
+        return view($this->moduleViewName . ".printAddress", $data);
+    }
+    public function lock($id, Request $request)
+    {
+        /*------------ACL-----------------*/
+        if (!\App\Models\ACL::isAccess()) {
+            return abort(404);
+        }
+        /*--------------------------------*/
+
+        $formObj = $this->modelObj;
+        $formObj = $formObj->find($id);
+        if (!$formObj) {
+            abort(404);
+        }
+        $formObj->is_lock = ($formObj->is_lock==1)?0:1;
+        $formObj->save();
+        session()->flash('success_message', "Client Updated!");
+
+        return redirect()->route($this->moduleRouteText . '.index');
+    }
+    public function printAddressSearch(Request $request)
+    {
+        $search_phone = ($request->get('search_phone'))? $request->get('search_phone'):0;
+        $search_name = ($request->get('search_name'))? $request->get('search_name'):0;
+        $search_company = ($request->get('search_company'))? $request->get('search_company'):0;
+        $data = array();
+        $status = 0;
+        $msg = 'Not Found!';
+        $client = Client::select('*');
+        if (\Auth::guard('admins')->user()->user_type_id != 1) {
+            $client = $client->where('user_id', \Auth::guard('admins')->user()->id);
+        }
+        if($search_phone){
+            $client = $client->where(function($qry)use($search_phone){
+                $qry = $qry->where('phone_1','LIKE','%'. $search_phone.'%')
+                ->orWhere('phone_2','LIKE','%'. $search_phone.'%')
+                ->orWhere('phone_3','LIKE','%'. $search_phone.'%');
+            });
+        }
+        if($search_name){
+            $client = $client->where('name','LIKE','%'. $search_name.'%');
+        }
+        if($search_company){
+            $client = $client->where('company_name','LIKE','%'. $search_company.'%');
+        }
+        $client = $client->first();
+        if($client){
+            $address = wordwrap($client->address, 10, "\n");
+            $msg = 'Search Result';
+            $status = 1;
+            $data['name'] = $client->name;
+            $data['phone'] = $client->phone_1;
+            $data['address'] = $address;
+            $data['state'] = $client->state;
+            $data['city'] = $client->city;
+            $data['pincode'] = $client->pincode;
+            $data['company_name'] = $client->company_name;
+            $data['landmark'] = $client->landmark;
+        }
+
+        return ['status' => $status, 'msg' => $msg, 'data' => $data];
+
     }
 }

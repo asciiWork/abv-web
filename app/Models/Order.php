@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
  
 class Order extends Model
 {
@@ -12,7 +13,7 @@ class Order extends Model
     public $timestamps = false;
 
     public static function getOrderData($id){
-      return $tObj = Order::where('user_id',$id)->get();
+      return $tObj = Order::where('user_id',$id)->orderBy('id','Desc')->get();
     }
     public static function getOrderNo(){
       $tObj = Order::orderBy('id','desc')->first();

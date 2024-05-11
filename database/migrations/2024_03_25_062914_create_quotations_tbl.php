@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->integer('client_id')->nullable();
+            $table->string('client_address')->nullable();
+            $table->string('invoice_number')->nullable();
             $table->string('quotation_number')->nullable();
+            $table->string('invoice_date')->nullable();
             $table->string('quotation_date')->nullable();
             $table->string('quotation_due_date')->nullable();
             $table->string('total_taxable_value')->nullable();
@@ -25,6 +28,7 @@ return new class extends Migration
             $table->string('gst_amount')->nullable();
             $table->string('final_total_amount')->nullable();
             $table->string('final_total_amount_words')->nullable();
+            $table->integer('is_invoice')->nullable()->default(0)->comment('qn-0, invoice-1');
             $table->timestamps();
         });
     }

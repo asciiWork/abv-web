@@ -58,7 +58,7 @@
             <h2 class="section__heading--maintitle">Our Customers</h2>
         </div>
         <div class="testimonial__section--inner">
-            <div class="testimonial__active--one  swiper">
+            <div class="testimonial__active--one  swiper testimonialList">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <div class="testimonial__items--thumbnail">
