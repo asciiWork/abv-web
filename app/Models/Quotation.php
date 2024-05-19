@@ -151,6 +151,11 @@ class Quotation extends Model
             'shipping_amount' => 'required',
             'final_total_amount' => 'required',
         ];
+        if($id){
+            $rules =$rules+[
+                'quotation_number' => 'required|min:2|unique:quotations,quotation_number,' . $id,
+            ];
+        }
         $validator = \Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             $messages = $validator->messages();

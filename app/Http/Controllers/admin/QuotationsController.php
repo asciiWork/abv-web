@@ -11,7 +11,7 @@ use App\Models\Admin;
 use App\Models\LastInvoicePrice;
 use App\Models\Product;
 use DataTables;
-// use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuotationsController extends Controller
 {
@@ -191,10 +191,9 @@ class QuotationsController extends Controller
     public function show($id, Request $request)
     {
         // return view($this->moduleViewName . '.demoPdf');
-
-        // $pdf = PDF::loadView($this->moduleViewName . '.demoPdf')->setOptions(['chroot'  => public_path('images/')]);
-        // $fileName = "quotation_.pdf";
-        // return $pdf->download($fileName);
+        //$pdf = PDF::loadView($this->moduleViewName . '.demoPdf');
+        //$fileName = "quotation_.pdf";
+        //return $pdf->download($fileName);
 
         $formObj = $this->modelObj;
         if (\Auth::guard('admins')->user()->user_type_id != 1) {

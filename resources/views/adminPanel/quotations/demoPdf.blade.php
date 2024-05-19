@@ -1,396 +1,312 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <link href="css/style.css" rel="stylesheet" media="print">
-
-    <title>Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
     <style>
-        .main-tabel-dv td {
-            padding: 0px;
-            margin: 0px;
+        body {
+            font-size: 11px;
         }
 
         table {
             border-collapse: collapse !important;
-            font-size: 16px;
             font-family: sans-serif;
         }
 
-        .main-tabel-dv th {
+        .datatable-tr {
+            line-height: 30px;
             border-top: 2px solid blue;
             border-bottom: 2px solid blue;
-            padding: 10px 0px;
-            text-align: left;
-
+            background-color: #eeeef7;
         }
 
-        .main-tabel-dv th:first-of-type,
-        .main-tabel-dv td:first-of-type {
-            width: 50px;
+        .datatable-tr-center {
+            text-align: center;
         }
 
-        .main-tabel-dv tr td {
-            border-bottom: 2px solid gray;
-            padding: 10px 0px;
+        .datatable-tr-left {
             text-align: left;
         }
 
-        .main-tabel-blg td {
-            border-bottom: 2px solid blue;
-            padding: 10px 0px;
-
-        }
-
-        .border-b-blg {
-            border-top: 2px solid gray;
-        }
-
-        .total-blg-dv table:first-of-type {
-            width: 767px;
-        }
-
-        .total-blg-dv table td {
+        .datatable-tr-right {
             text-align: right;
         }
 
-        .total-blg-dv .ttl-blg {
-            min-width: 200px;
-            margin: 5px 0px
+        .width5 {
+            width: 5%;
         }
 
-        @media screen and (max-width:600px) {}
+        .width10 {
+            width: 10%;
+        }
 
-        @media screen and (max-width:480px) {}
+        .width15 {
+            width: 14%;
+        }
+
+        .width20 {
+            width: 20%;
+        }
+
+        .width25 {
+            width: 25%;
+        }
+
+        .width30 {
+            width: 30%;
+        }
     </style>
 </head>
 
 <body>
-    <table width="991">
-        <tbody>
-            <tr>
-                <td align="left" width="50%">
-                    <table width="50%">
-                        <tbody>
-                            <tr>
-                                <td width="50%">
-                                    <a href="#">Q U O TAT I O N</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="50%">
-                                    ABV TOOL
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="50%">
-                                    GSTIN <b>24ATKPV5305Q1Z0</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="50%">
-                                    A- 205, Kris,hErlt,ecootKermE, ecoaEtp
-                                    xK,GUAJAR5,T3 T02
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                </td>
-                <td align="right" width="50%" valign="top">
-
-                    <table width="120" height="100">
-                        <tr>
-                            <td>
-                                <img src="images/logo.gif" alt="" width="250" height="auto">
-                            </td>
-                        </tr>
-                    </table>
-
-                </td>
-
-            </tr>
-            <tr>
-                <td align="left" width="100%">
-                    <table width="100%">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <b> Mobile</b> 7874427439, 8469555348
-                                </td>
-                                <td>
-                                    <b>Email</b> <a href="#">abvtradesol@gmail.com</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td width="320">
-                                    <b> Website</b> <a href="#">www.abvtool.in</a>
-                                </td>
-
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-
-                </td>
-
-
-            </tr>
-            <tr>
-                <table width="991" class="pad-tb-dv">
-                    <td align="left">
-                        <table>
-                            <tbody>
+    <table style="border:0px solid red; width: 100%;">
+        <tr>
+            <td>
+                <table style="border: 0px solid green;width: 100%;">
+                    <tr>
+                        <td style="border: 0px solid black;width: 70%;">
+                            <table border="0" style="border: 0px solid black;width: 100%;">
                                 <tr>
-                                    <td>
-                                        <b>Quotation #: EST-35 </b>
+                                    <td colspan="2">
+                                        <a href="#" style="text-decoration: none;letter-spacing: 3.5px;">QUOTATION</a>
                                     </td>
                                 </tr>
-
-
-                            </tbody>
-                        </table>
-
-                    </td>
-                    <td align="left">
-                        <table>
-                            <tbody>
                                 <tr>
-                                    <td>
-                                        <b>Quotation Date : O1 Dec 2023</b>
+                                    <td colspan="2" style="font-size:25px;">
+                                        <b>ABV TOOL</b>
                                     </td>
                                 </tr>
-
-
-                            </tbody>
-                        </table>
-
-                    </td>
-                    <td align="left">
-                        <table>
-                            <tbody>
                                 <tr>
-                                    <td>
-                                        <b>Due Date</b>: O1 Dec 2023
+                                    <td colspan="2">
+                                        GSTIN <b>24ATKPV5305Q1Z0</b>
                                     </td>
                                 </tr>
-
-
-                            </tbody>
-                        </table>
-
-                    </td>
-                </table>
-
-            </tr>
-            <br>
-            <tr>
-                <table width="991">
-                    <td align="left">
-                        <table>
-                            <tbody>
                                 <tr>
-                                    <td>
-                                        Customer Details:
+                                    <td colspan="2">
+                                        A-205, Krish Elite commercial complex
+                                        nr vishala land mark b/h sankalp international school, Ahmedabad
+                                        Ahmedabad, GUJARAT, 382350
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <b>Mr.Bharat</b>
+                                        <b> Mobile</b> 7874427439, 8469555348
+                                    </td>
+                                    <td>
+                                        <b>Email</b> <a href="#" style="text-decoration: none;color: #000;">abvtradesol@gmail.com</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <b>INhOSIGNS</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>GSTIN: 2FAA9hIF3H261ZH</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Ph: 9945259977
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </td>
-                    <td align="left" valign="top">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <b>Billing address:</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        No.41
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Kanakapura Main Road, Bengaluru
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Bengaluru Urban, KARNATAKA, 560062
-                                    </td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-
-                    </td>
-                </table>
-            </tr>
-            <br>
-            <tr>
-                <table width="50%">
-                    <td align="left">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        Place of Supply:
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>2F-KACNATAKA</b>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </table>
-            </tr>
-            <br>
-            <tr>
-                <table width="991px" class="main-tabel-dv">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Item</th>
-                            <th>Rate / Item</th>
-                            <th>Qty</th>
-                            <th>Taxable Value</th>
-                            <th>Tax Amount</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>OVOLO BIT </td>
-                            <td>369.00</td>
-                            <td>5 NOS</td>
-                            <td>1,845.00</td>
-                            <td>3.32.10 (18%)</td>
-                            <td>2,177.10</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>OVOLO BIT </td>
-                            <td>369.00</td>
-                            <td>5 NOS</td>
-                            <td>1,845.00</td>
-                            <td>3.32.10 (18%)</td>
-                            <td>2,177.10</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>OVOLO BIT </td>
-                            <td>369.00</td>
-                            <td>5 NOS</td>
-                            <td>1,845.00</td>
-                            <td>3.32.10 (18%)</td>
-                            <td>2,177.10</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table width="991" class="total-blg-dv">
-                    <tr align="right">
-                        <td>
-                            <table width="450">
-                                <tr>
-                                    <td>
-                                        <b>Taxable Amount</b>
-                                    </td>
-                                    <td>
-                                        <b>₹7000.00</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>Delivery Shipping Charges</b> - SAC: 9968
-                                    </td>
-                                    <td>
-                                        <b>₹150.00</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>IGST 18.0%</b>
-                                    </td>
-                                    <td>
-                                        <b>₹1,287.00</b>
-                                    </td>
-                                </tr>
-
-
-                            </table>
-                            <table width="320" class="ttl-blg">
-
-                                <tr class="border-b-blg">
-                                    <td style="font-size: 25px;">
-                                        <b>Total</b>
-                                    </td>
-                                    <td style="font-size: 25px;">
-                                        <b>₹8,437.00</b>
+                                    <td colspan="2">
+                                        <b> Website</b> <a href="#" style="text-decoration: none;color: #000;">www.abvtool.in</a>
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                    </tr>
-                    <br>
-
-                </table>
-            </tr>
-            <br />
-            <tr>
-                <table width="991px">
-
-                    <tbody>
-                        <tr>
-                            <td>
-                                <table class="main-tabel-blg" style="border-bottom: 1px solid rgba(23, 23, 172, 0.8);">
+                        <td style="border: 0px solid black;width: 50%;">
+                            <table>
+                                <tbody>
                                     <tr>
-                                        <td width="320">Total Items / Qty : 3/ 15,000</td>
-                                        <td width="920">Total amount (in words) : INR Eight Thousand, Four Hundred And Thirty-sevan Rupees Only.</td>
+                                        <td> &nbsp; </td>
                                     </tr>
-                                </table>
-                            </td>
-                        </tr>
+                                    <tr>
+                                        <td> &nbsp; </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right;">
+                                            <img src="images/logo.gif" alt="" width="80%" height="auto">
+                                        </td>
+                                    </tr>
 
-                    </tbody>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
-            </tr>
-            <br />
-            <br />
-            <tr>
-                <table width="991px">
 
+                <table width="100%" style="border: 0px solid green;">
+                    <tr>
+                        <td width="30%">
+                            <b>Quotation #: EST-35 </b>
+                        </td>
+                        <td width="30%">
+                            <b>Quotation Date : O1 Dec 2023</b>
+                        </td>
+                        <td width="30%">
+                            <b>Due Date</b>: O1 Dec 2023
+                        </td>
+                        <td width="10%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table width="100%" style="border: 0px solid green;margin-top: 15px;">
+                    <tr>
+                        <td width="30%" style="line-height: 22px;">
+                            <b>Customer Details:</b>
+                            <br>
+                            <b>McrBhacat</b>
+                            <br>
+                            <b>INhOSIGNS</b>
+                            <br>
+                            <b>GSTIN: 2FAAHhIF3H2C1ZH</b>
+                            <br>
+                            Ph: 9945259977<br>
+                        </td>
+                        <td width="30%" style="line-height: 22px;">
+                            <b>Billing address:</b>
+                            <br>
+                            No.41
+                            <br>
+                            Kanakapura Main Road, Bengaluru
+                            <br>
+                            Bengaluru Urban, KARNATAKA, 560062
+                            <br>
+                        </td>
+                        <td width="30%">
+                            &nbsp;
+                        </td>
+                        <td width="10%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table width="100%" style="border: 0px solid green;margin-top: 12px;">
+                    <tr>
+                        <td width="30%">
+                            <b>Place of Supply:</b>
+                            <br>
+                            <b>2F-KACNATAKA</b>
+                            <br>
+                        </td>
+                        <td width="30%">
+                            &nbsp;
+                        </td>
+                        <td width="30%">
+                            &nbsp;
+                        </td>
+                        <td width="10%">
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+
+
+                <table width="100%" style="border: 0px solid green;margin-top: 15px;">
+                    <tr>
+                        <td>
+                            <table width="100%" style="padding: 10px 0px;">
+                                <thead>
+                                    <tr class="datatable-tr">
+                                        <th class="datatable-tr-center width5">#</th>
+                                        <th class="datatable-tr-left width30">Item</th>
+                                        <th class="datatable-tr-right width10">Rate / Item</th>
+                                        <th class="datatable-tr-right width10">Qty</th>
+                                        <th class="datatable-tr-right width15">Taxable Value</th>
+                                        <th class="datatable-tr-right width15">Tax Amount</th>
+                                        <th class="datatable-tr-right width15">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;border-bottom: 2px solid gray;">1</td>
+                                        <td style="text-align:left;line-height: 20px;border-bottom: 2px solid gray;">
+                                            <b> OVOLO BIT</b>
+                                            <br> 19mm
+                                        </td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">369.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">5 NOS</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">1,845.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">3.32.10 (18%)</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">2,177.10</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;border-bottom: 2px solid gray;">1</td>
+                                        <td style="text-align:left;line-height: 20px;border-bottom: 2px solid gray;">
+                                            <b> OVOLO BIT</b>
+                                            <br> 19mm
+                                        </td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">369.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">5 NOS</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">1,845.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">3.32.10 (18%)</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">2,177.10</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;border-bottom: 2px solid gray;">1</td>
+                                        <td style="text-align:left;line-height: 20px;border-bottom: 2px solid gray;">
+                                            <b> OVOLO BIT</b>
+                                            <br> 19mm
+                                        </td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">369.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">5 NOS</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">1,845.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">3.32.10 (18%)</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">2,177.10</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;border-bottom: 2px solid gray;">1</td>
+                                        <td style="text-align:left;line-height: 20px;border-bottom: 2px solid gray;">
+                                            <b> OVOLO BIT</b>
+                                            <br> 19mm
+                                        </td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">369.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">5 NOS</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">1,845.00</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">3.32.10 (18%)</td>
+                                        <td style="text-align:right;vertical-align: top;border-bottom: 2px solid gray;">2,177.10</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" style="border: 0px solid green;margin-top: 15px;">
+                    <tr>
+                        <td>
+                            <table width="100%" style="padding: 10px 0px;">
+                                <tbody>
+                                    <tr>
+                                        <td class="datatable-tr-right">Taxable Amount</td>
+                                        <td class="datatable-tr-right width15" style="padding-left: 90px;">₹7,000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="datatable-tr-right">Delivecv/ Shippinp Chacpes - SAC: 9968</td>
+                                        <td class="datatable-tr-right width15">₹7,000.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="datatable-tr-right" style="border-bottom: 2px solid gray;">IGST 18.0%</td>
+                                        <td class="datatable-tr-right width15" style="border-bottom: 2px solid gray;">₹7,000.00</td>
+                                    </tr>
+                                    <tr style="font-size: 20px;font-weight: bold;">
+                                        <td class="datatable-tr-right">
+                                            <b>Total</b>
+                                        </td>
+                                        <td class="datatable-tr-right width15">₹7,000.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="100%" style="border-bottom: 2px solid blue;font-size: 10px;">
+                    <tr>
+                        <td width="20%">Total Items / Qty : 3/ 15,000</td>
+                        <td width="80%" style="text-align:right;">Total amount (in words) : INR Eight Thousand, Four Hundred And Thirty-sevan Rupees Only.</td>
+                    </tr>
+                </table>
+
+                <table width="100%">
                     <tbody>
-
                         <tr>
                             <td>
                                 <table>
@@ -443,59 +359,34 @@
                                 </table>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
-            </tr>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br /><br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
 
-            <tr>
-                <table width="991px">
-
-                    <tbody>
-
-                        <tr>
-                            <td align="left">
-                                <table>
-                                    <tr>
-                                        <td><b><a href="https://getswipe.in/">Swipe | Simple Invoicing, Billing and Payments | Visit getswipe.in</a></b></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Page 1/1 This is a digitally signed document.</td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td align="right">
-                                <table>
-
-                                    <tr>
-                                        <td>
-                                            <img src="images/footer-logo.png" alt="" width="120">
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-
-
-                        </tr>
-
-                    </tbody>
+                <table width="100%" style="margin-top: 100px;border: 0px solid;">
+                    <tr>
+                        <td style="width:60%;">
+                            <table width="100%">
+                                <tr>
+                                    <td><b><a href="https://getswipe.in/">Swipe | Simple Invoicing, Billing and Payments | Visit getswipe.in</a></b></td>
+                                </tr>
+                                <tr>
+                                    <td>Page 1/1 This is a digitally signed document.</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td align="right" style="width:40%;">
+                            <table width="100%" style="vertical-align: middle;">
+                                <tr>
+                                    <td rowspan="2">
+                                        <img src="images/footer-logo.png" style="float: right;width: 100px;height: auto;vertical-align: middle;">
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
-            </tr>
-        </tbody>
+            </td>
+        </tr>
     </table>
 </body>
 

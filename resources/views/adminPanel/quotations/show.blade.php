@@ -309,6 +309,7 @@
                                                 <b>₹{{ number_format($invoice->total_amount_value,2)}}</b>
                                             </td>
                                         </tr>
+                                        @if($invoice->discount)
                                         <tr>
                                             <td>
                                                 <b>Discount</b>
@@ -317,6 +318,7 @@
                                                 <b>{{$invoice->discount}} %</b>
                                             </td>
                                         </tr>
+                                        @endif
                                         <tr>
                                             <td>
                                                 <b>Shipping Charge</b>
