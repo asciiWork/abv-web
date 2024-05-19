@@ -144,6 +144,15 @@ class InvoicesController extends Controller
         $totalCounter2 = $this->modelObj->invoiceListData();
         $totalCounter2 = Quotation::listFilter($totalCounter2);
         $amount_counter['amount_with_gst'] = number_format($totalCounter2->sum('final_total_amount'),2);
+        $totalCounter3 = $this->modelObj->invoiceListData();
+        $totalCounter3 = Quotation::listFilter($totalCounter3);
+        $amount_counter['sgst_amount'] = number_format($totalCounter3->sum('sgst_amount'), 2);
+        $totalCounter4 = $this->modelObj->invoiceListData();
+        $totalCounter4 = Quotation::listFilter($totalCounter4);
+        $amount_counter['igst_amount'] = number_format($totalCounter4->sum('igst_amount'), 2);
+        $totalCounter5 = $this->modelObj->invoiceListData();
+        $totalCounter5 = Quotation::listFilter($totalCounter5);
+        $amount_counter['cgst_amount'] = number_format($totalCounter5->sum('cgst_amount'), 2);
 
         return Datatables::eloquent($model)
             ->editColumn('invoice_number', function ($row) {
@@ -167,7 +176,7 @@ class InvoicesController extends Controller
                 return $html;
             })
             ->addColumn('action', function ($row) {
-                $isEdit = (\Auth::guard('admins')->user()->user_type_id == 1 && $row->is_paid !=1)?1:0;
+                $isEdit = (\Auth::guard('admins')->user()->user_type_id == 1)?1:0;
                 return view(
                     "adminPanel.includes.actions",
                     [

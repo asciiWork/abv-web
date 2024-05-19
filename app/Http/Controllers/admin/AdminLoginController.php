@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\UserDevice;
+use Illuminate\Support\Facades\Session;
+use App\Models\UserSession;
+
 
 class AdminLoginController extends Controller
 {
@@ -27,13 +30,21 @@ class AdminLoginController extends Controller
         $credentials = ['email'=>$request->get('email'), 'password'=>$request->get('password'), 'status'=>1];
     
         if (\Auth::guard("admins")->attempt($credentials)) {
+            $sessionId = Session::getId();
+            $deviceInfo = $request->header('User-Agent');
 
-            $user_agent = $request->userAgent();
-            $ip = Admin::GetUserIp();
-            UserDevice::updateOrCreate(
-                ['user_id' => \Auth::guard("admins")->user()->id, 'user_agent' => $user_agent],
-                ['user_agent' => $user_agent, 'ip_address'=> $ip, 'last_logged_at'=>date('Y-m-d H:i:s')]
-            );
+            $activeSessions = UserSession::where('user_id', \Auth::guard("admins")->user()->id)->count();
+
+            if ($activeSessions >= 2) {
+                \Auth::guard("admins")->logout();
+                return redirect()->route('login')->withErrors(['email' => 'You may not logIn more then 2 device.']);
+            }
+
+            UserSession::create([
+                'user_id' => \Auth::guard("admins")->user()->id,
+                'session_id' => $sessionId,
+                'device_info' => $deviceInfo,
+            ]);
 
             return redirect()->route('admin-dashboard');
         }
@@ -41,9 +52,16 @@ class AdminLoginController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ]);
     }
-    public function getLogout()
+    public function getLogout(Request $request)
     {
+        $sessionId = Session::getId();
+        UserSession::where('session_id', $sessionId)->delete();
+
         \Auth::guard("admins")->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/admin')->with('success', 'Logged out successfully');
     }
 }

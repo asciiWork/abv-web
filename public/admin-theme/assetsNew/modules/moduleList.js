@@ -55,6 +55,9 @@ $(document).ready(function() {
             dataSrc: function(response) {
                 $("#total-with-gst").html(response.amount_with_gst);
                 $("#total-without-gst").html(response.amount_without_gst);
+                $("#total-sgst").html(response.sgst_amount);
+                $("#total-cgst").html(response.cgst_amount);
+                $("#total-igst").html(response.igst_amount);
                 return response.data;
             }
         },

@@ -19,6 +19,8 @@
                         <th width="15%">Company</th>
                         <th width="15%">Email</th>
                         <th width="15%">Phone</th>
+                        <th width="15%">Courier</th>
+                        <th width="5%">By</th>
                         <th width="5%">Action</th>
                     </tr>
                 </thead>
@@ -52,6 +54,14 @@
         {
             data: 'phone_1',
             name: 'phone_1'
+        },
+        {
+            data: 'courier',
+            name: 'courier'
+        },
+        {
+            data: 'user_id',
+            name: 'user_id'
         },
         {
             data: 'action',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Admin;
 use DataTables;
 
 class ClientsController extends Controller
@@ -157,6 +158,11 @@ class ClientsController extends Controller
                     $phone .= '<br/># ' . $row->phone_3;
                 return $phone;
             })
+            ->editColumn('user_id', function ($row) {
+                $url = Admin::getAvtar($row->image);
+                $html = '<img src="' . $url . '" class="rounded-circle" width="40" height="40">';
+                return $html;
+            })
             ->addColumn('action', function ($row) {
                 $isLocked = (\App\Models\ACL::isAdmin())?1:0;
                 return view(
@@ -170,27 +176,31 @@ class ClientsController extends Controller
                     ]
                 )->render();
             })
-            ->rawColumns(['phone_1', 'action', 'company_name'])
+            ->rawColumns(['phone_1', 'action', 'company_name', 'user_id'])
             ->filter(function ($query) {
                 $search_name = request()->get("search_name");
                 $search_company = request()->get("search_company");
                 $search_phone = request()->get("search_phone");
                 $search_address = request()->get("search_address");
+                $search_user = request()->get("search_user");
                 if(!empty($search_name)) {
-                    $query = $query->where("name", 'LIKE','%'.$search_name.'%');
+                    $query = $query->where("clients.name", 'LIKE','%'.$search_name.'%');
                 }
                 if(!empty($search_company)) {
-                    $query = $query->where("company_name", 'LIKE','%'.$search_company.'%');
+                    $query = $query->where("clients.company_name", 'LIKE','%'.$search_company.'%');
                 }
                 if(!empty($search_phone)) {
                     $query = $query->where(function($qry) use ($search_phone){
-                        $qry = $qry->where('phone_1','LIKE','%'. $search_phone.'%')
-                        ->orWhere('phone_3', 'LIKE', '%' . $search_phone . '%')
-                        ->orWhere('phone_2', 'LIKE', '%' . $search_phone . '%');
+                        $qry = $qry->where('clients.phone_1','LIKE','%'. $search_phone.'%')
+                        ->orWhere('clients.phone_3', 'LIKE', '%' . $search_phone . '%')
+                        ->orWhere('clients.phone_2', 'LIKE', '%' . $search_phone . '%');
                     });
                 }
                 if(!empty($search_address)) {
-                    $query = $query->where("address", 'LIKE','%'.$search_address.'%');
+                    $query = $query->where("clients.address", 'LIKE','%'.$search_address.'%');
+                }
+                if(!empty($search_user)) {
+                    $query = $query->where("users.name", 'LIKE','%'.$search_user.'%');
                 }
             })
             ->make(true);

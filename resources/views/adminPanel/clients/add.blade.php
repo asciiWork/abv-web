@@ -73,6 +73,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="form-label">Courier</label>
+                            <div class="position-relative input-icon">
+                                {!! Form::text('courier', null, ['class' => 'form-control', 'data-required' => true,'placeholder' => 'Enter Courier']) !!}
+                                <span class="position-absolute top-50 translate-middle-y"><i class="bi bi-file"></i></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3 text-right">
                     <button type="submit" class="btn btn-primary " id="submit_btn">{{ $buttonText}}</button>

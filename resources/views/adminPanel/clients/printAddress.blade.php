@@ -41,12 +41,12 @@
                     <address class="m-t-5 m-b-5" id="printableText">
                         <strong class="text-inverse">To,</strong><br>
                         <strong class="text-inverse" id="client-company">Company Name</strong><br>
-                        <strong class="text-inverse" id="client-name">Client Name</strong><br>
                         <span id="client-address">Street Address</span><br>
                         <span id="client-landmark">Landmark</span><br>
                         <span id="client-city">City</span>, <span id="client-pincode">Pin code</span><br>
                         <span id="client-state">State</span><br>
                         Mo: <span id="client-phone">Mobile Number</span><br>
+                        (<span class="text-inverse" id="client-name">Client Name</span>)
                     </address>
                 </div>
                 <br />

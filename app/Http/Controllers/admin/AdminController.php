@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ACL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -39,7 +40,10 @@ class AdminController extends Controller
         $data['monthlySalesOverview']= Quotation::monthlySalesOverview();
         $data['yearlySalesOverview']= Quotation::yearlySalesOverview();
         $data['sellingPrices'] = Admin::getSelling();
-
+        $isAdmin = ACL::isAdmin();
+        if(!$isAdmin){
+            return redirect()->route('admin-sales-overview', $userData->id);
+        }
         return view('adminPanel.dashboard',$data);
     }
     public function contact()
