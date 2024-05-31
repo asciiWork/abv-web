@@ -134,7 +134,7 @@
                                 </thead>
                                 <tbody class="tbodyTr">
                                     @if($qnItems)
-                                    <?php $i = 1; ?>
+                                    <?php $i = 1;?>
                                     @foreach($qnItems as $item)
                                     <tr id="tr-item-{{$i}}">
                                         <td class="">{{$i}}</td>
@@ -366,8 +366,9 @@
         var tamounts = 0;
         var texts = document.getElementsByClassName("total-amount");
         for (var i = 0; i < texts.length; i++) {
-            var aa = parseFloat(texts[i].value);
-            if (aa == "NaN" || aa == null || aa == "") {
+            var aaa = texts[i].value;
+            var aa = parseFloat(aaa);
+            if (aaa === "NaN" || aaa == null || aaa == "" || typeof aaa === NaN) {
                 aa = parseFloat("0");
             }
             tamounts = parseFloat(tamounts) + parseFloat(aa);

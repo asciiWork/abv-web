@@ -52,7 +52,11 @@ class Quotation extends Model
             $query = $query->where("clients.name", "LIKE", '%' . $search_client_name . '%');
         }
         if (!empty($search_client_phone)) {
-            $query = $query->where("clients.phone_1", "LIKE", '%' . $search_client_phone . '%');
+            $query = $query->where(function ($qry) use ($search_client_phone) {
+                $qry = $qry->where('clients.phone_1', 'LIKE', '%' . $search_client_phone . '%')
+                    ->orWhere('clients.phone_3', 'LIKE', '%' . $search_client_phone . '%')
+                    ->orWhere('clients.phone_2', 'LIKE', '%' . $search_client_phone . '%');
+            });
         }
         if (!empty($search_start_date)) {
             $query = $query->where("quotations.invoice_date", ">=", date('Y-m-d', strtotime($search_start_date)));
@@ -66,7 +70,7 @@ class Quotation extends Model
     {
         //A0001/24-25
         $newString = 'A0001/24-25';
-        $row = Quotation::where('is_invoice', 0)->orderBy('id','Desc')->first();
+        $row = Quotation::where('is_invoice', 0)->orderBy('quotation_number','Desc')->first();
         $originalString = ($row)? $row->quotation_number: "A0001/24-25";
         preg_match('/A(\d+)/', $originalString, $matches);
         $number = isset($matches[1]) ? $matches[1] : null;
@@ -80,7 +84,7 @@ class Quotation extends Model
     {
         //ABV0001/24-25
         $newString = 'ABV0001/24-25';
-        $row = Quotation::where('is_invoice', 1)->orderBy('id','Desc')->first();
+        $row = Quotation::where('is_invoice', 1)->orderBy('invoice_number','Desc')->first();
         $originalString = ($row)? $row->invoice_number: "ABV0000/24-25";
         preg_match('/ABV(\d+)/', $originalString, $matches);
         $number = isset($matches[1]) ? $matches[1] : null;

@@ -138,7 +138,7 @@
                                         <tr>
                                             <td>
                                                 @if($invoice->is_invoice)
-                                                <b>Quotation #: {{$invoice->invoice_number}} </b>
+                                                <b>Invoice #: {{$invoice->invoice_number}} </b>
                                                 @else
                                                 <b>Quotation #: {{$invoice->quotation_number}} </b>
                                                 @endif
@@ -416,7 +416,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Acount # :</td>
-                                                <td><b>52200068238921</b></td>
+                                                <td><b>50200068238921</b></td>
                                             </tr>
                                             <tr>
                                                 <td>IFSC</td>

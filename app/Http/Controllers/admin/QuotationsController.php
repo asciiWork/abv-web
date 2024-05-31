@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\Admin;
 use App\Models\LastInvoicePrice;
 use App\Models\Product;
+use App\Models\ProductSize;
 use DataTables;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -116,10 +117,11 @@ class QuotationsController extends Controller
                 $total_qnt = 0;
                 for ($i=0; $i < count($allProducts); $i++) {
                     $qnData = new QuotationItem();
+                    $extPRD =  ProductSize::where('id', $product_size_id[$i])->first();
                     $qnData->quotation_id = $qID;
                     $qnData->product_id = isset($allProducts[$i])?$allProducts[$i]:'';
-                    $qnData->product_size_id = (isset($product_size_id[$i]) && intval($product_size_id[$i]))?$product_size_id[$i]:'';
-                    $qnData->item_name = (isset($item_name[$i]) && intval($product_size_id[$i]))?$item_name[$i]: $product_size_id[$i];
+                    $qnData->product_size_id = ($extPRD)?$product_size_id[$i]:'';
+                    $qnData->item_name = (isset($item_name[$i]) && $extPRD)?$item_name[$i]: $product_size_id[$i];
                     $qnData->product_actual_price = isset($product_actual_price[$i])?$product_actual_price[$i]:'';
                     $qnData->quantity = isset($allQuantity[$i])?$allQuantity[$i]:'';
                     $qnData->taxable_value = isset($alltaxable_value[$i])?$alltaxable_value[$i]:'';
@@ -164,9 +166,9 @@ class QuotationsController extends Controller
     {
         $formObj = $this->modelObj;
         if (\Auth::guard('admins')->user()->user_type_id != 1) {
-            $formObj = $formObj->where('user_id', \Auth::guard('admins')->user()->id)->where('is_invoice', 0);
+            $formObj = $formObj->where('is_paid', 0)->where('user_id', \Auth::guard('admins')->user()->id)->where('is_invoice', 0);
         }
-        $formObj = $formObj->where('is_paid', 0)->find($id);
+        $formObj = $formObj->find($id);
 
         if (!$formObj) {
             abort(404);
@@ -280,11 +282,12 @@ class QuotationsController extends Controller
                 QuotationItem::where('quotation_id', $id)->delete();
                 $total_qnt=0;
                 for ($i = 0; $i < count($allProducts); $i++) {
+                    $extPRD =  ProductSize::where('id', $product_size_id[$i])->first();
                     $qnData = new QuotationItem();
                     $qnData->quotation_id = $id;
                     $qnData->product_id = isset($allProducts[$i]) ? $allProducts[$i] : '';
-                    $qnData->product_size_id = (isset($product_size_id[$i]) && intval($product_size_id[$i])) ? $product_size_id[$i] : '';
-                    $qnData->item_name = (isset($item_name[$i]) && intval($product_size_id[$i])) ? $item_name[$i] : $product_size_id[$i];
+                    $qnData->product_size_id = (isset($product_size_id[$i]) && $extPRD) ? $product_size_id[$i] : '';
+                    $qnData->item_name = (isset($item_name[$i]) && $extPRD) ? $item_name[$i] : $product_size_id[$i];
                     $qnData->product_actual_price = isset($product_actual_price[$i]) ? $product_actual_price[$i] : '';
                     $qnData->quantity = isset($allQuantity[$i]) ? $allQuantity[$i] : '';
                     $qnData->taxable_value = isset($alltaxable_value[$i]) ? $alltaxable_value[$i] : '';
@@ -381,7 +384,11 @@ class QuotationsController extends Controller
                     $query = $query->where("clients.company_name", "LIKE", '%'. $search_company.'%');
                 }
                 if (!empty($search_client_phone)) {
-                    $query = $query->where("clients.phone_1", "LIKE", '%'. $search_client_phone.'%');
+                    $query = $query->where(function ($qry) use ($search_client_phone) {
+                        $qry = $qry->where('clients.phone_1', 'LIKE', '%' . $search_client_phone . '%')
+                            ->orWhere('clients.phone_3', 'LIKE', '%' . $search_client_phone . '%')
+                            ->orWhere('clients.phone_2', 'LIKE', '%' . $search_client_phone . '%');
+                    });
                 }
                 if (!empty($search_date)) {
                     $query = $query->where("quotations.quotation_date", "LIKE", '%'. date('Y-m-d',strtotime($search_date)).'%');
@@ -405,7 +412,16 @@ class QuotationsController extends Controller
         if (!$formObj) {
             abort(404);
         }
-        $formObj->invoice_number = Quotation::getInvoiceNumber();
+        $invoice_number = Quotation::getInvoiceNumber();
+        if($invoice_number){
+            $inv = Quotation::where('is_invoice', 1)->where('invoice_number', $invoice_number)->first();
+            if($inv){
+                session()->flash('error_message', "Duplicate Invoice, please try again later!!");
+                return redirect()->route($this->moduleRouteText . '.index');
+            }
+        }
+
+        $formObj->invoice_number = $invoice_number;
         $formObj->invoice_date = date('Y-m-d');
         $formObj->is_invoice = 1;
         $formObj->save();

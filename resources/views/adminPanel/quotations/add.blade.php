@@ -398,15 +398,15 @@
         var tamounts = 0;
         var texts = document.getElementsByClassName("total-amount");
         for (var i = 0; i < texts.length; i++) {
-            var aa = parseFloat(texts[i].value);
-            if (aa == "NaN" || aa == null || aa == "") {
+            var aaa = texts[i].value;
+            var aa = parseFloat(aaa);
+            if (aaa === "NaN" || aaa == null || aaa == "" || typeof aaa === NaN) {
                 aa = parseFloat("0");
             }
             tamounts = parseFloat(tamounts) + parseFloat(aa);
         }
         $('.final-taxable-total').html(amountFormat(tamounts));
         $('#final-taxable-total-value').val(amountFormat(tamounts));
-
         var discountValue = $('#discount-value').val();
         if (discountValue == "NaN" || discountValue == null || discountValue == "") {
             discountValue = parseFloat("0");

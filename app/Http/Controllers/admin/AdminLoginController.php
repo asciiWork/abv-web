@@ -36,8 +36,8 @@ class AdminLoginController extends Controller
             $activeSessions = UserSession::where('user_id', \Auth::guard("admins")->user()->id)->count();
 
             if ($activeSessions >= 2) {
-                \Auth::guard("admins")->logout();
-                return redirect()->route('login')->withErrors(['email' => 'You may not logIn more then 2 device.']);
+                //\Auth::guard("admins")->logout();
+                //return redirect()->route('admin_login')->withErrors(['email' => 'You may not logIn more then 2 device.']);
             }
 
             UserSession::create([
